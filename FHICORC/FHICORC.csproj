@@ -1,0 +1,234 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <LangVersion>8.0</LangVersion>
+    <Configurations>Debug;Development;Unittests;Test;AppStore;AppStoreBeta</Configurations>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <DefineConstants>TRACE;UITEST;DEBUG;NETSTANDARD;NETSTANDARD2_0;</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Development|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineConstants>TRACE;DEBUG;UITEST;DEVELOPMENT;NETSTANDARD;NETSTANDARD2_0;</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Unittests|AnyCPU' ">
+    <IntermediateOutputPath>obj\Unittests</IntermediateOutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Unittests</OutputPath>
+    <DefineConstants>DEBUG;UNITTEST;UNITTESTS;NETSTANDARD;NETSTANDARD2_0;UITEST</DefineConstants>
+    <NoWarn>1701;1702</NoWarn>
+    <NoStdLib>false</NoStdLib>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
+    <DebugType></DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Test</OutputPath>
+    <DefineConstants>TRACE;SIT;TEST;NETSTANDARD;NETSTANDARD2_0;UITEST</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <IntermediateOutputPath>obj\Test</IntermediateOutputPath>
+    <NoWarn>1701;1702</NoWarn>
+    <NoStdLib>false</NoStdLib>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|AnyCPU' ">
+    <IntermediateOutputPath>obj\AppStore</IntermediateOutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\AppStore</OutputPath>
+    <DefineConstants>TRACE;APPSTORE;NETSTANDARD;NETSTANDARD2_0;</DefineConstants>
+    <NoWarn>1701;1702</NoWarn>
+    <NoStdLib>false</NoStdLib>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStoreBeta|AnyCPU' ">
+    <IntermediateOutputPath>obj\AppStoreBeta</IntermediateOutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\AppStoreBeta</OutputPath>
+    <DefineConstants>TRACE;APPSTOREBETA;NETSTANDARD;NETSTANDARD2_0;</DefineConstants>
+    <NoWarn>1701;1702</NoWarn>
+    <NoStdLib>false</NoStdLib>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Services\Helpers\**" />
+    <EmbeddedResource Remove="Services\Helpers\**" />
+    <None Remove="Services\Helpers\**" />
+    <None Remove="Locales\en.json" />
+    <EmbeddedResource Remove="Views\CertificateViews\ProblemPage.xaml" />
+    <EmbeddedResource Remove="Views\HelpPage.xaml" />
+    <Compile Remove="ViewModels\HelpPageViewModel.cs" />
+    <Compile Remove="Views\CertificateViews\ProblemPage.xaml.cs" />
+    <Compile Remove="Views\Deprecated\IntroductionPage.xaml.cs" />
+    <Compile Remove="Views\Deprecated\Share\ShareCodeView.xaml.cs" />
+    <Compile Remove="Views\Deprecated\ResultListViews\ResultListViewPage.xaml.cs" />
+    <Compile Remove="Views\HelpPage.xaml.cs" />
+    <Compile Update="Views\Menu\MenuPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Menu\MenuHelpPage.xaml.cs">
+      <DependentUpon>MenuHelpPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Elements\ScanSuccessResultPopup.xaml.cs">
+      <DependentUpon>ScanSuccessResultPopup.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ScannerPages\ScanEuTestResultView.xaml.cs">
+      <DependentUpon>ScanEuTestResultView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ScannerPages\ScanEuRecoveryResultView.xaml.cs">
+      <DependentUpon>ScanEuRecoveryResultView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <None Remove="Resources\Sounds\valid_scan_sound.mp3" />
+    <EmbeddedResource Include="Resources\Sounds\valid_scan_sound.mp3" />
+    <None Remove="Resources\Sounds\invalid_scan_sound.mp3" />
+    <EmbeddedResource Include="Resources\Sounds\invalid_scan_sound.mp3" />
+    <None Remove="Locales\nb.json" />
+    <EmbeddedResource Include="Locales\nb.json" />
+    <None Remove="Locales\nn.json" />
+    <EmbeddedResource Include="Locales\nn.json" />
+    <None Remove="Locales\valuesets.csv" />
+    <EmbeddedResource Include="Locales\valuesets.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="Resources\Fonts\PTSans-Bold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\PTSans-Bold.ttf" />
+    <None Remove="Resources\Fonts\PTSans-BoldItalic.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\PTSans-BoldItalic.ttf" />
+    <None Remove="Resources\Fonts\PTSans-Caption-Regular.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\PTSans-Caption-Regular.ttf" />
+    <None Remove="Resources\Fonts\PTSans-Italic.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\PTSans-Italic.ttf" />
+    <None Remove="Resources\Fonts\PTSans-Narrow-Regular.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\PTSans-Narrow-Regular.ttf" />
+    <None Remove="Resources\Fonts\PTSans-Regular.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\PTSans-Regular.ttf" />
+    <None Remove="Resources\Fonts\TitilliumWeb-SemiBold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\TitilliumWeb-SemiBold.ttf" />
+    <None Remove="Certs\dev.crt" />
+    <EmbeddedResource Include="Certs\dev.crt" />
+    <None Remove="Certs\local.crt" />
+    <EmbeddedResource Include="Certs\local.crt" />
+    <None Remove="Certs\preprod.crt" />
+    <EmbeddedResource Include="Certs\preprod.crt" />
+    <None Remove="Certs\prod.crt" />
+    <EmbeddedResource Include="Certs\prod.crt" />
+    <None Remove="Certs\test.crt" />
+    <EmbeddedResource Include="Certs\test.crt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Locales\en.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="27.0.2" />
+    <PackageReference Include="TinyIoC" Version="1.3.0" />
+    <PackageReference Include="TinyMvvm.TinyIoC" Version="2.4.14" />
+    <PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.4.0" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="ZXing.Net.Mobile" Version="3.1.0-beta2" />
+    <PackageReference Include="ZXing.Net.Mobile.Forms" Version="3.1.0-beta2" />
+    <PackageReference Include="modernhttpclient" Version="2.4.2" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="1.1.0" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.11" />
+    <PackageReference Include="AiForms.Dialogs" Version="1.0.10" />
+    <PackageReference Include="PeterO.Cbor" Version="4.3.0" />
+    <PackageReference Include="PeterO.URIUtility" Version="1.0.0" />
+    <PackageReference Include="PeterO.Numbers" Version="1.7.4" />
+    <PackageReference Include="IntelliAbb.Xamarin.Controls" Version="1.0.148" />
+    <PackageReference Include="Xamarin.Forms.RootCheck" Version="1.0.1" />
+    <PackageReference Include="Xamarin.Forms.InputKit" Version="3.7.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Locales\" />
+    <Folder Include="Services\RulesEngine" />
+    <Folder Include="Data\" />
+    <Folder Include="Services\WebServices\" />
+    <Folder Include="Views\ScannerPages\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Resources\Fonts\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Resources\Fonts\" />
+    <Folder Include="ViewModels\QrScannerViewModels\" />
+    <Folder Include="ViewModels\Error\" />
+    <Folder Include="Services\Navigation\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\RegistrationFlow\AddPhotoPage.xaml.cs">
+      <DependentUpon>AddPhotoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Verification\DOBEntryPage.xaml.cs">
+      <DependentUpon>DOBEntryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Verification\NameEntryPage.xaml.cs">
+      <DependentUpon>NameEntryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Verification\VerificationConfirmationPage.xaml.cs">
+      <DependentUpon>VerificationConfirmationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Verification\VerifyCodePage.xaml.cs">
+      <DependentUpon>VerifyCodePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\FrontPage.xaml.cs">
+      <DependentUpon>FrontPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Verification\VerificationMethodPage.xaml.cs">
+      <DependentUpon>VerificationMethodPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Onboarding\VerificationBasePage.xaml.cs">
+      <DependentUpon>VerificationBasePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\ScannerPages\QRScannerPage.xaml.cs">
+      <DependentUpon>QRScannerPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Views\ErrorPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Menu\HelpPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Elements\CameraPreview.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AnimationTestPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Verification\DOBEntryPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Verification\NameEntryPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Verification\VerificationConfirmationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Verification\VerifyCodePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FHICORC.Core\FHICORC.Core.csproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties locales_4en_1json__JsonSchema="http://json.schemastore.org/winget-pkgs" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

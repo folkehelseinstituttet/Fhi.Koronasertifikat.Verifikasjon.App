@@ -1,0 +1,40 @@
+pool:
+  vmImage: 'windows-latest'
+  demands: AndroidSDK
+  
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Debug'
+
+steps:
+- task: NuGetToolInstaller@1
+  displayName: 'Install NuGet'
+
+- task: NuGetCommand@2
+  displayName: 'Restore NuGet packages'
+  inputs:
+    command: 'restore'
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  displayName: 'Build solution'
+  inputs:
+    solution: '$(solution)'
+    msbuildArgs: '/nr:true /p:PackageLocation="$(build.artifactStagingDirectory)"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Unit Tests'
+  inputs:
+    command: test
+    projects: '**/*.Tests/*.csproj'
+    arguments: '-c $(BuildConfiguration) --no-restore'
+
+- task: DotNetCoreCLI@2
+  displayName: 'UI Tests' # TODO, run actual UI tests
+  inputs:
+    command: test
+    projects: '**/*.UiTests/*.csproj'
+    arguments: '-c $(BuildConfiguration) --no-restore'

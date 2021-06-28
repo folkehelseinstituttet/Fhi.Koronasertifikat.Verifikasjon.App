@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<pages:PopupPage
+    x:Class="FHICORC.Views.Elements.ScanSuccessResultPopup"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:effects="clr-namespace:FHICORC.Controls"
+    BackgroundColor="{StaticResource Dark60}"
+    NavigationPage.HasNavigationBar="False"
+    CloseWhenBackgroundIsClicked="False"
+    ios:Application.EnableAccessibilityScalingForNamedFontSizes="true">
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"
+            PositionIn="Bottom"
+            PositionOut="Bottom" />
+    </pages:PopupPage.Animation>
+
+
+    <Frame
+        Padding="0,0,0,90"
+        Margin="0, 0"
+        BackgroundColor="White"
+        CornerRadius="10"
+        HasShadow="False"
+        IsClippedToBounds="True"
+        TranslationY="70"
+        VerticalOptions="End">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0"
+                  HeightRequest="52"
+                  BackgroundColor="{StaticResource FHIPrimaryBlue}">
+                <Label
+                    Text="{Binding ValidText}"
+                    Style="{StaticResource TitleStyle}"
+                    FontSize="Title"
+                    TextColor="{StaticResource FHIWhite}"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center"
+                    effects:FontSizeLabelEffectParams.MaxFontSize="32.00"
+                    effects:FontSizeLabelEffectParams.MinFontSize="22.00">
+                    <Label.Effects>
+                        <effects:FontSizeLabelEffect/>
+                    </Label.Effects>
+                </Label>
+                <ImageButton
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"
+                    Padding="20, 15"
+                    BackgroundColor="Transparent"
+                    Source="{StaticResource CloseIcon}"
+                    Command="{Binding ClosePopupCommand}"
+                    AutomationProperties.Name="{Binding Strings[CLOSE_BUTTON]}"/>
+
+            </Grid>
+
+            <Image Grid.Row="1"
+                   Margin="0,30,0,0"
+                   BackgroundColor="Transparent"
+                   Source="{StaticResource CheckShield}"/>
+
+            <Grid Grid.Row="2"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         Margin="0, 16, 0, 0"
+                         IsVisible="{Binding FullName, Converter={StaticResource NullToVisibilityConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Text="{Binding FullName}"
+                       Grid.Column="0"
+                       Style="{StaticResource SubtitleStyle}"
+                       HorizontalTextAlignment="Center"
+                       VerticalOptions="Center"
+                       VerticalTextAlignment="Start"
+                       effects:FontSizeLabelEffectParams.MaxFontSize="24.00"
+                       effects:FontSizeLabelEffectParams.MinFontSize="12.00">
+                    <Label.Effects>
+                        <effects:FontSizeLabelEffect/>
+                    </Label.Effects>
+                </Label>
+                <Label Text="{Binding DateOfBirth}"
+                       Grid.Column="1"
+                       Style="{StaticResource ContentStyle}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       VerticalTextAlignment="Start"
+                       effects:FontSizeLabelEffectParams.MaxFontSize="24.00"
+                       effects:FontSizeLabelEffectParams.MinFontSize="12.00">
+                    <Label.Effects>
+                        <effects:FontSizeLabelEffect/>
+                    </Label.Effects>
+                </Label>
+            </Grid>
+
+            <StackLayout
+                Grid.Row="3"
+                HeightRequest="41"
+                BackgroundColor="{StaticResource SuccessBorderColor}"
+                Margin="0, 30, 0, 0"
+                Padding="0, 2">
+                <Label Text="{Binding SuccessBannerText}"
+                       Style="{StaticResource SubtitleStyle}"
+                       TextColor="{StaticResource FHIPrimaryBlue}"
+                       LineBreakMode="NoWrap"
+                       MaxLines="1"
+                       Margin="0,8,0,0"
+                       FontSize="17"
+                       VerticalTextAlignment="Center"
+                       VerticalOptions="Center"
+                       AutomationProperties.IsInAccessibleTree="False">
+                </Label>
+            </StackLayout>
+
+            <ProgressBar Grid.Row="4"
+                         x:Name="ProgressBar"
+                         Margin="56, 25, 56, 18"
+                         VerticalOptions="Center"
+                         HorizontalOptions="Fill"
+                         ProgressColor="{StaticResource FHIPrimaryBlue}"
+                         AutomationProperties.IsInAccessibleTree="False"/>
+            <Label Grid.Row="5"
+                   AutomationProperties.Name="{Binding SecondsRemainingText_Accessibility}"
+                   Text="{Binding SecondsRemainingText}"
+                   Style="{StaticResource TertierStyle}"
+                   FontSize="Small"
+                   TextColor="{StaticResource FHIPrimaryBlue}"
+                   Opacity="0.7"
+                   Margin="0,0,0,30"
+                   LineBreakMode="TailTruncation"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" 
+                   effects:FontSizeLabelEffectParams.MaxFontSize="16.00"
+                   effects:FontSizeLabelEffectParams.MinFontSize="10.00">
+                <Label.Effects>
+                    <effects:FontSizeLabelEffect/>
+                </Label.Effects>
+            </Label>
+        </Grid>
+    </Frame>
+</pages:PopupPage>

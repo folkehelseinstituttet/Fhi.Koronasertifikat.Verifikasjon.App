@@ -1,0 +1,37 @@
+parameters:
+  - name: azureSubscription
+    type: string
+    default: ''
+  - name: accountName
+    type: string
+    default: ''
+  - name: doRelease
+    type: string
+    default: 'true'
+  - name: textVersion
+    type: string
+    default: ''
+
+jobs:
+  - job: sync_text_files_job
+    displayName: Synchronize text files
+    condition: eq('${{ parameters.doRelease }}', 'true')
+    steps:
+    - script: |
+        mv $(Build.SourcesDirectory)/FHICORC/Locales/en.json $(Build.SourcesDirectory)/FHICORC/Locales/en_${{ parameters.textVersion }}.json
+        mv $(Build.SourcesDirectory)/FHICORC/Locales/nn.json $(Build.SourcesDirectory)/FHICORC/Locales/nn_${{ parameters.textVersion }}.json
+        mv $(Build.SourcesDirectory)/FHICORC/Locales/nb.json $(Build.SourcesDirectory)/FHICORC/Locales/nb_${{ parameters.textVersion }}.json
+      displayName: 'Renaming Locales with text version number.'   
+      
+    - task: AzureCLI@2
+      displayName: Sync files to storage account
+      inputs:
+        azureSubscription: ${{ parameters.azureSubscription }}
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage blob sync \
+                      -s $(Build.SourcesDirectory)/FHICORC/Locales \
+                      -c textdirectory \
+                      --account-name ${{ parameters.accountName }} \
+                      --exclude-pattern *.csv

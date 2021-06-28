@@ -1,0 +1,469 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:elements="clr-namespace:FHICORC.Views.Elements;assembly=FHICORC"
+             xmlns:controls="clr-namespace:FHICORC.Controls;assembly=FHICORC"
+             xmlns:effects="clr-namespace:FHICORC.Controls"
+             x:Class="FHICORC.Views.ScannerPages.ScanEuTestResultView"
+             BackgroundColor="{StaticResource NavigationHeaderBackgroundColor}"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="False">
+    <ContentPage.Content>
+        <Grid BackgroundColor="{StaticResource FHIWhite}"
+              RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0"
+                         BackgroundColor="{StaticResource DefaultBackgroundColor}"
+                         VerticalOptions="Start"
+                         Padding="0"
+                         Spacing="0">
+                <elements:NavigationHeader
+                    CenterLabelText="{Binding Strings[SCANNER_EU_TITLE_TEXT]}"
+                    RightButtonCommand="{Binding BackCommand}"
+                    RightButtonAccessibilityText="{Binding Strings[CLOSE_BUTTON]}"
+                    RightButtonImageSource="{StaticResource XMark}"
+                    VerticalOptions="Center">
+                    <elements:NavigationHeader.Padding>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="iOS" Value="0,50,0,0" />
+                            <On Platform="Android" Value="0,0,0,0" />
+                        </OnPlatform>
+                    </elements:NavigationHeader.Padding>
+                </elements:NavigationHeader>
+
+                <StackLayout
+                    BackgroundColor="{StaticResource BaseTextColor}"
+                    Margin="0,20,0,0"
+                    Padding="0"
+                    Spacing="0">
+                    <Label
+                        Margin="-60, 0"
+                        Padding="0, 2"
+                        VerticalTextAlignment="Center"
+                        MaxLines="1"
+                        LineBreakMode="NoWrap"
+                        Style="{StaticResource RegularLabelBoldStyle}"
+                        TextColor="{StaticResource WhiteTextColor}"
+                        Text="{Binding RepeatedText}"
+                        FontSize="17"
+                        AutomationProperties.IsInAccessibleTree="False">
+                    </Label>
+                </StackLayout>
+            </StackLayout>
+
+
+            <ScrollView Grid.Row="1">
+                <StackLayout Padding="0"
+                             BackgroundColor="{StaticResource FHIWhite}"
+                             Spacing="0">
+                    <Grid BackgroundColor="{StaticResource DefaultBackgroundColor}">
+                        <StackLayout Orientation="Vertical"
+                                     Spacing="6"
+                                     Padding="0"
+                                     Margin="0, 30">
+                            <Label Text="{Binding FullName}"
+                                   AutomationProperties.IsInAccessibleTree="True"
+                                   Style="{StaticResource ContentTitleStyle}"
+                                   HorizontalTextAlignment="Center"
+                                   HorizontalOptions="Center"
+                                   effects:FontSizeLabelEffectParams.MaxFontSize="32.00"
+                                   effects:FontSizeLabelEffectParams.MinFontSize="20.00">
+                                <Label.Effects>
+                                    <effects:FontSizeLabelEffect/>
+                                </Label.Effects>
+                            </Label>
+                            <Label Text="{Binding DateOfBirth}"
+                                   Style="{StaticResource ContentStyle}"
+                                   HorizontalTextAlignment="Center"
+                                   HorizontalOptions="Center"
+                                   effects:FontSizeLabelEffectParams.MaxFontSize="28.00"
+                                   effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                                <Label.Effects>
+                                    <effects:FontSizeLabelEffect/>
+                                </Label.Effects>
+                            </Label>
+                        </StackLayout>
+                    </Grid>
+
+
+                    <Grid Margin="20,30,20,30">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Source="{StaticResource TestIcon}"
+                               VerticalOptions="Center" HorizontalOptions="Start" />
+                        <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource InfoPaneHeaderStyle}"
+                               Text="{Binding NegativeTestHeaderText}"
+                               AutomationId="{Binding NegativeTestHeaderText}"
+                               HorizontalOptions="Start" VerticalOptions="Center"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="32.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="20.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label Grid.Row="1" Grid.Column="1" 
+                               Style="{StaticResource InfoPaneSubHeaderStyle}"
+                               Text="{Binding TestHeaderValue}" 
+                               HorizontalOptions="Start" 
+                               VerticalOptions="Center"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="28.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                    </Grid>
+                    <BoxView Margin="20,0,20,0" BackgroundColor="{StaticResource DefaultBackgroundColor}"
+                             HeightRequest="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+                    <Grid Margin="20,0,20,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,0" 
+                               AutomationId="{Binding NegativeTestTestNameText_Accessibility}"
+                               Text="{Binding NegativeTestTestNameText}"
+                               Style="{StaticResource InfoPaneItemHeader}"
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="30.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                               Text="{Binding TestName}" 
+                               Style="{StaticResource InfoPaneItemValue}"
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <BoxView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,10" BackgroundColor="{StaticResource DefaultBackgroundColor}" HeightRequest="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,0"
+                               AutomationId="{Binding NegativeTestNAATestNameText_Accessibility}"
+                               Text="{Binding NegativeTestNAATestNameText}"
+                               Style="{StaticResource InfoPaneItemHeader}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="30.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" 
+                               Text="{Binding NAATestName}" 
+                               Style="{StaticResource InfoPaneItemValue}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <BoxView Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,10" BackgroundColor="{StaticResource DefaultBackgroundColor}" HeightRequest="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        <Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" 
+                               AutomationId="{Binding NegativeTestResultText_Accessibility}"
+                               Text="{Binding NegativeTestResultText}"
+                               Style="{StaticResource InfoPaneItemHeader}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="30.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label Grid.Row="7" Grid.Column="0"
+                               Text="{Binding NegativeTestResultValue}" 
+                               Style="{StaticResource InfoPaneItemValue}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <BoxView Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,10" 
+                                 BackgroundColor="{StaticResource DefaultBackgroundColor}"
+                                 HeightRequest="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        <Label Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" 
+                               AutomationId="{Binding NegativeTestSampleCollectedDateTimeText_Accessibility}"
+                               Text="{Binding NegativeTestSampleCollectedDateTimeText}" 
+                               Style="{StaticResource InfoPaneItemHeader}" HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="30.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" 
+                               Text="{Binding NegativeTestSampleCollectionDateTimeValue}" 
+                               Style="{StaticResource InfoPaneItemValue}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <BoxView Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,10" BackgroundColor="{StaticResource DefaultBackgroundColor}" HeightRequest="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        <Label Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2" 
+                               AutomationId="{Binding NegativeTestDiseaseText_Accessibility}"
+                               Text="{Binding NegativeTestDiseaseText}" 
+                               Style="{StaticResource InfoPaneItemHeader}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="30.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label Grid.Row="13" Grid.Column="0" 
+                               Text="{Binding NegativeTestDiseaseValue}" 
+                               Style="{StaticResource InfoPaneItemValue}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <BoxView Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,10" BackgroundColor="{StaticResource DefaultBackgroundColor}" HeightRequest="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        <Label Grid.Row="15" Grid.Column="0" Grid.ColumnSpan="2" 
+                               AutomationId="{Binding NegativeTestManufacturerText_Accessibility}"
+                               Text="{Binding NegativeTestManufacturerText}"
+                               Style="{StaticResource InfoPaneItemHeader}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="30.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label Grid.Row="16" Grid.Column="0" Grid.ColumnSpan="2"  
+                               Text="{Binding NegativeTestManufacturerValue}" 
+                               Style="{StaticResource InfoPaneItemValue}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <BoxView Grid.Row="17" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,10" BackgroundColor="{StaticResource DefaultBackgroundColor}" HeightRequest="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand" IsVisible="{Binding NegativeTestSampleOriginValue, Converter={StaticResource NullToVisibilityConverter}}" />
+                        <Label Grid.Row="18" Grid.Column="0" Grid.ColumnSpan="2" 
+                               AutomationId="{Binding NegativeTestSampleOriginText_Accessibility}"
+                               Text="{Binding NegativeTestSampleOriginText}" 
+                               Style="{StaticResource InfoPaneItemHeader}" 
+                               HorizontalOptions="Start" 
+                               IsVisible="{Binding NegativeTestSampleOriginValue, Converter={StaticResource NullToVisibilityConverter}}"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="30.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label Grid.Row="19" Grid.Column="0" Grid.ColumnSpan="2" 
+                               Text="{Binding NegativeTestSampleOriginValue}" 
+                               Style="{StaticResource InfoPaneItemValue}" 
+                               HorizontalOptions="Start" 
+                               IsVisible="{Binding NegativeTestSampleOriginValue, Converter={StaticResource NullToVisibilityConverter}}"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <BoxView Grid.Row="20" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,10" BackgroundColor="{StaticResource DefaultBackgroundColor}" HeightRequest="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        <Label Grid.Row="21" Grid.Column="0" Grid.ColumnSpan="2" 
+                               AutomationId="{Binding NegativeTestTestCenterTimeText_Accessibility}"
+                               Text="{Binding NegativeTestTestCenterTimeText}" 
+                               Style="{StaticResource InfoPaneItemHeader}" HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="30.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label Grid.Row="22" Grid.Column="0" Grid.ColumnSpan="2" 
+                               Text="{Binding TestCenter}" 
+                               Style="{StaticResource InfoPaneItemValue}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <BoxView Grid.Row="23" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,10" BackgroundColor="{StaticResource DefaultBackgroundColor}" HeightRequest="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        <Label Grid.Row="24" Grid.Column="0" Grid.ColumnSpan="2" 
+                               AutomationId="{Binding NegativeTestTestingCountryText_Accessibility}"
+                               Text="{Binding NegativeTestTestingCountryText}" 
+                               Style="{StaticResource InfoPaneItemHeader}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="30.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label Grid.Row="25" Grid.Column="0" Grid.ColumnSpan="2" 
+                               Text="{Binding NegativeTestTestingCentreValue}" 
+                               Style="{StaticResource InfoPaneItemValue}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <BoxView Grid.Row="26" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,20" BackgroundColor="{StaticResource DefaultBackgroundColor}" HeightRequest="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowCertificate}"/>
+                        <Label Grid.Row="27" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,10"
+                               AutomationId="{Binding NegativeTestCertificateHeaderText_Accessibility}"
+                               Text="{Binding NegativeTestCertificateHeaderText}" 
+                               Style="{StaticResource InfoPaneSectionHeader}" 
+                               HorizontalOptions="Start" 
+                               IsVisible="{Binding ShowCertificate}"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="32.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label Grid.Row="28" Grid.Column="0" Grid.ColumnSpan="2"
+                               AutomationId="{Binding NegativeTestIssuerText_Accessibility}"
+                               Text="{Binding NegativeTestIssuerText}" 
+                               Style="{StaticResource InfoPaneItemHeader}" 
+                               HorizontalOptions="Start" 
+                               IsVisible="{Binding ShowCertificate}"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="30.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label Grid.Row="29" Grid.Column="0" Grid.ColumnSpan="2" 
+                               Text="{Binding NegativeTestIssuerValue}" 
+                               Style="{StaticResource InfoPaneItemValue}" 
+                               HorizontalOptions="Start" 
+                               IsVisible="{Binding ShowCertificate}"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <BoxView Grid.Row="30" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,10" BackgroundColor="{StaticResource DefaultBackgroundColor}" HeightRequest="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowCertificate}"/>
+                        <Label Grid.Row="31" Grid.Column="0" Grid.ColumnSpan="2" 
+                               AutomationId="{Binding NegativeTestCertificatIdentifierText_Accessibility}"
+                               Text="{Binding NegativeTestCertificatIdentifierText}" 
+                               Style="{StaticResource InfoPaneItemHeader}"
+                               HorizontalOptions="Start" 
+                               IsVisible="{Binding ShowCertificate}"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="30.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label Grid.Row="32" Grid.Column="0" Grid.ColumnSpan="2" 
+                               Text="{Binding NegativeTestCertificatIdentifierValue}" 
+                               Style="{StaticResource InfoPaneItemValue}" 
+                               HorizontalOptions="Start" 
+                               IsVisible="{Binding ShowCertificate}"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                    </Grid>
+
+                </StackLayout>
+            </ScrollView>
+
+
+            <StackLayout Grid.Row="2"
+                         Orientation="Vertical"
+                         VerticalOptions="End"
+                         Padding="0"
+                         Spacing="0"
+                         Margin="20">
+                <controls:SingleLineButton
+                    Padding="80,0,80,0"
+                    Command="{Binding ScanAgainCommand}"
+                    ImageSource="{StaticResource ScanRectangle}"
+                    Style="{StaticResource CombinedButtonPrimaryStyle}"
+                    Text="{Binding Strings[SCANNER_ERROR_BUTTON_TEXT]}" />
+
+                <!--  Seconds left before the page closes  -->
+                <Label
+                    Margin="0,20"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource TertierStyle}"
+                    Text="{Binding SecondsRemainingText}"
+                    AutomationProperties.IsInAccessibleTree="True"
+                    AutomationId="{Binding SecondsRemainingText_Accessibility}"
+                    TextColor="{StaticResource LightTextColor}"
+                    effects:FontSizeLabelEffectParams.MaxFontSize="24.00"
+                    effects:FontSizeLabelEffectParams.MinFontSize="12.00">
+                    <Label.Effects>
+                        <effects:FontSizeLabelEffect/>
+                    </Label.Effects>
+                </Label>
+            </StackLayout>
+        </Grid>
+
+
+    </ContentPage.Content>
+</ContentPage>

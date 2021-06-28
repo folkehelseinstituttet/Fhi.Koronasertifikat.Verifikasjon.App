@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage x:Class="FHICORC.Views.Menu.MenuPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:effects="clr-namespace:FHICORC.Controls"
+             xmlns:elements="clr-namespace:FHICORC.Views.Elements"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:viewModels="clr-namespace:FHICORC.ViewModels.Menu" ios:Page.UseSafeArea="False"
+             x:DataType="viewModels:MenuPageViewModel"
+             BackgroundColor="{StaticResource DefaultBackgroundColor}"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="SourceLicenseBtnStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="FontFamily" Value="PTSansBold" />
+                <Setter Property="TextColor" Value="{StaticResource BaseTextColor}" />
+
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.Padding>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="0,50,0,0" />
+                    <On Platform="Android" Value="0,0,0,0" />
+                </OnPlatform>
+            </Grid.Padding>
+            <elements:NavigationHeader CenterLabelText="{Binding Strings[MENU_TITLE]}"
+                                       LeftButtonAccessibilityText="{Binding Strings[BACK_BUTTON]}"
+                                       LeftButtonCommand="{Binding BackCommand}"
+                                       LeftButtonImageSource="{StaticResource ArrowBack}" LeftButtonHeightRequest="50" />
+            <ScrollView Grid.Row="1" BackgroundColor="{StaticResource FHIPrimaryWhite}">
+                <Grid RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.6*" />
+                        <RowDefinition Height="0.4*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackLayout Grid.Row="0" Orientation="Vertical"
+                          BackgroundColor="{StaticResource DefaultBackgroundColor}">
+                        <Image
+                            Margin="0,40,0,30"
+                            VerticalOptions="EndAndExpand"
+                            HorizontalOptions="CenterAndExpand"
+                            Source="{StaticResource CertificateLogo}"/>
+                        <Image
+                            Margin="0,0,0,40"
+                            VerticalOptions="StartAndExpand"
+                            HorizontalOptions="CenterAndExpand"
+                            Source="{StaticResource MenuPageTitle}"/>
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="1" Orientation="Vertical" Spacing="0">
+                        <Grid Grid.Row="0" ColumnSpacing="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" AutomationProperties.IsInAccessibleTree="False" HeightRequest="24" Source="{StaticResource MenuSettingIcon}"
+                                   VerticalOptions="Center" WidthRequest="24" Margin="20,0,0,0" />
+                            <Label Grid.Column="1" effects:FontSizeLabelEffectParams.MaxFontSize="32"
+                                   effects:FontSizeLabelEffectParams.MinFontSize="12"
+                                   HorizontalOptions="StartAndExpand" LineHeight="1"
+                                   AutomationProperties.IsInAccessibleTree="False"
+                                   Style="{StaticResource MenuButtonLabelStyle}" Text="{Binding Strings[MENU_SETTINGS_PAGE]}"
+                                   VerticalOptions="Center" VerticalTextAlignment="Center">
+                                <Label.Effects>
+                                    <effects:FontSizeLabelEffect />
+                                </Label.Effects>
+                            </Label>
+                            <Image Grid.Column="2" AutomationProperties.IsInAccessibleTree="False" HeightRequest="16" Source="{StaticResource ArrowNext}"
+                                   VerticalOptions="Center" WidthRequest="20"  Margin="0,0,20,0" />
+                            <Button Grid.Column="0" Grid.ColumnSpan="3" AutomationProperties.IsInAccessibleTree="True"
+                                    AutomationProperties.Name="{Binding Strings[MENU_SETTINGS_PAGE]}" Command="{Binding OpenSettingsPage}"
+                                    Style="{StaticResource MenuButtonStyle}" />
+                        </Grid>
+                        <Grid Grid.Row="1" ColumnSpacing="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" AutomationProperties.IsInAccessibleTree="False" HeightRequest="24" Source="{StaticResource MenuHelpIcon}"
+                                   VerticalOptions="Center" WidthRequest="24" Margin="20,0,0,0" />
+                            <Label Grid.Column="1" effects:FontSizeLabelEffectParams.MaxFontSize="32"
+                                   effects:FontSizeLabelEffectParams.MinFontSize="12"
+                                   AutomationProperties.IsInAccessibleTree="False"
+                                   HorizontalOptions="StartAndExpand" LineHeight="1"
+                                   Style="{StaticResource MenuButtonLabelStyle}" Text="{Binding Strings[MENU_HELP_PAGE]}"
+                                   VerticalOptions="Center" VerticalTextAlignment="Center">
+                                <Label.Effects>
+                                    <effects:FontSizeLabelEffect />
+                                </Label.Effects>
+                            </Label>
+                            <Image Grid.Column="2" AutomationProperties.IsInAccessibleTree="False" HeightRequest="16" Source="{StaticResource ArrowNext}"
+                                   VerticalOptions="Center" WidthRequest="20"  Margin="0,0,20,0" />
+                            <Button Grid.Column="0" Grid.ColumnSpan="3" AutomationProperties.IsInAccessibleTree="True"
+                                    AutomationProperties.Name="{Binding Strings[MENU_HELP_PAGE]}" Command="{Binding OpenSupportPage}"
+                                    Style="{StaticResource MenuButtonStyle}" />
+                        </Grid>
+                    </StackLayout>
+
+                    <Label
+                        Grid.Row="2"
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource RegularLabelStyle}"
+                        Text="{Binding VersionNumber}"
+                        TextColor="{StaticResource DarkTextColor}"
+                        VerticalTextAlignment="Center"
+                        effects:FontSizeLabelEffectParams.MaxFontSize="32"
+                        effects:FontSizeLabelEffectParams.MinFontSize="12">
+                        <Label.Effects>
+                            <effects:FontSizeLabelEffect />
+                        </Label.Effects>
+                        <Label.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="iOS" Value="0,0,0,50" />
+                                <On Platform="Android" Value="0,0,0,30" />
+                            </OnPlatform>
+                        </Label.Margin>
+                    </Label>
+                </Grid>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

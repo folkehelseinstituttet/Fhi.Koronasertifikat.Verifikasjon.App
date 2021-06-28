@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FHICORC.Views.LandingPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FHICORC.Controls"
+    xmlns:effects="clr-namespace:FHICORC.Controls"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:viewModel="clr-namespace:FHICORC.ViewModels"
+    ios:Page.UseSafeArea="False"
+    x:DataType="viewModel:LandingViewModel"
+    AutomationId="LandingPage"
+    AutomationProperties.IsInAccessibleTree="False"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Image
+                Grid.Row="0"
+                Grid.RowSpan="1"
+                Aspect="Fill"
+                Source="{StaticResource LandingPageStockImage}"
+                VerticalOptions="Fill" />
+
+            <Frame
+                Grid.Row="0"
+                Grid.RowSpan="3">
+                <Frame.Background>
+                    <LinearGradientBrush
+                        StartPoint="0.5, 0"
+                         EndPoint="0.5, 1" >
+                        <GradientStop Color="{StaticResource FHIPrimaryBlueTransparent}" Offset="0.1"/>
+                        <GradientStop Color="{StaticResource FHIPrimaryBlue}" Offset="1"/>
+                    </LinearGradientBrush>
+                </Frame.Background>
+            </Frame>
+
+            <Grid Grid.Row="0"
+                  RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="0.6*" />
+                    <RowDefinition Height="0.2*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="20,50,20,0" />
+                        <On Platform="Android" Value="20,35,20,0" />
+                    </OnPlatform>
+                </Grid.Margin>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        Grid.Column="0"
+                        HorizontalOptions="Start"
+                        Source="{StaticResource LandingPageFhiLogo}"
+                        VerticalOptions="Center"/>
+
+                    <ImageButton
+                        Grid.Column="2"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        AutomationProperties.Name="{Binding Strings[HELP_TITLE_BUTTON]}"
+                        BackgroundColor="Transparent"
+                        Command="{Binding HelpButtonCommand}"
+                        HorizontalOptions="End"
+                        Source="{StaticResource LandingHelpIcon}"
+                        VerticalOptions="Center" />
+                </Grid>
+
+                <StackLayout
+                    Grid.Row="1"
+                    Spacing="30"
+                    VerticalOptions="CenterAndExpand"
+                    Orientation="Vertical">
+
+                    <Image
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        BackgroundColor="Transparent"
+                        Source="{StaticResource CertificateLogo}" />
+
+                    <Image
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        BackgroundColor="Transparent"
+                        Source="{StaticResource LandingPageTitle}" 
+                        AutomationProperties.IsInAccessibleTree="True"
+                        AutomationProperties.Name="{Binding Strings[LANDING_PAGE_TITLE]}"/>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="2"
+                    VerticalOptions="StartAndExpand">
+                    <controls:SingleLineButton
+                        AutomationId="OpenScannerButton"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        AutomationProperties.Name="{Binding OpenScannerText}"
+                        Command="{Binding OpenScannerCommand}"
+                        Style="{StaticResource LandingButtonStyle}"
+                        Text="{Binding OpenScannerText}"
+                        WidthRequest="187"
+                        Padding="5,0,5,5"
+                        HorizontalOptions="Center"/>
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Row="3"
+                    VerticalOptions="EndAndExpand">
+                    <controls:SingleLineButton
+                        AutomationId="OpenScannerButton"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        AutomationProperties.Name="{Binding LanguageChangeButtonText}"
+                        Command="{Binding ChangeLanguageCommand}"
+                        Style="{StaticResource LandingTertiaryButtonStyle}"
+                        Text="{Binding LanguageChangeButtonText}"
+                        ImageSource="{StaticResource ArrowRightWhite}"
+                        ContentLayout="Right"
+                        effects:FontSizeLabelEffectParams.MaxFontSize="28.00"
+                        effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                        <controls:SingleLineButton.Effects>
+                            <effects:FontSizeLabelEffect/>
+                        </controls:SingleLineButton.Effects>
+                    </controls:SingleLineButton>
+                    <StackLayout.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="iOS" Value="0,0,0,30" />
+                            <On Platform="Android" Value="0,0,0,0" />
+                        </OnPlatform>
+                    </StackLayout.Margin>
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
+

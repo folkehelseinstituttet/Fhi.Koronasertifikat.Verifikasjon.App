@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    x:Class="FHICORC.Views.ScannerPages.ImagerScannerPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:elements="clr-namespace:FHICORC.Views.Elements" xmlns:controls="clr-namespace:FHICORC.Controls"
+    ios:Page.UseSafeArea="True"
+    BackgroundColor="{StaticResource NavigationHeaderBackgroundColor}"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <elements:NavigationHeader Grid.Row="0"
+                                       LeftButtonCommand="{Binding BackCommand}"
+                                       LeftButtonImageSource="{StaticResource ArrowBack}"
+                                       RightButtonCommand="{Binding OpenMenuCommand}"
+                                       RightButtonImageSource="{StaticResource HamburgerMenu}"
+                                       CenterLabelText="{Binding Strings[SCAN_CORONAPAS]}"
+                                       RightButtonAccessibilityText="{Binding Strings[MENU_BUTTON_TEXT]}"
+                                       LeftButtonAccessibilityText="{Binding Strings[BACK]}"
+                                       Margin="0, 0, 0, 30"
+                                       IsVisible="{Binding InTabbar, Converter={StaticResource BoolToInverseBoolConverter}}">
+                <elements:NavigationHeader.LeftButtonHeightRequest>
+                    <OnPlatform x:TypeArguments="x:Int32">
+                        <On Platform="iOS" Value="50" />
+                        <On Platform="Android" Value="50" />
+                    </OnPlatform>
+                </elements:NavigationHeader.LeftButtonHeightRequest>
+                <elements:NavigationHeader.RightButtonHeightRequest>
+                    <OnPlatform x:TypeArguments="x:Int32">
+                        <On Platform="iOS" Value="50" />
+                        <On Platform="Android" Value="25" />
+                    </OnPlatform>
+                </elements:NavigationHeader.RightButtonHeightRequest>
+                <elements:NavigationHeader.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="0,50,0,0" />
+                        <On Platform="Android" Value="0,15,0,0" />
+                    </OnPlatform>
+                </elements:NavigationHeader.Padding>
+            </elements:NavigationHeader>
+            <Grid Grid.Row="1">
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Image
+                        Grid.Row="0"
+                        Margin="0,20,0,0"
+                        HorizontalOptions="Center"
+                        MinimumHeightRequest="200"
+                        VerticalOptions="Start"
+                        Source="{StaticResource ImagerLogo}"
+                        WidthRequest="150" />
+                    <Label
+                        Grid.Row="1"
+                        Margin="0,20,0,0"
+                        HorizontalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center"
+                        controls:FontSizeLabelEffectParams.MinFontSize="30"
+                        controls:FontSizeLabelEffectParams.MaxFontSize="35"
+                        Style="{StaticResource TitleStyle}"
+                        FontFamily="TitilliumWebSemiBold"
+                        Text="{Binding Strings[LANDING_PAGE_TITLE]}">
+                        <Label.Effects>
+                            <controls:FontSizeLabelEffect />
+                        </Label.Effects>
+                    </Label>
+                </Grid>
+                <Label
+                    Grid.Row="1"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource TitleStyle}"
+                    controls:FontSizeLabelEffectParams.MinFontSize="46"
+                    controls:FontSizeLabelEffectParams.MaxFontSize="30"
+                    Text="{Binding Strings[ZEBRA_SCANNER_TITLE]}"
+                    HorizontalOptions="Center"
+                    VerticalTextAlignment="Center"
+                    VerticalOptions="FillAndExpand">
+                    <Label.Effects>
+                        <controls:FontSizeLabelEffect />
+                    </Label.Effects>
+                </Label>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

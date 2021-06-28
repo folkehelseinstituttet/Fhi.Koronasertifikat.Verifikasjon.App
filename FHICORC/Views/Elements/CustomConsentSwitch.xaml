@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView x:Class="FHICORC.Views.Elements.CustomConsentSwitch"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:FHICORC.Controls;assembly=FHICORC"
+             mc:Ignorable="d">
+    <Grid HorizontalOptions="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  Background Frame  -->
+        <Frame
+            x:Name="switchTrack"
+            Grid.Row="0"
+            Margin="0"
+            Padding="0"
+            BackgroundColor="Transparent"
+            BorderColor="{StaticResource FHIPrimaryBlue}"
+            HasShadow="False"
+            HeightRequest="30"
+            CornerRadius="15"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            WidthRequest="58">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+            </Frame.GestureRecognizers>
+        </Frame>
+
+        <!--  Running Frame  -->
+
+        <controls:SingleLineButton
+            x:Name="switchThumb"
+            BackgroundColor="{StaticResource FHIPrimaryBlue}"
+            HorizontalOptions="Start"
+            VerticalOptions="Center"
+            WidthRequest="26"
+            HeightRequest="26"
+            CornerRadius="13"
+            Margin="3,0,0,0"
+            Clicked="OnSwitchTapped"
+            AutomationProperties.IsInAccessibleTree="True">
+            <Button.GestureRecognizers>
+                <PanGestureRecognizer PanUpdated="PanGestureRecognizer_PanUpdated" />
+            </Button.GestureRecognizers>
+        </controls:SingleLineButton>
+    </Grid>
+</ContentView>

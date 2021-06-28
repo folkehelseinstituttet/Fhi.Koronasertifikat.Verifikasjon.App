@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    x:Class="FHICORC.Views.Menu.SettingsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:elements="clr-namespace:FHICORC.Views.Elements"
+    xmlns:controls="clr-namespace:FHICORC.Controls"
+    xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:viewModels="clr-namespace:FHICORC.ViewModels.Menu"
+    ios:Page.UseSafeArea="False"
+    xmlns:effects="clr-namespace:FHICORC.Controls"
+    x:DataType="viewModels:SettingsPageViewModel"
+    BackgroundColor="{StaticResource NavigationHeaderBackgroundColor}"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid BackgroundColor="{StaticResource NavigationHeaderBackgroundColor}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.Padding>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="0,50,0,0" />
+                    <On Platform="Android" Value="0,0,0,0" />
+                </OnPlatform>
+            </Grid.Padding>
+            <elements:NavigationHeader
+                CenterLabelText="{Binding Strings[SETTINGS_TITLE]}"
+                LeftButtonCommand="{Binding BackCommand}"
+                LeftButtonAccessibilityText="{Binding Strings[BACK_BUTTON]}"
+                LeftButtonHeightRequest="50"
+                LeftButtonImageSource="{StaticResource ArrowBack}" />
+            <ScrollView Grid.Row="1" BackgroundColor="{StaticResource DefaultBackgroundColor}">
+                <ScrollView.Content>
+                    <Grid RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label
+                            Grid.Row="0"
+                            Margin="20,35,20,15"
+                            AutomationId="{Binding Strings[SETTINGS_SECTION_1_TITLE_ACC]}"
+                            Style="{StaticResource ContentStyle}"
+                            Text="{Binding Strings[SETTINGS_SECTION_1_TITLE]}"
+                            effects:FontSizeLabelEffectParams.MaxFontSize="32.00"
+                            effects:FontSizeLabelEffectParams.MinFontSize="16.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <input:RadioButtonGroupView Grid.Row="1">
+                            <Grid 
+                              RowSpacing="1"
+                              RadioButtonGroup.GroupName="Language"
+                              BackgroundColor="{StaticResource NavigationHeaderBackgroundColor}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.3*" />
+                                    <RowDefinition Height="0.3*" />
+                                    <RowDefinition Height="0.3*" />
+                                </Grid.RowDefinitions>
+
+
+                                <Grid Grid.Row="0"
+                                      BackgroundColor="{StaticResource FHIPrimaryWhite}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0"
+                                       Text="{Binding Strings[SETTINGS_CHOOSE_LANGUAGE_NB]}"
+                                       Margin="21,17,0,17"
+                                       Style="{StaticResource SubtitleStyle}"
+                                       VerticalOptions="Center"
+                                       effects:FontSizeLabelEffectParams.MaxFontSize="32.00"
+                                       effects:FontSizeLabelEffectParams.MinFontSize="12.00">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_Bokmal" />
+                                        </Label.GestureRecognizers>
+                                        <Label.Effects>
+                                            <effects:FontSizeLabelEffect/>
+                                        </Label.Effects>
+                                    </Label>
+                                    <input:RadioButton
+                                        x:Name="RadioButtonBokmal"
+                                        Grid.Column="1"
+                                        AutomationProperties.IsInAccessibleTree="True"
+                                        AutomationProperties.Name="{Binding IsBokmalSelectedText}"
+                                        Margin="0,17,20,17"
+                                        CircleColor="{StaticResource FHIPrimaryBlue}"
+                                        Color="{StaticResource FHIPrimaryBlue}"
+                                        IsChecked="{Binding IsBokmalSelected, Mode=TwoWay}"
+                                        BackgroundColor="Transparent"
+                                        VerticalOptions="Center"/>
+                                </Grid>
+
+                                <Grid Grid.Row="1"
+                                      BackgroundColor="{StaticResource FHIPrimaryWhite}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0"
+                                       Text="{Binding Strings[SETTINGS_CHOOSE_LANGUAGE_NN]}"
+                                       Margin="21,17,0,17"
+                                       Style="{StaticResource SubtitleStyle}"
+                                       VerticalOptions="Center"
+                                       effects:FontSizeLabelEffectParams.MaxFontSize="32.00"
+                                       effects:FontSizeLabelEffectParams.MinFontSize="12.00">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_Nynorsk" />
+                                        </Label.GestureRecognizers>
+                                        <Label.Effects>
+                                            <effects:FontSizeLabelEffect/>
+                                        </Label.Effects>
+                                    </Label>
+                                    <input:RadioButton
+                                        x:Name="RadioButtonNynorsk"
+                                        Grid.Column="1"
+                                        AutomationProperties.IsInAccessibleTree="True"
+                                        AutomationProperties.Name="{Binding IsNynorskSelectedText}"
+                                        Margin="0,17,20,17"
+                                        CircleColor="{StaticResource FHIPrimaryBlue}"
+                                        Color="{StaticResource FHIPrimaryBlue}"
+                                        IsChecked="{Binding IsNynorskSelected, Mode=TwoWay}"
+                                        BackgroundColor="Transparent"
+                                        VerticalOptions="Center"/>
+                                </Grid>
+
+                                <Grid Grid.Row="2"
+                                      BackgroundColor="{StaticResource FHIPrimaryWhite}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0"
+                                       Text="{Binding Strings[SETTINGS_CHOOSE_LANGUAGE_EN]}"
+                                       Margin="21,17,0,17"
+                                       Style="{StaticResource SubtitleStyle}"
+                                       VerticalOptions="Center"
+                                       effects:FontSizeLabelEffectParams.MaxFontSize="32.00"
+                                       effects:FontSizeLabelEffectParams.MinFontSize="12.00">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_English" />
+                                        </Label.GestureRecognizers>
+                                        <Label.Effects>
+                                            <effects:FontSizeLabelEffect/>
+                                        </Label.Effects>
+                                    </Label>
+                                    <input:RadioButton
+                                        x:Name="RadioButtonEnglish"
+                                        Grid.Column="1"
+                                        AutomationProperties.IsInAccessibleTree="True"
+                                        AutomationProperties.Name="{Binding IsEnglishSelectedText}"
+                                        Margin="0,17,20,17"
+                                        CircleColor="{StaticResource FHIPrimaryBlue}"
+                                        Color="{StaticResource FHIPrimaryBlue}"
+                                        IsChecked="{Binding IsEnglishSelected, Mode=TwoWay}"
+                                        BackgroundColor="Transparent"
+                                        VerticalOptions="Center"/>
+                                </Grid>
+
+
+                            </Grid>
+                        </input:RadioButtonGroupView>
+
+                        <Label
+                            Grid.Row="2"
+                            Margin="20,35,20,15"
+                            Style="{StaticResource ContentStyle}"
+                            Text="{Binding SectionTitleScanner}"
+                            AutomationProperties.IsInAccessibleTree="True"
+                            AutomationId="{Binding Strings[QRSCANNER_SETTINGS_SECTION_TITLE_ACC]}"
+                            effects:FontSizeLabelEffectParams.MinFontSize="16.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+
+                        <Grid Grid.Row="3"
+                              RowSpacing="1"
+                              BackgroundColor="{StaticResource NavigationHeaderBackgroundColor}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="60" />
+                                <RowDefinition Height="60" />
+                            </Grid.RowDefinitions>
+                            <Grid 
+                                Grid.Row="0"
+                                BackgroundColor="{StaticResource FHIPrimaryWhite}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label
+                                    Grid.Column="0"
+                                    Margin="21,0,0,0"
+                                    AutomationProperties.IsInAccessibleTree="True"
+                                    Style="{StaticResource SubtitleStyle}"
+                                    Text="{Binding SettingsSound}"
+                                    VerticalOptions="Center"
+                                    effects:FontSizeLabelEffectParams.MaxFontSize="32.00"
+                                    effects:FontSizeLabelEffectParams.MinFontSize="12.00">
+                                    <Label.Effects>
+                                        <effects:FontSizeLabelEffect/>
+                                    </Label.Effects>
+                                </Label>
+
+                                <Switch
+                                    Grid.Column="1"
+                                    Margin="0,0,16,0"
+                                    AutomationProperties.IsInAccessibleTree="True"
+                                    Toggled="Switch_Toggled_Sound"
+                                    IsToggled="{Binding SoundSettingEnabled}"
+                                    HeightRequest="30"
+                                    VerticalOptions="Center"/>
+                            </Grid>
+
+
+                            <Grid
+                                Grid.Row="1"
+                                BackgroundColor="{StaticResource FHIPrimaryWhite}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                    Grid.Column="0"
+                                    Margin="21,0,0,0"
+                                    AutomationProperties.IsInAccessibleTree="True"
+                                    Style="{StaticResource SubtitleStyle}"
+                                    Text="{Binding SettingsVibration}"
+                                    VerticalOptions="Center"
+                                    effects:FontSizeLabelEffectParams.MaxFontSize="32.00"
+                                    effects:FontSizeLabelEffectParams.MinFontSize="12.00">
+                                    <Label.Effects>
+                                        <effects:FontSizeLabelEffect/>
+                                    </Label.Effects>
+                                </Label>
+
+                                <Switch
+                                    Grid.Column="1"
+                                    Margin="0,0,16,0"
+                                    AutomationProperties.IsInAccessibleTree="True"
+                                    Toggled="Switch_Toggled_Vibration"
+                                    IsToggled="{Binding VibrationSettingEnabled}"
+                                    HeightRequest="30"
+                                    VerticalOptions="Center" />
+                            </Grid>
+                        </Grid>
+
+                        <Grid Grid.Row="4"
+                              RowSpacing="10"
+                              VerticalOptions="EndAndExpand">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.Margin>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="iOS" Value="20,50,20,50" />
+                                    <On Platform="Android" Value="20,50,20,30" />
+                                </OnPlatform>
+                            </Grid.Margin>
+
+                            <controls:SingleLineButton
+                                Grid.Row="0"
+                                Padding="50,0,50,0"
+                                ImageSource="{StaticResource SyncIcon}"
+                                Style="{StaticResource CombinedButtonPrimaryStyle}"
+                                Command="{Binding FetchKeysCommand}"
+                                Text="{Binding Strings[SETTINGS_FETCH_CONTRL_KEYS]}"
+                                TextColor="{StaticResource DefaultBackgroundColor}"
+                                effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                                effects:FontSizeLabelEffectParams.MinFontSize="16.00">
+                                <controls:SingleLineButton.Effects>
+                                    <effects:FontSizeLabelEffect/>
+                                </controls:SingleLineButton.Effects>
+                            </controls:SingleLineButton>
+
+                            <Label Grid.Row="1" HorizontalTextAlignment="Center"
+                                   Style="{StaticResource RegularLabelStyle}" Text="{Binding LastUpdated}"
+                                   TextColor="{StaticResource DarkTextColor}" VerticalTextAlignment="Center"
+                                   effects:FontSizeLabelEffectParams.MaxFontSize="32.00"
+                                   effects:FontSizeLabelEffectParams.MinFontSize="16.00">
+                                <Label.Effects>
+                                    <effects:FontSizeLabelEffect/>
+                                </Label.Effects>
+                            </Label>
+                        </Grid>
+                    </Grid>
+                </ScrollView.Content>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

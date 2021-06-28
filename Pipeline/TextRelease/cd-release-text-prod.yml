@@ -1,0 +1,17 @@
+trigger: none
+
+pr: none
+
+pool:
+  vmImage: 'ubuntu-20.04'
+
+variables:
+  - group: Appcenter-${{ parameters.env }}
+
+extends:
+  template: cd-release-text-pipeline.yml
+  parameters:
+    azureSubscription: FHI-Koronasertifikat.Verifisering-ARM-Prod
+    accountName: $(stvksAccountname)
+    doRelease: ${{ eq(variables['Build.SourceBranch'], 'refs/heads/main') }}
+    textVersion: '3.3'

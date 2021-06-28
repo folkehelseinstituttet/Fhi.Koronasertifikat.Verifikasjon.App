@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage
+    x:Class="FHICORC.Views.ScannerPages.ScannerErrorPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:controls="clr-namespace:FHICORC.Controls"
+    xmlns:elements="clr-namespace:FHICORC.Views.Elements"
+    xmlns:effects="clr-namespace:FHICORC.Controls"
+    NavigationPage.HasNavigationBar="False"
+    BackgroundColor="{StaticResource NavigationHeaderBackgroundColor}"
+    ios:Application.EnableAccessibilityScalingForNamedFontSizes="true"
+    ios:Page.UseSafeArea="True">
+    <ContentPage.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0"
+                         Orientation="Vertical"
+                         Padding="0"
+                         Spacing="0">
+                <elements:NavigationHeader
+                    CenterLabelText="{Binding PageTitle}"
+                    RightButtonAccessibilityText="{Binding Strings[CLOSE_BUTTON]}"
+                    RightButtonCommand="{Binding ScanAgainCommand}"
+                    RightButtonImageSource="{StaticResource XMark}" />
+
+
+                <!--  Repeating text for Expired and Invalid page  -->
+                <StackLayout
+                    BackgroundColor="{StaticResource ExpiredBorderColor}"
+                    IsVisible="{Binding ShowInvalidPage, Converter={StaticResource BoolToInverseBoolConverter}}"
+                    Padding="0"
+                    Spacing="0">
+                    <Label
+                        Margin="-50, 0"
+                        Padding="0, 2"
+                        VerticalTextAlignment="Center"
+                        MaxLines="1"
+                        LineBreakMode="NoWrap"
+                        Style="{StaticResource SecondaryContentBoldStyle}"
+                        TextColor="{StaticResource BaseTextColor}"
+                        Text="{Binding RepeatedText}"
+                        effects:FontSizeLabelEffectParams.MaxFontSize="15.00"
+                        effects:FontSizeLabelEffectParams.MinFontSize="15.00"
+                        AutomationProperties.IsInAccessibleTree="False">
+                        <Label.Effects>
+                            <effects:FontSizeLabelEffect/>
+                        </Label.Effects>
+                    </Label>
+                </StackLayout>
+
+                <StackLayout
+                    BackgroundColor="{StaticResource InvalidBorderColor}"
+                    IsVisible="{Binding ShowInvalidPage}"
+                    Padding="0"
+                    Spacing="0">
+                    <Label
+                        Margin="-50, 0"
+                        Padding="0, 2"
+                        VerticalTextAlignment="Center"
+                        MaxLines="1"
+                        LineBreakMode="NoWrap"
+                        Style="{StaticResource SecondaryContentBoldStyle}"
+                        TextColor="{StaticResource BaseTextColor}"
+                        Text="{Binding RepeatedText}" 
+                        effects:FontSizeLabelEffectParams.MaxFontSize="15.00"
+                        effects:FontSizeLabelEffectParams.MinFontSize="15.00"
+                        AutomationProperties.IsInAccessibleTree="False">
+                        <Label.Effects>
+                            <effects:FontSizeLabelEffect/>
+                        </Label.Effects>
+                    </Label>
+                </StackLayout>
+            </StackLayout>
+
+
+            <ScrollView Grid.Row="1" VerticalOptions="FillAndExpand">
+                <StackLayout 
+                    Orientation="Vertical"
+                    VerticalOptions="CenterAndExpand"
+                    Padding="0"
+                    Spacing="0"
+                    Margin="43,0,43,0">
+                    <!--  Title for Expired and Invalid page  -->
+                    <StackLayout
+                        IsVisible="{Binding ShowInvalidPage, Converter={StaticResource BoolToInverseBoolConverter}}"
+                        Orientation="Vertical"
+                        Spacing="18">
+                        <Image Source="{StaticResource HourGlass}" />
+                        <Label
+                            Style="{StaticResource BigTitleStyle}"
+                            Text="{Binding Strings[SCANNER_ERROR_EXPIRED_TITLE]}"
+                            HorizontalTextAlignment="Center" >
+                        </Label>
+                        <Label
+                            Style="{StaticResource ContentStyle}"
+                            Text="{Binding Strings [SCANNER_ERROR_EXPIRED_CONTENT]}"
+                            HorizontalTextAlignment="Center" >
+                        </Label>
+                        <Label
+                            Style="{StaticResource ContentStyle}"
+                            Text="{Binding Strings [SCANNER_ERROR_EXPIRED_CONTENT_2]}"
+                            HorizontalTextAlignment="Center" >
+                        </Label>
+                    </StackLayout>
+
+                    <StackLayout
+                        IsVisible="{Binding ShowInvalidPage}"
+                        Orientation="Vertical"
+                        Spacing="18">
+                        <Image Source="{StaticResource xMarkCircle}" />
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            Style="{StaticResource BigTitleStyle}"
+                            Text="{Binding Strings[SCANNER_ERROR_INVALID_TITLE]}" >
+                        </Label>
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            Style="{StaticResource ContentStyle}"
+                            Text="{Binding Strings [SCANNER_ERROR_INVALID_CONTENT]}" >
+                        </Label>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+
+            <StackLayout Grid.Row="2"
+                         Orientation="Vertical"
+                         VerticalOptions="End"
+                         Padding="0"
+                         Spacing="0"
+                         Margin="50,20,50,20">
+                <controls:SingleLineButton
+                    Padding="20, 0"
+                    Command="{Binding ScanAgainCommand}"
+                    ImageSource="{StaticResource ScanRectangle}"
+                    AutomationProperties.IsInAccessibleTree="True"
+                    AutomationProperties.Name="{Binding Strings[SCANNER_ERROR_BUTTON_TEXT]}"
+                    Style="{StaticResource CombinedButtonPrimaryStyle}"
+                    Text="{Binding Strings[SCANNER_ERROR_BUTTON_TEXT]}" />
+
+                <!--  Seconds left before the page closes  -->
+                <Label
+                    Margin="0,20"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource ContentStyle}"
+                    FontSize="Small"
+                    Text="{Binding SecondsRemainingText}"
+                    TextColor="{StaticResource BaseTextColor}"
+                    AutomationProperties.IsInAccessibleTree="True"
+                    AutomationId="{Binding SecondsRemainingText_Accessibility}"
+                    effects:FontSizeLabelEffectParams.MaxFontSize="18.00">
+                    <Label.Effects>
+                        <effects:FontSizeLabelEffect/>
+                    </Label.Effects>
+                </Label>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

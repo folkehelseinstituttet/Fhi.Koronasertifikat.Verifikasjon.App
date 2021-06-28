@@ -1,0 +1,767 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{405FDB97-9A61-426F-B1B9-86D876065C57}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TemplateGuid>{89a4fe7c-635d-49c9-8d8c-5cd363c0d68d}</TemplateGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>FHICORC.iOS</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>FHICORC.iOS</AssemblyName>
+    <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <ProvisioningType>manual</ProvisioningType>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;DEBUG;UITEST</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>None</MtouchLink>
+    <MtouchInterpreter>-all</MtouchInterpreter>
+    <IOSDebugOverWiFi>false</IOSDebugOverWiFi>
+    <DeviceSpecificBuild>true</DeviceSpecificBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
+    <AppExtensionDebugBundleId />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Development|iPhoneSimulator'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\iPhoneSimulator\Development\</OutputPath>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;DEVELOPMENT;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <MtouchLink>None</MtouchLink>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchDebug>true</MtouchDebug>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Development|iPhone'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\iPhone\Development\</OutputPath>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;DEVELOPMENT;DEBUG;UITEST</DefineConstants>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchLink>None</MtouchLink>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchArch>ARM64</MtouchArch>
+    <MtouchInterpreter>-all</MtouchInterpreter>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Unittests|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Unittests</OutputPath>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;DEBUG;UNITTEST;UITEST</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchVerbosity>
+    </MtouchVerbosity>
+    <MtouchEnableSGenConc>false</MtouchEnableSGenConc>
+    <MtouchLink>SdkOnly</MtouchLink>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Test</OutputPath>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;UITEST</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchVerbosity>
+    </MtouchVerbosity>
+    <MtouchEnableSGenConc>false</MtouchEnableSGenConc>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchArch>ARMv7</MtouchArch>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|iPhone' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Test</OutputPath>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;TEST</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchVerbosity>
+    </MtouchVerbosity>
+    <MtouchFloat32>true</MtouchFloat32>
+    <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignProvision>Automatic:AdHoc</CodesignProvision>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\AppStore</OutputPath>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;APPSTORE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchVerbosity>
+    </MtouchVerbosity>
+    <MtouchFloat32>true</MtouchFloat32>
+    <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignProvision>Automatic:AppStore</CodesignProvision>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStoreBeta|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\AppStoreBeta</OutputPath>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;APPSTOREBETA</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchVerbosity>
+    </MtouchVerbosity>
+    <MtouchFloat32>true</MtouchFloat32>
+    <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignProvision>Automatic:AppStore</CodesignProvision>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <MtouchLink>SdkOnly</MtouchLink>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Custom Renderers\FontSizeLabelEffect.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <BundleResource Include="..\FHICORC\Configuration\appsettings.Development.json">
+      <Link>Resources\appsettings.Development.json</Link>
+    </BundleResource>
+    <BundleResource Include="..\FHICORC\Configuration\appsettings.local.json">
+      <Link>Resources\appsettings.local.json</Link>
+    </BundleResource>
+    <None Include="Entitlements.plist" />
+    <None Include="Info.plist" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IosScannerFactory.cs" />
+    <Compile Include="Services\PlatformBrowserService.cs" />
+    <Compile Include="Services\ConfigurationProvider.cs" />
+    <Compile Include="Services\StatusBarService.cs" />
+    <Compile Include="Custom Renderers\CustomPickerRenderer.cs" />
+    <BundleResource Include="..\FHICORC\Configuration\appsettings.Test.json">
+      <Link>Resources\appsettings.Test.json</Link>
+    </BundleResource>
+    <BundleResource Include="..\FHICORC\Configuration\appsettings.AppStore.json">
+      <Link>Resources\appsettings.AppStore.json</Link>
+    </BundleResource>
+    <BundleResource Include="packages.lock.json" />
+    <Compile Include="Custom Renderers\SingleLineButtonRenderer.cs" />
+    <BundleResource Include="..\FHICORC\Configuration\appsettings.AppStoreBeta.json">
+      <Link>Resources\appsettings.AppStoreBeta.json</Link>
+    </BundleResource>
+    <Compile Include="Custom Renderers\CustomSwitchRenderer.cs" />
+    <Compile Include="Services\IosDeepLinkingService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="AppAssets.xcassets\valid_passport_icon_green.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\valid_passport_icon_green.imageset\valid_passport_icon_green.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\valid_passport_icon_green.imageset\valid_passport_icon_green@2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\valid_passport_icon_green.imageset\valid_passport_icon_green@3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <ImageAsset Include="AppAssets.xcassets\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\HamburgerMenu.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\HamburgerMenu.imageset\hamburger_menu.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\HamburgerMenu.imageset\hamburger_menu%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\HamburgerMenu.imageset\hamburger_menu%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_layout.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_layout.imageset\error_layout%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_queue.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_queue.imageset\error_queue.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_queue.imageset\error_queue%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_queue.imageset\error_queue%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\valid_passport_icon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\valid_passport_icon.imageset\valid_passport_icon.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\valid_passport_icon.imageset\valid_passport_icon%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\valid_passport_icon.imageset\valid_passport_icon%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\question_mark_white.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\landing_page_background.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\landing_page_background.imageset\landing_page_background.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\landing_page_background.imageset\landing_page_background%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\landing_page_background.imageset\landing_page_background%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\landing_page_logo.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\landing_page_logo.imageset\landing_page_logo%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\landing_page_stock_image.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_lock.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\close_icon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\close_icon.imageset\close_icon.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\close_icon.imageset\close_icon%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\close_icon.imageset\close_icon%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\hourGlass.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\x_mark.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\ScanRectangle.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\x_mark_circle.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\arrow_right_white.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\arrow_right_white.imageset\arrow_right_white.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\arrow_right_white.imageset\arrow_right_white%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\arrow_right_white.imageset\arrow_right_white%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\landing_page_logo.imageset\landing_page_logo%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\landing_page_logo.imageset\landing_page_logo%402x-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\landing_page_logo.imageset\landing_page_logo%403x-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\landing_page_fhi_logo.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\landing_page_fhi_logo.imageset\landing_page_fhi_logo%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\landing_page_fhi_logo.imageset\landing_page_fhi_logo%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\landing_page_fhi_logo.imageset\landing_page_fhi_logo%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\question_mark_white.imageset\question_mark_white.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\landing_page_stock_image.imageset\FHI_Frontpage_100521 1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\landing_page_stock_image.imageset\FHI_Frontpage_100521 1-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\landing_page_stock_image.imageset\FHI_Frontpage_100521 1-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\x_mark_circle.imageset\x_mark_circle.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\ScanRectangle.imageset\ScanRectangle.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\x_mark.imageset\x_mark.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\hourGlass.imageset\hourGlass.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\back_arrow.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\back_arrow.imageset\blue.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\back_arrow.imageset\blue-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\back_arrow.imageset\blue-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\burger.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\burger.imageset\burger.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\burger.imageset\burger-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\burger.imageset\burger-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\close_white.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\close_white.imageset\close_white.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\close_white.imageset\white.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\close_white.imageset\white-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\scan_valid_no.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\scan_valid_no.imageset\White.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\scan_valid_no.imageset\White-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\scan_valid_no.imageset\White-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\arrow_right.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\arrow_right.imageset\arrow_right.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\settings_icon_cog.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\settings_icon_cog.imageset\settings_icon_cog.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\navigation_arrow_back.imageset\blue.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\navigation_arrow_back.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\SplashBackground.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\SplashBackground-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\SplashBackground-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_maintenance.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_maintenance.imageset\V2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_maintenance.imageset\V2-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_maintenance.imageset\V2-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_layout.imageset\Large-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_layout.imageset\Large.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_layout.imageset\Large-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\external.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\external.imageset\External.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\external.imageset\External-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\external.imageset\External-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\AppIcon-2.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\AppIcon-2.appiconset\40px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\AppIcon-2.appiconset\60px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\AppIcon-2.appiconset\58px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\AppIcon-2.appiconset\87px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\AppIcon-2.appiconset\80px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\AppIcon-2.appiconset\120px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\AppIcon-2.appiconset\120px-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\AppIcon-2.appiconset\180px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\AppIcon-2.appiconset\20px_Iphone_Spotlight.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\AppIcon-2.appiconset\40px-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\AppIcon-2.appiconset\29px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\AppIcon-2.appiconset\58px-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\AppIcon-2.appiconset\40px-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\AppIcon-2.appiconset\80px-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\AppIcon-2.appiconset\76px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\AppIcon-2.appiconset\152px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\AppIcon-2.appiconset\167px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_lock.imageset\error_lock.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_lock.imageset\error_lock-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_lock.imageset\error_lock-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\certificate_logo.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\certificate_logo.imageset\app_logo.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\certificate_logo.imageset\app_logo%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\certificate_logo.imageset\app_logo%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\AppIcon-2.appiconset\1024px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\scanner_gradient.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\scanner_gradient.imageset\scanner_gradient.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\scanner_gradient.imageset\scanner_gradient%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\scanner_gradient.imageset\scanner_gradient%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\sync_icon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\sync_icon.imageset\sync_icon.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\sync_icon.imageset\sync_icon%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\sync_icon.imageset\sync_icon%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\test.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\test.imageset\test.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\test.imageset\test%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\test.imageset\test%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\check_shield.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\check_shield.imageset\check_shield.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\check_shield.imageset\check_shield%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\check_shield.imageset\check_shield%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\certificate_title_white.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\certificate_title_white.imageset\certificate_title_white.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\certificate_title_white.imageset\certificate_title_white%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\certificate_title_white.imageset\certificate_title_white%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\certificate_title_blue.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\certificate_title_blue.imageset\certificate_title_blue.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\certificate_title_blue.imageset\certificate_title_blue%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\certificate_title_blue.imageset\certificate_title_blue%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\menu_help_icon.imageset\Contents.json" />
+    <ImageAsset Include="AppAssets.xcassets\menu_help_icon.imageset\menu_helpsupport.png" />
+    <ImageAsset Include="AppAssets.xcassets\menu_help_icon.imageset\menu_helpsupport%402x.png" />
+    <ImageAsset Include="AppAssets.xcassets\menu_help_icon.imageset\menu_helpsupport%403x.png" />
+    <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\Contents.json" />
+    <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\landing_helpsupport.png" />
+    <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\landing_helpsupport%402x.png" />
+    <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\landing_helpsupport%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp.Views.Forms">
+      <Version>2.80.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+    <PackageReference Include="ZXing.Net.Mobile">
+      <Version>3.1.0-beta2</Version>
+    </PackageReference>
+    <PackageReference Include="ZXing.Net.Mobile.Forms">
+      <Version>3.1.0-beta2</Version>
+    </PackageReference>
+    <PackageReference Include="Rg.Plugins.Popup">
+      <Version>2.0.0.11</Version>
+    </PackageReference>
+    <PackageReference Include="PeterO.Cbor">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="PeterO.URIUtility">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="PeterO.Numbers">
+      <Version>1.7.4</Version>
+    </PackageReference>
+    <PackageReference Include="AiForms.Dialogs">
+      <Version>1.0.10</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="AppAssets.xcassets\app_logo.imageset\" />
+    <Folder Include="AppAssets.xcassets\arrow_back.imageset\" />
+    <Folder Include="AppAssets.xcassets\back_arrow_circle.imageset\" />
+    <Folder Include="AppAssets.xcassets\bottombar_info.imageset\" />
+    <Folder Include="AppAssets.xcassets\bottombar_passport.imageset\" />
+    <Folder Include="AppAssets.xcassets\bottombar_scan.imageset\" />
+    <Folder Include="AppAssets.xcassets\clock_icon.imageset\" />
+    <Folder Include="AppAssets.xcassets\collapsed_icon.imageset\" />
+    <Folder Include="AppAssets.xcassets\CoronaPassLogo.imageset\" />
+    <Folder Include="AppAssets.xcassets\covid_19_negative_test_icon.imageset\" />
+    <Folder Include="AppAssets.xcassets\covid_19_recovery_icon.imageset\" />
+    <Folder Include="AppAssets.xcassets\covid_19_vaccine_icon.imageset\" />
+    <Folder Include="AppAssets.xcassets\delete_keyboard.imageset\" />
+    <Folder Include="AppAssets.xcassets\error_lock_icon.imageset\" />
+    <Folder Include="AppAssets.xcassets\exclamation_icon_blue.imageset\" />
+    <Folder Include="AppAssets.xcassets\exclamation_mark.imageset\" />
+    <Folder Include="AppAssets.xcassets\expanded_icon.imageset\" />
+    <Folder Include="AppAssets.xcassets\expander_down_arrow.imageset\" />
+    <Folder Include="AppAssets.xcassets\expander_right_arrow.imageset\" />
+    <Folder Include="AppAssets.xcassets\expired_icon.imageset\" />
+    <Folder Include="AppAssets.xcassets\fingerprint_layout.imageset\" />
+    <Folder Include="AppAssets.xcassets\forward_arrow.imageset\" />
+    <Folder Include="AppAssets.xcassets\hamburger_menu.imageset\" />
+    <Folder Include="AppAssets.xcassets\HelpSupportQuestion.imageset\" />
+    <Folder Include="AppAssets.xcassets\help_icon_blue.imageset\" />
+    <Folder Include="AppAssets.xcassets\hide_info_icon.imageset\" />
+    <Folder Include="AppAssets.xcassets\icon_down_triangle.imageset\" />
+    <Folder Include="AppAssets.xcassets\icon_right_triangle.imageset\" />
+    <Folder Include="AppAssets.xcassets\info.imageset\" />
+    <Folder Include="AppAssets.xcassets\information_icon.imageset\" />
+    <Folder Include="AppAssets.xcassets\information_icon_large.imageset\" />
+    <Folder Include="AppAssets.xcassets\international_passport_icon.imageset\" />
+    <Folder Include="AppAssets.xcassets\inverse_crown_icon.imageset\" />
+    <Folder Include="AppAssets.xcassets\inverse_plane_icon.imageset\" />
+    <Folder Include="AppAssets.xcassets\landing_page_art.imageset\" />
+    <Folder Include="AppAssets.xcassets\landing_page_texture.imageset\" />
+    <Folder Include="AppAssets.xcassets\landing_page_vector.imageset\" />
+    <Folder Include="AppAssets.xcassets\lightbulb.imageset\" />
+    <Folder Include="AppAssets.xcassets\lock_icon.imageset\" />
+    <Folder Include="AppAssets.xcassets\Logo.imageset\" />
+    <Folder Include="AppAssets.xcassets\main_page_dotted_background.imageset\" />
+    <Folder Include="AppAssets.xcassets\passport_picker_icon.imageset\" />
+    <Folder Include="AppAssets.xcassets\qr_code_scanner.imageset\" />
+    <Folder Include="AppAssets.xcassets\reload_icon.imageset\" />
+    <Folder Include="AppAssets.xcassets\selected_dot_blue.imageset\" />
+    <Folder Include="AppAssets.xcassets\setting.imageset\" />
+    <Folder Include="AppAssets.xcassets\share_icon.imageset\" />
+    <Folder Include="AppAssets.xcassets\show_info_icon.imageset\" />
+    <Folder Include="AppAssets.xcassets\SplashBackground.imageset\" />
+    <Folder Include="AppAssets.xcassets\sundhedsminiateriet_landing_page_logo.imageset\" />
+    <Folder Include="AppAssets.xcassets\text_page.imageset\" />
+    <Folder Include="AppAssets.xcassets\toast_tick.imageset\" />
+    <Folder Include="AppAssets.xcassets\valid_icon.imageset\" />
+    <Folder Include="AppAssets.xcassets\Xsø.imageset\" />
+    <Folder Include="AppAssets.xcassets\menu_help_icon.imageset\" />
+    <Folder Include="AppAssets.xcassets\landingpage_help_icon.imageset\" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\FHICORC.Core\FHICORC.Core.csproj">
+      <Project>{01BA28A8-4E03-43A4-A8E2-8488D3841FDA}</Project>
+      <Name>FHICORC.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FHICORC\FHICORC.csproj">
+      <Project>{6E489D54-1048-4780-81D1-A694A49C3339}</Project>
+      <Name>FHICORC</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>

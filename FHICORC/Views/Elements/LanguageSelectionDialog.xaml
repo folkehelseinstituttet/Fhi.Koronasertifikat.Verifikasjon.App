@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<extra:DialogView
+    x:Class="FHICORC.Views.Elements.LanguageSelectionDialog"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:effects="clr-namespace:FHICORC.Controls"
+    xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+    xmlns:extra="clr-namespace:AiForms.Dialogs.Abstractions;assembly=AiForms.Dialogs.Abstractions"
+    xmlns:viewmodel="clr-namespace:FHICORC.ViewModels;assembly=FHICORC"
+    x:DataType="viewmodel:Custom.LanguageSelectionDialogViewModel"
+    BackgroundColor="{StaticResource FHIPrimaryWhite}"
+    CornerRadius="10"
+    DialogNotifier="{Binding Notifier}"
+    HorizontalLayoutAlignment="Center"
+    OffsetX="0"
+    OffsetY="0"
+    OverlayColor="{StaticResource Dark60}"
+    UseCurrentPageLocation="false"
+    VerticalLayoutAlignment="Center">
+    <Grid
+        Margin="25,15,20,30"
+        RowSpacing="0"
+        HorizontalOptions="Center"
+        VerticalOptions="Center"
+        WidthRequest="300">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ImageButton
+            Grid.Row="0"
+            BackgroundColor="Transparent"
+            Command="{Binding CloseCommand}"
+            Source="{StaticResource XMark}"
+            AutomationProperties.Name="{Binding CancelButton}"
+            WidthRequest="20"
+            HeightRequest="20"
+            HorizontalOptions="End" />
+        <Label
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Margin="0,10,0,0"
+            effects:FontSizeLabelEffectParams.MaxFontSize="22"
+            effects:FontSizeLabelEffectParams.MinFontSize="15"
+            Style="{StaticResource TitleStyle}"
+            AutomationProperties.IsInAccessibleTree="True"
+            Text="{Binding Title}">
+            <Label.Effects>
+                <effects:FontSizeLabelEffect />
+            </Label.Effects>
+        </Label>
+        <input:RadioButtonGroupView Grid.Row="2" Margin="0, 20, 0, 10">
+            <Grid RowSpacing="15"
+                  RadioButtonGroup.GroupName="Language">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.3*" />
+                    <RowDefinition Height="0.3*" />
+                    <RowDefinition Height="0.3*" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0"
+                      ColumnSpacing="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <input:RadioButton
+                        x:Name="RadioButtonBokmal"
+                        Grid.Column="0"
+                        Color="{StaticResource FHIPrimaryBlue}"
+                        CircleColor="{StaticResource FHIPrimaryBlue}"
+                        IsChecked="{Binding IsBokmalSelected, Mode=TwoWay}" />
+                    <Label
+                        Grid.Column="1"
+                        Text="{Binding BokmalText}"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        Style="{StaticResource ContentStyle}"
+                        VerticalOptions="Center"
+                        effects:FontSizeLabelEffectParams.MaxFontSize="34"
+                        effects:FontSizeLabelEffectParams.MinFontSize="12">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_Bokmal" />
+                        </Label.GestureRecognizers>
+                        <Label.Effects>
+                            <effects:FontSizeLabelEffect />
+                        </Label.Effects>
+                    </Label>
+                </Grid>
+
+                <Grid Grid.Row="1"
+                      ColumnSpacing="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <input:RadioButton
+                        x:Name="RadioButtonNynorsk"
+                        Grid.Column="0"
+                        Color="{StaticResource FHIPrimaryBlue}"
+                        CircleColor="{StaticResource FHIPrimaryBlue}"
+                        IsChecked="{Binding IsNynorskSelected, Mode=TwoWay}" />
+                    <Label
+                        Grid.Column="1"
+                        Text="{Binding NynorskText}"
+                        Style="{StaticResource ContentStyle}"
+                        VerticalOptions="Center"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        effects:FontSizeLabelEffectParams.MaxFontSize="34"
+                        effects:FontSizeLabelEffectParams.MinFontSize="12">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_Nynorsk" />
+                        </Label.GestureRecognizers>
+                        <Label.Effects>
+                            <effects:FontSizeLabelEffect />
+                        </Label.Effects>
+                    </Label>
+                </Grid>
+
+                <Grid Grid.Row="2"
+                      ColumnSpacing="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <input:RadioButton
+                        x:Name="RadioButtonEnglish"
+                        Grid.Column="0"
+                        Color="{StaticResource FHIPrimaryBlue}"
+                        CircleColor="{StaticResource FHIPrimaryBlue}"
+                        IsChecked="{Binding IsEnglishSelected, Mode=TwoWay}" />
+                    <Label
+                        Grid.Column="1"
+                        Text="{Binding EnglishText}"
+                        Style="{StaticResource ContentStyle}"
+                        VerticalOptions="Center"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        effects:FontSizeLabelEffectParams.MaxFontSize="34"
+                        effects:FontSizeLabelEffectParams.MinFontSize="12">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_English" />
+                        </Label.GestureRecognizers>
+                        <Label.Effects>
+                            <effects:FontSizeLabelEffect />
+                        </Label.Effects>
+                    </Label>
+                </Grid>
+            </Grid>
+        </input:RadioButtonGroupView>
+        <Grid Grid.Row="3"
+              Margin="0,20,5,0"
+              HorizontalOptions="FillAndExpand">
+            <Grid>
+                <Button
+                    Grid.Row="0"
+                    Clicked="Complete"
+                    HorizontalOptions="FillAndExpand"
+                    Style="{StaticResource CombinedButtonPrimaryStyle}"
+                    AutomationProperties.IsInAccessibleTree="True"
+                    AutomationProperties.Name="{Binding OkButtonText}"/>
+                <Label
+                    Grid.Row="0"
+                    effects:FontSizeLabelEffectParams.MaxFontSize="32"
+                    effects:FontSizeLabelEffectParams.MinFontSize="12"
+                    HorizontalOptions="Center"
+                    AutomationProperties.IsInAccessibleTree="False"
+                    HorizontalTextAlignment="Center"
+                    InputTransparent="True"
+                    IsEnabled="False"
+                    FontFamily="PTSansRegular"
+                    FontSize="Medium"
+                    Text="{Binding OkButtonText}"
+                    TextColor="White"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center">
+                    <Label.Effects>
+                        <effects:FontSizeLabelEffect />
+                    </Label.Effects>
+                </Label>
+            </Grid>
+        </Grid>
+    </Grid>
+</extra:DialogView>

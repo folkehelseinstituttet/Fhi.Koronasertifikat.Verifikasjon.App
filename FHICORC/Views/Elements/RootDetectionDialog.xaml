@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<extra:DialogView
+    x:Class="FHICORC.Views.Elements.RootDetectionDialog"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:effects="clr-namespace:FHICORC.Controls"
+    xmlns:extra="clr-namespace:AiForms.Dialogs.Abstractions;assembly=AiForms.Dialogs.Abstractions"
+    xmlns:viewmodel="clr-namespace:FHICORC.ViewModels;assembly=FHICORC"
+    x:DataType="viewmodel:Custom.CustomDialogViewModel"
+    BackgroundColor="{StaticResource FHIPrimaryWhite}"
+    CornerRadius="10"
+    DialogNotifier="{Binding Notifier}"
+    HorizontalLayoutAlignment="Center"
+    OffsetX="0"
+    OffsetY="0"
+    OverlayColor="{StaticResource Dark60}"
+    UseCurrentPageLocation="false"
+    VerticalLayoutAlignment="Center">
+    <Grid
+        Margin="25,30,25,30"
+        HorizontalOptions="Center"
+        RowSpacing="20"
+        VerticalOptions="Center"
+        WidthRequest="300">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Image Grid.Row="0" Source="{StaticResource ErrorCheckLayout}" WidthRequest="60" HeightRequest="60" />
+        <Label
+            Grid.Row="1"
+            HorizontalTextAlignment="Center"
+            effects:FontSizeLabelEffectParams.MaxFontSize="24"
+            effects:FontSizeLabelEffectParams.MinFontSize="14"
+            Style="{StaticResource TitleStyle}"
+            Text="{Binding Title}">
+            <Label.Effects>
+                <effects:FontSizeLabelEffect />
+            </Label.Effects>
+        </Label>
+        <Label
+            Grid.Row="2"
+            HorizontalTextAlignment="Center"
+            effects:FontSizeLabelEffectParams.MaxFontSize="22"
+            effects:FontSizeLabelEffectParams.MinFontSize="12"
+            Style="{StaticResource ContentStyle}"
+            Text="{Binding Body}">
+            <Label.Effects>
+                <effects:FontSizeLabelEffect />
+            </Label.Effects>
+        </Label>
+        <Grid Grid.Row="3"
+              HeightRequest="50"
+              HorizontalOptions="FillAndExpand">
+            <Button
+                Grid.Row="0"
+                Clicked="Complete"
+                HorizontalOptions="FillAndExpand"
+                Style="{StaticResource DialogButtonPrimaryStyle}" />
+            <Label
+                Grid.Row="0"
+                effects:FontSizeLabelEffectParams.MaxFontSize="32"
+                effects:FontSizeLabelEffectParams.MinFontSize="12"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                InputTransparent="True"
+                IsEnabled="False"
+                Text="{Binding OkButtonText}"
+                Style="{StaticResource CustomDialogAcceptLabelStyle}"
+                VerticalOptions="Center"
+                VerticalTextAlignment="Center">
+            <Label.Effects>
+                <effects:FontSizeLabelEffect />
+            </Label.Effects>
+            </Label>
+        </Grid>
+    </Grid>
+</extra:DialogView>

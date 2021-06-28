@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Grid
+    x:Class="FHICORC.Views.Elements.NavigationHeader"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:FHICORC.Controls"
+    x:Name="HeaderGrid"
+    BackgroundColor="{StaticResource NavigationHeaderBackgroundColor}">
+
+    <Grid Margin="10,10">
+        <ImageButton
+            x:Name="LeftButton"
+            Padding="6,6,6,6"
+            AutomationId="LeftButton"
+            BackgroundColor="Transparent"
+            HorizontalOptions="Start"
+            VerticalOptions="Center" />
+
+        <Label
+            x:Name="CenterLabel"
+            local:FontSizeLabelEffectParams.MaxFontSize="32"
+            local:FontSizeLabelEffectParams.MinFontSize="12"
+            AutomationId="{Binding CenterLabelText}"
+            HorizontalOptions="CenterAndExpand"
+            HorizontalTextAlignment="Center"
+            LineBreakMode="NoWrap"
+            Style="{StaticResource NavigationTitleTextStyle}"
+            Text="{Binding CenterLabelText}"
+            VerticalOptions="Center"
+            VerticalTextAlignment="Center">
+            <Label.Effects>
+                <local:FontSizeLabelEffect />
+            </Label.Effects>
+        </Label>
+
+        <ImageButton
+            x:Name="RightButton"
+            Padding="10,0,10,0"
+            AutomationId="RightButton"
+            BackgroundColor="Transparent"
+            HorizontalOptions="End"
+            VerticalOptions="Center"/>
+    </Grid>
+</Grid>

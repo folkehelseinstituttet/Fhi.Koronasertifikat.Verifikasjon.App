@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    x:Class="FHICORC.Views.Menu.AboutPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:elements="clr-namespace:FHICORC.Views.Elements"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:viewModels="clr-namespace:FHICORC.ViewModels.Menu"
+    ios:Page.UseSafeArea="False"
+    x:DataType="viewModels:AboutPageViewModel"
+    BackgroundColor="{StaticResource NavigationHeaderBackgroundColor}"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid BackgroundColor="{StaticResource NavigationHeaderBackgroundColor}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="64" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.Padding>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="0,50,0,0" />
+                    <On Platform="Android" Value="0,0,0,0" />
+                </OnPlatform>
+            </Grid.Padding>
+            <elements:NavigationHeader
+                CenterLabelText="{Binding Strings[ABOUT_PAGE_TITLE]}"
+                LeftButtonCommand="{Binding BackCommand}"
+                LeftButtonHeightRequest="40"
+                LeftButtonImageSource="{StaticResource ArrowBack}"/>
+            <ScrollView Grid.Row="1" BackgroundColor="{StaticResource DefaultBackgroundColor}">
+                <ScrollView.Content>
+                    <Grid Padding="20,23,20,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label
+                            Grid.Row="0"
+                            Style="{StaticResource RegularLabelStyle}"
+                            Text="{Binding Strings[ABOUT_SECTION_1_TITLE]}" />
+                        <Label
+                            Grid.Row="1"
+                            Margin="0,15,0,0"
+                            Style="{StaticResource ContentTitleStyle}"
+                            Text="{Binding Strings[ABOUT_SECTION_1_CONTENT]}" />
+                        <Label
+                            Grid.Row="2"
+                            Margin="0,15,0,0"
+                            Style="{StaticResource ContentStyle}"
+                            Text="{Binding Strings[ABOUT_SECTION_1_SUBCONTENT]}" />
+                        <Label
+                            Grid.Row="3"
+                            Margin="0,42,0,0"
+                            Style="{StaticResource RegularLabelStyle}"
+                            Text="{Binding Strings[ABOUT_SECTION_2_TITLE]}" />
+                        <Label
+                            Grid.Row="4"
+                            Margin="0,15,0,0"
+                            Style="{StaticResource ContentTitleStyle}"
+                            Text="{Binding Strings[ABOUT_SECTION_2_CONTENT]}" />
+                        <Label
+                            Grid.Row="5"
+                            Margin="0,15,0,0"
+                            Style="{StaticResource ContentStyle}"
+                            Text="{Binding Strings[ABOUT_SECTION_2_SUBCONTENT]}" />
+                    </Grid>
+                </ScrollView.Content>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

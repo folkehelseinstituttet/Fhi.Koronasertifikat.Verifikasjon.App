@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+	<item
+        android:id="@android:id/background"
+        android:drawable="@drawable/progress_bar_background"
+		android:height="@dimen/abc_progress_bar_height_material"
+		android:gravity="center"
+		/>
+	<item android:id="@android:id/progress"
+		  android:height="@dimen/abc_progress_bar_height_material"
+		  android:gravity="center">
+		<scale
+            android:drawable="@drawable/shape_progressbar_progress"
+            android:scaleWidth="100%" />
+	</item>
+</layer-list>

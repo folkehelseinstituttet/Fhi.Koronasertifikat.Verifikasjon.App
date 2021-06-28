@@ -1,0 +1,28 @@
+# ci-build-xamarin.yml
+# ~~~~~~~~~~~~~~
+#
+# Pipeline for building xamarin iOS and Android apps.
+# This is triggered on every pull request
+
+trigger:
+- none
+
+# Global variables
+variables:
+  solution: '**/*.sln'
+  versionName: 1.0.6
+  ${{ if eq( variables['Build.SourceBranchName'], 'main')}}:
+    env: 'prod'
+  ${{ if ne( variables['Build.SourceBranchName'], 'main')}}:
+    env: 'test'
+
+name: $(Build.Reason)-$(versionName).$(Build.BuildId).$(env)
+
+extends:
+  template: cd-build-deploy-appcenter.yml
+  parameters:
+    solution: ${{ variables.solution }}
+    versionName: ${{ variables.versionName }}
+    env: ${{ variables.env }}
+    doBuild: true
+    doDeploy: false

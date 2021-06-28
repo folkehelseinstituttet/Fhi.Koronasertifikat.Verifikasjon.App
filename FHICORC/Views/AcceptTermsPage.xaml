@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    x:Class="FHICORC.Views.AcceptTermsPage"
+    NavigationPage.HasNavigationBar="False"
+    ios:Page.UseSafeArea="true"
+    BackgroundColor="{StaticResource DefaultBackgroundColor}">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ImageButton
+                Grid.Row="0"
+                Padding="15,15,0,0"
+                HeightRequest="50"
+                Command="{Binding BackCommand}"
+                AutomationProperties.Name="{Binding Strings[BACK_BUTTON]}"
+                Source="{StaticResource ArrowBack}"
+                BackgroundColor="Transparent"
+                HorizontalOptions="Start"
+                VerticalOptions="Center" />
+            <ScrollView Grid.Row="1">
+                <Grid RowSpacing="20" Padding="0, 0, 0, 20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="45" />
+                    </Grid.RowDefinitions>
+                    <Label
+                        Margin="20"
+                        Grid.Row="1"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        TextType="Html"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding AcceptTermsHtmlText}">
+                    </Label>
+                    <StackLayout
+                        Grid.Row="2"
+                        HorizontalOptions="Center"
+                        Orientation="Horizontal">
+                        <Switch IsToggled="{Binding TermsAccepted, Mode=TwoWay}"  />
+                        <Label Text="{Binding AcceptTermsLabelText}" VerticalTextAlignment="Center" VerticalOptions="Center" Style="{StaticResource RegularLabelBoldStyle}"/>
+                    </StackLayout>
+                    <StackLayout
+                        Grid.Row="3"
+                        Margin="20, 0, 20, 0">
+                        <Button
+                            Text="{Binding Strings[CONFIRM_BUTTON]}"
+                            Command="{Binding NextButtonCommand}"
+                            IsEnabled="{Binding TermsAccepted}"
+                            Style="{StaticResource CombinedButtonPrimaryStyle}"/>
+                    </StackLayout>
+                </Grid>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

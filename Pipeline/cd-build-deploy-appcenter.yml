@@ -1,0 +1,264 @@
+# cd-build-deploy-appcenter.yml
+# ~~~~~~~~~~~~~~
+#
+# Template pipeline for building xamarin iOS and Android apps
+# and deploy to App Center. 
+
+parameters:
+- name: solution
+  type: string
+  default: '**/*.sln'
+- name: versionName
+  type: object
+  default: 1.0.6
+- name: env
+  type: string
+  default: 'test'
+- name: doBuild
+  type: boolean
+  default: false
+- name: doDeploy
+  type: boolean
+  default: false
+
+stages:
+- stage: 'Build_Android_and_iOS_Stage'
+  displayName: Building iOS ipa and Android apk for ${{ parameters.env }}
+  condition: eq(${{ parameters.doBuild }}, true)
+
+  pool:
+    vmImage: 'macOS-10.15'
+
+  jobs:
+  - job: 'Build_Android_Job_to_${{ parameters.env }}'
+    variables:
+    - group: 'FHICORC - App CI'
+    - group: Appcenter-${{ parameters.env }}
+    - name: outputDirectory
+      value: '$(build.binariesDirectory)/$(buildConfig)'
+    - name: BaseUrl
+      value: '$(envBaseUrl)'
+    - name: AuthorizationHeader
+      value: '$(authHeader)'
+
+
+    steps:
+    - task: NuGetToolInstaller@1
+
+    - task: NuGetCommand@2
+      inputs:
+        restoreSolution: '${{ parameters.solution }}'
+
+    - task: DownloadSecureFile@1
+      name: downloadKeyStore
+      displayName: 'Download Keystore file from Secure Files'
+      inputs:
+        secureFile: 'FHICORC.jks'
+
+    - task: FileTransform@1
+      inputs:
+        folderPath: '$(Build.SourcesDirectory)/FHICORC/Configuration'      
+        fileType: json
+        targetFiles: appsettings.$(buildConfig).json
+
+    - task: DownloadSecureFile@1
+      name: downloadCert
+      displayName: 'Download env json file from Secure Files'
+      inputs:
+        secureFile: '${{ parameters.env }}.crt'
+
+    - task: PowerShell@2
+      displayName: 'Move cert files'
+      inputs:
+        targetType: 'inline'
+        script: |
+          Move-Item -Force -Path "$(downloadCert.secureFilePath)" -Destination "$(Build.SourcesDirectory)/FHICORC/Certs/${{ parameters.env }}.crt"
+      
+    - task: InstallBundletool@1
+      displayName: 'Install Android Bundletool'
+      inputs:
+        username: '$(NC002GithubUsername)'
+        personalAccessToken: '$(NC002GithubAccessToken)'
+
+    - task: android-manifest-version@1
+      displayName: 'Setting Android build number to $(Build.BuildId)'
+      inputs:
+        sourcePath: '$(androidManifestPath)'
+        versionCodeOption: 'buildid'
+        versionCode: '$(Build.BuildId)'
+        versionName: '${{ parameters.versionName }}'
+        printFile: true
+    
+    - task: XamarinAndroid@1
+      displayName: 'Building and signing Android app [$(buildConfig)|$(buildPlatform)]'
+      inputs:
+        projectFile: '**/*Android*.csproj'
+        outputDirectory: '$(outputDirectory)'
+        configuration: '$(buildConfig)' 
+        msbuildArguments: '-restore /t:SignAndroidPackage /p:AndroidBuildApplicationPackage=True /p:AndroidPackageFormat=aab /p:OutputPath=$(outputDirectory) /p:AndroidKeyStore=True /p:AndroidSigningKeyStore=$(downloadKeyStore.secureFilePath) /p:AndroidSigningStorePass=$(keystorePassword) /p:AndroidSigningKeyAlias=$(keyAlias) /p:AndroidSigningKeyPass=$(keyPassword)'
+
+    - task: Bundletool@1
+      displayName: 'Unpacking AAB to APK for distribution'
+      inputs:
+        bundleToolArguments: 'build-apks --bundle=$(outputDirectory)/no.fhi.KoronasertifikatKontrollapp-Signed.aab --output=$(outputDirectory)/fhicorc.apks --mode=universal --ks=$(downloadKeyStore.secureFilePath) --ks-pass=pass:$(keystorePassword) --ks-key-alias=$(keyAlias) --key-pass=pass:$(keyPassword)'
+      
+    - script: |
+        unzip $(outputDirectory)/fhicorc.apks -d $(outputDirectory)
+    - script: |
+        mv $(outputDirectory)/*-Signed.aab $(outputDirectory)/$(Build.BuildId).aab
+        mv $(outputDirectory)/universal.apk $(outputDirectory)/$(Build.BuildId).apk
+      displayName: 'Renaming .aab and .apk to $(Build.BuildId).aab and $(Build.BuildId).apk'
+      
+    - task: CopyFiles@2
+      displayName: 'Copying signed apk file to Staging directory'
+      inputs:
+        sourceFolder: $(outputDirectory)
+        contents: |
+          $(Build.BuildId).aab
+          $(Build.BuildId).apk
+        targetFolder: $(Build.ArtifactStagingDirectory)
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publishing Android artifact in pipeline'
+      inputs:
+        ArtifactName: 'fhicorc-android-${{ parameters.env }}-$(Build.BuildId)'
+    
+  - job: 'Build_iOS_Job_to_${{ parameters.env }}'
+    variables:
+    - group: 'FHICORC - App CI'
+    - group: Appcenter-${{ parameters.env }}
+    - name: outputDirectory
+      value: '$(build.binariesDirectory)/$(buildConfig)'
+    - name: BaseUrl
+      value: '$(envBaseUrl)'
+    - name: AuthorizationHeader
+      value: '$(authHeader)'
+
+    steps:
+    - task: NuGetToolInstaller@1
+
+    - task: NuGetCommand@2
+      inputs:
+        restoreSolution: '${{ parameters.solution }}'
+
+    - task: FileTransform@1
+      inputs:
+        folderPath: '$(Build.SourcesDirectory)/FHICORC/Configuration'      
+        fileType: json
+        targetFiles: appsettings.$(buildConfig).json
+
+    - task: DownloadSecureFile@1
+      name: downloadCert
+      displayName: 'Download env json file from Secure Files'
+      inputs:
+        secureFile: '${{ parameters.env }}.crt'
+
+    - task: PowerShell@2
+      displayName: 'Move cert files'
+      inputs:
+        targetType: 'inline'
+        script: |
+          Move-Item -Force -Path "$(downloadCert.secureFilePath)" -Destination "$(Build.SourcesDirectory)/FHICORC/Certs/${{ parameters.env }}.crt"
+
+    - task: ios-bundle-version@1
+      displayName: 'Setting iOS Build.BuildId to $(Build.BuildId)'
+      inputs:
+        sourcePath: '$(infoPlistPath)'
+        versionCodeOption: 'buildid'
+        versionCode: '$(Build.BuildId)'
+        versionName: '${{ parameters.versionName }}'
+        printFile: true
+
+    - task: InstallAppleCertificate@2
+      displayName: 'Install Apple InstallAppleCertificate for ${{ parameters.env }}'
+      inputs:
+        certSecureFile: 'FHICORC_apple_certificate.p12'
+        certPwd: $(appleCertPassword)
+        keychain: 'temp'
+        deleteCert: true
+
+    - task: InstallAppleProvisioningProfile@1
+      inputs:
+        provisioningProfileLocation: 'secureFiles'
+        ${{ if eq(parameters.env, 'prod') }}:
+          provProfileSecureFile: 'FHICORC_AppStore.mobileprovision'
+        ${{ if ne(parameters.env, 'prod') }}:
+          provProfileSecureFile: 'FHICORC_Ad_Hoc.mobileprovision'
+        removeProfile: true
+
+    - task: XamariniOS@2
+      displayName: 'Building and signing iOS app (Build $(Build.BuildId)) [$(buildConfig)]'
+      inputs:
+        solutionFile: '${{ parameters.solution }}'
+        configuration: $(buildConfig)
+        packageApp: true
+        buildForSimulator: false
+        runNugetRestore: false
+        signingIdentity: '$(appleCertIdentity)'
+        signingProvisioningProfileID: '$(APPLE_PROV_PROFILE_UUID)'
+        args: '-restore /t:Clean;Build /p:OutputPath="$(outputDirectory)"'
+
+    - task: CopyFiles@2
+      inputs:
+        sourceFolder: $(outputDirectory)
+        contents: |
+          *.ipa
+        targetFolder: $(Build.ArtifactStagingDirectory)
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publishing iOS artifact in pipeline'
+      inputs:
+        ArtifactName: 'fhicorc-ios-${{ parameters.env }}-$(Build.BuildId)'
+
+
+- stage: 'Deploy_Android_and_iOS_Stage'
+  displayName: Deploy iOS ipa and Android apk to Appcenter for ${{ parameters.env }}
+  condition: eq(${{ parameters.doDeploy }}, true)
+  variables:
+    - group : Appcenter-${{ parameters.env }}
+   
+  pool:
+    vmImage: 'macOS-10.15'
+
+  jobs:
+  - job: 'Deploy_Android_Job'
+    steps:
+    - task: DownloadBuildArtifacts@0
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'fhicorc-android-${{ parameters.env }}-$(Build.BuildId)'
+        downloadPath: '$(System.ArtifactsDirectory)'
+
+    - task: AppCenterDistribute@3
+      displayName: 'Distributing Android apk to App Center'
+      inputs:
+        serverEndpoint: 'FHICORC - Android - ${{ parameters.env }}'
+        appSlug: '$(appSlugAndroid)'
+        appFile: '$(System.ArtifactsDirectory)/fhicorc-android-${{ parameters.env }}-$(Build.BuildId)/*.apk'
+        symbolsOption: 'Android'
+        releaseNotesOption: 'input'
+        releaseNotesInput: '$(androidAppCenterReleaseNotes)'
+        destinationType: 'groups'
+        distributionGroupId: '$(androidAppCenterDistributionGroupId)'
+
+  - job: 'Deploy_iOS_Job'
+    steps:
+    - task: DownloadBuildArtifacts@0
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'fhicorc-ios-${{ parameters.env }}-$(Build.BuildId)'
+        downloadPath: '$(System.ArtifactsDirectory)'
+
+    - task: AppCenterDistribute@3
+      displayName: 'Distributing iOS .ipa file to ${{ parameters.env }} Center'
+      inputs:
+        serverEndpoint: 'FHICORC - iOS - ${{ parameters.env }}'
+        appSlug: '$(appSlugiOS)'
+        appFile: '$(System.ArtifactsDirectory)/fhicorc-ios-${{ parameters.env }}-$(Build.BuildId)/*.ipa'
+        symbolsOption: Apple
+        releaseNotesOption: 'input'
+        releaseNotesInput: '$(iOSAppCenterReleaseNotes)'
+        destinationType: 'groups'
+        distributionGroupId: '$(iOSAppCenterDistributionGroupId)'

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+	<item>
+		<bitmap android:src="@drawable/splash_screen" android:tileMode="disabled" android:gravity="fill_horizontal|fill_vertical" />
+	</item>
+	<item android:gravity="center" android:bottom="50dp" android:drawable="@drawable/certificate_logo" />
+</layer-list>

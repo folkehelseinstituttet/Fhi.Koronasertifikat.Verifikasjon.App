@@ -1,0 +1,431 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Application
+    x:Class="FHICORC.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:FHICORC.Controls.Converters;assembly=FHICORC">
+    <!--
+        Define global resources and styles here, that apply to all pages in your app.
+    -->
+    <Application.Resources>
+        <ResourceDictionary>
+            <!--  Text  -->
+            <Color x:Key="TitleTextColor">#1c1999</Color>
+            <Color x:Key="LightTextColor">#77819A</Color>
+            <Color x:Key="ContentTextColor">#47526F</Color>
+            <Color x:Key="BaseTextColor">#24215f</Color>
+            <Color x:Key="WhiteTextColor">#ffffff</Color>
+            <Color x:Key="GreyTextColor">#6C768E</Color>
+            <Color x:Key="DarkTextColor">#22215D</Color>
+            <Color x:Key="LinkColor">#3B37E2</Color>
+
+            <!--  Background Colour  -->
+            <Color x:Key="DefaultBackgroundColor">#E1EAED</Color>
+            <Color x:Key="NavigationHeaderBackgroundColor">#E1EAED</Color>
+            <Color x:Key="LandingPageColorStart">#4B4E6F</Color>
+            <Color x:Key="MainPageBackgroundColor">#E7F2F2</Color>
+            <Color x:Key="SuccessBorderColor">#D9F0D4</Color>
+            <Color x:Key="InvalidBorderColor">#FBB5AD</Color>
+            <Color x:Key="ExpiredBorderColor">#F5E360</Color>
+
+
+            <!--  Image  -->
+            <x:String x:Key="LandingPageFhiLogo">landing_page_fhi_logo.png</x:String>
+            <x:String x:Key="LandingPageBackground">landing_page_background</x:String>
+            <x:String x:Key="LandingPageLogo">landing_page_logo</x:String>
+            <x:String x:Key="LandingPageTitle">certificate_title_white</x:String>
+            <x:String x:Key="ImagerLogo">imager_logo.png</x:String>
+            <x:String x:Key="LandingPageStockImage">landing_page_stock_image</x:String>
+            <x:String x:Key="ArrowBack">navigation_arrow_back</x:String>
+            <x:String x:Key="ValidIconNo">scan_valid_no.png</x:String>
+            <x:String x:Key="ValidPassportIconGreen">valid_passport_icon_green.png</x:String>
+            <x:String x:Key="HamburgerMenu">burger.png</x:String>
+            <x:String x:Key="XMark">x_mark.png</x:String>
+            <x:String x:Key="ScanRectangle">ScanRectangle.png</x:String>
+            <x:String x:Key="HourGlass">hourGlass.png</x:String>
+            <x:String x:Key="xMarkCircle">x_mark_circle.png</x:String>
+            <x:String x:Key="External">external.png</x:String>
+            <x:String x:Key="ScannerGradient">scanner_gradient.png</x:String>
+            <x:String x:Key="VaccineIcon">vaccine.png</x:String>
+            <x:String x:Key="TestIcon">test.png</x:String>
+            <x:String x:Key="RecoveryIcon">recovery.png</x:String>
+            <x:String x:Key="CheckShield">check_shield.png</x:String>
+            <x:String x:Key="MenuPageTitle">certificate_title_blue</x:String>
+
+            <x:String x:Key="UserIcon">icon_user.png</x:String>
+            <x:String x:Key="ArrowNext">arrow_right</x:String>
+            <x:String x:Key="MenuHelpIcon">menu_help_icon</x:String>
+            <x:String x:Key="LandingHelpIcon">landingpage_help_icon</x:String>
+            <x:String x:Key="MenuSettingIcon">settings_icon_cog</x:String>
+            <x:String x:Key="CertificateLogo">certificate_logo.png</x:String>
+            <x:String x:Key="ArrowRightWhite">arrow_right_white</x:String>
+            <x:String x:Key="SyncIcon">sync_icon.png</x:String>
+
+            <x:String x:Key="ErrorUnknown">error_layout.png</x:String>
+            <x:String x:Key="ErrorLock">error_lock.png</x:String>
+            <x:String x:Key="ErrorMaintenance">error_maintenance.png</x:String>
+            <x:String x:Key="ErrorQueue">error_queue.png</x:String>
+            <x:String x:Key="CloseIcon">close_white.png</x:String>
+            <x:String x:Key="ErrorCheckLayout">error_layout.png</x:String>
+            
+
+            <!--  Others  -->
+
+            <Color x:Key="ButtonBlue">#3B37E2</Color>
+            <Color x:Key="ButtonDisable">#A2A8B8</Color>
+            <Color x:Key="MenuButtonPressed">#80F3F9FB</Color>
+            <Color x:Key="White">#FFFFFF</Color>
+            <Color x:Key="Dark60">#99000000</Color>
+
+            <Color x:Key="FHIPrimaryBlue">#32345C</Color>
+            <Color x:Key="FHIPrimaryBlueTransparent">#CC32345C</Color>
+            <Color x:Key="FHIPrimaryBlueButtonPressed">#F232345C</Color>
+            <Color x:Key="FHIWhite">#F3F9FB</Color>
+            <Color x:Key="FHIPrimaryWhite">#F3F9FB</Color>
+            <Color x:Key="FHISecondaryWhite">#FFFFFF</Color>
+
+
+            <!--  Global Style  -->
+
+            <Style x:Key="TitleStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansBold" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+                <Setter Property="LineHeight" Value="1.1" />
+            </Style>
+
+            <Style x:Key="BigTitleStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansBold" />
+                <Setter Property="FontSize" Value="Title" />
+                <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+            </Style>
+
+            <Style x:Key="LandingTitleStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="TitilliumWebSemiBold" />
+                <Setter Property="FontSize" Value="35" />
+                <Setter Property="TextColor" Value="{StaticResource FHISecondaryWhite}" />
+                <Setter Property="LineHeight">0.8</Setter>
+            </Style>
+
+            <Style x:Key="MenuTitleStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="TitilliumWebSemiBold" />
+                <Setter Property="FontSize" Value="35" />
+                <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+            </Style>
+
+            <Style x:Key="SubtitleStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansBold" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+            </Style>
+
+            <Style x:Key="ContentTitleStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansBold" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+                <Setter Property="LineHeight" Value="1.2" />
+            </Style>
+
+            <Style x:Key="ContentStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansRegular" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+            </Style>
+
+            <Style x:Key="TitleItalicStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansItalic" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+            </Style>
+
+            <Style x:Key="ContentItalicStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansItalic" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+            </Style>
+
+            <Style x:Key="NavigationTitleTextStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansBold" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+            </Style>
+
+            <Style x:Key="SecondaryContentBoldStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansBold" />
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+            </Style>
+
+            <Style x:Key="RegularLabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansRegular" />
+                <Setter Property="FontSize" Value="Body" />
+                <Setter Property="TextColor" Value="{StaticResource ContentTextColor}" />
+            </Style>
+
+            <Style x:Key="RegularLabelBoldStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansBold" />
+                <Setter Property="FontSize" Value="Body" />
+                <Setter Property="TextColor" Value="{StaticResource ContentTextColor}" />
+            </Style>
+
+            <Style x:Key="TertierStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansRegular" />
+                <Setter Property="FontSize" Value="Caption" />
+                <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+            </Style>
+
+            <Style x:Key="TertierBoldStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansBold" />
+                <Setter Property="FontSize" Value="Caption" />
+                <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+            </Style>
+
+            <Style x:Key="InfoPaneHeaderStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansBold" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="TextColor" Value="{StaticResource BaseTextColor}" />
+            </Style>
+
+            <Style x:Key="InfoPaneSubHeaderStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansItalic" />
+                <Setter Property="FontSize" Value="Body" />
+                <Setter Property="TextColor" Value="{StaticResource BaseTextColor}" />
+            </Style>
+
+            <Style x:Key="InfoPaneItemHeader" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansRegular" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="TextColor" Value="{StaticResource GreyTextColor}" />
+            </Style>
+
+            <Style x:Key="InfoPaneItemValue" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansRegular" />
+                <Setter Property="FontSize" Value="Body" />
+                <Setter Property="TextColor" Value="{StaticResource BaseTextColor}" />
+            </Style>
+
+            <Style x:Key="InfoPaneSectionHeader" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansBold" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="TextColor" Value="{StaticResource BaseTextColor}" />
+            </Style>
+
+            <Style x:Key="InfoPanePassportHeader" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansBold" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteTextColor}" />
+            </Style>
+
+            <Style x:Key="CustomDialogCancelLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+                <Setter Property="FontFamily" Value="PTSansBold" />
+            </Style>
+
+            <Style x:Key="CustomDialogAcceptLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource FHIPrimaryWhite}" />
+                <Setter Property="FontFamily" Value="PTSansBold" />
+            </Style>
+
+            <Style x:Key="MenuButtonLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="FontFamily" Value="PTSansBold" />
+                <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+            </Style>
+
+           
+            <Style x:Key="SecondaryButtonStyle" TargetType="Button">
+                <Setter Property="HeightRequest" Value="45" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="FontSize" Value="Body" />
+                <Setter Property="BorderColor" Value="{StaticResource FHIPrimaryBlue}" />
+                <Setter Property="BorderWidth" Value="1" />
+                <Setter Property="FontFamily" Value="PTSansRegular" />
+                <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                    <Setter Property="HeightRequest" Value="41" />
+                                    <Setter Property="Margin" Value="2" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style x:Key="CombinedButtonPrimaryStyle" TargetType="Button">
+                <Setter Property="MinimumHeightRequest" Value="45" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="FontSize" Value="Body" />
+                <Setter Property="FontFamily" Value="PTSansRegular" />
+                <Setter Property="TextColor" Value="{StaticResource White}" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource FHIPrimaryBlue}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource FHIPrimaryBlueButtonPressed}" />
+                                    <Setter Property="HeightRequest" Value="41" />
+                                    <Setter Property="Margin" Value="2" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource ButtonDisable}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style x:Key="DialogButtonPrimaryStyle" TargetType="Button">
+                <Setter Property="HeightRequest" Value="45" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="FontSize" Value="Body" />
+                <Setter Property="FontFamily" Value="PTSansBold" />
+                <Setter Property="TextColor" Value="{StaticResource White}" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource FHIPrimaryBlue}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource FHIPrimaryBlueButtonPressed}" />
+                                    <Setter Property="HeightRequest" Value="41" />
+                                    <Setter Property="Margin" Value="2" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style x:Key="DialogButtonSecondaryStyle" TargetType="Button">
+                <Setter Property="HeightRequest" Value="45" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="FontSize" Value="Body" />
+                <Setter Property="BorderColor" Value="{StaticResource FHIPrimaryBlue}" />
+                <Setter Property="BorderWidth" Value="1" />
+                <Setter Property="FontFamily" Value="PTSansBold" />
+                <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                    <Setter Property="HeightRequest" Value="41" />
+                                    <Setter Property="Margin" Value="2" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style x:Key="LandingButtonStyle" TargetType="Button">
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="FontSize" Value="Title" />
+                <Setter Property="FontFamily" Value="PTSansRegular" />
+                <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+                <Setter Property="HeightRequest" Value="60" />
+                <Setter Property="WidthRequest" Value="187" />
+                <Setter Property="Padding">
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="48, 16, 48, 16" />
+                        <On Platform="Android" Value="0, 0, 0, 0" />
+                    </OnPlatform>
+                </Setter>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource FHIPrimaryWhite}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource DefaultBackgroundColor}" />
+                                    <Setter Property="HeightRequest" Value="56" />
+                                    <Setter Property="WidthRequest" Value="183" />
+                                    <Setter Property="Margin" Value="2" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style x:Key="LandingTertiaryButtonStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="Body" />
+                <Setter Property="FontFamily" Value="PTSansRegular" />
+                <Setter Property="TextColor" Value="{StaticResource White}" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource FHIPrimaryBlueTransparent}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style x:Key="MenuButtonStyle" TargetType="Button">
+                <Setter Property="Padding" Value="0,16,0,16" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource MenuButtonPressed}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <!--  Converters  -->
+            <converters:BoolToInverseBoolConverter x:Key="BoolToInverseBoolConverter" />
+            <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
