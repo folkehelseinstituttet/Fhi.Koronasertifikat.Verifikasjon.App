@@ -210,6 +210,9 @@
     <ImageAsset Include="AppAssets.xcassets\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\close_blue.imageset\close_blue.png" />
+    <ImageAsset Include="AppAssets.xcassets\close_blue.imageset\close_blue%402x.png" />
+    <ImageAsset Include="AppAssets.xcassets\close_blue.imageset\close_blue%403x.png" />
     <ImageAsset Include="AppAssets.xcassets\HamburgerMenu.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -694,6 +697,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
+    <Folder Include="AppAssets.xcassets\close_blue.imageset\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AppAssets.xcassets\landing_page_background.imageset\" />
+    <Folder Include="AppAssets.xcassets\landing_page_logo.imageset\" />
+    <Folder Include="AppAssets.xcassets\landing_page_stock_image.imageset\" />
+    <Folder Include="AppAssets.xcassets\landing_page_vector.imageset\" />
     <Folder Include="AppAssets.xcassets\app_logo.imageset\" />
     <Folder Include="AppAssets.xcassets\arrow_back.imageset\" />
     <Folder Include="AppAssets.xcassets\back_arrow_circle.imageset\" />

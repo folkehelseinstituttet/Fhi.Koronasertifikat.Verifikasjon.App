@@ -1,4 +1,7 @@
-﻿using FHICORC.Services;
+﻿using FHICORC.Core.Services.Interface;
+using FHICORC.Core.Services.Model.Converter;
+using FHICORC.Core.Services.Model.EuDCCModel.ValueSet;
+using FHICORC.Services;
 using FHICORC.Services.Interfaces;
 using FHICORC.Utils;
 using FHICORC.ViewModels.Base;
@@ -58,19 +61,19 @@ namespace FHICORC.ViewModels.Certificates
 
         #endregion
 
-        public string NegativeTestTypeOfTestValue => PassportViewModel.PassportData.TypeOfTest;
-        public string NegativeTestResultValue => PassportViewModel.PassportData.Result;
+        public string NegativeTestTypeOfTestValue => _translator.Translate(DGCValueSetEnum.TypeOfTest, PassportViewModel.PassportData.TypeOfTest ?? "").ToString();
+        public string NegativeTestResultValue => _translator.Translate(DGCValueSetEnum.TestResult, PassportViewModel.PassportData.Result ?? "").ToString();
         public string NegativeTestSampleCollectionDateTimeValue => PassportViewModel.PassportData.SampleCollectedTime?.ToLocaleDateTimeFormat() ?? "-";
-        public string NegativeTestDiseaseValue => PassportViewModel.PassportData.Disease;
-        public string NegativeTestManufacturerValue => PassportViewModel.PassportData.TestManufacturer;
+        public string NegativeTestDiseaseValue => _translator.Translate(DGCValueSetEnum.Disease, PassportViewModel.PassportData.Disease ?? "").ToString();
+        public string NegativeTestManufacturerValue => _translator.Translate(DGCValueSetEnum.TestManufacturer, PassportViewModel.PassportData.TestManufacturer ?? "").ToString();
         public string NegativeTestNumberValue => "";
         public string NegativeTestSampleOriginValue => PassportViewModel.PassportData.SampleOrigin;
         public string NegativeTestTestingCentreValue => PassportViewModel.PassportData.TestCountry ?? "-";
         public string NegativeTestIssuerValue => ShowCertificate ? PassportViewModel.PassportData.CertificateIssuer : "-";
         public string NegativeTestCertificatIdentifierValue => ShowCertificate ? PassportViewModel.PassportData.CertificateIdentifier : "-";
-        public string TestHeaderValue => ShowHeader ? PassportViewModel.PassportData.TypeOfTest : "-";
+        public string TestHeaderValue => ShowHeader ? _translator.Translate(DGCValueSetEnum.TypeOfTest, PassportViewModel.PassportData.TypeOfTest ?? "").ToString() : "-";
         public string TestCenter => PassportViewModel.PassportData.TestCenter;
-        public string TestName => string.IsNullOrEmpty(PassportViewModel.PassportData.TestName) ? "-" : PassportViewModel.PassportData.TestName;
+        public string TestName => string.IsNullOrEmpty(PassportViewModel.PassportData.TestName) ? "-" : _translator.Translate(DGCValueSetEnum.TypeOfTest, PassportViewModel.PassportData.TestName ?? "").ToString();
         public string NAATestName => PassportViewModel.PassportData.NAATestName;
 
         public PassportViewModel PassportViewModel { get; set; } = new PassportViewModel();
@@ -79,7 +82,12 @@ namespace FHICORC.ViewModels.Certificates
         public bool ShowHeader { get; set; }
         public bool ShowTextInEnglish { get; set; }
 
-        public InfoTestTextViewModel(ITimer timer) : base(timer) { }
+        private IDgcValueSetTranslator _translator;
+
+        public InfoTestTextViewModel(ITimer timer) : base(timer)
+        {
+            _translator = DigitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
+        }
 
         public void UpdateView()
         {

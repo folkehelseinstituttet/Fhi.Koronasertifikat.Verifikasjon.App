@@ -17,7 +17,7 @@ namespace FHICORC.Core.Services.Model.EuDCCModel.ValueSet
         }
         public override void WriteJson(JsonWriter writer, string value, JsonSerializer serializer)
         {
-            writer.WriteRawValue(_dgcValueSetTranslator.GetDGCCode(_key, value));
+            writer.WriteRawValue(_dgcValueSetTranslator.GetDGCCode(_key, $"\"{value}\""));
         }
 
         public override string ReadJson(JsonReader reader, Type objectType, string existingValue, bool hasExistingValue,

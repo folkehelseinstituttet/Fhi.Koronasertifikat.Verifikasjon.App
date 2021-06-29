@@ -48,9 +48,12 @@
     <Folder Include="Services\Model\Converter\" />
     <Folder Include="Services\Model\NoDGCModel\" />
     <Folder Include="Services\Model\EuDCCModel\1.3.0\" />
+    <Folder Include="Services\Model\BusinessRules\" />
+    <Folder Include="Services\BusinessRules\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Com.AugustCellars.COSE" Version="1.7.0" />
+    <PackageReference Include="JsonLogic.Net" Version="1.1.9" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     <PackageReference Include="TinyIoC" Version="1.3.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -72,11 +75,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Remove="Services\Model\EuDCCModel\ValueSet\test_manf.json" />
-    <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\test_manf.json">
+    <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\test-manf.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Remove="Services\Model\EuDCCModel\ValueSet\test_result.json" />
-    <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\test_result.json">
+    <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\test-result.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Remove="Services\Model\EuDCCModel\ValueSet\vaccine-mah-manf.json" />
@@ -91,5 +94,7 @@
     <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\vaccine-prophylaxis.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Remove="Services\Model\EuDCCModel\ValueSet\test-type.json" />
+    <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\test-type.json" />
   </ItemGroup>
 </Project>

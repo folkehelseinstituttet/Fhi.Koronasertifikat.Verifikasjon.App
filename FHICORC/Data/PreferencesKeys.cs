@@ -9,5 +9,7 @@
         public static readonly string SCANNER_VIBRATION_SETTING = nameof(SCANNER_VIBRATION_SETTING);
         public static readonly string SCANNER_SOUND_SETTING = nameof(SCANNER_SOUND_SETTING);
         public static readonly string TERMS_ACCEPTED = nameof(TERMS_ACCEPTED);
+        public static readonly string BUSINESS_RULES = nameof(BUSINESS_RULES);
+        public static readonly string LAST_TIME_FETCHED_RULES = nameof(LAST_TIME_FETCHED_RULES);
     }
 }
