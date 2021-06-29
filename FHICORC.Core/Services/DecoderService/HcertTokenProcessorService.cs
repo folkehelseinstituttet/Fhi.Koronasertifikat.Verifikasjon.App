@@ -12,6 +12,10 @@ using FHICORC.Core.Services.Utils;
 using FHICORC.Core.Services.Model.NO;
 using System.Text.RegularExpressions;
 using System.Linq;
+using FHICORC.Core.Interfaces;
+using FHICORC.Core.Services.Model.EuDCCModel._1._3._0;
+using FHICORC.Core.Services.Model.BusinessRules;
+using System.Collections.Generic;
 
 namespace FHICORC.Core.Services.DecoderServices
 {
@@ -19,14 +23,21 @@ namespace FHICORC.Core.Services.DecoderServices
     {
         private readonly ICertificationService _certificationService;
         private readonly IDateTimeService _dateTimeService;
+        private readonly IRuleVerifierService _ruleVerifierService;
+        private readonly IRuleSelectorService _ruleSelectorService;
 
         private IDgcValueSetTranslator _translator;
 
         public HcertTokenProcessorService(
-            ICertificationService certificationService, IDateTimeService dateTimeService)
+            ICertificationService certificationService,
+            IDateTimeService dateTimeService,
+            IRuleSelectorService ruleSelectorService,
+            IRuleVerifierService ruleVerifierService)
         {
             _certificationService = certificationService;
             _dateTimeService = dateTimeService;
+            _ruleSelectorService = ruleSelectorService;
+            _ruleVerifierService = ruleVerifierService;
             _translator = DigitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
             DigitalGreenValueSetTranslatorFactory.Init();
         }
@@ -55,8 +66,13 @@ namespace FHICORC.Core.Services.DecoderServices
                 string jsonStringFromBytes = coseSign1Object.GetJson();
 
                 ITokenPayload decodedModel = MapToModelFromJson(jsonStringFromBytes, base45String.Substring(0, 3));
+
                 DateTime? expiration = decodedModel.ExpiredDateTime();
                 DateTime? issueAt = decodedModel.IssueDateTime();
+
+                if (decodedModel is DCCPayload dccPayload)
+                    resultModel.RulesFeedBacks = VerifyRules(dccPayload);
+
                 if (expiration != null)
                 {
                     if (_dateTimeService.Now.CompareTo(issueAt) <= 0)
@@ -86,6 +102,15 @@ namespace FHICORC.Core.Services.DecoderServices
                 return resultModel;
             }
             
+        }
+
+        private List<RulesFeedbackData> VerifyRules(DCCPayload dccPayload)
+        {
+            var external = _ruleSelectorService.ApplyExternalData(dccPayload);
+            var applicableRules = _ruleSelectorService.SelectRules(dccPayload);
+            var verifyRulesModel = new VerifyRulesModel { HCert = dccPayload.DCCPayloadData.DCC, External = external };
+            
+            return _ruleVerifierService.Verify(applicableRules, verifyRulesModel) ?? new List<RulesFeedbackData>();
         }
 
         private CoseSign1Object DecodeToCOSEFlow(string base45String)

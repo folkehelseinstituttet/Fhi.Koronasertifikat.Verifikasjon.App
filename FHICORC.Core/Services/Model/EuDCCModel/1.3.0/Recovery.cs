@@ -9,7 +9,6 @@ namespace FHICORC.Core.Services.Model.EuDCCModel._1._3._0
     {
         [JsonProperty("tg")]
         //disease or agent targeted
-        [JsonConverter(typeof(DigitalGreenValueSetConverter), DGCValueSetEnum.Disease)]
         public string Disease { get; set; }
         
         [JsonProperty("fr")]

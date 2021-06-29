@@ -145,7 +145,7 @@ namespace FHICORC.ViewModels
                 {
                     _deviceFeedbackService.Vibrate(ScanSuccessVibrationDuration);
                     _deviceFeedbackService.PlaySound(SoundKeys.VALID_SCAN_SOUND);
-                    await OnScanSuccess(model.DecodedModel);
+                    await OnScanSuccess(model);
                 }
                 else
                 {
@@ -164,12 +164,12 @@ namespace FHICORC.ViewModels
             }
         }
 
-        private async Task OnScanSuccess(ITokenPayload payload)
+        private async Task OnScanSuccess(TokenValidateResultModel tokenValidateResultModel)
         {
             bool anyVaccinations = false;
             bool anyTestResults = false;
             bool anyRecovery = false;
-            if (payload is Core.Services.Model.EuDCCModel._1._3._0.DCCPayload cwtPayload)
+            if (tokenValidateResultModel.DecodedModel is Core.Services.Model.EuDCCModel._1._3._0.DCCPayload cwtPayload)
             {
                 anyVaccinations = cwtPayload.DCCPayloadData.DCC.Vaccinations?.Any()?? false;
                 anyTestResults = cwtPayload.DCCPayloadData.DCC.Tests?.Any() ?? false;
@@ -178,7 +178,7 @@ namespace FHICORC.ViewModels
             else
             {
                 if (await IsResultOpen()) return;
-                await _popupService.ShowScanSuccessPopup(payload);
+                await _popupService.ShowScanSuccessPopup(tokenValidateResultModel.DecodedModel);
                 return;
             }
 
@@ -188,7 +188,7 @@ namespace FHICORC.ViewModels
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     if (await IsResultOpen()) return;
-                    await _navigationService.PushPage(new ScanEuVaccineResultView(), true, Enums.PageNavigationStyle.PushModallyFullscreen, payload);
+                    await _navigationService.PushPage(new ScanEuVaccineResultView(), true, Enums.PageNavigationStyle.PushModallyFullscreen, tokenValidateResultModel);
                 });
             }
             // Should be (!anyVaccinations && anyTestResults && !anyRecovery) - once we support multi-factor
@@ -197,7 +197,7 @@ namespace FHICORC.ViewModels
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     if (await IsResultOpen()) return;
-                    await _navigationService.PushPage(new ScanEuTestResultView(), true, Enums.PageNavigationStyle.PushModallyFullscreen, payload);
+                    await _navigationService.PushPage(new ScanEuTestResultView(), true, Enums.PageNavigationStyle.PushModallyFullscreen, tokenValidateResultModel);
                 });
             }
             // Should be (!anyVaccinations && !anyTestResults && anyRecovery) - once we support multi-factor
@@ -206,7 +206,7 @@ namespace FHICORC.ViewModels
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     if (await IsResultOpen()) return;
-                    await _navigationService.PushPage(new ScanEuRecoveryResultView(), true, Enums.PageNavigationStyle.PushModallyFullscreen, payload);
+                    await _navigationService.PushPage(new ScanEuRecoveryResultView(), true, Enums.PageNavigationStyle.PushModallyFullscreen, tokenValidateResultModel);
                 });
             }
             else

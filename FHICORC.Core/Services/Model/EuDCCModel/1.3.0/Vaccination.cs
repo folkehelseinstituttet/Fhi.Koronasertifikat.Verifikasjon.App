@@ -9,22 +9,18 @@ namespace FHICORC.Core.Services.Model.EuDCCModel._1._3._0
     {
         [JsonProperty("tg")]
         //disease or agent targeted
-        [JsonConverter(typeof(DigitalGreenValueSetConverter), DGCValueSetEnum.Disease)]
         public string Disease { get; set; }
         
         [JsonProperty("vp")]
         //vaccine or prophylaxis
-        [JsonConverter(typeof(DigitalGreenValueSetConverter), DGCValueSetEnum.VaccineProphylaxis)]
         public string VaccineProphylaxis { get; set; }
         
         [JsonProperty("mp")]
         //vaccine medicinal product
-        [JsonConverter(typeof(DigitalGreenValueSetConverter), DGCValueSetEnum.VaccineMedicinalProduct)]
         public string VaccineMedicinalProduct { get; set; }
         
         [JsonProperty("ma")]
         //Marketing Authorization Holder - if no MAH present, then manufacturer
-        [JsonConverter(typeof(DigitalGreenValueSetConverter), DGCValueSetEnum.VaccineAuthorityHolder)]
         public string Manufacturer { get; set; }
         
         [JsonProperty("dn")]
