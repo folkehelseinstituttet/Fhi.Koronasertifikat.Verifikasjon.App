@@ -1,6 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json;
-using FHICORC.Core.Services.Model.Converter;
 using FHICORC.Core.Services.Model.EuDCCModel.ValueSet;
 
 namespace FHICORC.Core.Services.Model.EuDCCModel._1._3._0
@@ -24,7 +23,6 @@ namespace FHICORC.Core.Services.Model.EuDCCModel._1._3._0
         public string TestManufacturer { get; set; }
 
         [JsonProperty("sc")]
-        [JsonConverter(typeof(EpochDatetimeConverter))]
         public DateTime? SampleCollectedTime { get; set; }
         
         [JsonProperty("tr")]
