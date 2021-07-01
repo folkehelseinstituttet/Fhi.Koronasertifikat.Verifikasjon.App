@@ -67,7 +67,7 @@
             <x:String x:Key="ErrorMaintenance">error_maintenance.png</x:String>
             <x:String x:Key="ErrorQueue">error_queue.png</x:String>
             <x:String x:Key="CloseIcon">close_white.png</x:String>
-            <x:String x:Key="CloseIconBlue">close_blue.png</x:String>
+            <x:String x:Key="CloseIconBlue">close_icon_blue.png</x:String>
             <x:String x:Key="ErrorCheckLayout">error_layout.png</x:String>
             
 
