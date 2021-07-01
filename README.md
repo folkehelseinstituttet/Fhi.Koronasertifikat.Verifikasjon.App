@@ -1,4 +1,4 @@
-<h1 align="center"> Kontroll av koronasertifikat Mobile Application <br/><img style="margin-right: 1%; margin-bottom: 0.5em; float: left;" src="https://github.com/folkehelseinstituttet/Fhi.Koronasertifikat.Verifikasjon.App/blob/feature/README/FHICORC/Resources/Logo.png"> </h1>
+<h1 align="center"> Kontroll av koronasertifikat Mobile Application <br/><img style="margin-right: 1%; margin-bottom: 2em; float: left;" src="https://github.com/folkehelseinstituttet/Fhi.Koronasertifikat.Verifikasjon.App/blob/feature/README/FHICORC/Resources/Logo.png"> </h1>
 <br/>
 
 [![GitHub last commit](https://img.shields.io/github/last-commit/folkehelseinstituttet/Fhi.Koronasertifikat.Verifikasjon.App)](https://github.com/folkehelseinstituttet/Fhi.Koronasertifikat.Verifikasjon.App/commits)
@@ -11,6 +11,12 @@ If you are interested in backend server implementation, check out https://github
 
 Common questions as well as general information about Kontroll av koronasertifikat is available on [Norwegian Institute of Public Health](https://www.helsenorge.no/koronasertifikat/) (English) webpages.
 
+## Azure Pipelines status (build and test)
+
+|    Branch    | Status  |
+|--------|---|
+| main | [![Build Status](https://fhi.visualstudio.com/Fhi.Koronasertifikat.Prosjekt/_apis/build/status/prod-cd-build-deploy-appcenter?branchName=main)](https://fhi.visualstudio.com/Fhi.Koronasertifikat.Prosjekt/_build)  |
+| dev    | [![Build Status](https://fhi.visualstudio.com/Fhi.Koronasertifikat.Prosjekt/_apis/build/status/prod-cd-build-deploy-appcenter?branchName=dev)](https://fhi.visualstudio.com/Fhi.Koronasertifikat.Prosjekt/_build)  |
 
 ## Development
 ### Prerequisites
