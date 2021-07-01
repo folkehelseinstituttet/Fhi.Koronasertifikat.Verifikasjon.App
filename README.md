@@ -1,4 +1,4 @@
-<h1 align="center"> Kontroll av koronasertifikat Mobile Application <br/><img style="margin-right: 1%; margin-bottom: 2em; float: left;" src="https://github.com/folkehelseinstituttet/Fhi.Koronasertifikat.Verifikasjon.App/blob/feature/README/FHICORC/Resources/Logo.png"> </h1>
+<h1 align="center"> Kontroll av koronasertifikat Mobile Application <br/><img style="margin-right: 1%; margin-bottom: 1em; margin-top:1em; float: left;" src="https://github.com/folkehelseinstituttet/Fhi.Koronasertifikat.Verifikasjon.App/blob/feature/README/FHICORC/Resources/Logo.png"> </h1>
 <br/>
 
 [![GitHub last commit](https://img.shields.io/github/last-commit/folkehelseinstituttet/Fhi.Koronasertifikat.Verifikasjon.App)](https://github.com/folkehelseinstituttet/Fhi.Koronasertifikat.Verifikasjon.App/commits)
@@ -15,8 +15,8 @@ Common questions as well as general information about Kontroll av koronasertifik
 
 |    Branch    | Status  |
 |--------|---|
-| main | [![Build Status](https://fhi.visualstudio.com/Fhi.Koronasertifikat.Prosjekt/_apis/build/status/prod-cd-build-deploy-appcenter?branchName=main)]  
-| dev    | [![Build Status](https://fhi.visualstudio.com/Fhi.Koronasertifikat.Prosjekt/_apis/build/status/prod-cd-build-deploy-appcenter?branchName=dev)]
+| main | ![Build Status](https://fhi.visualstudio.com/Fhi.Koronasertifikat.Prosjekt/_apis/build/status/prod-cd-build-deploy-appcenter?branchName=main)  
+| dev    | ![Build Status](https://fhi.visualstudio.com/Fhi.Koronasertifikat.Prosjekt/_apis/build/status/prod-cd-build-deploy-appcenter?branchName=dev)
 
 ## Development
 ### Prerequisites
