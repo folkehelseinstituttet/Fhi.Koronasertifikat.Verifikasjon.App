@@ -15,8 +15,8 @@ Common questions as well as general information about Kontroll av koronasertifik
 
 |    Branch    | Status  |
 |--------|---|
-| main | [![Build Status](https://fhi.visualstudio.com/Fhi.Koronasertifikat.Prosjekt/_apis/build/status/prod-cd-build-deploy-appcenter?branchName=main)](https://fhi.visualstudio.com/Fhi.Koronasertifikat.Prosjekt/_build)  |
-| dev    | [![Build Status](https://fhi.visualstudio.com/Fhi.Koronasertifikat.Prosjekt/_apis/build/status/prod-cd-build-deploy-appcenter?branchName=dev)](https://fhi.visualstudio.com/Fhi.Koronasertifikat.Prosjekt/_build)  |
+| main | [![Build Status](https://fhi.visualstudio.com/Fhi.Koronasertifikat.Prosjekt/_apis/build/status/prod-cd-build-deploy-appcenter?branchName=main)]  
+| dev    | [![Build Status](https://fhi.visualstudio.com/Fhi.Koronasertifikat.Prosjekt/_apis/build/status/prod-cd-build-deploy-appcenter?branchName=dev)]
 
 ## Development
 ### Prerequisites
