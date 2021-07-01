@@ -1,5 +1,5 @@
 # How to contribute
-Thank you for showing interest in contributing to  Koronasertifikat-Validering. By contributing to  Koronasertifikat-Validering, you also agree to abide by its [Code of Conduct](CODE_OF_CONDUCT.md) at all times.
+Thank you for showing interest in contributing to Kontroll av koronasertifikat. By contributing to Kontroll av koronasertifikat, you also agree to abide by its [Code of Conduct](CODE_OF_CONDUCT.md) at all times.
 
 ## Intro
 We use GitHub at all times to work with the codebase. All of the feature development and bugfixes are handled via pull requests submitted to GitHub repo that undergo a review process by team members of FHI organisation. Feel free to comment something you think is important under pull requests and issues at any time.

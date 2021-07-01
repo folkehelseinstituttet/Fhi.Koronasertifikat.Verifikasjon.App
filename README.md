@@ -41,7 +41,7 @@ Feedback and contribution are always welcome. For more information about how to 
 
 
 ## Licence
-Copyright (c) 2020 Agency for Digitisation (Denmark), 2020 Norwegian Institute of Public Health (Norway), 2020 Netcompany Group AS
+Copyright (c) 2021 Norwegian Institute of Public Health (Norway), 2021 Danish Health Authority (Denmark)
 
 Kontroll av koronasertifikat is Open Source software released under the [MIT license](LICENSE.md)
 
