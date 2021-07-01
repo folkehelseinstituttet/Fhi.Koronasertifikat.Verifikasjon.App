@@ -107,6 +107,8 @@ namespace FHICORC
         {
             _preferencesService.SetUserPreference(PreferencesKeys.SCANNER_VIBRATION_SETTING, true);
             _preferencesService.SetUserPreference(PreferencesKeys.SCANNER_SOUND_SETTING, true);
+            _preferencesService.SetUserPreference(PreferencesKeys.BORDER_CONTROL_ON, false);
+            _preferencesService.SetUserPreference(PreferencesKeys.DOMESTIC_CONTROL_ON, false);
         }
 
         protected override async void OnResume()

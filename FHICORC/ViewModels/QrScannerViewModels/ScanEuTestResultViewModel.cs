@@ -3,9 +3,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using FHICORC.Core.Data;
 using FHICORC.Core.Services.Enum;
 using FHICORC.Core.Services.Model;
 using FHICORC.Core.Services.Model.BusinessRules;
+using FHICORC.Data;
 using FHICORC.Enums;
 using FHICORC.Models;
 using FHICORC.Services;
@@ -66,9 +68,33 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             }
         }
 
+        private string _bannerText;
+        public string BannerText
+        {
+            get => _bannerText;
+            set
+            {
+                _bannerText = value;
+                OnPropertyChanged(nameof(BannerText));
+            }
+        }
+
+        private Color _bannerColor;
+        public Color BannerColor
+        {
+            get => _bannerColor;
+            set
+            {
+                _bannerColor = value;
+                OnPropertyChanged(nameof(BannerColor));
+            }
+        }
+
         public RulesFeedbackViewModel RulesFeedbackViewModel { get; set; }
 
-        public string RepeatedText => string.Concat(Enumerable.Repeat($"{"SCANNER_EU_BANNER_TEXT".Translate()}         ", 10));
+        private readonly IPreferencesService _preferencesService;
+
+        public string RepeatedText => string.Concat(Enumerable.Repeat($"{BannerText}         ", 10));
 
 
         public ICommand ScanAgainCommand => new Command(async () =>
@@ -76,10 +102,12 @@ namespace FHICORC.ViewModels.QrScannerViewModels
 
         public ICommand ShowRulesInfoCommand => new Command(async () => await ExecuteOnceAsync(ShowRulesInfo));
 
-        public ScanEuTestResultViewModel(ITimer timer): base(timer)
+        public ScanEuTestResultViewModel(ITimer timer, IPreferencesService preferencesService) : base(timer)
         {
             ShowTextInEnglish = true;
             ShowHeader = true;
+            _preferencesService = preferencesService;
+            CheckControlType();
         }
 
         public override Task InitializeAsync(object navigationData)
@@ -120,6 +148,20 @@ namespace FHICORC.ViewModels.QrScannerViewModels
         private async Task ShowRulesInfo()
         {
             await _navigationService.PushPage(new RulesInfoModalView(RulesFeedbackViewModel, EuPassportType.TEST), true, PageNavigationStyle.PushModallySheetPageIOS);
+        }
+
+        private void CheckControlType()
+        {
+            if (_preferencesService.GetUserPreferenceAsBoolean(PreferencesKeys.BORDER_CONTROL_ON))
+            {
+                BannerColor = Color.FromHex("#32345C");
+                BannerText = "SCANNER_EU_BANNER_TEXT".Translate();
+            }
+            else
+            {
+                BannerColor = Color.FromHex("#B22A5A");
+                BannerText = "SCANNER_NO_BANNER_TEXT".Translate();
+            }
         }
     }
 }

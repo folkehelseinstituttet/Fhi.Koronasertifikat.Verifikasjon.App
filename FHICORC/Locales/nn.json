@@ -63,6 +63,7 @@
   "INTERNATIONAL_INFO_CERTIFICATE_PASSPORT_NUMBER_TEXT": "SERTIFIKAT-ID",
   "SCANNER_EU_TITLE_TEXT": "Koronasertifikat",
   "SCANNER_EU_BANNER_TEXT": "Grensekontroll",
+  "SCANNER_NO_BANNER_TEXT": "Innenlandskontroll",
   "SCANNER_ERROR_EXPIRED_TITLE": "Gått ut",
   "SCANNER_ERROR_EXPIRED_CONTENT": "Koronasertifikatet har gått ut.",
   "SCANNER_ERROR_EXPIRED_CONTENT_2": "Be personen om å opne koronasertifikatet på helsenorge.no.",
