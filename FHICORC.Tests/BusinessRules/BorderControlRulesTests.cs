@@ -429,68 +429,6 @@ namespace FHICORC.Tests.BusinessRules
         }
 
         [Test]
-        public void Recovery_InValidPeriod_UnknownType_RedResult()
-        {
-            DCCPayload dccPayload = GetRecoveryPayload(RECOVERY_MIN_DAYS, 0, RECOVERY_MAX_DAYS);
-            dccPayload.DCCPayloadData.DCC.Recovery[0].Disease = "UNKNOWN";
-            VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
-            var results = ruleVerifierService.Verify(rules, rulesModel);
-            bool atLeastOneFalse = false;
-            foreach (var result in results)
-            {
-                if (result.Result == RulesFeedbackResult.FALSE)
-                {
-                    atLeastOneFalse = true;
-                    break;
-                }
-            }
-            Assert.AreEqual(true, atLeastOneFalse);
-        }
-
-        [Test]
-        public void Recovery_BeforeValidPeriod_UnknownType_RedResult()
-        {
-            DCCPayload dccPayload = GetRecoveryPayload(RECOVERY_MIN_DAYS, 0, RECOVERY_MAX_DAYS);
-            dccPayload.DCCPayloadData.DCC.Recovery[0].Disease = "UNKNOWN";
-            VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            rulesModel.External.ValidationClock = DateTime.UtcNow.AddDays(-1);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
-            var results = ruleVerifierService.Verify(rules, rulesModel);
-            bool atLeastOneFalse = false;
-            foreach (var result in results)
-            {
-                if (result.Result == RulesFeedbackResult.FALSE)
-                {
-                    atLeastOneFalse = true;
-                    break;
-                }
-            }
-            Assert.AreEqual(true, atLeastOneFalse);
-        }
-
-        [Test]
-        public void Recovery_AfterValidPeriod_UnknownType_RedResult()
-        {
-            DCCPayload dccPayload = GetRecoveryPayload(RECOVERY_MIN_DAYS, 0, RECOVERY_MAX_DAYS);
-            dccPayload.DCCPayloadData.DCC.Recovery[0].Disease = "UNKNOWN";
-            VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            rulesModel.External.ValidationClock = DateTime.UtcNow.AddDays(RECOVERY_MAX_DAYS);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
-            var results = ruleVerifierService.Verify(rules, rulesModel);
-            bool atLeastOneFalse = false;
-            foreach (var result in results)
-            {
-                if (result.Result == RulesFeedbackResult.FALSE)
-                {
-                    atLeastOneFalse = true;
-                    break;
-                }
-            }
-            Assert.AreEqual(true, atLeastOneFalse);
-        }
-
-        [Test]
         public void TestResult_InValidPeriod_RedResult()
         {
             DCCPayload dccPayload = GetTestResultPayload(TESTRESULT_MAX_HOURS);
