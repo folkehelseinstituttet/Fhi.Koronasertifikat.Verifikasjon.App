@@ -212,7 +212,7 @@ namespace FHICORC.Tests.BusinessRules
         }
 
         [Test]
-        public void Vaccine_TwoOfTwoDoses_InValidPeriod_GreenResult()
+        public void Vaccine_TwoOfTwoDoses_InValidPeriod_Comirnaty_GreenResult()
         {
             DCCPayload dccPayload = GetVaccinePayload(TWO_OF_TWO_MIN_DAYS - 1);
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
@@ -223,6 +223,35 @@ namespace FHICORC.Tests.BusinessRules
                 Assert.AreEqual(RulesFeedbackResult.TRUE, result.Result);
             }
         }
+
+        [Test]
+        public void Vaccine_TwoOfTwoDoses_InValidPeriod_Moderna_GreenResult()
+        {
+            DCCPayload dccPayload = GetVaccinePayload(TWO_OF_TWO_MIN_DAYS - 1);
+            dccPayload.DCCPayloadData.DCC.Vaccinations[0].VaccineMedicinalProduct = "EU/1/20/1507";
+            VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var results = ruleVerifierService.Verify(rules, rulesModel);
+            foreach (var result in results)
+            {
+                Assert.AreEqual(RulesFeedbackResult.TRUE, result.Result);
+            }
+        }
+
+        [Test]
+        public void Vaccine_TwoOfTwoDoses_InValidPeriod_Vaxzevria_GreenResult()
+        {
+            DCCPayload dccPayload = GetVaccinePayload(TWO_OF_TWO_MIN_DAYS - 1);
+            dccPayload.DCCPayloadData.DCC.Vaccinations[0].VaccineMedicinalProduct = "EU/1/21/1529";
+            VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var results = ruleVerifierService.Verify(rules, rulesModel);
+            foreach (var result in results)
+            {
+                Assert.AreEqual(RulesFeedbackResult.TRUE, result.Result);
+            }
+        }
+
 
         [Test]
         public void Vaccine_TwoOfTwoDoses_BeforeValidPeriod_RedResult()
@@ -284,7 +313,7 @@ namespace FHICORC.Tests.BusinessRules
         }
 
         [Test]
-        public void Vaccine_OneOfOneDoses_InValidPeriod_GreenResult()
+        public void Vaccine_OneOfOneDoses_InValidPeriod_Janssen_GreenResult()
         {
             DCCPayload dccPayload = GetVaccinePayload(ONE_OF_ONE_MIN_DAYS - 1);
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].DoseNumber = 1;
@@ -322,12 +351,44 @@ namespace FHICORC.Tests.BusinessRules
         }
 
         [Test]
-        public void Vaccine_OneOfOneDoses_TwoOfTwoType_InValidPeriod_GreenResult()
+        public void Vaccine_OneOfOneDoses_TwoOfTwoType_InValidPeriod_Comirnaty_GreenResult()
         {
             DCCPayload dccPayload = GetVaccinePayload(ONE_OF_ONE_TWO_OF_TWO_TYPE_MIN_DAYS - 1);
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].DoseNumber = 1;
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].TotalSeriesOfDose = 1;
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].VaccineMedicinalProduct = "EU/1/20/1528";
+            VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var results = ruleVerifierService.Verify(rules, rulesModel);
+            foreach (var result in results)
+            {
+                Assert.AreEqual(RulesFeedbackResult.TRUE, result.Result);
+            }
+        }
+
+        [Test]
+        public void Vaccine_OneOfOneDoses_TwoOfTwoType_InValidPeriod_Moderna_GreenResult()
+        {
+            DCCPayload dccPayload = GetVaccinePayload(ONE_OF_ONE_TWO_OF_TWO_TYPE_MIN_DAYS - 1);
+            dccPayload.DCCPayloadData.DCC.Vaccinations[0].DoseNumber = 1;
+            dccPayload.DCCPayloadData.DCC.Vaccinations[0].TotalSeriesOfDose = 1;
+            dccPayload.DCCPayloadData.DCC.Vaccinations[0].VaccineMedicinalProduct = "EU/1/20/1507";
+            VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var results = ruleVerifierService.Verify(rules, rulesModel);
+            foreach (var result in results)
+            {
+                Assert.AreEqual(RulesFeedbackResult.TRUE, result.Result);
+            }
+        }
+
+        [Test]
+        public void Vaccine_OneOfOneDoses_TwoOfTwoType_InValidPeriod_Vaxzevria_GreenResult()
+        {
+            DCCPayload dccPayload = GetVaccinePayload(ONE_OF_ONE_TWO_OF_TWO_TYPE_MIN_DAYS - 1);
+            dccPayload.DCCPayloadData.DCC.Vaccinations[0].DoseNumber = 1;
+            dccPayload.DCCPayloadData.DCC.Vaccinations[0].TotalSeriesOfDose = 1;
+            dccPayload.DCCPayloadData.DCC.Vaccinations[0].VaccineMedicinalProduct = "EU/1/21/1529";
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
             var rules = ruleSelectorService.SelectRules(dccPayload);
             var results = ruleVerifierService.Verify(rules, rulesModel);
