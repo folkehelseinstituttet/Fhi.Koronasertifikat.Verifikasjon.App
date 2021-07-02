@@ -279,18 +279,6 @@
     <ImageAsset Include="AppAssets.xcassets\error_lock.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\close_icon.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\close_icon.imageset\close_icon.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\close_icon.imageset\close_icon%402x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\close_icon.imageset\close_icon%403x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="AppAssets.xcassets\hourGlass.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
