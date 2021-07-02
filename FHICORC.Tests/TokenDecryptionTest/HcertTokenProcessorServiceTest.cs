@@ -29,7 +29,8 @@ namespace FHICORC.Tests.TokenDecryptionTest
                         new MockDateTimeService(),
                         new MockBusinessRulesService()
                     ),
-                new RuleVerifierService());
+                new RuleVerifierService(),
+                new MockPreferencesService());
         }
 
         [Test]

@@ -110,7 +110,7 @@ namespace FHICORC.Core.Services.DecoderServices
         private List<RulesFeedbackData> VerifyRules(DCCPayload dccPayload)
         {
             bool international = _preferencesService.GetUserPreferenceAsBoolean("BORDER_CONTROL_ON");
-            var external = _ruleSelectorService.ApplyExternalData(dccPayload);
+            var external = _ruleSelectorService.ApplyExternalData(dccPayload, international);
             var applicableRules = _ruleSelectorService.SelectRules(dccPayload, international);
             var verifyRulesModel = new VerifyRulesModel { HCert = dccPayload.DCCPayloadData.DCC, External = external };
             

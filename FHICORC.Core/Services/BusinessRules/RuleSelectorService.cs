@@ -25,7 +25,7 @@ namespace FHICORC.Core.Services.BusinessRules
             _businessRulesService = businessRulesService;
         }
 
-        public ExternalData ApplyExternalData(DCCPayload dccPayload)
+        public ExternalData ApplyExternalData(DCCPayload dccPayload, bool international)
         {
             ExternalData external = new ExternalData();
             ValueSets valueSets = new ValueSets();
@@ -61,7 +61,7 @@ namespace FHICORC.Core.Services.BusinessRules
             }
 
             external.ValidationClock = _dateTimeService.Now;
-            external.CountryCode = "NO";
+            external.CountryCode = international ? "NO" : "NX";
             external.Exp = dccPayload.ExpiredDateTime();
             external.Iat = dccPayload.IssueDateTime();
             external.ValueSets = valueSets;
@@ -80,9 +80,9 @@ namespace FHICORC.Core.Services.BusinessRules
             recovery = dccPayload.DCCPayloadData.DCC.Recovery?.Any() ?? false;
 
 
-            var businessRules = international ? _businessRulesService.GetBusinessRules().International : _businessRulesService.GetBusinessRules().Domestic;
+            var businessRules = _businessRulesService.GetBusinessRules();
             List<BusinessRule> resultList = new List<BusinessRule>();
-            string countryCode = "NO";
+            string countryCode = international ? "NO" : "NX";
             string generalString = "GR-" + countryCode;
             if (vaccinations)
             {

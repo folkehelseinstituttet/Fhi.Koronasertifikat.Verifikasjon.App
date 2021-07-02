@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using FHICORC.Core.Data;
@@ -25,7 +26,7 @@ namespace FHICORC.Services.DataManagers
 
         private TimeSpan _periodicFetchingInterval { get; set; }
 
-        private BusinessRulesDto businessRules;
+        private ICollection<BusinessRule> businessRules;
 
         public BusinessRulesDataManager(
             ISettingsService settingsService,
@@ -54,7 +55,7 @@ namespace FHICORC.Services.DataManagers
 
         public async Task FetchBusinessRulesFromBackend(bool handleErrorsSilently)
         {
-            ApiResponse<BusinessRulesDto> response = await _businessRulesRepository.GetBusinessRules();
+            ApiResponse<ICollection<BusinessRule>> response = await _businessRulesRepository.GetBusinessRules();
             await _navigationTaskManager.HandlerErrors(response, handleErrorsSilently);
             if (response.Data != null && response.IsSuccessfull)
             {
@@ -63,13 +64,13 @@ namespace FHICORC.Services.DataManagers
             }
         }
 
-        private BusinessRulesDto ReadBusinessRules()
+        private ICollection<BusinessRule> ReadBusinessRules()
         {
             try
             {
                 var path = Path.Combine(Environment.GetFolderPath(BUSINESS_RULES_FILE_DIRECTORY), BUSINESS_RULES_FILE_NAME);
                 var text = File.ReadAllText(path);
-                return JsonConvert.DeserializeObject<BusinessRulesDto>(text);
+                return JsonConvert.DeserializeObject<ICollection<BusinessRule>>(text);
             }
             catch (Exception)
             {
@@ -77,14 +78,14 @@ namespace FHICORC.Services.DataManagers
             }
         }
 
-        public BusinessRulesDto GetBusinessRules()
+        public ICollection<BusinessRule> GetBusinessRules()
         {
             if (businessRules == null)
                 businessRules = ReadBusinessRules();
             return businessRules;
         }
 
-        private void SaveBusinessRulesFile(BusinessRulesDto rulesText)
+        private void SaveBusinessRulesFile(ICollection<BusinessRule> rulesText)
         {
             try
             {
