@@ -9,7 +9,7 @@ Issue is not always a bug you discover in the app but potential enhancements, ne
 
 ### Submitting an issue
 - Give the issue a short, clear title that describes the bug or feature request
-- Include what version of  Koronasertifikat-Validering you are using. If you are reporting a bug, include details on how you get it.
+- Include what version of  Kontroll av koronasertifikat you are using. If you are reporting a bug, include details on how you get it.
 - Include steps to reproduce the issue
 - Include screenshots, if possible
 - If possible, mark the issue with an appropriate label, e.g., `is:bug`
@@ -37,4 +37,4 @@ After step 5, the team will start a review process of the PR.
 ## Licence
 Copyright (c) 2021 Norwegian Institute of Public Health (Norway), 2021 Danish Health Authority  (Denmark)
 
- Koronasertifikat-Validering is Open Source software released under the [MIT license](LICENSE.md)
+ Kontroll av koronasertifikat is Open Source software released under the [MIT license](LICENSE.md)
