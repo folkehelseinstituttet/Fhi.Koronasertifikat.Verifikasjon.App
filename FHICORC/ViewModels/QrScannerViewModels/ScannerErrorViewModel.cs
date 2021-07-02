@@ -14,7 +14,10 @@ namespace FHICORC.ViewModels.QrScannerViewModels
     public class ScannerErrorViewModel : BaseScanViewModel
     {
         public string PageTitle => ShowInvalidPage ? "SCANNER_ERROR_INVALID_TITLE".Translate() : "SCANNER_ERROR_EXPIRED_TITLE".Translate();
-        public bool ShowInvalidPage => TokenValidateResultModel.ValidationResult == TokenValidateResult.Invalid;
+        public string InvalidContentText => TokenValidateResultModel.ValidationResult == TokenValidateResult.Invalid ? "SCANNER_ERROR_INVALID_CONTENT".Translate()
+            : "SCANNER_ERROR_UNKNOWN_TYPE_CONTENT".Translate();
+        public bool ShowInvalidPage => TokenValidateResultModel.ValidationResult == TokenValidateResult.Invalid
+            || TokenValidateResultModel.ValidationResult == TokenValidateResult.UnsupportedType;
         public TokenValidateResultModel TokenValidateResultModel { get; set; } = new TokenValidateResultModel();
 
         public string RepeatedText => string.Concat(Enumerable.Repeat(PageTitle.PadLeft(15), 10));
@@ -34,6 +37,7 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             OnPropertyChanged(nameof(ShowInvalidPage));
             OnPropertyChanged(nameof(PageTitle));
             OnPropertyChanged(nameof(RepeatedText));
+            OnPropertyChanged(nameof(InvalidContentText));
 
             return base.InitializeAsync(navigationData);
         }
