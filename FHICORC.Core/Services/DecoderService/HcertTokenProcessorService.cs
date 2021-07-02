@@ -10,7 +10,6 @@ using FHICORC.Core.Services.Model.CoseModel;
 using FHICORC.Core.Services.Model.EuDCCModel;
 using FHICORC.Core.Services.Utils;
 using FHICORC.Core.Services.Model.NO;
-using System.Text.RegularExpressions;
 using System.Linq;
 
 namespace FHICORC.Core.Services.DecoderServices
