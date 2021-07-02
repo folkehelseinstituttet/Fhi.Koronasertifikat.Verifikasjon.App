@@ -1,4 +1,4 @@
-<h1 align="center"> Kontroll av koronasertifikat Mobile Application <br/><img style="margin-right: 1%; margin-bottom: 1em; margin-top:1em; float: left;" src="https://github.com/folkehelseinstituttet/Fhi.Koronasertifikat.Verifikasjon.App/blob/feature/README/FHICORC/Resources/Logo.png"> </h1>
+<h1 align="center"> Kontroll av koronasertifikat Mobile Application <br/><img style="margin-right: 1%; margin-bottom: 1em; margin-top:1em; float: left;" src="https://raw.githubusercontent.com/folkehelseinstituttet/Fhi.Koronasertifikat.Verifikasjon.App/dev/FHICORC/Resources/Logo.png"> </h1>
 <br/>
 
 [![GitHub last commit](https://img.shields.io/github/last-commit/folkehelseinstituttet/Fhi.Koronasertifikat.Verifikasjon.App)](https://github.com/folkehelseinstituttet/Fhi.Koronasertifikat.Verifikasjon.App/commits)
