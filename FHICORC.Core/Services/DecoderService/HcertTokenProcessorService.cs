@@ -10,12 +10,12 @@ using FHICORC.Core.Services.Model.CoseModel;
 using FHICORC.Core.Services.Model.EuDCCModel;
 using FHICORC.Core.Services.Utils;
 using FHICORC.Core.Services.Model.NO;
-using System.Text.RegularExpressions;
 using System.Linq;
 using FHICORC.Core.Interfaces;
 using FHICORC.Core.Services.Model.EuDCCModel._1._3._0;
 using FHICORC.Core.Services.Model.BusinessRules;
 using System.Collections.Generic;
+using FHICORC.Core.Data;
 
 namespace FHICORC.Core.Services.DecoderServices
 {
@@ -25,6 +25,7 @@ namespace FHICORC.Core.Services.DecoderServices
         private readonly IDateTimeService _dateTimeService;
         private readonly IRuleVerifierService _ruleVerifierService;
         private readonly IRuleSelectorService _ruleSelectorService;
+        private readonly IPreferencesService _preferencesService;
 
         private IDgcValueSetTranslator _translator;
 
@@ -32,12 +33,14 @@ namespace FHICORC.Core.Services.DecoderServices
             ICertificationService certificationService,
             IDateTimeService dateTimeService,
             IRuleSelectorService ruleSelectorService,
-            IRuleVerifierService ruleVerifierService)
+            IRuleVerifierService ruleVerifierService,
+            IPreferencesService preferencesService)
         {
             _certificationService = certificationService;
             _dateTimeService = dateTimeService;
             _ruleSelectorService = ruleSelectorService;
             _ruleVerifierService = ruleVerifierService;
+            _preferencesService = preferencesService;
             _translator = DigitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
             DigitalGreenValueSetTranslatorFactory.Init();
         }
@@ -106,8 +109,9 @@ namespace FHICORC.Core.Services.DecoderServices
 
         private List<RulesFeedbackData> VerifyRules(DCCPayload dccPayload)
         {
-            var external = _ruleSelectorService.ApplyExternalData(dccPayload);
-            var applicableRules = _ruleSelectorService.SelectRules(dccPayload);
+            bool international = _preferencesService.GetUserPreferenceAsBoolean("BORDER_CONTROL_ON");
+            var external = _ruleSelectorService.ApplyExternalData(dccPayload, international);
+            var applicableRules = _ruleSelectorService.SelectRules(dccPayload, international);
             var verifyRulesModel = new VerifyRulesModel { HCert = dccPayload.DCCPayloadData.DCC, External = external };
             
             return _ruleVerifierService.Verify(applicableRules, verifyRulesModel) ?? new List<RulesFeedbackData>();
@@ -145,7 +149,7 @@ namespace FHICORC.Core.Services.DecoderServices
                     return GetNODigitalGreenModelV1ByVersion(defaultPayload, json);
                 case TokenType.HC1:
                     var deserialized = JsonConvert
-                        .DeserializeObject<Model.EuDCCModel._1._3._0.DCCPayload>(json);
+                        .DeserializeObject<DCCPayload>(json);
                     ValidateCwt(deserialized);
                     return deserialized;
             }
@@ -168,7 +172,7 @@ namespace FHICORC.Core.Services.DecoderServices
             throw exception;
         }
 
-        private void ValidateCwt(Model.EuDCCModel._1._3._0.DCCPayload cwt)
+        private void ValidateCwt(DCCPayload cwt)
         {
             if (string.IsNullOrEmpty(cwt.DCCPayloadData.DCC.PersonName.StandardisedSurname))
             {

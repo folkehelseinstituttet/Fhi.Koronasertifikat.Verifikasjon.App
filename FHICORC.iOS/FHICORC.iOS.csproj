@@ -641,6 +641,10 @@
     <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\landing_helpsupport.png" />
     <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\landing_helpsupport%402x.png" />
     <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\landing_helpsupport%403x.png" />
+    <ImageAsset Include="AppAssets.xcassets\close_icon_blue.imageset\Contents.json" />
+    <ImageAsset Include="AppAssets.xcassets\close_icon_blue.imageset\close_blue.png" />
+    <ImageAsset Include="AppAssets.xcassets\close_icon_blue.imageset\close_blue%402x.png" />
+    <ImageAsset Include="AppAssets.xcassets\close_icon_blue.imageset\close_blue%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -742,6 +746,7 @@
     <Folder Include="AppAssets.xcassets\Xsø.imageset\" />
     <Folder Include="AppAssets.xcassets\menu_help_icon.imageset\" />
     <Folder Include="AppAssets.xcassets\landingpage_help_icon.imageset\" />
+    <Folder Include="AppAssets.xcassets\close_icon_blue.imageset\" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

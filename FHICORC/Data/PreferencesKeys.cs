@@ -11,5 +11,7 @@
         public static readonly string TERMS_ACCEPTED = nameof(TERMS_ACCEPTED);
         public static readonly string BUSINESS_RULES = nameof(BUSINESS_RULES);
         public static readonly string LAST_TIME_FETCHED_RULES = nameof(LAST_TIME_FETCHED_RULES);
+        public static readonly string BORDER_CONTROL_ON = nameof(BORDER_CONTROL_ON);
+        public static readonly string DOMESTIC_CONTROL_ON = nameof(DOMESTIC_CONTROL_ON);
     }
 }

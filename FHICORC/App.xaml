@@ -85,6 +85,9 @@
             <Color x:Key="FHIWhite">#F3F9FB</Color>
             <Color x:Key="FHIPrimaryWhite">#F3F9FB</Color>
             <Color x:Key="FHISecondaryWhite">#FFFFFF</Color>
+            <Color x:Key="FHIGreen">#8AA983</Color>
+            <Color x:Key="FHIBorderColor">#A5ACBB</Color>
+            <Color x:Key="LandingButtonDisabled">#94F3F9FB</Color>
 
 
             <!--  Global Style  -->
@@ -381,6 +384,11 @@
                                     <Setter Property="HeightRequest" Value="56" />
                                     <Setter Property="WidthRequest" Value="183" />
                                     <Setter Property="Margin" Value="2" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource LandingButtonDisabled}" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
