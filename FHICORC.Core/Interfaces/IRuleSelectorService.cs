@@ -6,7 +6,7 @@ namespace FHICORC.Core.Interfaces
 {
     public interface IRuleSelectorService
     {
-        ICollection<BusinessRule> SelectRules(DCCPayload dccPayload);
+        ICollection<BusinessRule> SelectRules(DCCPayload dccPayload, bool international);
         ExternalData ApplyExternalData(DCCPayload dccPayload);
     }
 }

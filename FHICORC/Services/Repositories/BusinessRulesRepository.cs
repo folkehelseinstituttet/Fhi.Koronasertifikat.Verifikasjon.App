@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using FHICORC.Configuration;
 using FHICORC.Core.Services.Model.BusinessRules;
 using FHICORC.Core.WebServices;
@@ -9,10 +8,10 @@ namespace FHICORC.Services.Repositories
 {
     public class BusinessRulesRepository : BaseRepository, IBusinessRulesRepository
     {
-        public async Task<ApiResponse<ICollection<BusinessRule>>> GetBusinessRules()
+        public async Task<ApiResponse<BusinessRulesDto>> GetBusinessRules()
         {
             string url = Urls.URL_GET_BUSINESS_RULES;
-            return await _restClient.Get<ICollection<BusinessRule>>(url);
+            return await _restClient.Get<BusinessRulesDto>(url);
         }
     }
 }

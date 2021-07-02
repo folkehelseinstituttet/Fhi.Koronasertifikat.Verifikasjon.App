@@ -69,7 +69,7 @@ namespace FHICORC.Core.Services.BusinessRules
             return external;
         }
 
-        public ICollection<BusinessRule> SelectRules(DCCPayload dccPayload)
+        public ICollection<BusinessRule> SelectRules(DCCPayload dccPayload, bool international)
         {
             bool vaccinations = false;
             bool tests = false;
@@ -80,7 +80,7 @@ namespace FHICORC.Core.Services.BusinessRules
             recovery = dccPayload.DCCPayloadData.DCC.Recovery?.Any() ?? false;
 
 
-            var businessRules = _businessRulesService.ReadBusinessRules();
+            var businessRules = international ? _businessRulesService.GetBusinessRules().International : _businessRulesService.GetBusinessRules().Domestic;
             List<BusinessRule> resultList = new List<BusinessRule>();
             string countryCode = "NO";
             string generalString = "GR-" + countryCode;
