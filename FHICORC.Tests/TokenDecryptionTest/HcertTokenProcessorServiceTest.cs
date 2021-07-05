@@ -1,12 +1,14 @@
 ﻿using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
-using FHICORC.Configuration;
 using FHICORC.Core.Services.DecoderServices;
 using FHICORC.Core.Services.Enum;
 using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Model.CoseModel;
 using FHICORC.Tests.TestMocks;
+using FHICORC.Core.Services.BusinessRules;
+using FHICORC.Core.Services;
+using FHICORC.Core.Services.Model.Converter;
 
 namespace FHICORC.Tests.TokenDecryptionTest
 {
@@ -19,7 +21,16 @@ namespace FHICORC.Tests.TokenDecryptionTest
         {
             MockCertificationService = new Mock<ICertificationService>();
             MockCertificationService.Setup(x => x.VerifyCoseSign1Object(It.IsAny<CoseSign1Object>()));
-            verifier = new HcertTokenProcessorService(MockCertificationService.Object, IoCContainer.Resolve<IDateTimeService>());
+            verifier = new HcertTokenProcessorService(
+                MockCertificationService.Object,
+                new MockDateTimeService(),
+                new RuleSelectorService(
+                        DigitalGreenValueSetTranslatorFactory.DgcValueSetTranslator,
+                        new MockDateTimeService(),
+                        new MockBusinessRulesService()
+                    ),
+                new RuleVerifierService(),
+                new MockPreferencesService());
         }
 
         [Test]

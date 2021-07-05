@@ -11,5 +11,6 @@ namespace FHICORC.Configuration
 
         public static string URL_GET_PUBLIC_KEY => $"{_baseUrl}{_apiVersion}/publickey";
         public static string URL_GET_TEXTS => $"{_baseUrl}{_apiVersion}/text";
+        public static string URL_GET_BUSINESS_RULES => $"{_baseUrl}{_apiVersion}/rule";
     }
 }

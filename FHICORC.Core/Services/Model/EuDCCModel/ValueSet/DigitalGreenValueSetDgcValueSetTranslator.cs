@@ -9,15 +9,17 @@ namespace FHICORC.Core.Services.Model.EuDCCModel.ValueSet
 {
     public class DigitalGreenValueSetDgcValueSetTranslator: IDgcValueSetTranslator
     {
-        private List<ValueSetModel> ValueSetModels = new List<ValueSetModel>();
+        public List<ValueSetModel> ValueSetModels { get; set; } = new List<ValueSetModel>();
 
         private List<string> _valueSetFileNames = new List<string>()
         {
             "disease-agent-targeted.json",
-            "test_result.json",
+            "test-result.json",
             "vaccine-prophylaxis.json",
             "vaccine-medicinal-product.json",
-            "vaccine-mah-manf.json"
+            "vaccine-mah-manf.json",
+            "test-type.json",
+            "test-manf.json"
         };
 
         public async void InitValueSet()
@@ -48,6 +50,8 @@ namespace FHICORC.Core.Services.Model.EuDCCModel.ValueSet
             {DGCValueSetEnum.VaccineProphylaxis, "sct-vaccines-covid-19"},
             {DGCValueSetEnum.VaccineMedicinalProduct, "vaccines-covid-19-names"},
             {DGCValueSetEnum.VaccineAuthorityHolder, "vaccines-covid-19-auth-holders"},
+            {DGCValueSetEnum.TypeOfTest, "covid-19-lab-test-type" },
+            {DGCValueSetEnum.TestManufacturer, "covid-19-lab-test-manufacturer-and-name" }
         };
 
         public object Translate(DGCValueSetEnum key, string value)

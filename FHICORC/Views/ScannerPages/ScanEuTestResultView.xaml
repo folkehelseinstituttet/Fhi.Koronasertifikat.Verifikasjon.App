@@ -39,7 +39,7 @@
                 </elements:NavigationHeader>
 
                 <StackLayout
-                    BackgroundColor="{StaticResource BaseTextColor}"
+                    BackgroundColor="{Binding BannerColor}"
                     Margin="0,20,0,0"
                     Padding="0"
                     Spacing="0">
@@ -91,7 +91,17 @@
                             </Label>
                         </StackLayout>
                     </Grid>
-
+                    <StackLayout
+                            BackgroundColor="{Binding RuleBackgroundColor}"
+                            HeightRequest="54"
+                            VerticalOptions="End"
+                            HorizontalOptions="Fill">
+                        <Label
+                            Text="{Binding NumberOfRulesFulfilled}"
+                            HorizontalOptions="Center"
+                            VerticalOptions="CenterAndExpand"
+                            Style="{StaticResource SubtitleStyle}" />
+                    </StackLayout>
 
                     <Grid Margin="20,30,20,30">
                         <Grid.RowDefinitions>
@@ -437,8 +447,19 @@
                          Orientation="Vertical"
                          VerticalOptions="End"
                          Padding="0"
-                         Spacing="0"
+                         Spacing="10"
                          Margin="20">
+                <controls:SingleLineButton
+                    Command="{Binding ShowRulesInfoCommand}"
+                    Style="{StaticResource SecondaryButtonStyle}"
+                    Text="{Binding Strings[RULES_ENGINE_SCANNER_BUTTON_TEXT]}"
+                    effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                    effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                    <controls:SingleLineButton.Effects>
+                        <effects:FontSizeLabelEffect/>
+                    </controls:SingleLineButton.Effects>
+                </controls:SingleLineButton>
+
                 <controls:SingleLineButton
                     Padding="80,0,80,0"
                     Command="{Binding ScanAgainCommand}"

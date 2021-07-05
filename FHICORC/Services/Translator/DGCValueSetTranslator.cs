@@ -17,6 +17,9 @@ namespace FHICORC.Services.Translator
     {
         private readonly ITextService _textService;
         private LanguageSelection _selectedLanguage { get; set; }
+        private List<ValueSetModel> valueSetModels;
+        public List<ValueSetModel> ValueSetModels { get => valueSetModels; set => valueSetModels = value; }
+
         public List<CsvValueSet> _valueSets = new List<CsvValueSet>();
         public DGCValueSetTranslator(ITextService textService)
         {

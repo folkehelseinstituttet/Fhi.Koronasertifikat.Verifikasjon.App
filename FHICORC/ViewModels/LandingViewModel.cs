@@ -10,6 +10,7 @@ using FHICORC.Views.ScannerPages;
 using Xamarin.CommunityToolkit.ObjectModel;
 using FHICORC.Core.Data;
 using FHICORC.Data;
+using System;
 
 namespace FHICORC.ViewModels
 {
@@ -26,18 +27,62 @@ namespace FHICORC.ViewModels
 
         private readonly IDialogService _dialogService;
         private readonly IPreferencesService _preferencesService;
-
         private IScannerFactory _scannerFactoryService;
+
+        private bool _borderControlOn;
+        public bool BorderControlOn
+        {
+            get => _borderControlOn;
+            set
+            {
+                if (_borderControlOn == value)
+                    return;
+                _borderControlOn = value;
+                DomesticControlOn = !BorderControlOn;
+                _preferencesService.SetUserPreference(PreferencesKeys.BORDER_CONTROL_ON, value);
+                UpdateScannerButton();
+                OnPropertyChanged(nameof(BorderControlOn));
+            }
+        }
+
+        private bool _domesticControlOn;
+        public bool DomesticControlOn
+        {
+            get => _domesticControlOn;
+            set
+            {
+                if (_domesticControlOn == value)
+                    return;
+                _domesticControlOn = value;
+                BorderControlOn = !DomesticControlOn;
+                _preferencesService.SetUserPreference(PreferencesKeys.DOMESTIC_CONTROL_ON, value);
+                UpdateScannerButton();
+                OnPropertyChanged(nameof(DomesticControlOn));
+            }
+        }
+
+        private bool _isScannerButtonVisible;
+        public bool IsScannerButtonVisible
+        {
+            get => _isScannerButtonVisible;
+            set
+            {
+                _isScannerButtonVisible = value;
+                OnPropertyChanged(nameof(IsScannerButtonVisible));
+            }
+        }
+
         public LandingViewModel(IDialogService dialogService, IScannerFactory scannerFactoryService, IPreferencesService preferencesService)
         {
             _dialogService = dialogService;
             _scannerFactoryService = scannerFactoryService;
             _preferencesService = preferencesService;
+            BorderControlOn = _preferencesService.GetUserPreferenceAsBoolean(PreferencesKeys.BORDER_CONTROL_ON);
+            DomesticControlOn = _preferencesService.GetUserPreferenceAsBoolean(PreferencesKeys.DOMESTIC_CONTROL_ON);
         }
 
         private async Task GoToScannerPage()
         {
-
             if (_preferencesService.GetUserPreferenceAsBoolean(PreferencesKeys.TERMS_ACCEPTED))
             {
                 if (_scannerFactoryService.GetAvailableScanner() == null)
@@ -75,6 +120,14 @@ namespace FHICORC.ViewModels
             OnPropertyChanged(nameof(OpenScannerText));
             OnPropertyChanged(nameof(LandingPageTitle));
             OnPropertyChanged(nameof(LanguageChangeButtonText));
+        }
+
+        private void UpdateScannerButton()
+        {
+            if (!BorderControlOn && !DomesticControlOn)
+                IsScannerButtonVisible = false;
+            else
+                IsScannerButtonVisible = true;
         }
     }
 }
