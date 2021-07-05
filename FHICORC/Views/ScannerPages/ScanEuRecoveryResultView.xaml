@@ -96,6 +96,8 @@
                             VerticalOptions="End"
                             HorizontalOptions="Fill">
                         <Label
+                            AutomationProperties.IsInAccessibleTree="True"
+                            AutomationId="{Binding NumberOfRulesFulfilledAccessibilityText}"
                             Text="{Binding NumberOfRulesFulfilled}"
                             HorizontalOptions="Center"
                             VerticalOptions="CenterAndExpand"

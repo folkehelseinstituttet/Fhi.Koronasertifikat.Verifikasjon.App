@@ -66,6 +66,17 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             }
         }
 
+        private string _numberOfRulesFulfilledAccessibilityText;
+        public string NumberOfRulesFulfilledAccessibilityText
+        {
+            get => _numberOfRulesFulfilledAccessibilityText;
+            set
+            {
+                _numberOfRulesFulfilledAccessibilityText = value;
+                OnPropertyChanged(nameof(NumberOfRulesFulfilledAccessibilityText));
+            }
+        }
+
         public RulesFeedbackViewModel RulesFeedbackViewModel { get; set; }
 
         public string RepeatedText => string.Concat(Enumerable.Repeat($"{"SCANNER_EU_BANNER_TEXT".Translate()}         ", 10));
@@ -74,7 +85,7 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             await ExecuteOnceAsync(async () => await Task.Run(ClosePage)));
 
         public ICommand ShowRulesInfoCommand => new Command(async () => await ExecuteOnceAsync(ShowRulesInfo));
-        
+
         public ScanEuVaccineResultViewModel(ITimer timer) : base(timer)
         {
             ShowTextInEnglish = true;
@@ -96,6 +107,7 @@ namespace FHICORC.ViewModels.QrScannerViewModels
                         RulesEnginePassed = RulesFeedbackViewModel.RulesEngineResult.Where(x => x.Result == RulesFeedbackResult.TRUE).Count();
                         RulesEngineResultCount = RulesFeedbackViewModel.RulesEngineResult.Count;
                         NumberOfRulesFulfilled = string.Format("RULES_ENGINE_FULFILLED_COUNT".Translate(), RulesEnginePassed, RulesEngineResultCount);
+                        NumberOfRulesFulfilledAccessibilityText = string.Format("RULES_ENGINE_FULFILLED_COUNT_ACCESSIBILITY_TEXT".Translate(), RulesEnginePassed, RulesEngineResultCount);
                         if (RulesEnginePassed == RulesEngineResultCount)
                         {
                             RuleBackgroundColor = Color.FromHex("#D9F0D4");
