@@ -69,6 +69,7 @@
   "SCANNER_ERROR_EXPIRED_CONTENT_2": "Be personen om å opne koronasertifikatet på helsenorge.no.",
   "SCANNER_ERROR_INVALID_TITLE": "Ugyldig",
   "SCANNER_ERROR_INVALID_CONTENT": "Koronasertifikatet er ikkje gyldig.",
+  "SCANNER_ERROR_UNKNOWN_TYPE_CONTENT": "Sertifikatet er ikkje gyldig for grensekontroll. I grensekontroll vil appen kun validera EU/EØS-kodar.",
   "SCANNER_ERROR_BUTTON_TEXT": "Skann ny",
   "MENU_TITLE": "Meny",
   "MENU_SETTINGS_PAGE": "Innstillingar",

@@ -68,13 +68,25 @@ namespace FHICORC.Core.Services.DecoderServices
 #endif
                 string jsonStringFromBytes = coseSign1Object.GetJson();
 
-                ITokenPayload decodedModel = MapToModelFromJson(jsonStringFromBytes, base45String.Substring(0, 3));
+                bool international = _preferencesService.GetUserPreferenceAsBoolean("BORDER_CONTROL_ON");
+
+                ITokenPayload decodedModel;
+                if (international)
+                    decodedModel = InternationalMapToModelFromJson(jsonStringFromBytes, base45String.Substring(0, 3));
+                else
+                    decodedModel = DomesticMapToModelFromJson(jsonStringFromBytes, base45String.Substring(0, 3));
+
+                if (decodedModel == null)
+                {
+                    resultModel.ValidationResult = TokenValidateResult.UnsupportedType;
+                    return resultModel;
+                }
 
                 DateTime? expiration = decodedModel.ExpiredDateTime();
                 DateTime? issueAt = decodedModel.IssueDateTime();
 
                 if (decodedModel is DCCPayload dccPayload)
-                    resultModel.RulesFeedBacks = VerifyRules(dccPayload);
+                    resultModel.RulesFeedBacks = VerifyRules(dccPayload, international);
 
                 if (expiration != null)
                 {
@@ -107,9 +119,8 @@ namespace FHICORC.Core.Services.DecoderServices
             
         }
 
-        private List<RulesFeedbackData> VerifyRules(DCCPayload dccPayload)
+        private List<RulesFeedbackData> VerifyRules(DCCPayload dccPayload, bool international)
         {
-            bool international = _preferencesService.GetUserPreferenceAsBoolean("BORDER_CONTROL_ON");
             var external = _ruleSelectorService.ApplyExternalData(dccPayload, international);
             var applicableRules = _ruleSelectorService.SelectRules(dccPayload, international);
             var verifyRulesModel = new VerifyRulesModel { HCert = dccPayload.DCCPayloadData.DCC, External = external };
@@ -140,7 +151,7 @@ namespace FHICORC.Core.Services.DecoderServices
             return cborMessageFromCOSE;
         }
 
-        private ITokenPayload MapToModelFromJson(string json, string tokenPrefix)
+        private ITokenPayload DomesticMapToModelFromJson(string json, string tokenPrefix)
         {
             switch (TokenTypeExtension.GetTokenType(tokenPrefix))
             {
@@ -153,7 +164,20 @@ namespace FHICORC.Core.Services.DecoderServices
                     ValidateCwt(deserialized);
                     return deserialized;
             }
-            throw new InvalidDataException("The provided token is not a valid NO token or token based on hcert 1 specification");
+            return null;
+        }
+
+        private ITokenPayload InternationalMapToModelFromJson(string json, string tokenPrefix)
+        {
+            switch (TokenTypeExtension.GetTokenType(tokenPrefix))
+            {
+                case TokenType.HC1:
+                    var deserialized = JsonConvert
+                        .DeserializeObject<DCCPayload>(json);
+                    ValidateCwt(deserialized);
+                    return deserialized;
+            }
+            return null;
         }
 
         private ITokenPayload GetNODigitalGreenModelV1ByVersion(DefaultCWTPayload defaultCwtPayload, string json)

@@ -69,6 +69,7 @@
   "SCANNER_ERROR_EXPIRED_CONTENT_2": "Ask the person to open the COVID-19 certificate on helsenorge.no",
   "SCANNER_ERROR_INVALID_TITLE": "Invalid",
   "SCANNER_ERROR_INVALID_CONTENT": "The COVID-19 certificate is invalid.",
+  "SCANNER_ERROR_UNKNOWN_TYPE_CONTENT": "The certificate is not valid for border control. In border control the app will only validate EU/EEC codes.",
   "SCANNER_ERROR_BUTTON_TEXT": "Scan again",
   "MENU_TITLE": "Menu",
   "MENU_SETTINGS_PAGE": "Settings",

@@ -124,7 +124,7 @@
                         <Label
                             HorizontalTextAlignment="Center"
                             Style="{StaticResource ContentStyle}"
-                            Text="{Binding Strings [SCANNER_ERROR_INVALID_CONTENT]}" >
+                            Text="{Binding InvalidContentText}" >
                         </Label>
                     </StackLayout>
                 </StackLayout>
