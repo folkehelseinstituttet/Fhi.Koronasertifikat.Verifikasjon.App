@@ -49,6 +49,9 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Label
                             Grid.Row="0"
@@ -85,7 +88,7 @@
                             Grid.Row="3"
                             Margin="0,32,0,0"
                             Style="{StaticResource ContentTitleStyle}"
-                            Text="{Binding Strings[HELP_PRIVACY_STATEMENT]}"
+                            Text="{Binding Strings[HELP_TERMS_OF_SERVICE]}"
                             effects:FontSizeLabelEffectParams.MaxFontSize="34.00"
                             effects:FontSizeLabelEffectParams.MinFontSize="15.00">
                             <Label.Effects>
@@ -96,7 +99,7 @@
                             Grid.Row="4"
                             Margin="0,0,0,17"
                             Style="{StaticResource ContentStyle}"
-                            Text="{Binding Strings[HELP_PRIVACY_STATEMENT_CONTENT]}"
+                            Text="{Binding Strings[HELP_TERMS_OF_SERVICE_CONTENT]}"
                             effects:FontSizeLabelEffectParams.MaxFontSize="32.00"
                             effects:FontSizeLabelEffectParams.MinFontSize="12.00">
                             <Label.Effects>
@@ -106,8 +109,8 @@
                         <controls:SingleLineButton
                             Grid.Row="5"
                             Padding="5,0,5,0"
-                            Text="{Binding Strings[HELP_PRIVACY_STATEMENT_BUTTON]}"
-                            Command="{Binding OpenPrivacyLinkCommand}"
+                            Text="{Binding Strings[HELP_TERMS_OF_SERVICE_BUTTON]}"
+                            Command="{Binding TermsOfServiceLinkCommand}"
                             Style="{StaticResource SecondaryButtonStyle}">
                             <controls:SingleLineButton.Effects>
                                 <effects:FontSizeLabelEffect/>
@@ -115,9 +118,9 @@
                         </controls:SingleLineButton>
                         <Label
                             Grid.Row="6"
-                            Margin="0,28,0,0"
+                            Margin="0,32,0,0"
                             Style="{StaticResource ContentTitleStyle}"
-                            Text="{Binding Strings[HELP_ACCESSIBILITY_STATEMENT]}"
+                            Text="{Binding Strings[HELP_PRIVACY_STATEMENT]}"
                             effects:FontSizeLabelEffectParams.MaxFontSize="34.00"
                             effects:FontSizeLabelEffectParams.MinFontSize="15.00">
                             <Label.Effects>
@@ -128,7 +131,7 @@
                             Grid.Row="7"
                             Margin="0,0,0,17"
                             Style="{StaticResource ContentStyle}"
-                            Text="{Binding Strings[HELP_ACCESSIBILITY_STATEMENT_CONTENT]}"
+                            Text="{Binding Strings[HELP_PRIVACY_STATEMENT_CONTENT]}"
                             effects:FontSizeLabelEffectParams.MaxFontSize="32.00"
                             effects:FontSizeLabelEffectParams.MinFontSize="12.00">
                             <Label.Effects>
@@ -138,6 +141,38 @@
                         <controls:SingleLineButton
                             Grid.Row="8"
                             Padding="5,0,5,0"
+                            Text="{Binding Strings[HELP_PRIVACY_STATEMENT_BUTTON]}"
+                            Command="{Binding OpenPrivacyLinkCommand}"
+                            Style="{StaticResource SecondaryButtonStyle}">
+                            <controls:SingleLineButton.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </controls:SingleLineButton.Effects>
+                        </controls:SingleLineButton>
+                        <Label
+                            Grid.Row="9"
+                            Margin="0,28,0,0"
+                            Style="{StaticResource ContentTitleStyle}"
+                            Text="{Binding Strings[HELP_ACCESSIBILITY_STATEMENT]}"
+                            effects:FontSizeLabelEffectParams.MaxFontSize="34.00"
+                            effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label
+                            Grid.Row="10"
+                            Margin="0,0,0,17"
+                            Style="{StaticResource ContentStyle}"
+                            Text="{Binding Strings[HELP_ACCESSIBILITY_STATEMENT_CONTENT]}"
+                            effects:FontSizeLabelEffectParams.MaxFontSize="32.00"
+                            effects:FontSizeLabelEffectParams.MinFontSize="12.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <controls:SingleLineButton
+                            Grid.Row="11"
+                            Padding="5,0,5,0"
                             Text="{Binding Strings[HELP_ACCESSIBILITY_STATEMENT_BUTTON]}"
                             Command="{Binding OpenAccessibilityLinkCommand}"
                             Style="{StaticResource SecondaryButtonStyle}">
@@ -146,7 +181,7 @@
                             </controls:SingleLineButton.Effects>
                         </controls:SingleLineButton>
                         <Label
-                            Grid.Row="9"
+                            Grid.Row="12"
                             Margin="0,28,0,0"
                             Style="{StaticResource ContentTitleStyle}"
                             Text="{Binding Strings[HELP_MORE_INFO_TITLE]}"
@@ -157,7 +192,7 @@
                             </Label.Effects>
                         </Label>
                         <Label
-                            Grid.Row="10"
+                            Grid.Row="13"
                             Margin="0,0,0,17"
                             Text="{Binding Strings[HELP_MORE_INFO_CONTENT]}"
                             Style="{StaticResource ContentStyle}"
@@ -168,7 +203,7 @@
                             </Label.Effects>
                         </Label>
                         <controls:SingleLineButton
-                            Grid.Row="11"
+                            Grid.Row="14"
                             Text="{Binding Strings[HELP_MORE_INFO_BUTTON]}"
                             Command="{Binding OpenHelpLinkCommand}"
                             Style="{StaticResource SecondaryButtonStyle}">
