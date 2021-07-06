@@ -169,7 +169,7 @@ namespace FHICORC.ViewModels.QrScannerViewModels
 
             NumberOfRulesPassed = string.Format("RULES_ENGINE_VERIFY_PASSED".Translate(), RulesEnginePassed, RulesEngineResultCount);
             NumberOfRulesFailed = string.Format("RULES_ENGINE_VERIFY_FAILED".Translate(), RulesEngineFailed, RulesEngineResultCount);
-            NumberOfRulesOpen = string.Format("RULES_ENGINE_FULFILLED_COUNT_ACCESSIBILITY_TEXT".Translate(), RulesEngineOpen, RulesEngineResultCount);
+            NumberOfRulesOpen = string.Format("RULES_ENGINE_VERIFY_OPEN".Translate(), RulesEngineOpen, RulesEngineResultCount);
 
             NumberOfRulesPassedAccessibilityText = string.Format("RULES_ENGINE_VERIFY_PASSED_ACCESSIBILITY_TEXT".Translate(), RulesEnginePassed, RulesEngineResultCount);
             NumberOfRulesFailedAccessibilityText = string.Format("RULES_ENGINE_VERIFY_FAILED_ACCESSIBILITY_TEXT".Translate(), RulesEngineFailed, RulesEngineResultCount);
