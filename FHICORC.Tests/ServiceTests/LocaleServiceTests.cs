@@ -5,6 +5,9 @@ using Newtonsoft.Json;
 using NUnit.Framework;
 using FHICORC.Enums;
 using FHICORC.Services;
+using FHICORC.Configuration;
+using FHICORC.Core.Data;
+using FHICORC.Tests.TestMocks;
 
 namespace FHICORC.Tests.ServiceTests
 {
@@ -16,6 +19,7 @@ namespace FHICORC.Tests.ServiceTests
         [SetUp]
         public void SetUp()
         {
+            IoCContainer.RegisterInterface<IPreferencesService, MockPreferencesService>();
             testStream = new MemoryStream(Encoding.UTF8.GetBytes(@"{""TEST_KEY"": ""TEST"", ""TEST_KEY_2"": ""TEST {0} TEST""}"));
         }
 
@@ -29,7 +33,7 @@ namespace FHICORC.Tests.ServiceTests
         [Test]
         public void Translate_KeyFoundReturnsValueForCurrentLocale()
         {
-            localeService.LoadLocale("dk", testStream);
+            localeService.LoadLocale("dk", testStream, false);
             string translated = localeService.Translate("TEST_KEY");
             Assert.AreEqual("TEST", translated);
         }
@@ -37,7 +41,7 @@ namespace FHICORC.Tests.ServiceTests
         [Test]
         public void Translate_WithArgsReturnsFormatted()
         {
-            localeService.LoadLocale("dk", testStream);
+            localeService.LoadLocale("dk", testStream, false);
             string translated = localeService.Translate("TEST_KEY_2", "TEST");
             Assert.AreEqual("TEST TEST TEST", translated);
         }
@@ -45,7 +49,7 @@ namespace FHICORC.Tests.ServiceTests
         [Test]
         public void GetLanguage_ReturnsCorrectLanguage()
         {
-            localeService.LoadLocale("nb", testStream);
+            localeService.LoadLocale("nb", testStream, false);
             Assert.AreEqual(LanguageSelection.Bokmal, LocaleService.Current.GetLanguage());
         }
 
@@ -55,7 +59,7 @@ namespace FHICORC.Tests.ServiceTests
             Stream invalidStream = new MemoryStream(Encoding.UTF8.GetBytes("\"TEST_KEY\": \"TEST\" \"TEST_KEY_2\": \"TEST {0} TEST\""));
             Assert.Throws<JsonReaderException>(() =>
             {
-                localeService.LoadLocale("dk", invalidStream);
+                localeService.LoadLocale("dk", invalidStream, false);
             });
         }
 
@@ -63,8 +67,8 @@ namespace FHICORC.Tests.ServiceTests
         public void LoadLocale_OverwritesOldLocales()
         {
             Stream anotherStream = new MemoryStream(Encoding.UTF8.GetBytes("{\"TEST_KEY\": \"TEST2\"}"));
-            localeService.LoadLocale("dk", testStream);
-            localeService.LoadLocale("en", anotherStream);
+            localeService.LoadLocale("dk", testStream, false);
+            localeService.LoadLocale("en", anotherStream, false);
             Assert.AreEqual(LanguageSelection.English, LocaleService.Current.GetLanguage());
             Assert.AreEqual("TEST2", LocaleService.Current.Translate("TEST_KEY"));
         }
