@@ -76,6 +76,8 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             {
                 _numberOfRulesFulfilledAccessibilityText = value;
                 OnPropertyChanged(nameof(NumberOfRulesFulfilledAccessibilityText));
+            }
+        }
 
         private string _bannerText;
         public string BannerText

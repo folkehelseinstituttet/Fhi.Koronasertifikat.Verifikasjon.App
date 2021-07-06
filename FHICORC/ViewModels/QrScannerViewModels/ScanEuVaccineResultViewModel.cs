@@ -76,7 +76,8 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             {
                 _numberOfRulesFulfilledAccessibilityText = value;
                 OnPropertyChanged(nameof(NumberOfRulesFulfilledAccessibilityText));
-
+            }
+        }
         private string _bannerText;
         public string BannerText
         {
@@ -109,7 +110,7 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             await ExecuteOnceAsync(async () => await Task.Run(ClosePage)));
 
         public ICommand ShowRulesInfoCommand => new Command(async () => await ExecuteOnceAsync(ShowRulesInfo));
-        
+
         public ScanEuVaccineResultViewModel(ITimer timer, IPreferencesService preferencesService) : base(timer)
         {
             ShowTextInEnglish = true;
