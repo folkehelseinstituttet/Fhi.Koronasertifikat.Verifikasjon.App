@@ -22,7 +22,7 @@ namespace FHICORC.Tests.ServiceTests
             var vaccinations = new Vaccination[1];
             vaccinations[0] = new Vaccination();
             var dcc = new DCCPayload { DCCPayloadData = new HCertModel { DCC = new DCCSchemaV1 { Vaccinations = vaccinations } } };
-            var rules = ruleSelectorService.SelectRules(dcc);
+            var rules = ruleSelectorService.SelectRules(dcc, true);
             Assert.AreEqual(2, rules.Count);
         }
 
@@ -33,7 +33,7 @@ namespace FHICORC.Tests.ServiceTests
             vaccinations[0] = new Vaccination();
             var dcc = new DCCPayload { DCCPayloadData = new HCertModel { DCC = new DCCSchemaV1 { Vaccinations = vaccinations } } };
             var rules = ruleSelectorService.SelectRules(dcc, false);
-            Assert.AreEqual(3, rules.Count);
+            Assert.AreEqual(2, rules.Count);
         }
 
         [Test]
@@ -42,7 +42,7 @@ namespace FHICORC.Tests.ServiceTests
             var testResults = new TestResult[1];
             testResults[0] = new TestResult();
             var dcc = new DCCPayload { DCCPayloadData = new HCertModel { DCC = new DCCSchemaV1 { Tests = testResults } } };
-            var rules = ruleSelectorService.SelectRules(dcc);
+            var rules = ruleSelectorService.SelectRules(dcc, true);
             Assert.AreEqual(1, rules.Count);
         }
 
@@ -62,7 +62,7 @@ namespace FHICORC.Tests.ServiceTests
             var recoveries = new Recovery[1];
             recoveries[0] = new Recovery();
             var dcc = new DCCPayload { DCCPayloadData = new HCertModel { DCC = new DCCSchemaV1 { Recovery = recoveries } } };
-            var rules = ruleSelectorService.SelectRules(dcc);
+            var rules = ruleSelectorService.SelectRules(dcc, true);
             Assert.AreEqual(1, rules.Count);
         }
 
@@ -73,7 +73,7 @@ namespace FHICORC.Tests.ServiceTests
             recoveries[0] = new Recovery();
             var dcc = new DCCPayload { DCCPayloadData = new HCertModel { DCC = new DCCSchemaV1 { Recovery = recoveries } } };
             var rules = ruleSelectorService.SelectRules(dcc, false);
-            Assert.AreEqual(3, rules.Count);
+            Assert.AreEqual(1, rules.Count);
         }
 
         [Test]

@@ -135,7 +135,7 @@ namespace FHICORC.Tests.BusinessRules
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].DoseNumber = 1;
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].TotalSeriesOfDose = 2;
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             bool atLeastOneFalse = false;
             foreach (var result in results)
@@ -156,7 +156,7 @@ namespace FHICORC.Tests.BusinessRules
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].DoseNumber = 1;
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].TotalSeriesOfDose = 2;
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             bool atLeastOneFalse = false;
             foreach (var result in results)
@@ -177,7 +177,7 @@ namespace FHICORC.Tests.BusinessRules
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].DoseNumber = 1;
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].TotalSeriesOfDose = 2;
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             bool atLeastOneFalse = false;
             foreach (var result in results)
@@ -197,7 +197,7 @@ namespace FHICORC.Tests.BusinessRules
             DCCPayload dccPayload = GetVaccinePayload(ONE_OF_TWO_MIN_DAYS);
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].VaccineMedicinalProduct = "UnknownType";
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             bool atLeastOneFalse = false;
             foreach (var result in results)
@@ -216,7 +216,7 @@ namespace FHICORC.Tests.BusinessRules
         {
             DCCPayload dccPayload = GetVaccinePayload(TWO_OF_TWO_MIN_DAYS - 1);
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             foreach (var result in results)
             {
@@ -230,7 +230,7 @@ namespace FHICORC.Tests.BusinessRules
             DCCPayload dccPayload = GetVaccinePayload(TWO_OF_TWO_MIN_DAYS - 1);
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].VaccineMedicinalProduct = "EU/1/20/1507";
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             foreach (var result in results)
             {
@@ -244,7 +244,7 @@ namespace FHICORC.Tests.BusinessRules
             DCCPayload dccPayload = GetVaccinePayload(TWO_OF_TWO_MIN_DAYS - 1);
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].VaccineMedicinalProduct = "EU/1/21/1529";
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             foreach (var result in results)
             {
@@ -258,7 +258,7 @@ namespace FHICORC.Tests.BusinessRules
         {
             DCCPayload dccPayload = GetVaccinePayload(TWO_OF_TWO_MIN_DAYS + 1);
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             bool atLeastOneFalse = false;
             foreach (var result in results)
@@ -278,7 +278,7 @@ namespace FHICORC.Tests.BusinessRules
         {
             DCCPayload dccPayload = GetVaccinePayload(TWO_OF_TWO_MAX_DAYS - 1);
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             bool atLeastOneFalse = false;
             foreach (var result in results)
@@ -298,7 +298,7 @@ namespace FHICORC.Tests.BusinessRules
             DCCPayload dccPayload = GetVaccinePayload(TWO_OF_TWO_MAX_DAYS + 1);
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].VaccineMedicinalProduct = "UnknownType";
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             bool atLeastOneFalse = false;
             foreach (var result in results)
@@ -320,7 +320,7 @@ namespace FHICORC.Tests.BusinessRules
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].TotalSeriesOfDose = 1;
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].VaccineMedicinalProduct = "EU/1/20/1525";
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             foreach (var result in results)
             {
@@ -336,7 +336,7 @@ namespace FHICORC.Tests.BusinessRules
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].TotalSeriesOfDose = 1;
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].VaccineMedicinalProduct = "EU/1/20/1525";
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             bool atLeastOneFalse = false;
             foreach (var result in results)
@@ -358,7 +358,7 @@ namespace FHICORC.Tests.BusinessRules
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].TotalSeriesOfDose = 1;
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].VaccineMedicinalProduct = "EU/1/20/1528";
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             foreach (var result in results)
             {
@@ -374,7 +374,7 @@ namespace FHICORC.Tests.BusinessRules
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].TotalSeriesOfDose = 1;
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].VaccineMedicinalProduct = "EU/1/20/1507";
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             foreach (var result in results)
             {
@@ -390,7 +390,7 @@ namespace FHICORC.Tests.BusinessRules
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].TotalSeriesOfDose = 1;
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].VaccineMedicinalProduct = "EU/1/21/1529";
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             foreach (var result in results)
             {
@@ -407,7 +407,7 @@ namespace FHICORC.Tests.BusinessRules
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].TotalSeriesOfDose = 1;
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].VaccineMedicinalProduct = "EU/1/20/1525";
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             bool atLeastOneFalse = false;
             foreach (var result in results)
@@ -429,7 +429,7 @@ namespace FHICORC.Tests.BusinessRules
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].TotalSeriesOfDose = 1;
             dccPayload.DCCPayloadData.DCC.Vaccinations[0].VaccineMedicinalProduct = "UNKNOWN_TYPE";
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             bool atLeastOneFalse = false;
             foreach (var result in results)
@@ -448,7 +448,7 @@ namespace FHICORC.Tests.BusinessRules
         {
             DCCPayload dccPayload = GetRecoveryPayload(RECOVERY_MIN_DAYS - 1, 0, RECOVERY_MAX_DAYS);
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             foreach (var result in results)
             {
@@ -461,7 +461,7 @@ namespace FHICORC.Tests.BusinessRules
         {
             DCCPayload dccPayload = GetRecoveryPayload(RECOVERY_MIN_DAYS + 1, 0, RECOVERY_MAX_DAYS);
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             bool atLeastOneFalse = false;
             foreach (var result in results)
@@ -481,7 +481,7 @@ namespace FHICORC.Tests.BusinessRules
             DCCPayload dccPayload = GetRecoveryPayload(RECOVERY_MIN_DAYS + 1, RECOVERY_MAX_DAYS, RECOVERY_MAX_DAYS);
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
             rulesModel.External.ValidationClock = DateTime.UtcNow.AddDays(RECOVERY_MAX_DAYS);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             foreach (var result in results)
             {
@@ -494,7 +494,7 @@ namespace FHICORC.Tests.BusinessRules
         {
             DCCPayload dccPayload = GetTestResultPayload(TESTRESULT_MAX_HOURS);
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             foreach (var result in results)
             {
@@ -507,7 +507,7 @@ namespace FHICORC.Tests.BusinessRules
         {
             DCCPayload dccPayload = GetTestResultPayload(TESTRESULT_MAX_HOURS - 1);
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             foreach (var result in results)
             {
@@ -521,7 +521,7 @@ namespace FHICORC.Tests.BusinessRules
             DCCPayload dccPayload = GetTestResultPayload(TESTRESULT_MAX_HOURS);
             dccPayload.DCCPayloadData.DCC.Tests[0].Disease = "UNKNOWN";
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             foreach (var result in results)
             {
@@ -535,7 +535,7 @@ namespace FHICORC.Tests.BusinessRules
             DCCPayload dccPayload = GetTestResultPayload(TESTRESULT_MAX_HOURS - 1);
             dccPayload.DCCPayloadData.DCC.Tests[0].Disease = "UNKNOWN";
             VerifyRulesModel rulesModel = GetVerifyRulesModel(dccPayload);
-            var rules = ruleSelectorService.SelectRules(dccPayload);
+            var rules = ruleSelectorService.SelectRules(dccPayload, true);
             var results = ruleVerifierService.Verify(rules, rulesModel);
             foreach (var result in results)
             {
