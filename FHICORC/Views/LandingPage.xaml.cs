@@ -1,4 +1,5 @@
-﻿using FHICORC.Configuration;
+﻿using System;
+using FHICORC.Configuration;
 using FHICORC.Services.Interfaces;
 using FHICORC.Utils;
 using FHICORC.ViewModels;
@@ -22,6 +23,22 @@ namespace FHICORC.Views
             base.OnAppearing();
             IoCContainer.Resolve<INavigationService>().SetStatusBar(FHICORCColor.LandingPageColorStart.Color(), Color.White);
 
+        }
+
+        void TapGestureRecognizer_Tapped_Border(object sender, EventArgs e)
+        {
+            if (!RadioButtonBorder.IsChecked)
+            {
+                RadioButtonBorder.IsChecked = true;
+            }
+        }
+
+        void TapGestureRecognizer_Tapped_Domestic(object sender, EventArgs e)
+        {
+            if (!RadioButtonDomestic.IsChecked)
+            {
+                RadioButtonDomestic.IsChecked = true;
+            }
         }
     }
 }

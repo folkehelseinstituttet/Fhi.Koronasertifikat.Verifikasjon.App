@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Model.BusinessRules;
@@ -22,7 +21,7 @@ namespace FHICORC.Tests.TestMocks
             return Task.CompletedTask;
         }
 
-        public ICollection<BusinessRule> ReadBusinessRules()
+        public ICollection<BusinessRule> GetBusinessRules()
         {
             return new List<BusinessRule>
             {
@@ -57,6 +56,30 @@ namespace FHICORC.Tests.TestMocks
                 new BusinessRule
                 {
                     Identifier = "RR-NO-0003"
+                },
+                new BusinessRule
+                {
+                    Identifier = "GR-NX-0001"
+                },
+                new BusinessRule
+                {
+                    Identifier = "VR-NX-0001"
+                },
+                new BusinessRule
+                {
+                    Identifier = "VR-NX-0002"
+                },
+                new BusinessRule
+                {
+                    Identifier = "TR-NX-0001"
+                },
+                new BusinessRule
+                {
+                    Identifier = "RR-NX-0001"
+                },
+                new BusinessRule
+                {
+                    Identifier = "RR-NX-0002"
                 },
             };
         }

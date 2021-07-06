@@ -1,5 +1,5 @@
 # How to contribute
-Thank you for showing interest in contributing to  Koronasertifikat-Validering. By contributing to  Koronasertifikat-Validering, you also agree to abide by its [Code of Conduct](CODE_OF_CONDUCT.md) at all times.
+Thank you for showing interest in contributing to Kontroll av koronasertifikat. By contributing to Kontroll av koronasertifikat, you also agree to abide by its [Code of Conduct](CODE_OF_CONDUCT.md) at all times.
 
 ## Intro
 We use GitHub at all times to work with the codebase. All of the feature development and bugfixes are handled via pull requests submitted to GitHub repo that undergo a review process by team members of FHI organisation. Feel free to comment something you think is important under pull requests and issues at any time.
@@ -9,7 +9,7 @@ Issue is not always a bug you discover in the app but potential enhancements, ne
 
 ### Submitting an issue
 - Give the issue a short, clear title that describes the bug or feature request
-- Include what version of  Koronasertifikat-Validering you are using. If you are reporting a bug, include details on how you get it.
+- Include what version of  Kontroll av koronasertifikat you are using. If you are reporting a bug, include details on how you get it.
 - Include steps to reproduce the issue
 - Include screenshots, if possible
 - If possible, mark the issue with an appropriate label, e.g., `is:bug`
@@ -37,4 +37,4 @@ After step 5, the team will start a review process of the PR.
 ## Licence
 Copyright (c) 2021 Norwegian Institute of Public Health (Norway), 2021 Danish Health Authority  (Denmark)
 
- Koronasertifikat-Validering is Open Source software released under the [MIT license](LICENSE.md)
+ Kontroll av koronasertifikat is Open Source software released under the [MIT license](LICENSE.md)

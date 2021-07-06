@@ -26,6 +26,8 @@ namespace FHICORC.Services.DataManagers
 
         private TimeSpan _periodicFetchingInterval { get; set; }
 
+        private ICollection<BusinessRule> businessRules;
+
         public BusinessRulesDataManager(
             ISettingsService settingsService,
             IDateTimeService dateTimeService,
@@ -62,7 +64,7 @@ namespace FHICORC.Services.DataManagers
             }
         }
 
-        public ICollection<BusinessRule> ReadBusinessRules()
+        private ICollection<BusinessRule> ReadBusinessRules()
         {
             try
             {
@@ -74,6 +76,13 @@ namespace FHICORC.Services.DataManagers
             {
                 return null;
             }
+        }
+
+        public ICollection<BusinessRule> GetBusinessRules()
+        {
+            if (businessRules == null)
+                businessRules = ReadBusinessRules();
+            return businessRules;
         }
 
         private void SaveBusinessRulesFile(ICollection<BusinessRule> rulesText)

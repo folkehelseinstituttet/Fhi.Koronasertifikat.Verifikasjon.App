@@ -1,6 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json;
-using FHICORC.Core.Services.Model.Converter;
 using FHICORC.Core.Services.Model.EuDCCModel.ValueSet;
 
 namespace FHICORC.Core.Services.Model.EuDCCModel._1._3._0

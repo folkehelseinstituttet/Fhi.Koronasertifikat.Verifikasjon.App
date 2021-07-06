@@ -4,6 +4,7 @@
     {
         Invalid,
         Expired,
-        Valid
+        Valid,
+        UnsupportedType
     }
 }
