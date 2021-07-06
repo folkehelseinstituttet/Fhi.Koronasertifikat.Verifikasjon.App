@@ -17,7 +17,7 @@ namespace FHICORC.Tests.ServiceTests
             new MockBusinessRulesService());
 
         [Test]
-        public void Select_WithVaccineReturnsOnlyVRAndGR()
+        public void SelectInternational_WithVaccineReturnsOnlyVRAndGR()
         {
             var vaccinations = new Vaccination[1];
             vaccinations[0] = new Vaccination();
@@ -27,7 +27,17 @@ namespace FHICORC.Tests.ServiceTests
         }
 
         [Test]
-        public void Select_WithTestReturnsOnlyTRAndGR()
+        public void SelectDomestic_WithVaccineReturnsOnlyVRAndGR()
+        {
+            var vaccinations = new Vaccination[1];
+            vaccinations[0] = new Vaccination();
+            var dcc = new DCCPayload { DCCPayloadData = new HCertModel { DCC = new DCCSchemaV1 { Vaccinations = vaccinations } } };
+            var rules = ruleSelectorService.SelectRules(dcc, false);
+            Assert.AreEqual(3, rules.Count);
+        }
+
+        [Test]
+        public void SelectInternational_WithTestReturnsOnlyTRAndGR()
         {
             var testResults = new TestResult[1];
             testResults[0] = new TestResult();
@@ -37,7 +47,17 @@ namespace FHICORC.Tests.ServiceTests
         }
 
         [Test]
-        public void Select_WithRecoveryReturnsOnlyRRAndGR()
+        public void SelectDomestic_WithTestReturnsOnlyTRAndGR()
+        {
+            var testResults = new TestResult[1];
+            testResults[0] = new TestResult();
+            var dcc = new DCCPayload { DCCPayloadData = new HCertModel { DCC = new DCCSchemaV1 { Tests = testResults } } };
+            var rules = ruleSelectorService.SelectRules(dcc, false);
+            Assert.AreEqual(2, rules.Count);
+        }
+
+        [Test]
+        public void SelectInternational_WithRecoveryReturnsOnlyRRAndGR()
         {
             var recoveries = new Recovery[1];
             recoveries[0] = new Recovery();
@@ -47,10 +67,20 @@ namespace FHICORC.Tests.ServiceTests
         }
 
         [Test]
+        public void SelectDomestic_WithRecoveryReturnsOnlyRRAndGR()
+        {
+            var recoveries = new Recovery[1];
+            recoveries[0] = new Recovery();
+            var dcc = new DCCPayload { DCCPayloadData = new HCertModel { DCC = new DCCSchemaV1 { Recovery = recoveries } } };
+            var rules = ruleSelectorService.SelectRules(dcc, false);
+            Assert.AreEqual(3, rules.Count);
+        }
+
+        [Test]
         public void ApplyExternalData_AllFieldsSet()
         {
             var dcc = new DCCPayload { IssueAt = new DateTime(2021, 06, 10), ExpirationTime = new DateTime(2021, 06, 21), DCCPayloadData = new HCertModel { DCC = new DCCSchemaV1 { } } };
-            ExternalData external = ruleSelectorService.ApplyExternalData(dcc);
+            ExternalData external = ruleSelectorService.ApplyExternalData(dcc, true);
             Assert.AreEqual("NO", external.CountryCode);
             Assert.AreEqual(dcc.ExpirationTime, external.Exp);
             Assert.AreEqual(dcc.IssueAt, external.Iat);

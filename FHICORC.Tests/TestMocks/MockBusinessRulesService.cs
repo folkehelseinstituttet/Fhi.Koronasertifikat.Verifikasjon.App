@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Model.BusinessRules;
@@ -23,7 +22,7 @@ namespace FHICORC.Tests.TestMocks
             return Task.CompletedTask;
         }
 
-        public ICollection<BusinessRule> ReadBusinessRules()
+        public ICollection<BusinessRule> GetBusinessRules()
         {
             var repo = new MockBusinessRulesRepository();
             var result = repo.GetBusinessRules().GetAwaiter().GetResult();

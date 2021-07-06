@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:FHICORC.Controls"
     xmlns:effects="clr-namespace:FHICORC.Controls"
+    xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:viewModel="clr-namespace:FHICORC.ViewModels"
     ios:Page.UseSafeArea="False"
@@ -44,7 +45,8 @@
                   RowSpacing="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="0.6*" />
+                    <RowDefinition Height="0.5*" />
+                    <RowDefinition Height="0.3*" />
                     <RowDefinition Height="0.2*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
@@ -98,9 +100,109 @@
                         AutomationProperties.IsInAccessibleTree="True"
                         AutomationProperties.Name="{Binding Strings[LANDING_PAGE_TITLE]}"/>
                 </StackLayout>
+
                 <StackLayout
-                    Grid.Row="2"
+                    Grid.Row="2">
+                    <Label
+                        Style="{StaticResource ContentTitleStyle}"
+                        TextColor="{StaticResource FHIPrimaryWhite}"
+                        HorizontalOptions="Center"
+                        Text="Velg kontrolltype"/>
+                    <input:RadioButtonGroupView>
+                        <Grid
+                            RowSpacing="14"
+                            RadioButtonGroup.GroupName="ControlState">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid
+                                Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.3*" />
+                                    <ColumnDefinition Width="0.7*" />
+                                </Grid.ColumnDefinitions>
+                                <Frame
+                                    Grid.Column="0"
+                                    Padding="0"
+                                    BackgroundColor="{StaticResource FHIWhite}"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Center"
+                                    HeightRequest="35"
+                                    WidthRequest="35"
+                                    CornerRadius="17.5"
+                                    HasShadow="False">
+                                    <input:RadioButton
+                                        x:Name="RadioButtonBorder"
+                                        CircleColor="{StaticResource FHIBorderColor}"
+                                        Color="{StaticResource FHIGreen}"
+                                        Scale="1.4"
+                                        IsChecked="{Binding BorderControlOn, Mode=TwoWay}"
+                                        BackgroundColor="Transparent"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"/>
+                                </Frame>
+                                <Label
+                                    Grid.Column="1"
+                                    Margin="16,0,0,0"
+                                    Text="{Binding Strings[SCANNER_EU_BANNER_TEXT]}"
+                                    Style="{StaticResource ContentStyle}"
+                                    TextColor="{StaticResource FHISecondaryWhite}"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_Border"  />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+
+                            <Grid
+                                Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.3*" />
+                                    <ColumnDefinition Width="0.7*" />
+                                </Grid.ColumnDefinitions>
+                                <Frame
+                                    Grid.Column="0"
+                                    Padding="0"
+                                    BackgroundColor="{StaticResource FHIWhite}"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Center"
+                                    HeightRequest="35"
+                                    WidthRequest="35"
+                                    CornerRadius="17.5"
+                                    HasShadow="False">
+                                    <input:RadioButton
+                                        x:Name="RadioButtonDomestic"
+                                        CircleColor="{StaticResource FHIBorderColor}"
+                                        Color="{StaticResource FHIGreen}"
+                                        Scale="1.4"
+                                        IsChecked="{Binding DomesticControlOn, Mode=TwoWay}"
+                                        BackgroundColor="Transparent"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"/>
+                                </Frame>
+                                <Label
+                                    Grid.Column="1"
+                                    Margin="16,0,0,0"
+                                    Text="{Binding Strings[SCANNER_NO_BANNER_TEXT]}"
+                                    Style="{StaticResource ContentStyle}"
+                                    TextColor="{StaticResource FHISecondaryWhite}"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_Domestic"  />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                        </Grid>
+                    </input:RadioButtonGroupView>
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Row="3"
                     VerticalOptions="StartAndExpand">
+
                     <controls:SingleLineButton
                         AutomationId="OpenScannerButton"
                         AutomationProperties.IsInAccessibleTree="True"
@@ -110,11 +212,12 @@
                         Text="{Binding OpenScannerText}"
                         WidthRequest="187"
                         Padding="5,0,5,5"
+                        IsVisible="{Binding IsScannerButtonVisible}"
                         HorizontalOptions="Center"/>
                 </StackLayout>
 
                 <StackLayout
-                    Grid.Row="3"
+                    Grid.Row="4"
                     VerticalOptions="EndAndExpand">
                     <controls:SingleLineButton
                         AutomationId="OpenScannerButton"

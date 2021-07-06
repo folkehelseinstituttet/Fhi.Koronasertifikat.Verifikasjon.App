@@ -1224,23 +1224,23 @@
       <Generator>
       </Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable-mdpi\close_blue.png">
+    <AndroidResource Include="Resources\drawable-mdpi\close_icon_blue.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable-hdpi\close_blue.png">
+    <AndroidResource Include="Resources\drawable-hdpi\close_icon_blue.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable-xhdpi\close_blue.png">
+    <AndroidResource Include="Resources\drawable-xhdpi\close_icon_blue.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable-xxhdpi\close_blue.png">
+    <AndroidResource Include="Resources\drawable-xxhdpi\close_icon_blue.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\close_blue.png">
+    <AndroidResource Include="Resources\drawable-xxxhdpi\close_icon_blue.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
