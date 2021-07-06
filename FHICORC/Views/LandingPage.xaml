@@ -107,7 +107,9 @@
                         Style="{StaticResource ContentTitleStyle}"
                         TextColor="{StaticResource FHIPrimaryWhite}"
                         HorizontalOptions="Center"
-                        Text="Velg kontrolltype"/>
+                        AutomationProperties.IsInAccessibleTree="True"
+                        AutomationProperties.Name="{Binding SelectControlType}"
+                        Text="{Binding SelectControlType}"/>
                     <input:RadioButtonGroupView>
                         <Grid
                             RowSpacing="14"
@@ -134,6 +136,8 @@
                                     HasShadow="False">
                                     <input:RadioButton
                                         x:Name="RadioButtonBorder"
+                                        AutomationProperties.IsInAccessibleTree="True"
+                                        AutomationProperties.Name="{Binding RadioButtonBorderText}"
                                         CircleColor="{StaticResource FHIBorderColor}"
                                         Color="{StaticResource FHIGreen}"
                                         Scale="1.4"
@@ -145,6 +149,7 @@
                                 <Label
                                     Grid.Column="1"
                                     Margin="16,0,0,0"
+                                    AutomationProperties.IsInAccessibleTree="True"
                                     Text="{Binding Strings[SCANNER_EU_BANNER_TEXT]}"
                                     Style="{StaticResource ContentStyle}"
                                     TextColor="{StaticResource FHISecondaryWhite}"
@@ -174,6 +179,8 @@
                                     HasShadow="False">
                                     <input:RadioButton
                                         x:Name="RadioButtonDomestic"
+                                        AutomationProperties.IsInAccessibleTree="True"
+                                        AutomationProperties.Name="{Binding RadioButtonDomesticText}"
                                         CircleColor="{StaticResource FHIBorderColor}"
                                         Color="{StaticResource FHIGreen}"
                                         Scale="1.4"
@@ -185,6 +192,7 @@
                                 <Label
                                     Grid.Column="1"
                                     Margin="16,0,0,0"
+                                    AutomationProperties.IsInAccessibleTree="True"
                                     Text="{Binding Strings[SCANNER_NO_BANNER_TEXT]}"
                                     Style="{StaticResource ContentStyle}"
                                     TextColor="{StaticResource FHISecondaryWhite}"

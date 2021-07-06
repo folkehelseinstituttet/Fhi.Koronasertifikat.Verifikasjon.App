@@ -21,6 +21,7 @@ namespace FHICORC.ViewModels
         public string LandingPageTitle => "LANDING_PAGE_TITLE".Translate();
         public string LanguageChangeButtonText => "LANDING_PAGE_LANGUAGE_CHANGE_BUTTON_TEXT".Translate();
         public string HelpButton => "HELP".Translate();
+        public string SelectControlType => "LANDING_PAGE_CONTROL_TYPE".Translate();
 
         public ICommand ChangeLanguageCommand => new Command(async () => await ExecuteOnceAsync(DisplayChangeLanguageDialog));
         public ICommand OpenScannerCommand => new Command(async () => await ExecuteOnceAsync(GoToScannerPage));
@@ -61,6 +62,30 @@ namespace FHICORC.ViewModels
             }
         }
 
+        private string _radioButtonBorderText;
+        public string RadioButtonBorderText
+        {
+            get => _radioButtonBorderText;
+            set
+            {
+                _radioButtonBorderText = value;
+                OnPropertyChanged(nameof(RadioButtonBorderText));
+            }
+        }
+
+
+        private string _radioButtonDomesticText;
+        public string RadioButtonDomesticText
+        {
+            get => _radioButtonDomesticText;
+            set
+            {
+                _radioButtonDomesticText = value;
+                OnPropertyChanged(nameof(RadioButtonDomesticText));
+            }
+        }
+
+
         private bool _isScannerButtonVisible;
         public bool IsScannerButtonVisible
         {
@@ -79,6 +104,14 @@ namespace FHICORC.ViewModels
             _preferencesService = preferencesService;
             BorderControlOn = _preferencesService.GetUserPreferenceAsBoolean(PreferencesKeys.BORDER_CONTROL_ON);
             DomesticControlOn = _preferencesService.GetUserPreferenceAsBoolean(PreferencesKeys.DOMESTIC_CONTROL_ON);
+            setAccessibilityTextOnRadioButtons();
+        }
+
+
+        public void setAccessibilityTextOnRadioButtons()
+        {
+            RadioButtonBorderText = BorderControlOn ? "SETTINGS_RADIO_BUTTON_CHOSEN".Translate() : "SETTINGS_RADIO_BUTTON_NOT_CHOSEN".Translate();
+            RadioButtonDomesticText = DomesticControlOn ? "SETTINGS_RADIO_BUTTON_CHOSEN".Translate() : "SETTINGS_RADIO_BUTTON_NOT_CHOSEN".Translate();
         }
 
         private async Task GoToScannerPage()
@@ -96,7 +129,7 @@ namespace FHICORC.ViewModels
             }
             else
             {
-               await _navigationService.OpenAcceptTermsPage();
+                await _navigationService.OpenAcceptTermsPage();
             }
         }
 
@@ -120,6 +153,7 @@ namespace FHICORC.ViewModels
             OnPropertyChanged(nameof(OpenScannerText));
             OnPropertyChanged(nameof(LandingPageTitle));
             OnPropertyChanged(nameof(LanguageChangeButtonText));
+            setAccessibilityTextOnRadioButtons();
         }
 
         private void UpdateScannerButton()

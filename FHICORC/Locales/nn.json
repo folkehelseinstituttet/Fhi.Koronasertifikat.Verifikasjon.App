@@ -1,6 +1,7 @@
 ﻿{
     "LANDING_PAGE_QR_CODE": "Skannar",
     "LANDING_PAGE_TITLE": "Kontroll av koronasertifikat",
+    "LANDING_PAGE_CONTROL_TYPE": "Vel kontrolltype",
     "LANDING_PAGE_LANGUAGE_CHANGE_BUTTON_TEXT": "Endre språk / Change language",
     "CHANGE_LANGUAGE_DIALOG_OK_BUTTON": "Stadfest",
     "SETTINGS_CHOOSE_LANGUAGE_DIALOG_TITLE_NB": "Velg språk",
