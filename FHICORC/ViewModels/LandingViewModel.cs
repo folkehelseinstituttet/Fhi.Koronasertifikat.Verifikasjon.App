@@ -22,6 +22,8 @@ namespace FHICORC.ViewModels
         public string LanguageChangeButtonText => "LANDING_PAGE_LANGUAGE_CHANGE_BUTTON_TEXT".Translate();
         public string HelpButton => "HELP".Translate();
         public string SelectControlType => "LANDING_PAGE_CONTROL_TYPE".Translate();
+        public string ScannerEURadioBtnText => "SCANNER_EU_BANNER_TEXT".Translate();
+        public string ScannerNORadioBtnText => "SCANNER_NO_BANNER_TEXT".Translate();
 
         public ICommand ChangeLanguageCommand => new Command(async () => await ExecuteOnceAsync(DisplayChangeLanguageDialog));
         public ICommand OpenScannerCommand => new Command(async () => await ExecuteOnceAsync(GoToScannerPage));
@@ -43,6 +45,7 @@ namespace FHICORC.ViewModels
                 _preferencesService.SetUserPreference(PreferencesKeys.BORDER_CONTROL_ON, value);
                 UpdateScannerButton();
                 OnPropertyChanged(nameof(BorderControlOn));
+                setAccessibilityTextOnRadioButtons();
             }
         }
 
@@ -59,6 +62,7 @@ namespace FHICORC.ViewModels
                 _preferencesService.SetUserPreference(PreferencesKeys.DOMESTIC_CONTROL_ON, value);
                 UpdateScannerButton();
                 OnPropertyChanged(nameof(DomesticControlOn));
+                setAccessibilityTextOnRadioButtons();
             }
         }
 
@@ -153,6 +157,9 @@ namespace FHICORC.ViewModels
             OnPropertyChanged(nameof(OpenScannerText));
             OnPropertyChanged(nameof(LandingPageTitle));
             OnPropertyChanged(nameof(LanguageChangeButtonText));
+            OnPropertyChanged(nameof(SelectControlType));
+            OnPropertyChanged(nameof(ScannerEURadioBtnText));
+            OnPropertyChanged(nameof(ScannerNORadioBtnText));
             setAccessibilityTextOnRadioButtons();
         }
 
