@@ -89,6 +89,10 @@ namespace FHICORC
             {
                 ClearAppData();
             }
+            if (VersionTracking.IsFirstLaunchForCurrentVersion)
+            {
+                _preferencesService.SetUserPreference(PreferencesKeys.TERMS_ACCEPTED, false);
+            }
             await _textService.LoadSavedLocales();
             _navigationService.OpenLandingPage();
             await _textService.LoadRemoteLocales();

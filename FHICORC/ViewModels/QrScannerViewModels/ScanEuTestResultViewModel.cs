@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -69,6 +69,17 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             }
         }
 
+        private string _numberOfRulesFulfilledAccessibilityText;
+        public string NumberOfRulesFulfilledAccessibilityText
+        {
+            get => _numberOfRulesFulfilledAccessibilityText;
+            set
+            {
+                _numberOfRulesFulfilledAccessibilityText = value;
+                OnPropertyChanged(nameof(NumberOfRulesFulfilledAccessibilityText));
+            }
+        }
+
         private string _bannerText;
         public string BannerText
         {
@@ -128,6 +139,7 @@ namespace FHICORC.ViewModels.QrScannerViewModels
                         RulesEnginePassed = RulesFeedbackViewModel.RulesEngineResult.Where(x => x.Result == RulesFeedbackResult.TRUE).Count();
                         RulesEngineResultCount = RulesFeedbackViewModel.RulesEngineResult.Count;
                         NumberOfRulesFulfilled = string.Format("RULES_ENGINE_FULFILLED_COUNT".Translate(), RulesEnginePassed, RulesEngineResultCount);
+                        NumberOfRulesFulfilledAccessibilityText = string.Format("RULES_ENGINE_FULFILLED_COUNT_ACCESSIBILITY_TEXT".Translate(), RulesEnginePassed, RulesEngineResultCount);
                         if (RulesEnginePassed == RulesEngineResultCount)
                         {
                             RuleBackgroundColor = Color.FromHex("#D9F0D4");
@@ -138,7 +150,7 @@ namespace FHICORC.ViewModels.QrScannerViewModels
                         }
                         UpdateView();
                     }
-                }     
+                }
             }
             catch (Exception e)
             {

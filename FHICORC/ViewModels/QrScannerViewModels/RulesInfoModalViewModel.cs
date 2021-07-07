@@ -77,6 +77,42 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             }
         }
 
+        private string _numberOfRulesPassedAccessibilityText;
+        public string NumberOfRulesPassedAccessibilityText
+        {
+            get => _numberOfRulesPassedAccessibilityText;
+            set
+            {
+                _numberOfRulesPassedAccessibilityText = value;
+                OnPropertyChanged(nameof(NumberOfRulesPassedAccessibilityText));
+            }
+        }
+
+
+        private string _numberOfRulesFailedAccessibilityText;
+        public string NumberOfRulesFailedAccessibilityText
+        {
+            get => _numberOfRulesFailedAccessibilityText;
+            set
+            {
+                _numberOfRulesFailedAccessibilityText = value;
+                OnPropertyChanged(nameof(NumberOfRulesFailedAccessibilityText));
+            }
+        }
+
+        private string _numberOfRulesOpenAccessibilityText;
+        public string NumberOfRulesOpenAccessibilityText
+        {
+            get => _numberOfRulesOpenAccessibilityText;
+            set
+            {
+                _numberOfRulesOpenAccessibilityText = value;
+                OnPropertyChanged(nameof(NumberOfRulesOpenAccessibilityText));
+            }
+        }
+
+
+
         public RulesInfoModalViewModel(RulesFeedbackViewModel rulesFeedbackViewModel, EuPassportType euPassportType)
         {
             RulesFeedbackViewModel = rulesFeedbackViewModel;
@@ -130,9 +166,15 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             RulesEngineFailed = RulesFeedbackViewModel.RulesEngineResult.Where(x => x.Result == RulesFeedbackResult.FALSE).Count();
             RulesEngineOpen = RulesFeedbackViewModel.RulesEngineResult.Where(x => x.Result == RulesFeedbackResult.OPEN).Count();
             RulesEngineResultCount = RulesFeedbackViewModel.RulesEngineResult.Count;
+
             NumberOfRulesPassed = string.Format("RULES_ENGINE_VERIFY_PASSED".Translate(), RulesEnginePassed, RulesEngineResultCount);
             NumberOfRulesFailed = string.Format("RULES_ENGINE_VERIFY_FAILED".Translate(), RulesEngineFailed, RulesEngineResultCount);
             NumberOfRulesOpen = string.Format("RULES_ENGINE_VERIFY_OPEN".Translate(), RulesEngineOpen, RulesEngineResultCount);
+
+            NumberOfRulesPassedAccessibilityText = string.Format("RULES_ENGINE_VERIFY_PASSED_ACCESSIBILITY_TEXT".Translate(), RulesEnginePassed, RulesEngineResultCount);
+            NumberOfRulesFailedAccessibilityText = string.Format("RULES_ENGINE_VERIFY_FAILED_ACCESSIBILITY_TEXT".Translate(), RulesEngineFailed, RulesEngineResultCount);
+            NumberOfRulesOpenAccessibilityText = string.Format("RULES_ENGINE_VERIFY_OPEN_ACCESSIBILITY_TEXT".Translate(), RulesEngineOpen, RulesEngineResultCount);
+
         }
     }
 }

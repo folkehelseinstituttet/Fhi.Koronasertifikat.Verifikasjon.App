@@ -24,5 +24,11 @@ namespace FHICORC.Views.ScannerPages
             ((ScanEuVaccineResultViewModel)BindingContext).Timer.Enabled = false;
             base.OnDisappearing();
         }
+
+        protected override void OnAppearing()
+        {
+            ((ScanEuVaccineResultViewModel)BindingContext).Timer.Enabled = true;
+            base.OnAppearing();
+        }
     }
 }

@@ -123,19 +123,25 @@ namespace FHICORC.Services.WebServices
 
         public void SetLocale(string isoCode)
         {
-            string versionNumber = _preferencesService.GetUserPreferenceAsString(PreferencesKeys.CURRENT_TEXT_VERSION);
+            string versionNumberOfLastFetchedTextFile = _preferencesService.GetUserPreferenceAsString(PreferencesKeys.CURRENT_TEXT_VERSION);
             FileStream localeFile;
-            try
+            if (IsLastFetchedVersionNewerThanEmbeddedVersion())
             {
-                localeFile = File.OpenRead(Path.Combine(Environment.GetFolderPath(ZIP_FILE_DIRECTORY), $"{isoCode}_{versionNumber}.json"));
-                LocaleService.Current.LoadLocale(isoCode, localeFile);
-                _preferencesService.SetUserPreference(PreferencesKeys.LANGUAGE_SETTING, isoCode);
+                try
+                {
+                    localeFile = File.OpenRead(Path.Combine(Environment.GetFolderPath(ZIP_FILE_DIRECTORY), $"{isoCode}_{versionNumberOfLastFetchedTextFile}.json"));
+                    LocaleService.Current.LoadLocale(isoCode, localeFile, false);
+                }
+                catch (Exception)
+                {
+                    localeFile = File.OpenRead(Path.Combine(Environment.GetFolderPath(ZIP_FILE_DIRECTORY), $"{isoCode}.json"));
+                    LocaleService.Current.LoadLocale(isoCode, localeFile, true);
+                }
             }
-            catch (Exception)
+            else
             {
                 localeFile = File.OpenRead(Path.Combine(Environment.GetFolderPath(ZIP_FILE_DIRECTORY), $"{isoCode}.json"));
-                LocaleService.Current.LoadLocale(isoCode, localeFile);
-                _preferencesService.SetUserPreference(PreferencesKeys.LANGUAGE_SETTING, isoCode);
+                LocaleService.Current.LoadLocale(isoCode, localeFile, true);
             }
         }
 
@@ -153,6 +159,22 @@ namespace FHICORC.Services.WebServices
             }
 
             return localeFile;
+        }
+
+        private bool IsLastFetchedVersionNewerThanEmbeddedVersion()
+        {
+            string stringVersionNumberOfLastFetchedTextFile = _preferencesService.GetUserPreferenceAsString(PreferencesKeys.CURRENT_TEXT_VERSION);
+            string stringVersionNumberOfEmbeddedTextFile = IoCContainer.Resolve<ISettingsService>().EmbeddedTextVersion;
+
+            if (string.IsNullOrEmpty(stringVersionNumberOfLastFetchedTextFile))
+            {
+                stringVersionNumberOfLastFetchedTextFile = "0.0";
+            }
+
+            Version versionNumberOfLastFetchedTextFile = new Version(stringVersionNumberOfLastFetchedTextFile);
+            Version versionNumberOfEmbeddedTextFile = new Version(stringVersionNumberOfEmbeddedTextFile);
+
+            return versionNumberOfLastFetchedTextFile.CompareTo(versionNumberOfEmbeddedTextFile) > 0;
         }
 
         private string ExtractZipFile(string path)

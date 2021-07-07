@@ -88,5 +88,6 @@
     <Folder Include="ServiceTests\" />
     <Folder Include="ModelTests\" />
     <Folder Include="ViewModelTests\" />
+    <Folder Include="BusinessRules\" />
   </ItemGroup>
 </Project>
