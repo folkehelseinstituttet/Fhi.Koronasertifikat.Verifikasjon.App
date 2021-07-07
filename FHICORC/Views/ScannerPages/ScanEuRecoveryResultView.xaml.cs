@@ -24,5 +24,11 @@ namespace FHICORC.Views.ScannerPages
             ((ScanEuRecoveryResultViewModel)BindingContext).Timer.Enabled = false;
             base.OnDisappearing();
         }
+
+        protected override void OnAppearing()
+        {
+            ((ScanEuRecoveryResultViewModel)BindingContext).Timer.Enabled = true;
+            base.OnAppearing();
+        }
     }
 }
