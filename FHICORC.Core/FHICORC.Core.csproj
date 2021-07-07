@@ -70,31 +70,23 @@
     <PackageReference Include="Zlib.Portable.Signed" Version="1.11.0" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Services\Model\EuDCCModel\ValueSet\disease-agent-targeted.json" />
-    <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\disease-agent-targeted.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <None Remove="Services\Model\EuDCCModel\ValueSet\test_manf.json" />
-    <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\test-manf.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <None Remove="Services\Model\EuDCCModel\ValueSet\test_result.json" />
-    <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\test-result.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <None Remove="Services\Model\EuDCCModel\ValueSet\vaccine-mah-manf.json" />
-    <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\vaccine-mah-manf.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <None Remove="Services\Model\EuDCCModel\ValueSet\vaccine-medicinal-product.json" />
-    <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\vaccine-medicinal-product.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <None Remove="Services\Model\EuDCCModel\ValueSet\vaccine-prophylaxis.json" />
-    <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\vaccine-prophylaxis.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <None Remove="Services\Model\EuDCCModel\ValueSet\test-type.json" />
-    <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\test-type.json" />
+    <None Remove="Services\Model\EuDCCModel\ValueSet\covid-19-lab-test-type.json" />
+    <None Remove="Services\Model\EuDCCModel\ValueSet\covid-19-lab-test-manufacturer-and-name.json" />
+    <None Remove="Services\Model\EuDCCModel\ValueSet\covid-19-lab-result.json" />
+    <None Remove="Services\Model\EuDCCModel\ValueSet\disease-agent-targeted.json" />
+    <None Remove="Services\Model\EuDCCModel\ValueSet\vaccines-covid-19-auth-holders.json" />
+    <None Remove="Services\Model\EuDCCModel\ValueSet\vaccines-covid-19-names.json" />
+    <None Remove="Services\Model\EuDCCModel\ValueSet\sct-vaccines-covid-19.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\covid-19-lab-test-type.json" />
+    <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\covid-19-lab-test-manufacturer-and-name.json" />
+    <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\covid-19-lab-result.json" />
+    <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\disease-agent-targeted.json" />
+    <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\vaccines-covid-19-auth-holders.json" />
+    <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\vaccines-covid-19-names.json" />
+    <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\sct-vaccines-covid-19.json" />
   </ItemGroup>
 </Project>

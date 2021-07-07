@@ -149,7 +149,7 @@ namespace FHICORC.Services.WebServices
             }
             catch (Exception)
             {
-                localeFile  = File.OpenRead(Path.Combine(Environment.GetFolderPath(ZIP_FILE_DIRECTORY), $"valuesets.csv"));
+                localeFile = File.OpenRead(Path.Combine(Environment.GetFolderPath(ZIP_FILE_DIRECTORY), $"valuesets.csv"));
             }
 
             return localeFile;

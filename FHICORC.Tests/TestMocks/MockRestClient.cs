@@ -61,5 +61,13 @@ namespace FHICORC.Tests.TestMocks
         public void ClearLocalesRequestHeaders()
         {
         }
+
+        public void RegisterValuesetsRequestHeaders(string lastTimestamp)
+        {
+        }
+
+        public void ClearValuesetsRequestHeaders()
+        {
+        }
     }
 }

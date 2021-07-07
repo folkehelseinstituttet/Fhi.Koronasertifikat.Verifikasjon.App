@@ -26,6 +26,7 @@ namespace FHICORC.Core.Services.DecoderServices
         private readonly IRuleVerifierService _ruleVerifierService;
         private readonly IRuleSelectorService _ruleSelectorService;
         private readonly IPreferencesService _preferencesService;
+        private readonly IDigitalGreenValueSetTranslatorFactory _digitalGreenValueSetTranslatorFactory;
 
         private IDgcValueSetTranslator _translator;
 
@@ -34,22 +35,24 @@ namespace FHICORC.Core.Services.DecoderServices
             IDateTimeService dateTimeService,
             IRuleSelectorService ruleSelectorService,
             IRuleVerifierService ruleVerifierService,
-            IPreferencesService preferencesService)
+            IPreferencesService preferencesService,
+            IDigitalGreenValueSetTranslatorFactory digitalGreenValueSetTranslatorFactory)
         {
             _certificationService = certificationService;
             _dateTimeService = dateTimeService;
             _ruleSelectorService = ruleSelectorService;
             _ruleVerifierService = ruleVerifierService;
             _preferencesService = preferencesService;
-            _translator = DigitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
-            DigitalGreenValueSetTranslatorFactory.Init();
+            _digitalGreenValueSetTranslatorFactory = digitalGreenValueSetTranslatorFactory;
+            _translator = _digitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
+            _digitalGreenValueSetTranslatorFactory.Init();
         }
 
         public void SetDgcValueSetTranslator(IDgcValueSetTranslator translator)
         {
             _translator = translator;
-            DigitalGreenValueSetTranslatorFactory.DgcValueSetTranslator = translator;
-            DigitalGreenValueSetTranslatorFactory.Init();
+            _digitalGreenValueSetTranslatorFactory.DgcValueSetTranslator = translator;
+            _digitalGreenValueSetTranslatorFactory.Init();
         }
 
         public async Task<TokenValidateResultModel> DecodePassportTokenToModel(string base45String)
@@ -183,7 +186,7 @@ namespace FHICORC.Core.Services.DecoderServices
         private ITokenPayload GetNODigitalGreenModelV1ByVersion(DefaultCWTPayload defaultCwtPayload, string json)
         {
             //override the current translator in case multiple translator exist 
-            DigitalGreenValueSetTranslatorFactory.DgcValueSetTranslator = _translator;
+            _digitalGreenValueSetTranslatorFactory.DgcValueSetTranslator = _translator;
             switch (defaultCwtPayload.DGCPayloadData.euHcertV1Schema.Version)
             {
                 case "1.0.0":
