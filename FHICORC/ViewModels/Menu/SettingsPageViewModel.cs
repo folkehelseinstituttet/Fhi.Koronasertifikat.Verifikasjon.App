@@ -22,6 +22,7 @@ namespace FHICORC.ViewModels.Menu
         private readonly ISecureStorageService<PublicKeyStorageModel> _secureStorageService;
         private readonly IPublicKeyService _publicKeyService;
         private readonly IDateTimeService _dateTimeService;
+        private readonly IBusinessRulesService _businessRulesService;
 
         private bool isBokmalSelected;
         private bool isNynorskSelected;
@@ -188,6 +189,8 @@ namespace FHICORC.ViewModels.Menu
                 return;
             }
             await _publicKeyService.FetchPublicKeyFromBackend(false);
+            await _businessRulesService.FetchBusinessRulesFromBackend(false);
+            await _textService.LoadRemoteLocales();
             RaisePropertyChanged(() => LastUpdated);
             lastClicked = _dateTimeService.Now;
         });
@@ -205,7 +208,8 @@ namespace FHICORC.ViewModels.Menu
             IPreferencesService preferencesService,
             ISecureStorageService<PublicKeyStorageModel> secureStorageService,
             IPublicKeyService publicKeyService,
-            IDateTimeService dateTimeService)
+            IDateTimeService dateTimeService,
+            IBusinessRulesService businessRulesService)
         {
             _dialogService = dialogService;
             _textService = textService;
@@ -213,6 +217,7 @@ namespace FHICORC.ViewModels.Menu
             _secureStorageService = secureStorageService;
             _publicKeyService = publicKeyService;
             _dateTimeService = dateTimeService;
+            _businessRulesService = businessRulesService;
 
             SetRadioButtons();
             setAccessibilityTextOnRadioButtons();

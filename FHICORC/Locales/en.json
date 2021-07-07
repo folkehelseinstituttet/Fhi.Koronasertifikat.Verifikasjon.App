@@ -8,7 +8,7 @@
   "SETTINGS_CHOOSE_LANGUAGE_DIALOG_TITLE_EN": "Choose language",
   "SETTINGS_CHOOSE_LANGUAGE_DIALOG_CONTENT_NB": "Appen starter på nytt for å skifte språk",
   "SETTINGS_CHOOSE_LANGUAGE_DIALOG_CONTENT_EN": "The app will restart to change language",
-  "SETTINGS_FETCH_CONTRL_KEYS": "Fetch control keys",
+  "SETTINGS_FETCH_CONTRL_KEYS": "Fetch control data",
   "SETTINGS_LAST_UPDATED": "Last updated: {0}",
   "SCANNER_CAMERA_PERMISSION_TITLE": "The scanner needs access to the camera.",
   "SCANNER_CAMERA_PERMISSION_DESC": "Give the scanner access to the camera in order to scan codes.",
