@@ -6,7 +6,6 @@ using FHICORC.ViewModels.Base;
 using FHICORC.Services;
 using System.Windows.Input;
 using Xamarin.Forms;
-using FHICORC.Services.Navigation;
 using FHICORC.Models;
 using FHICORC.Core.Services.Interface;
 using System.Globalization;
@@ -23,6 +22,7 @@ namespace FHICORC.ViewModels.Menu
         private readonly IPublicKeyService _publicKeyService;
         private readonly IDateTimeService _dateTimeService;
         private readonly IBusinessRulesService _businessRulesService;
+        private readonly IValueSetService _valueSetService;
 
         private bool isBokmalSelected;
         private bool isNynorskSelected;
@@ -191,6 +191,8 @@ namespace FHICORC.ViewModels.Menu
             await _publicKeyService.FetchPublicKeyFromBackend(false);
             await _businessRulesService.FetchBusinessRulesFromBackend(false);
             await _textService.LoadRemoteLocales();
+            long lastTimeFetchedValuesets = _preferencesService.GetUserPreferenceAsLong(PreferencesKeys.LAST_TIME_FETCHED_VALUESETS);
+            await _valueSetService.FetchAndSaveLatestVersionOfValueSets(lastTimeFetchedValuesets);
             RaisePropertyChanged(() => LastUpdated);
             lastClicked = _dateTimeService.Now;
         });
@@ -209,7 +211,8 @@ namespace FHICORC.ViewModels.Menu
             ISecureStorageService<PublicKeyStorageModel> secureStorageService,
             IPublicKeyService publicKeyService,
             IDateTimeService dateTimeService,
-            IBusinessRulesService businessRulesService)
+            IBusinessRulesService businessRulesService,
+            IValueSetService valueSetService)
         {
             _dialogService = dialogService;
             _textService = textService;
@@ -218,6 +221,7 @@ namespace FHICORC.ViewModels.Menu
             _publicKeyService = publicKeyService;
             _dateTimeService = dateTimeService;
             _businessRulesService = businessRulesService;
+            _valueSetService = valueSetService;
 
             SetRadioButtons();
             setAccessibilityTextOnRadioButtons();

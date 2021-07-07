@@ -100,7 +100,8 @@ namespace FHICORC
         private async Task FetchRemoteData()
         {
             await _textService.LoadRemoteLocales();
-            await _valueSetService.FetchAndSaveLatestVersionOfValueSets();
+            long lastTimeFetchedValuesets = _preferencesService.GetUserPreferenceAsLong(PreferencesKeys.LAST_TIME_FETCHED_VALUESETS);
+            await _valueSetService.FetchAndSaveLatestVersionOfValueSets(lastTimeFetchedValuesets);
             await _businessRulesDataManager.CheckAndFetchBusinessRulesFromBackend();
             await _publicKeyDataManager.CheckAndFetchPublicKeyFromBackend();
         }

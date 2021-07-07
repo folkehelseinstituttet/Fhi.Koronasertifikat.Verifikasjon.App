@@ -14,8 +14,10 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             ITextService textService,
             ISecureStorageService<PublicKeyStorageModel> secureStorageService,
             IPublicKeyService publicKeyService,
-            IDateTimeService dateTimeService
-            ) : base(dialogService, textService, preferencesService, secureStorageService, publicKeyService, dateTimeService)
+            IDateTimeService dateTimeService,
+            IBusinessRulesService businessRulesService,
+            IValueSetService valueSetService
+            ) : base(dialogService, textService, preferencesService, secureStorageService, publicKeyService, dateTimeService, businessRulesService, valueSetService)
         {
         }
 
