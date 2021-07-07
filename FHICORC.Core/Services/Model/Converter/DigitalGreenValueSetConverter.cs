@@ -10,9 +10,9 @@ namespace FHICORC.Core.Services.Model.EuDCCModel.ValueSet
         private readonly DGCValueSetEnum _key;
         private readonly IDgcValueSetTranslator _dgcValueSetTranslator;
 
-        public DigitalGreenValueSetConverter(DGCValueSetEnum key)
+        public DigitalGreenValueSetConverter(DGCValueSetEnum key, IDigitalGreenValueSetTranslatorFactory digitalGreenValueSetTranslatorFactory)
         {
-            _dgcValueSetTranslator = DigitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
+            _dgcValueSetTranslator = digitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
             _key = key;
         }
         public override void WriteJson(JsonWriter writer, string value, JsonSerializer serializer)

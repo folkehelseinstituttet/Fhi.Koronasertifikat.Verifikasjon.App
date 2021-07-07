@@ -84,9 +84,9 @@ namespace FHICORC.ViewModels.Certificates
 
         private IDgcValueSetTranslator _translator;
 
-        public InfoTestTextViewModel(ITimer timer) : base(timer)
+        public InfoTestTextViewModel(ITimer timer, IDigitalGreenValueSetTranslatorFactory digitalGreenValueSetTranslatorFactory) : base(timer)
         {
-            _translator = DigitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
+            _translator = digitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
         }
 
         public void UpdateView()

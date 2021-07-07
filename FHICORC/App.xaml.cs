@@ -28,6 +28,7 @@ namespace FHICORC
         private readonly INavigationService _navigationService;
         private IPublicKeyService _publicKeyDataManager;
         private IBusinessRulesService _businessRulesDataManager;
+        private IValueSetService _valueSetService;
 
         public App()
         {
@@ -42,6 +43,7 @@ namespace FHICORC
             _navigationService = IoCContainer.Resolve<INavigationService>();
             _publicKeyDataManager = IoCContainer.Resolve<IPublicKeyService>();
             _businessRulesDataManager = IoCContainer.Resolve<IBusinessRulesService>();
+            _valueSetService = IoCContainer.Resolve<IValueSetService>();
             ConfigureApp();
         }
 
@@ -94,6 +96,7 @@ namespace FHICORC
             await _textService.LoadSavedLocales();
             _navigationService.OpenLandingPage();
             await _textService.LoadRemoteLocales();
+            await _valueSetService.FetchAndSaveLatestVersionOfValueSets();
             await _businessRulesDataManager.CheckAndFetchBusinessRulesFromBackend();
             await _publicKeyDataManager.CheckAndFetchPublicKeyFromBackend();
             base.OnStart();

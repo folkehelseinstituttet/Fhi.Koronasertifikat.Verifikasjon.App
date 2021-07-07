@@ -72,9 +72,9 @@ namespace FHICORC.ViewModels.Certificates
 
         private IDgcValueSetTranslator _translator;
 
-        public InfoVaccineTextViewModel(ITimer timer) : base(timer)
+        public InfoVaccineTextViewModel(ITimer timer, IDigitalGreenValueSetTranslatorFactory digitalGreenValueSetTranslatorFactory) : base(timer)
         {
-            _translator = DigitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
+            _translator = digitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
         }
 
 

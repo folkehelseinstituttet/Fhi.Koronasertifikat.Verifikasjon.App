@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using FHICORC.Core.Data;
 using FHICORC.Core.Services.Enum;
+using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Model;
 using FHICORC.Core.Services.Model.BusinessRules;
 using FHICORC.Data;
@@ -110,8 +111,10 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             await ExecuteOnceAsync(async () => await Task.Run(ClosePage)));
 
         public ICommand ShowRulesInfoCommand => new Command(async () => await ExecuteOnceAsync(ShowRulesInfo));
-
-        public ScanEuRecoveryResultViewModel(ITimer timer, IPreferencesService preferencesService) : base(timer)
+        
+        public ScanEuRecoveryResultViewModel(ITimer timer,
+            IPreferencesService preferencesService,
+            IDigitalGreenValueSetTranslatorFactory digitalGreenValueSetTranslatorFactory) : base(timer, digitalGreenValueSetTranslatorFactory)
         {
             ShowTextInEnglish = true;
             ShowHeader = true;

@@ -11,18 +11,18 @@ namespace FHICORC.Core.Services.BusinessRules
 {
     public class RuleSelectorService : IRuleSelectorService
     {
-
-        private readonly IDgcValueSetTranslator _translator;
         private readonly IDateTimeService _dateTimeService;
         private readonly IBusinessRulesService _businessRulesService;
+        private readonly IDigitalGreenValueSetTranslatorFactory _digitalGreenValueSetTranslatorFactory;
 
-        public RuleSelectorService(IDgcValueSetTranslator translator,
+        public RuleSelectorService(
             IDateTimeService dateTimeService,
-            IBusinessRulesService businessRulesService)
+            IBusinessRulesService businessRulesService,
+            IDigitalGreenValueSetTranslatorFactory digitalGreenValueSetTranslatorFactory)
         {
-            _translator = translator;
             _dateTimeService = dateTimeService;
             _businessRulesService = businessRulesService;
+            _digitalGreenValueSetTranslatorFactory = digitalGreenValueSetTranslatorFactory;
         }
 
         public ExternalData ApplyExternalData(DCCPayload dccPayload, bool international)
@@ -30,7 +30,7 @@ namespace FHICORC.Core.Services.BusinessRules
             ExternalData external = new ExternalData();
             ValueSets valueSets = new ValueSets();
 
-            var _translator = DigitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
+            var _translator = _digitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
 
             foreach (var valueSetModel in _translator.ValueSetModels)
             {
