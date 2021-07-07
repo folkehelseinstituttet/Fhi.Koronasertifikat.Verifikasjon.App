@@ -1,6 +1,7 @@
 {
   "LANDING_PAGE_QR_CODE": "Scanner",
   "LANDING_PAGE_TITLE": "Control of COVID-19 certificate",
+  "LANDING_PAGE_CONTROL_TYPE": "Select control type",
   "LANDING_PAGE_LANGUAGE_CHANGE_BUTTON_TEXT": "Endre språk / Change language",
   "CHANGE_LANGUAGE_DIALOG_OK_BUTTON": "Confirm",
   "SETTINGS_CHOOSE_LANGUAGE_DIALOG_TITLE_NB": "Velg språk",
@@ -134,11 +135,14 @@
   "RULES_ENGINE_CURRENT_TABLE_HEADER": "Current",
   "RULES_ENGINE_SCANNER_BUTTON_TEXT": "Show rules",
   "RULES_ENGINE_FULFILLED_COUNT": "{0}/{1} rules fulfilled",
+  "RULES_ENGINE_FULFILLED_COUNT_ACCESSIBILITY_TEXT": "{0} of {1} rules fulfilled ",
   "RULES_ENGINE_VERIFY_HEADER_TEST": "Current rules - Test",
   "RULES_ENGINE_VERIFY_HEADER_VACCINE": "Current rules - Vaccine",
   "RULES_ENGINE_VERIFY_HEADER_RECOVERY": "Current rules - Recovery",
   "RULES_ENGINE_VERIFY_FAILED": "{0}/{1} Need consideration",
   "RULES_ENGINE_VERIFY_PASSED": "{0}/{1} Fulfilled",
-  "RULES_ENGINE_VERIFY_OPEN": "{0}/{1} Not evaluated"
+  "RULES_ENGINE_VERIFY_OPEN": "{0}/{1} Not evaluated",
+  "RULES_ENGINE_VERIFY_FAILED_ACCESSIBILITY_TEXT": "{0} of {1} Need consideration",
+  "RULES_ENGINE_VERIFY_PASSED_ACCESSIBILITY_TEXT": "{0} of {1} Fulfilled",
+  "RULES_ENGINE_VERIFY_OPEN_ACCESSIBILITY_TEXT": "{0} of {1} Not evaluated"
 }
-

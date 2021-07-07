@@ -1,6 +1,7 @@
-﻿{
+{
   "LANDING_PAGE_QR_CODE": "Scanner",
   "LANDING_PAGE_TITLE": "Kontroll av koronasertifikat",
+  "LANDING_PAGE_CONTROL_TYPE": "Velg kontrolltype",
   "LANDING_PAGE_LANGUAGE_CHANGE_BUTTON_TEXT": "Endre språk / Change language",
   "CHANGE_LANGUAGE_DIALOG_OK_BUTTON": "Bekreft",
   "SETTINGS_CHOOSE_LANGUAGE_DIALOG_TITLE_NB": "Velg språk",
@@ -134,10 +135,14 @@
   "RULES_ENGINE_CURRENT_TABLE_HEADER": "Current",
   "RULES_ENGINE_SCANNER_BUTTON_TEXT": "Vis regler",
   "RULES_ENGINE_FULFILLED_COUNT": "{0}/{1} regler innfridd",
+  "RULES_ENGINE_FULFILLED_COUNT_ACCESSIBILITY_TEXT": "{0} av {1} regler innfridd",
   "RULES_ENGINE_VERIFY_HEADER_TEST": "Gjeldende - Test",
   "RULES_ENGINE_VERIFY_HEADER_VACCINE": "Gjeldende - Vaksine",
   "RULES_ENGINE_VERIFY_HEADER_RECOVERY": "Gjeldende - Sykdom",
   "RULES_ENGINE_VERIFY_FAILED": "{0}/{1} Trenger vurdering",
   "RULES_ENGINE_VERIFY_PASSED": "{0}/{1} Innfridd",
-  "RULES_ENGINE_VERIFY_OPEN": "{0}/{1} Ikke evaluert"
+  "RULES_ENGINE_VERIFY_OPEN": "{0}/{1} Ikke evaluert",
+  "RULES_ENGINE_VERIFY_FAILED_ACCESSIBILITY_TEXT": "{0} av {1} Trenger vurdering",
+  "RULES_ENGINE_VERIFY_PASSED_ACCESSIBILITY_TEXT": "{0} av {1}  Innfridd",
+  "RULES_ENGINE_VERIFY_OPEN_ACCESSIBILITY_TEXT": "{0} av {1} Ikke evaluert"
 }

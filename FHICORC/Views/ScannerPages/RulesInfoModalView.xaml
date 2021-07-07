@@ -29,6 +29,8 @@
                             Grid.Row="0"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
+                            AutomationProperties.IsInAccessibleTree="True"
+                            AutomationId="{Binding BindingContext.NumberOfRulesFailedAccessibilityText,Source={x:Reference Name=RuleModal}}"
                             Text="{Binding BindingContext.NumberOfRulesFailed, Source={x:Reference Name=RuleModal}}"
                             Margin="0,0,0,10"
                             Style="{StaticResource ContentStyle}"/>
@@ -115,6 +117,8 @@
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
                             Margin="0,0,0,10"
+                            AutomationProperties.IsInAccessibleTree="True"
+                            AutomationId="{Binding BindingContext.NumberOfRulesPassedAccessibilityText,Source={x:Reference Name=RuleModal}}"
                             Text="{Binding BindingContext.NumberOfRulesPassed, Source={x:Reference Name=RuleModal}}"
                             Style="{StaticResource ContentStyle}"/>
                         <BoxView
@@ -199,6 +203,8 @@
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
                             Margin="0,0,0,10"
+                            AutomationProperties.IsInAccessibleTree="True"
+                            AutomationId="{Binding BindingContext.NumberOfRulesOpenAccessibilityText, Source={x:Reference Name=RuleModal}}"
                             Text="{Binding BindingContext.NumberOfRulesOpen, Source={x:Reference Name=RuleModal}}"
                             Style="{StaticResource ContentStyle}"/>
                         <BoxView
