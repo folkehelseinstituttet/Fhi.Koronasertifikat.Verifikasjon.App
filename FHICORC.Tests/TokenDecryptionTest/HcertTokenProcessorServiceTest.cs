@@ -9,6 +9,9 @@ using FHICORC.Tests.TestMocks;
 using FHICORC.Core.Services.BusinessRules;
 using FHICORC.Core.Services;
 using FHICORC.Core.Services.Model.Converter;
+using FHICORC.Configuration;
+using FHICORC.Core.WebServices;
+using FHICORC.Services.Interfaces;
 
 namespace FHICORC.Tests.TokenDecryptionTest
 {
@@ -19,18 +22,21 @@ namespace FHICORC.Tests.TokenDecryptionTest
 
         public HcertTokenProcessorServiceTest()
         {
+            IoCContainer.RegisterInterface<IRestClient, MockRestClient>();
+            IoCContainer.RegisterInterface<IStatusBarService, MockStatusBarService>();
             MockCertificationService = new Mock<ICertificationService>();
             MockCertificationService.Setup(x => x.VerifyCoseSign1Object(It.IsAny<CoseSign1Object>()));
             verifier = new HcertTokenProcessorService(
                 MockCertificationService.Object,
                 new MockDateTimeService(),
                 new RuleSelectorService(
-                        DigitalGreenValueSetTranslatorFactory.DgcValueSetTranslator,
                         new MockDateTimeService(),
-                        new MockBusinessRulesService()
+                        new MockBusinessRulesService(),
+                        IoCContainer.Resolve<IDigitalGreenValueSetTranslatorFactory>()
                     ),
                 new RuleVerifierService(),
-                new MockPreferencesService());
+                new MockPreferencesService(),
+                IoCContainer.Resolve<IDigitalGreenValueSetTranslatorFactory>());
         }
 
         [Test]

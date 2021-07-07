@@ -1,9 +1,12 @@
 ﻿using System;
+using FHICORC.Configuration;
 using FHICORC.Core.Interfaces;
 using FHICORC.Core.Services.BusinessRules;
+using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Model.BusinessRules;
-using FHICORC.Core.Services.Model.Converter;
 using FHICORC.Core.Services.Model.EuDCCModel._1._3._0;
+using FHICORC.Core.WebServices;
+using FHICORC.Services.Interfaces;
 using FHICORC.Tests.TestMocks;
 using NUnit.Framework;
 
@@ -11,10 +14,18 @@ namespace FHICORC.Tests.ServiceTests
 {
     public class RuleSelectorServiceTest
     {
-        private readonly IRuleSelectorService ruleSelectorService = new RuleSelectorService(
-            DigitalGreenValueSetTranslatorFactory.DgcValueSetTranslator,
-            new MockDateTimeService(),
-            new MockBusinessRulesService());
+        private readonly IRuleSelectorService ruleSelectorService;
+
+        public RuleSelectorServiceTest()
+        {
+            IoCContainer.RegisterInterface<IStatusBarService, MockStatusBarService>();
+            IoCContainer.RegisterInterface<IRestClient, MockRestClient>();
+            ruleSelectorService = new RuleSelectorService(
+                new MockDateTimeService(),
+                new MockBusinessRulesService(),
+                IoCContainer.Resolve<IDigitalGreenValueSetTranslatorFactory>()
+            );
+        }
 
         [Test]
         public void SelectInternational_WithVaccineReturnsOnlyVRAndGR()

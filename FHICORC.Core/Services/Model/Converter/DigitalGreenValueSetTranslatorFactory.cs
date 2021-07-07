@@ -1,13 +1,17 @@
 ﻿using FHICORC.Core.Services.Interface;
-using FHICORC.Core.Services.Model.EuDCCModel.ValueSet;
 
 namespace FHICORC.Core.Services.Model.Converter
 {
-    public static class DigitalGreenValueSetTranslatorFactory
+    public class DigitalGreenValueSetTranslatorFactory : IDigitalGreenValueSetTranslatorFactory
     {
-        public static IDgcValueSetTranslator DgcValueSetTranslator { get; set; } = new DigitalGreenValueSetDgcValueSetTranslator();
+        public IDgcValueSetTranslator DgcValueSetTranslator { get; set; }
 
-        public static void Init()
+        public DigitalGreenValueSetTranslatorFactory(IDgcValueSetTranslator dgcValueSetTranslator)
+        {
+            DgcValueSetTranslator = dgcValueSetTranslator;
+        }
+
+        public void Init()
         {
             DgcValueSetTranslator.InitValueSet();
         }
