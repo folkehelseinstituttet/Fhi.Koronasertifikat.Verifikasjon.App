@@ -35,21 +35,26 @@ namespace FHICORC.Services.WebServices
             _dateTimeService = dateTimeService;
         }
 
-        public async Task FetchAndSaveLatestVersionOfValueSets()
+        public async Task CheckFetchAndSaveLatestVersionOfValueSets()
         {
             long lastTimeFetchedValuesets = _preferencesService.GetUserPreferenceAsLong(PreferencesKeys.LAST_TIME_FETCHED_VALUESETS);
             int minTimeBetweenFetches = IoCContainer.Resolve<ISettingsService>().MinimumHoursBetweenTextFetches;
             if ((_dateTimeService.Now - new DateTime(lastTimeFetchedValuesets).ToUniversalTime()).TotalHours > minTimeBetweenFetches)
             {
-                Stream result = await FetchZipFileFromServer(lastTimeFetchedValuesets);
-                if (result != null && result.Length != 0)
+                await FetchAndSaveLatestVersionOfValueSets(lastTimeFetchedValuesets);
+            }
+        }
+
+        public async Task FetchAndSaveLatestVersionOfValueSets(long lastTimeFetchedValuesets)
+        {
+            Stream result = await FetchZipFileFromServer(lastTimeFetchedValuesets);
+            if (result != null && result.Length != 0)
+            {
+                string path = await SaveZipFile(result);
+                if (!string.IsNullOrEmpty(path))
                 {
-                    string path = await SaveZipFile(result);
-                    if (!string.IsNullOrEmpty(path))
-                    {
-                        long timestamp = ExtractZipFile(path);
-                        _preferencesService.SetUserPreference(PreferencesKeys.LAST_TIME_FETCHED_VALUESETS, timestamp);
-                    }
+                    long timestamp = ExtractZipFile(path);
+                    _preferencesService.SetUserPreference(PreferencesKeys.LAST_TIME_FETCHED_VALUESETS, timestamp);
                 }
             }
         }
