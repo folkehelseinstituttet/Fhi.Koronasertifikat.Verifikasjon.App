@@ -109,7 +109,13 @@
                         HorizontalOptions="Center"
                         AutomationProperties.IsInAccessibleTree="True"
                         AutomationProperties.Name="{Binding SelectControlType}"
-                        Text="{Binding SelectControlType}"/>
+                        Text="{Binding SelectControlType}"
+                        effects:FontSizeLabelEffectParams.MaxFontSize="28"
+                        effects:FontSizeLabelEffectParams.MinFontSize="12">
+                        <Label.Effects>
+                            <effects:FontSizeLabelEffect />
+                        </Label.Effects>
+                    </Label>
                     <input:RadioButtonGroupView>
                         <Grid
                             RowSpacing="14"
@@ -152,6 +158,8 @@
                                     Margin="16,0,0,0"
                                     AutomationProperties.IsInAccessibleTree="True"
                                     Text="{Binding ScannerEURadioBtnText}"
+                                    effects:FontSizeLabelEffectParams.MaxFontSize="28"
+                                    effects:FontSizeLabelEffectParams.MinFontSize="12"
                                     Style="{StaticResource ContentStyle}"
                                     TextColor="{StaticResource FHISecondaryWhite}"
                                     HorizontalOptions="Start"
@@ -159,6 +167,9 @@
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_Border"  />
                                     </Label.GestureRecognizers>
+                                    <Label.Effects>
+                                        <effects:FontSizeLabelEffect />
+                                    </Label.Effects>
                                 </Label>
                             </Grid>
 
@@ -197,12 +208,17 @@
                                     AutomationProperties.IsInAccessibleTree="True"
                                     Text="{Binding ScannerNORadioBtnText}"
                                     Style="{StaticResource ContentStyle}"
+                                    effects:FontSizeLabelEffectParams.MaxFontSize="28"
+                                    effects:FontSizeLabelEffectParams.MinFontSize="12"
                                     TextColor="{StaticResource FHISecondaryWhite}"
                                     HorizontalOptions="Start"
                                     VerticalOptions="Center">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_Domestic"  />
                                     </Label.GestureRecognizers>
+                                    <Label.Effects>
+                                        <effects:FontSizeLabelEffect />
+                                    </Label.Effects>
                                 </Label>
                             </Grid>
                         </Grid>
@@ -211,8 +227,8 @@
 
                 <StackLayout
                     Grid.Row="3"
-                    VerticalOptions="StartAndExpand">
-
+                    VerticalOptions="StartAndExpand"
+                    Padding="5,20">
                     <controls:SingleLineButton
                         AutomationId="OpenScannerButton"
                         AutomationProperties.IsInAccessibleTree="True"
@@ -221,7 +237,6 @@
                         Style="{StaticResource LandingButtonStyle}"
                         Text="{Binding OpenScannerText}"
                         WidthRequest="187"
-                        Padding="5,0,5,5"
                         IsVisible="{Binding IsScannerButtonVisible}"
                         HorizontalOptions="Center"/>
                 </StackLayout>
