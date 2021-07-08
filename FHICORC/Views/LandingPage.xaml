@@ -163,6 +163,7 @@
                                     Style="{StaticResource ContentStyle}"
                                     TextColor="{StaticResource FHISecondaryWhite}"
                                     HorizontalOptions="Start"
+                                    MaxLines="1"
                                     VerticalOptions="Center">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_Border"  />
@@ -208,6 +209,7 @@
                                     AutomationProperties.IsInAccessibleTree="True"
                                     Text="{Binding ScannerNORadioBtnText}"
                                     Style="{StaticResource ContentStyle}"
+                                    MaxLines="1"
                                     effects:FontSizeLabelEffectParams.MaxFontSize="28"
                                     effects:FontSizeLabelEffectParams.MinFontSize="12"
                                     TextColor="{StaticResource FHISecondaryWhite}"
