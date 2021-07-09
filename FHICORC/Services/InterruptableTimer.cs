@@ -62,6 +62,9 @@ namespace FHICORC.Services
                     _msRemainingSeconds -= _timer.Interval;
                 }
 
+                if (_msRemainingSeconds < 0)
+                    _msRemainingSeconds = 0;
+
                 _lastActive = currentTime;
 
                 OnTimeElapsed();
