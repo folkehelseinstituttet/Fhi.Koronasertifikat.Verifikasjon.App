@@ -1,12 +1,17 @@
 ﻿using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
-using FHICORC.Configuration;
 using FHICORC.Core.Services.DecoderServices;
 using FHICORC.Core.Services.Enum;
 using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Model.CoseModel;
 using FHICORC.Tests.TestMocks;
+using FHICORC.Core.Services.BusinessRules;
+using FHICORC.Core.Services;
+using FHICORC.Core.Services.Model.Converter;
+using FHICORC.Configuration;
+using FHICORC.Core.WebServices;
+using FHICORC.Services.Interfaces;
 
 namespace FHICORC.Tests.TokenDecryptionTest
 {
@@ -17,9 +22,21 @@ namespace FHICORC.Tests.TokenDecryptionTest
 
         public HcertTokenProcessorServiceTest()
         {
+            IoCContainer.RegisterInterface<IRestClient, MockRestClient>();
+            IoCContainer.RegisterInterface<IStatusBarService, MockStatusBarService>();
             MockCertificationService = new Mock<ICertificationService>();
             MockCertificationService.Setup(x => x.VerifyCoseSign1Object(It.IsAny<CoseSign1Object>()));
-            verifier = new HcertTokenProcessorService(MockCertificationService.Object, IoCContainer.Resolve<IDateTimeService>());
+            verifier = new HcertTokenProcessorService(
+                MockCertificationService.Object,
+                new MockDateTimeService(),
+                new RuleSelectorService(
+                        new MockDateTimeService(),
+                        new MockBusinessRulesService(),
+                        IoCContainer.Resolve<IDigitalGreenValueSetTranslatorFactory>()
+                    ),
+                new RuleVerifierService(new MockPreferencesService()),
+                new MockPreferencesService(),
+                IoCContainer.Resolve<IDigitalGreenValueSetTranslatorFactory>());
         }
 
         [Test]

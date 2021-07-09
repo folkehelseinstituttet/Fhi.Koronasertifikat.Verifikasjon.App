@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:FHICORC.Controls"
     xmlns:effects="clr-namespace:FHICORC.Controls"
+    xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:viewModel="clr-namespace:FHICORC.ViewModels"
     ios:Page.UseSafeArea="False"
@@ -15,47 +16,32 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Image
                 Grid.Row="0"
-                Grid.RowSpan="1"
+                Grid.RowSpan="4"
                 Aspect="Fill"
                 Source="{StaticResource LandingPageStockImage}"
                 VerticalOptions="Fill" />
 
             <Frame
                 Grid.Row="0"
-                Grid.RowSpan="3">
+                Grid.RowSpan="4">
                 <Frame.Background>
                     <LinearGradientBrush
                         StartPoint="0.5, 0"
-                         EndPoint="0.5, 1" >
+                            EndPoint="0.5, 1" >
                         <GradientStop Color="{StaticResource FHIPrimaryBlueTransparent}" Offset="0.1"/>
                         <GradientStop Color="{StaticResource FHIPrimaryBlue}" Offset="1"/>
                     </LinearGradientBrush>
                 </Frame.Background>
             </Frame>
-
-            <Grid Grid.Row="0"
-                  RowSpacing="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="0.6*" />
-                    <RowDefinition Height="0.2*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.Margin>
-                    <OnPlatform x:TypeArguments="Thickness">
-                        <On Platform="iOS" Value="20,50,20,0" />
-                        <On Platform="Android" Value="20,35,20,0" />
-                    </OnPlatform>
-                </Grid.Margin>
-
-                <Grid Grid.Row="0">
+            <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -65,7 +51,14 @@
                         Grid.Column="0"
                         HorizontalOptions="Start"
                         Source="{StaticResource LandingPageFhiLogo}"
-                        VerticalOptions="Center"/>
+                        VerticalOptions="Center">
+                        <Image.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="iOS" Value="20,50,20,0" />
+                                <On Platform="Android" Value="20,35,20,0" />
+                            </OnPlatform>
+                        </Image.Margin>
+                    </Image>
 
                     <ImageButton
                         Grid.Column="2"
@@ -75,10 +68,28 @@
                         Command="{Binding HelpButtonCommand}"
                         HorizontalOptions="End"
                         Source="{StaticResource LandingHelpIcon}"
-                        VerticalOptions="Center" />
+                        VerticalOptions="Center">
+                        <ImageButton.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="iOS" Value="20,50,20,0" />
+                                <On Platform="Android" Value="20,35,20,0" />
+                            </OnPlatform>
+                        </ImageButton.Margin>
+                    </ImageButton>
                 </Grid>
-
+            <ScrollView Grid.Row="2">
+            <Grid 
+                RowSpacing="0"
+                Margin="20,0,20,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
                 <StackLayout
+                    Margin="0,64,0,0"
                     Grid.Row="1"
                     Spacing="30"
                     VerticalOptions="CenterAndExpand"
@@ -98,9 +109,115 @@
                         AutomationProperties.IsInAccessibleTree="True"
                         AutomationProperties.Name="{Binding Strings[LANDING_PAGE_TITLE]}"/>
                 </StackLayout>
+
                 <StackLayout
-                    Grid.Row="2"
-                    VerticalOptions="StartAndExpand">
+                    Grid.Row="2">
+                    <Label
+                        Margin="0, 54, 0, 0"
+                        Style="{StaticResource ContentTitleStyle}"
+                        TextColor="{StaticResource FHIPrimaryWhite}"
+                        HorizontalOptions="Center"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        AutomationProperties.Name="{Binding SelectControlType}"
+                        Text="{Binding SelectControlType}"
+                        effects:FontSizeLabelEffectParams.MaxFontSize="28"
+                        effects:FontSizeLabelEffectParams.MinFontSize="12">
+                        <Label.Effects>
+                            <effects:FontSizeLabelEffect />
+                        </Label.Effects>
+                    </Label>
+                    <input:RadioButtonGroupView>
+                        <Grid
+                            RowSpacing="14"
+                            RadioButtonGroup.GroupName="ControlState">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid
+                                Grid.Row="1" ColumnSpacing="16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.3*" />
+                                    <ColumnDefinition Width="0.7*" />
+                                </Grid.ColumnDefinitions>
+                                <input:RadioButton
+                                    x:Name="RadioButtonBorder"
+                                    Grid.Column="0"
+                                    AutomationProperties.IsInAccessibleTree="True"
+                                    AutomationProperties.Name="{Binding RadioButtonBorderText}"
+                                    CircleColor="{StaticResource FHISecondaryWhite}"
+                                    HeightRequest="36"
+                                    WidthRequest="36"
+                                    Color="{StaticResource FHISecondaryWhite}"
+                                    IsChecked="{Binding BorderControlOn, Mode=TwoWay}"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="End"/>
+                                <Label
+                                    Grid.Column="1"
+                                    Margin="16,0,0,0"
+                                    AutomationProperties.IsInAccessibleTree="True"
+                                    Text="{Binding ScannerEURadioBtnText}"
+                                    effects:FontSizeLabelEffectParams.MaxFontSize="28"
+                                    effects:FontSizeLabelEffectParams.MinFontSize="12"
+                                    Style="{StaticResource ContentStyle}"
+                                    TextColor="{StaticResource FHISecondaryWhite}"
+                                    HorizontalOptions="Start"
+                                    MaxLines="1"
+                                    VerticalOptions="Center">
+                                    <Label.Effects>
+                                        <effects:FontSizeLabelEffect />
+                                    </Label.Effects>
+                                </Label>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_Border"  />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                            <Grid
+                                Grid.Row="2" ColumnSpacing="16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.3*" />
+                                    <ColumnDefinition Width="0.7*" />
+                                </Grid.ColumnDefinitions>
+                                <input:RadioButton
+                                    Grid.Column="0"
+                                    x:Name="RadioButtonDomestic"
+                                    WidthRequest="36"
+                                    HeightRequest="36"
+                                    AutomationProperties.IsInAccessibleTree="True"
+                                    AutomationProperties.Name="{Binding RadioButtonDomesticText}"
+                                    CircleColor="{StaticResource FHISecondaryWhite}"
+                                    Color="{StaticResource FHISecondaryWhite}"
+                                    IsChecked="{Binding DomesticControlOn, Mode=TwoWay}"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="End"/>
+                                <Label
+                                    Grid.Column="1"
+                                    Margin="16,0,0,0"
+                                    AutomationProperties.IsInAccessibleTree="True"
+                                    Text="{Binding ScannerNORadioBtnText}"
+                                    Style="{StaticResource ContentStyle}"
+                                    MaxLines="1"
+                                    effects:FontSizeLabelEffectParams.MaxFontSize="28"
+                                    effects:FontSizeLabelEffectParams.MinFontSize="12"
+                                    TextColor="{StaticResource FHISecondaryWhite}"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Center">
+                                    <Label.Effects>
+                                        <effects:FontSizeLabelEffect />
+                                    </Label.Effects>
+                                </Label>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_Domestic"  />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Grid>
+                    </input:RadioButtonGroupView>
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Row="3"
+                    VerticalOptions="StartAndExpand"
+                    Padding="5,20">
                     <controls:SingleLineButton
                         AutomationId="OpenScannerButton"
                         AutomationProperties.IsInAccessibleTree="True"
@@ -108,14 +225,20 @@
                         Command="{Binding OpenScannerCommand}"
                         Style="{StaticResource LandingButtonStyle}"
                         Text="{Binding OpenScannerText}"
-                        WidthRequest="187"
-                        Padding="5,0,5,5"
-                        HorizontalOptions="Center"/>
+                        IsVisible="{Binding IsScannerButtonVisible}"
+                        HorizontalOptions="Center"
+                        effects:FontSizeLabelEffectParams.MaxFontSize="28.00"
+                        effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                        <controls:SingleLineButton.Effects>
+                            <effects:FontSizeLabelEffect/>
+                        </controls:SingleLineButton.Effects>
+                    </controls:SingleLineButton>
                 </StackLayout>
 
                 <StackLayout
-                    Grid.Row="3"
-                    VerticalOptions="EndAndExpand">
+                    Grid.Row="4"
+                    Margin="0,34,0,0"
+                    VerticalOptions="Center">
                     <controls:SingleLineButton
                         AutomationId="OpenScannerButton"
                         AutomationProperties.IsInAccessibleTree="True"
@@ -131,14 +254,9 @@
                             <effects:FontSizeLabelEffect/>
                         </controls:SingleLineButton.Effects>
                     </controls:SingleLineButton>
-                    <StackLayout.Margin>
-                        <OnPlatform x:TypeArguments="Thickness">
-                            <On Platform="iOS" Value="0,0,0,30" />
-                            <On Platform="Android" Value="0,0,0,0" />
-                        </OnPlatform>
-                    </StackLayout.Margin>
                 </StackLayout>
             </Grid>
+            </ScrollView>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

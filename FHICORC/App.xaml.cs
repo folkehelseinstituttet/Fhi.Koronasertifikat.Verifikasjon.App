@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using FHICORC.Configuration;
 using FHICORC.Core.Data;
@@ -10,11 +7,11 @@ using FHICORC.Core.Services.Interface;
 using FHICORC.Data;
 using FHICORC.Services;
 using FHICORC.Services.Interfaces;
-using FHICORC.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.RootCheck;
 using Xamarin.Forms.Xaml;
+using System.Threading.Tasks;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace FHICORC
@@ -27,6 +24,8 @@ namespace FHICORC
         private readonly ITextService _textService;
         private readonly INavigationService _navigationService;
         private IPublicKeyService _publicKeyDataManager;
+        private IBusinessRulesService _businessRulesDataManager;
+        private IValueSetService _valueSetService;
 
         public App()
         {
@@ -40,6 +39,8 @@ namespace FHICORC
             _textService = IoCContainer.Resolve<ITextService>();
             _navigationService = IoCContainer.Resolve<INavigationService>();
             _publicKeyDataManager = IoCContainer.Resolve<IPublicKeyService>();
+            _businessRulesDataManager = IoCContainer.Resolve<IBusinessRulesService>();
+            _valueSetService = IoCContainer.Resolve<IValueSetService>();
             ConfigureApp();
         }
 
@@ -85,12 +86,24 @@ namespace FHICORC
             {
                 ClearAppData();
             }
+            if (VersionTracking.IsFirstLaunchForCurrentVersion)
+            {
+                _preferencesService.SetUserPreference(PreferencesKeys.TERMS_ACCEPTED, false);
+            }
             await _textService.LoadSavedLocales();
             _navigationService.OpenLandingPage();
-            await _textService.LoadRemoteLocales();
-            await _publicKeyDataManager.CheckAndFetchPublicKeyFromBackend();
+            await FetchRemoteData();
             base.OnStart();
             PerformRootCheck();
+        }
+
+        private async Task FetchRemoteData()
+        {
+            await _textService.LoadRemoteLocales();
+            long lastTimeFetchedValuesets = _preferencesService.GetUserPreferenceAsLong(PreferencesKeys.LAST_TIME_FETCHED_VALUESETS);
+            await _valueSetService.FetchAndSaveLatestVersionOfValueSets(lastTimeFetchedValuesets);
+            await _businessRulesDataManager.CheckAndFetchBusinessRulesFromBackend();
+            await _publicKeyDataManager.CheckAndFetchPublicKeyFromBackend();
         }
 
         private void ClearAppData()
@@ -104,12 +117,14 @@ namespace FHICORC
         {
             _preferencesService.SetUserPreference(PreferencesKeys.SCANNER_VIBRATION_SETTING, true);
             _preferencesService.SetUserPreference(PreferencesKeys.SCANNER_SOUND_SETTING, true);
+            _preferencesService.SetUserPreference(PreferencesKeys.BORDER_CONTROL_ON, false);
+            _preferencesService.SetUserPreference(PreferencesKeys.DOMESTIC_CONTROL_ON, false);
         }
 
         protected override async void OnResume()
         {
             base.OnResume();
-            await _publicKeyDataManager.CheckAndFetchPublicKeyFromBackend();
+            await FetchRemoteData();
             PerformRootCheck();
         }
 

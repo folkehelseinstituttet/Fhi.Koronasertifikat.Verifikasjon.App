@@ -157,5 +157,8 @@
                 </Label.Effects>
             </Label>
         </Grid>
+        <Frame.GestureRecognizers>
+            <SwipeGestureRecognizer Direction="Down" Swiped="SwipeGestureRecognizer_Swiped" />
+        </Frame.GestureRecognizers>
     </Frame>
 </pages:PopupPage>

@@ -51,11 +51,12 @@ namespace FHICORC.Models
                     var result = payload.DCCPayloadData.DCC.Tests.First();
                     Disease = result.Disease ?? "-";
                     TestName = result.TypeOfTest ?? "-"; ;
-                    NAATestName = result.NAATestName ?? "-"; ;
-                    TestManufacturer = result.TestManufacturer ?? "-"; ;
+                    NAATestName = result.NAATestName ?? "-";
+                    TestManufacturer = result.TestManufacturer ?? "-";
                     SampleCollectedTime = result.SampleCollectedTime;
-                    Result = result.ResultOfTest ?? "-"; ;
-                    TestCenter = result.TestingCentre ?? "-"; ;
+                    Result = result.ResultOfTest ?? "-";
+                    TypeOfTest = result.TypeOfTest ?? "_";
+                    TestCenter = result.TestingCentre ?? "-";
                     TestCountry = result.CountryOfTest ?? "-";
                     CertificateIdentifier = result.CertificateId ?? "-";
                     CertificateIssuer = result.CertificateIssuer ?? "-";

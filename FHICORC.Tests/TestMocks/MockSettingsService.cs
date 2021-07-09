@@ -52,7 +52,7 @@ namespace FHICORC.Tests.TestMocks
         public string Version = "1.0.0";
         public string VersionString => Version;
 
-        public string EmbeddedTextVersion => "2.0.0";
+        public string EmbeddedTextVersion => "1.5";
         public int PublicKeyPeriodicFetchingIntervalInHours => 24;
 
         public string Environment => "mock";

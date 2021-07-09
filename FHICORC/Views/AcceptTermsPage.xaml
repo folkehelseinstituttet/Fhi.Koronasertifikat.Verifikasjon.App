@@ -27,27 +27,260 @@
                 <Grid RowSpacing="20" Padding="0, 0, 0, 20">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="45" />
                     </Grid.RowDefinitions>
                     <Label
-                        Margin="20"
+                        Margin="20, 10, 20, 0"
+                        Grid.Row="0"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentTitleStyle}"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        AutomationId="{Binding Strings[ACCEPT_TERMS_HEADER_ONE_ACCESSIBILITY_TEXT]}"
+                        Text="{Binding Strings[ACCEPT_TERMS_HEADER_ONE]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
                         Grid.Row="1"
                         TextColor="{StaticResource FHIPrimaryBlue}"
-                        TextType="Html"
                         Style="{StaticResource ContentStyle}"
-                        Text="{Binding AcceptTermsHtmlText}">
-                    </Label>
-                    <StackLayout
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_ONE_SECTION_ONE]}" />
+
+                    <Label
+                        Margin="20, 0, 20, 0"
                         Grid.Row="2"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentTitleStyle}"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        AutomationId="{Binding Strings[ACCEPT_TERMS_HEADER_TWO_ACCESSIBILITY_TEXT]}"
+                        Text="{Binding Strings[ACCEPT_TERMS_HEADER_TWO]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="3"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_TWO_SECTION_ONE]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="4"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_TWO_SECTION_TWO]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="5"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_TWO_SECTION_THREE]}" />
+
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="6"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentTitleStyle}"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        AutomationId="{Binding Strings[ACCEPT_TERMS_HEADER_THREE_ACCESSIBILITY_TEXT]}"
+                        Text="{Binding Strings[ACCEPT_TERMS_HEADER_THREE]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="7"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_THREE_SECTION_ONE]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="8"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_THREE_SECTION_TWO]}" />
+
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="9"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentTitleStyle}"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        AutomationId="{Binding Strings[ACCEPT_TERMS_HEADER_FOUR_ACCESSIBILITY_TEXT]}"
+                        Text="{Binding Strings[ACCEPT_TERMS_HEADER_FOUR]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="10"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_FOUR_SECTION_ONE]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="11"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_FOUR_SECTION_TWO]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="12"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_FOUR_SECTION_THREE]}" />
+
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="13"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentTitleStyle}"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        AutomationId="{Binding Strings[ACCEPT_TERMS_HEADER_FIVE_ACCESSIBILITY_TEXT]}"
+                        Text="{Binding Strings[ACCEPT_TERMS_HEADER_FIVE]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="14"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_FIVE_SECTION_ONE]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="15"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_FIVE_SECTION_TWO]}" />
+
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="16"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentTitleStyle}"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        AutomationId="{Binding Strings[ACCEPT_TERMS_HEADER_SIX_ACCESSIBILITY_TEXT]}"
+                        Text="{Binding Strings[ACCEPT_TERMS_HEADER_SIX]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="17"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_SIX_SECTION_ONE]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="18"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_SIX_SECTION_TWO]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="19"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_SIX_SECTION_THREE]}" />
+
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="20"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentTitleStyle}"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        AutomationId="{Binding Strings[ACCEPT_TERMS_HEADER_SEVEN_ACCESSIBILITY_TEXT]}"
+                        Text="{Binding Strings[ACCEPT_TERMS_HEADER_SEVEN]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="21"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_SEVEN_SECTION_ONE]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="22"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_SEVEN_SECTION_TWO]}" />
+
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="23"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentTitleStyle}"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        AutomationId="{Binding Strings[ACCEPT_TERMS_HEADER_EIGHT_ACCESSIBILITY_TEXT]}"
+                        Text="{Binding Strings[ACCEPT_TERMS_HEADER_EIGHT]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="24"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_EIGHT_SECTION_ONE]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="25"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_EIGHT_SECTION_TWO]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="26"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_EIGHT_SECTION_THREE]}" />
+
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="27"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentTitleStyle}"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        AutomationId="{Binding Strings[ACCEPT_TERMS_HEADER_NINE_ACCESSIBILITY_TEXT]}"
+                        Text="{Binding Strings[ACCEPT_TERMS_HEADER_NINE]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="28"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_NINE_SECTION_ONE]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="29"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_NINE_SECTION_TWO]}" />
+                    <Label
+                        Margin="20, 0, 20, 0"
+                        Grid.Row="30"
+                        TextColor="{StaticResource FHIPrimaryBlue}"
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_NINE_SECTION_THREE]}" />
+                    <StackLayout
+                        Grid.Row="31"
                         HorizontalOptions="Center"
                         Orientation="Horizontal">
-                        <Switch IsToggled="{Binding TermsAccepted, Mode=TwoWay}"  />
                         <Label Text="{Binding AcceptTermsLabelText}" VerticalTextAlignment="Center" VerticalOptions="Center" Style="{StaticResource RegularLabelBoldStyle}"/>
+                        <Switch IsToggled="{Binding TermsAccepted, Mode=TwoWay}"  />
                     </StackLayout>
                     <StackLayout
-                        Grid.Row="3"
+                        Grid.Row="32"
                         Margin="20, 0, 20, 0">
                         <Button
                             Text="{Binding Strings[CONFIRM_BUTTON]}"

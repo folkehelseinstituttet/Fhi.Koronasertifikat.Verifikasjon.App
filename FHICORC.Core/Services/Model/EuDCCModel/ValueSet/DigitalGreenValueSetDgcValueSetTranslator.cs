@@ -9,35 +9,62 @@ namespace FHICORC.Core.Services.Model.EuDCCModel.ValueSet
 {
     public class DigitalGreenValueSetDgcValueSetTranslator: IDgcValueSetTranslator
     {
-        private List<ValueSetModel> ValueSetModels = new List<ValueSetModel>();
+        public List<ValueSetModel> ValueSetModels { get; set; } = new List<ValueSetModel>();
+
+        private readonly IValueSetService _valueSetService;
 
         private List<string> _valueSetFileNames = new List<string>()
         {
             "disease-agent-targeted.json",
-            "test_result.json",
-            "vaccine-prophylaxis.json",
-            "vaccine-medicinal-product.json",
-            "vaccine-mah-manf.json"
+            "covid-19-lab-result.json",
+            "sct-vaccines-covid-19.json",
+            "vaccines-covid-19-names.json",
+            "vaccines-covid-19-auth-holders.json",
+            "covid-19-lab-test-type.json",
+            "covid-19-lab-test-manufacturer-and-name.json"
         };
+
+        public DigitalGreenValueSetDgcValueSetTranslator(IValueSetService valueSetService)
+        {
+            _valueSetService = valueSetService;
+        }
 
         public async void InitValueSet()
         {
             var assembly = IntrospectionExtensions.GetTypeInfo(typeof(DigitalGreenValueSetDgcValueSetTranslator)).Assembly;
-            var embededResources = assembly.GetManifestResourceNames();
-            foreach (string embededResource in embededResources)
+            var embeddedResources = assembly.GetManifestResourceNames();
+            foreach (string fileName in _valueSetFileNames)
             {
-                if (!_valueSetFileNames.Any(x => embededResource.Contains(x))) continue;
-                using (Stream resourceStream = assembly.GetManifestResourceStream(embededResource))
+                try
                 {
-                    using (var streamReader = new StreamReader(resourceStream))
+                    using (Stream resourceStream = _valueSetService.GetValueSet(fileName))
                     {
-                        var json = await streamReader.ReadToEndAsync();
+                        using (var streamReader = new StreamReader(resourceStream))
+                        {
+                            var json = await streamReader.ReadToEndAsync();
 
-                        ValueSetModels.Add( JsonConvert
-                            .DeserializeObject<ValueSetModel>(json));
-                    }  
+                            ValueSetModels.Add(JsonConvert
+                                .DeserializeObject<ValueSetModel>(json));
+                        }
+                    }
                 }
-                
+                catch (FileNotFoundException)
+                {
+                    var embeddedResource = embeddedResources.Where(x => x.Contains(fileName)).FirstOrDefault();
+                    if (!string.IsNullOrEmpty(embeddedResource))
+                    {
+                        using (Stream resourceStream = assembly.GetManifestResourceStream(embeddedResource))
+                        {
+                            using (var streamReader = new StreamReader(resourceStream))
+                            {
+                                var json = await streamReader.ReadToEndAsync();
+
+                                ValueSetModels.Add(JsonConvert
+                                    .DeserializeObject<ValueSetModel>(json));
+                            }
+                        }
+                    }
+                }
             }
         }
         
@@ -48,6 +75,8 @@ namespace FHICORC.Core.Services.Model.EuDCCModel.ValueSet
             {DGCValueSetEnum.VaccineProphylaxis, "sct-vaccines-covid-19"},
             {DGCValueSetEnum.VaccineMedicinalProduct, "vaccines-covid-19-names"},
             {DGCValueSetEnum.VaccineAuthorityHolder, "vaccines-covid-19-auth-holders"},
+            {DGCValueSetEnum.TypeOfTest, "covid-19-lab-test-type" },
+            {DGCValueSetEnum.TestManufacturer, "covid-19-lab-test-manufacturer-and-name" }
         };
 
         public object Translate(DGCValueSetEnum key, string value)
