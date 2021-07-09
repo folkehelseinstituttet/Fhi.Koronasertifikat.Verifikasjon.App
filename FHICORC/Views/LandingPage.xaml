@@ -145,10 +145,10 @@
                                     Grid.Column="0"
                                     AutomationProperties.IsInAccessibleTree="True"
                                     AutomationProperties.Name="{Binding RadioButtonBorderText}"
-                                    CircleColor="{StaticResource FHIBorderColor}"
+                                    CircleColor="{StaticResource FHISecondaryWhite}"
                                     HeightRequest="36"
                                     WidthRequest="36"
-                                    Color="{StaticResource FHIGreen}"
+                                    Color="{StaticResource FHISecondaryWhite}"
                                     IsChecked="{Binding BorderControlOn, Mode=TwoWay}"
                                     VerticalOptions="Center"
                                     HorizontalOptions="End"/>
@@ -185,8 +185,8 @@
                                     HeightRequest="36"
                                     AutomationProperties.IsInAccessibleTree="True"
                                     AutomationProperties.Name="{Binding RadioButtonDomesticText}"
-                                    CircleColor="{StaticResource FHIBorderColor}"
-                                    Color="{StaticResource FHIGreen}"
+                                    CircleColor="{StaticResource FHISecondaryWhite}"
+                                    Color="{StaticResource FHISecondaryWhite}"
                                     IsChecked="{Binding DomesticControlOn, Mode=TwoWay}"
                                     VerticalOptions="Center"
                                     HorizontalOptions="End"/>
