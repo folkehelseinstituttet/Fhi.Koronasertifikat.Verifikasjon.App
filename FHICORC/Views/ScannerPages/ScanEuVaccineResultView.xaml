@@ -101,8 +101,15 @@
                             AutomationId="{Binding NumberOfRulesFulfilledAccessibilityText}"
                             Text="{Binding NumberOfRulesFulfilled}"
                             HorizontalOptions="Center"
+                            MaxLines="1"
                             VerticalOptions="CenterAndExpand"
-                            Style="{StaticResource SubtitleStyle}" />
+                            Style="{StaticResource SubtitleStyle}"
+                            effects:FontSizeLabelEffectParams.MaxFontSize="32"
+                            effects:FontSizeLabelEffectParams.MinFontSize="18">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect />
+                            </Label.Effects>
+                        </Label>
                     </StackLayout>
 
                     <Grid Margin="20,30,20,30">
