@@ -52,7 +52,12 @@
                         TextColor="{StaticResource WhiteTextColor}"
                         Text="{Binding RepeatedText}"
                         FontSize="15"
-                        AutomationProperties.IsInAccessibleTree="False">
+                        AutomationProperties.IsInAccessibleTree="False"
+                        effects:FontSizeLabelEffectParams.MaxFontSize="32.00"
+                        effects:FontSizeLabelEffectParams.MinFontSize="18.00">
+                        <Label.Effects>
+                            <effects:FontSizeLabelEffect/>
+                        </Label.Effects>
                     </Label>
                 </StackLayout>
             </StackLayout>
