@@ -10,7 +10,7 @@ trigger:
 # Global variables
 variables:
   solution: '**/*.sln'
-  versionName: 1.0.6
+  versionName: 2.0.0
   ${{ if eq( variables['Build.SourceBranchName'], 'main')}}:
     env: 'prod'
   ${{ if ne( variables['Build.SourceBranchName'], 'main')}}:
