@@ -26,7 +26,9 @@ namespace FHICORC.Tests.BusinessRules
 
         private IRuleSelectorService ruleSelectorService;
 
-        private readonly IRuleVerifierService ruleVerifierService = new RuleVerifierService();
+        private readonly IRuleVerifierService ruleVerifierService = new RuleVerifierService(
+            new MockPreferencesService()
+        );
 
         private int ONE_OF_TWO_MIN_DAYS = -21;
         private int ONE_OF_TWO_MAX_DAYS = -99;
