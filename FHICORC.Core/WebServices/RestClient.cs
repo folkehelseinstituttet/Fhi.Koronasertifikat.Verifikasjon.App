@@ -361,5 +361,20 @@ namespace FHICORC.Core.WebServices
                 HttpClient.DefaultRequestHeaders.Remove("CurrentVersionNo");
             }
         }
+
+        public void RegisterValuesetsRequestHeaders(string lastTimestamp)
+        {
+            ClearValuesetsRequestHeaders();
+
+            HttpClient.DefaultRequestHeaders.Add("LastFetched", lastTimestamp);
+        }
+
+        public void ClearValuesetsRequestHeaders()
+        {
+            if (HttpClient.DefaultRequestHeaders.Contains("LastFetched"))
+            {
+                HttpClient.DefaultRequestHeaders.Remove("LastFetched");
+            }
+        }
     }
 }

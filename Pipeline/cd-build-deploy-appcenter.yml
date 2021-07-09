@@ -10,7 +10,7 @@ parameters:
   default: '**/*.sln'
 - name: versionName
   type: object
-  default: 1.0.6
+  default: 2.0.0
 - name: env
   type: string
   default: 'test'

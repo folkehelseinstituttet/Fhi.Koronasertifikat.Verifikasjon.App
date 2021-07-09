@@ -58,7 +58,6 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             return new ImagerScannerViewModel(
                 IoCContainer.Resolve<IScannerFactory>(),
                 IoCContainer.Resolve<ITokenProcessorService>(),
-                IoCContainer.Resolve<ITextService>(),
                 IoCContainer.Resolve<IPopupService>(),
                 IoCContainer.Resolve<IDeviceFeedbackService>()
             );
@@ -66,14 +65,10 @@ namespace FHICORC.ViewModels.QrScannerViewModels
 
         public ImagerScannerViewModel(IScannerFactory scannerFactoryService,
             ITokenProcessorService tokenProcessorService,
-            ITextService textService,
             IPopupService popupService,
             IDeviceFeedbackService deviceFeedbackService) : base()
         {
             _tokenProcessorService = tokenProcessorService;
-            var translator = new DGCValueSetTranslator(textService);
-            translator.SelectLanguage(LanguageSelection.English);
-            _tokenProcessorService.SetDgcValueSetTranslator(translator);
             _scannerFactoryService = scannerFactoryService;
             _scanner = _scannerFactoryService.GetAvailableScanner();
             _popupService = popupService;
@@ -119,7 +114,7 @@ namespace FHICORC.ViewModels.QrScannerViewModels
                 if ((model.DecodedModel is Core.Services.Model.EuDCCModel._1._3._0.DCCPayload)
                         && model.ValidationResult == TokenValidateResult.Valid)
                 {
-                    await OnScanEUFinish(model.DecodedModel);
+                    await OnScanEUFinish(model);
                     _deviceFeedbackService.Vibrate(ScanSuccessVibrationDuration);
                     _deviceFeedbackService.PlaySound(SoundKeys.VALID_SCAN_SOUND);
                 }
@@ -151,12 +146,12 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             await _popupService.ShowScanSuccessPopup(model);
         }
 
-        private async Task OnScanEUFinish(ITokenPayload model)
+        private async Task OnScanEUFinish(TokenValidateResultModel model)
         {
             bool anyVaccinations = false;
             bool anyTestResults = false;
             bool anyRecovery = false;
-            if (model is Core.Services.Model.EuDCCModel._1._3._0.DCCPayload cwtPayload)
+            if (model.DecodedModel is Core.Services.Model.EuDCCModel._1._3._0.DCCPayload cwtPayload)
             {
                 anyVaccinations = cwtPayload.DCCPayloadData.DCC.Vaccinations?.Any() ?? false;
                 anyTestResults = cwtPayload.DCCPayloadData.DCC.Tests?.Any() ?? false;

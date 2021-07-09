@@ -17,5 +17,7 @@ namespace FHICORC.Core.WebServices
         Task<ApiResponse<Stream>> GetFileAsStreamAsync(string url);
         void RegisterLocalesRequestHeaders(string versionNumber);
         void ClearLocalesRequestHeaders();
+        void RegisterValuesetsRequestHeaders(string lastTimestamp);
+        void ClearValuesetsRequestHeaders();
     }
 }

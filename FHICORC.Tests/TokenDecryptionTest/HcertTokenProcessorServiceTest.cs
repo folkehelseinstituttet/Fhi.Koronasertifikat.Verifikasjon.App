@@ -1,12 +1,17 @@
 ﻿using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
-using FHICORC.Configuration;
 using FHICORC.Core.Services.DecoderServices;
 using FHICORC.Core.Services.Enum;
 using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Model.CoseModel;
 using FHICORC.Tests.TestMocks;
+using FHICORC.Core.Services.BusinessRules;
+using FHICORC.Core.Services;
+using FHICORC.Core.Services.Model.Converter;
+using FHICORC.Configuration;
+using FHICORC.Core.WebServices;
+using FHICORC.Services.Interfaces;
 
 namespace FHICORC.Tests.TokenDecryptionTest
 {
@@ -17,9 +22,21 @@ namespace FHICORC.Tests.TokenDecryptionTest
 
         public HcertTokenProcessorServiceTest()
         {
+            IoCContainer.RegisterInterface<IRestClient, MockRestClient>();
+            IoCContainer.RegisterInterface<IStatusBarService, MockStatusBarService>();
             MockCertificationService = new Mock<ICertificationService>();
             MockCertificationService.Setup(x => x.VerifyCoseSign1Object(It.IsAny<CoseSign1Object>()));
-            verifier = new HcertTokenProcessorService(MockCertificationService.Object, IoCContainer.Resolve<IDateTimeService>());
+            verifier = new HcertTokenProcessorService(
+                MockCertificationService.Object,
+                new MockDateTimeService(),
+                new RuleSelectorService(
+                        new MockDateTimeService(),
+                        new MockBusinessRulesService(),
+                        IoCContainer.Resolve<IDigitalGreenValueSetTranslatorFactory>()
+                    ),
+                new RuleVerifierService(new MockPreferencesService()),
+                new MockPreferencesService(),
+                IoCContainer.Resolve<IDigitalGreenValueSetTranslatorFactory>());
         }
 
         [Test]
@@ -27,7 +44,7 @@ namespace FHICORC.Tests.TokenDecryptionTest
         {
             //This test does not validate the signature, it just test the decoding part
             string prefixCompressedCose =
-                "HC1:NCFOXN%TS3DH3ZSUZK+.V0ETD%65NL-AH:VEIOOW%I04W-ODGJLSLL56M+QI6M8SA3/-2E%5TR5VVBFVA*T5OGO%9BA180JC6IAT92K1WBDVA K%KIO4KPK6PK6F$B7$KN+R$FK8+S:RA39K9-UOH2ATP8$JHG4TNOVCTA KK.S-DI.SSW*P*WEZ-S-YNWCK+7B5KDG/BWLG1JAF.7BPKR-S E1CSQ6U7SSQY%SVJ55M8K7PMK5%NARK4519VMAWL6QH0 L6PK6RK43:4W0BAJ2RK4LOEZK4PSEN$K1RS$15SBCL20*W0VTQ8OI+*PA KZ*U0I1-I0*OC6H05TMBDKDII-GGUJKXGGEC8.-B97U3-SY$NKLACIQ 52564L64W5A 4F4DR+7C218UBR: KF N04C:A3*Y8QZ8 .K/6UW6N8:JEWE$JDBLEH-BL1H6TK-CI:ULOPD6LF20HFJC3DAYJDPKDUDBQEAJJKHHGEC8ZI9$JAQJKS-KX2MYII*GICZG9$G5/BUZ4RD9$XLM.300SPV4HHFO87Y3MM2MS-8+QB*CSO$I-HB+FQUE9KS6D0Q0BOH2EA9DJJDWQB HO4VSNRD$1K:ZJJ4WXXRGAT*405+5C3";
+                "HC1:NCFOXN%TS3DH3ZSUZK+.V0ETD%65NL-AH-R6IOO6+IKAUE058WA7V36/9AT4V22F/8X*G3M9JUPY0BX/KR96R/S09T./0LWTKD33236J3TA3M*4VV2 73-E3GG396B-43O058YIB73A*G3W19UEBY5:PI0EGSP4*2DN43U*0CEBQ/GXQFY73CIBC:G 7376BXBJBAJ UNFMJCRN0H3PQN*E33H3OA70M3FMJIJN523.K5QZ4A+2XEN QT QTHC31M3+E32R44$28A9H0D3ZCL4JMYAZ+S-A5$XKX6T2YC 35H/ITX8GL2-LH/CJTK96L6SR9MU9RFGJA6Q3QR$P2OIC0JVLA8J3ET3:H3A+2+33U SAAUOT3TPTO4UBZIC0JKQTL*QDKBO.AI9BVYTOCFOPS4IJCOT0$89NT2V457U8+9W2KQ-7LF9-DF07U$B97JJ1D7WKP/HLIJLRKF1MFHJP7NVDEBU1J*Z222E.GJS57J5JAKA1UM %Q9D54*AHRC4VV*UI+ALZN6ZYVAT3GLM+5SH3U64B$ H%0HBHE+BOT1QHY923VAI7 PTV*C0 G2WIKTG9UM+JVY9SKS020FE/G";
             var result =  await verifier.DecodePassportTokenToModel(prefixCompressedCose);
             //because this token is expired
             Assert.AreNotEqual(result.ValidationResult, TokenValidateResult.Invalid);
@@ -37,7 +54,7 @@ namespace FHICORC.Tests.TokenDecryptionTest
         {
             //This test does not validate the signature, it just test the decoding part
             string prefixCompressedCose =
-                "HC1:NCFOXN%TS3DH3ZSUZK+.V0ETD%65NL-AH:VEIOOW%I04W-ODGJLSLL56M+QI6M8SA3/-2E%5TR5VVBFVA*T5OGO%9BA180JC6IAT92K1WBDVA K%KIO4KPK6PK6F$B7$KN+R$FK8+S:RA39K9-UOH2ATP8$JHG4TNOVCTA KK.S-DI.SSW*P*WEZ-S-YNWCK+7B5KDG/BWLG1JAF.7BPKR-S E1CSQ6U7SSQY%SVJ55M8K7PMK5%NARK4519VMAWL6QH0 L6PK6RK43:4W0BAJ2RK4LOEZK4PSEN$K1RS$15SBCL20*W0VTQ8OI+*PA KZ*U0I1-I0*OC6H05TMBDKDII-GGUJKXGGEC8.-B97U3-SY$NKLACIQ 52564L64W5A 4F4DR+7C218UBR: KF N04C:A3*Y8QZ8 .K/6UW6N8:JEWE$JDBLEH-BL1H6TK-CI:ULOPD6LF20HFJC3DAYJDPKDUDBQEAJJKHHGEC8ZI9$JAQJKS-KX2MYII*GICZG9$G5/BUZ4RD9$XLM.300SPV4HHFO87Y3MM2MS-8+QB*CSO$I-HB+FQUE9KS6D0Q0BOH2EA9DJJDWQB HO4VSNRD$1K:ZJJ4WXXRGAT*405+5C3";
+                "HC1:NCFG70HF0/3WUWGVLKE99.9RBVE4FTGCDH479CK$603XK2F3I7SF612F3I$RA61/IC6TAY50.FK6ZK7:EDOLFVC*70B$D% D3IA4W5646946846.966KCN9E%961A6DL6FA7D46XJCCWENF6OF63W5KF60A6WJCT3ETB8WJC0FDTA6AIA%G7X+AQB9746IG77TA$96T476:6/Q6M*8CR63Y8R46WX8F46VL6/G8SF6DR64S8+96QK4.JCP9EJY8L/5M/5546.96VF6%JC+QEEK3ZED+EDKWE3EFX3ET34X C:VDS7DM347%EKWEMED3KC.SC4KCD3DX47B46IL6646I*6..DX%DLPCG/DE$EIZAITA2IA.HA+YAU09HY8 NAE+9GY8ZJCH/DTZ9 QE5$C .CJECQW5HXO*WOZED93DXKEI3DAWEG09DH8$B9+S9 JC4/D3192KCQEDTVD$PC5$CUZC $5Z$5JPCT3E5JDOA7Q478465W58*6V50R*4SWCB4V5:TQ17.X6/O4N-VBLDT7HEKK1KD:W9Q1K4BJ2+IJ.J1Z8VTQ*DS AE2-3M6C/K4V UJ8MQ+64D7K7NA*UT250W9SN3YJA/JOFSMR4E6HI*5G0MG%U5.%0B6M+X5H*R:CVB0VR/MBWD5F8+-K*JH7YKK67TJD5$NO4DLLCX0W -M0I90-SMJPUUK+PA00ADLED*L1DF+NT6+18$B$BL:67.-E-+N52RI$U0FD.72XP7:RAM36$ 31$PHSJOV7WAT*UCYKO1LJ3+RNWSU0H0UPT:L1BR5R1 -HC-HTW6$XRC-28U7QZHO8T+%Q-I7BISNT1:8U2FUB8J$$4%Z1LX3$ DF$CL6K+USJNHWSV1EC3OBAJMHOT8NKXMPEWG61U";
             var result =  await verifier.DecodePassportTokenToModel(prefixCompressedCose);
             //because this token is expired
             Assert.AreNotEqual(result.ValidationResult, TokenValidateResult.Invalid);

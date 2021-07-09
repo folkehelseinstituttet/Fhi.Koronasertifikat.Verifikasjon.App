@@ -1,4 +1,7 @@
-﻿using FHICORC.Services;
+﻿using FHICORC.Core.Services.Interface;
+using FHICORC.Core.Services.Model.Converter;
+using FHICORC.Core.Services.Model.EuDCCModel.ValueSet;
+using FHICORC.Services;
 using FHICORC.Services.Interfaces;
 using FHICORC.Utils;
 using FHICORC.ViewModels.Base;
@@ -39,13 +42,13 @@ namespace FHICORC.ViewModels.Certificates
 
         #endregion
 
-        public string RecoveryDiseaseValue => PassportViewModel.PassportData.RecoveryDisease;
+        public string RecoveryDiseaseValue => _translator.Translate(DGCValueSetEnum.Disease, PassportViewModel.PassportData.RecoveryDisease ?? "").ToString();
         public string RecoveryDateValue => PassportViewModel.PassportData.DateFirstPositiveTest ?? "-";
         public string RecoveryCountryValue => PassportViewModel.PassportData.CountryOfTest;
         public string RecoveryIssuerValue => ShowCertificate ? PassportViewModel.PassportData.CertificateIssuer : "-";
         public string RecoveryValidFromValue => ShowCertificate ? PassportViewModel.PassportData.CertificateValidFrom?.ToLocaleDateFormat() : "-";
         public string RecoveryValidToValue => ShowCertificate ? PassportViewModel.PassportData.CertificateValidTo?.ToLocaleDateFormat() : "-";
-        public string RecoveryHeaderValue => ShowHeader ? PassportViewModel.PassportData.RecoveryDisease : "-";
+        public string RecoveryHeaderValue => ShowHeader ? _translator.Translate(DGCValueSetEnum.Disease, PassportViewModel.PassportData.RecoveryDisease ?? "").ToString() : "-";
         public string RecoveryIdentifierValue => ShowCertificate ? PassportViewModel.PassportData.CertificateIdentifier : "-";
 
         public PassportViewModel PassportViewModel { get; set; } = new PassportViewModel();
@@ -54,7 +57,12 @@ namespace FHICORC.ViewModels.Certificates
         public bool ShowHeader { get; set; }
         public bool ShowTextInEnglish { get; set; }
 
-        public InfoRecoveryTextViewModel(ITimer timer) : base(timer){ }
+        private IDgcValueSetTranslator _translator;
+
+        public InfoRecoveryTextViewModel(ITimer timer, IDigitalGreenValueSetTranslatorFactory digitalGreenValueSetTranslatorFactory) : base(timer)
+        {
+            _translator = digitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
+        }
 
         public void UpdateView()
         {

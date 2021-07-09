@@ -17,6 +17,9 @@ using FHICORC.ViewModels.QrScannerViewModels;
 using TinyIoC;
 using FHICORC.Core.Services;
 using FHICORC.Services.DataManagers;
+using FHICORC.Core.Services.BusinessRules;
+using FHICORC.Core.Services.Model.Converter;
+using FHICORC.Core.Services.Model.EuDCCModel.ValueSet;
 
 namespace FHICORC.Configuration
 {
@@ -66,16 +69,22 @@ namespace FHICORC.Configuration
             _container.Register<IConnectivityService, ConnectivityService>();
             _container.Register<IDateTimeService, DateTimeService>().AsSingleton();
             _container.Register<IPublicKeyStorageRepository, PublicKeyStorageRepository>();
+            _container.Register<IBusinessRulesRepository, MockBusinessRulesRepository>();
             _container.Register<ITextService, TextService>();
             _container.Register<ITextRepository, TextRepository>();
             _container.Register<ICertificationService, CertificationService>();
             _container.Register<IPopupService, PopupService>();
             _container.Register<IDeviceFeedbackService, DeviceFeedbackService>();
             _container.Register<ISslCertificateService, SslCertificateService>().AsSingleton();
-            _container.Register<IDgcValueSetTranslator, DGCValueSetTranslator>();
+            _container.Register<IDgcValueSetTranslator, DigitalGreenValueSetDgcValueSetTranslator>();
             _container.Register<ITokenProcessorService, HcertTokenProcessorService>();
             _container.Register<IAssemblyService, AssemblyService>();
             _container.Register<ITimer, InterruptableTimer>();
+            _container.Register<IRuleVerifierService, RuleVerifierService>();
+            _container.Register<IRuleSelectorService, RuleSelectorService>();
+            _container.Register<IValueSetService, ValueSetService>();
+            _container.Register<IDigitalGreenValueSetTranslatorFactory, DigitalGreenValueSetTranslatorFactory>();
+            _container.Register<IValueSetRepository, ValueSetRepository>();
         }
 
         //The services that need to be reset after the user logs out.
@@ -84,6 +93,7 @@ namespace FHICORC.Configuration
             _container.Register<ISettingsService, SettingsService>().AsSingleton();
             _container.Register<IRestClient, RestClient>();
             _container.Register<IPublicKeyService, PublicKeyDataManager>().AsSingleton();
+            _container.Register<IBusinessRulesService, BusinessRulesDataManager>().AsSingleton();
         }
 
         public static void ResetIoCContainer()
@@ -103,6 +113,7 @@ namespace FHICORC.Configuration
 
 
             _container.Register<IPublicKeyRepository, PublicKeyRepository>();
+            _container.Register<IBusinessRulesRepository, BusinessRulesRepository>();
 
         }
 

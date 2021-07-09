@@ -1,4 +1,7 @@
-﻿using FHICORC.Services;
+﻿using FHICORC.Core.Services.Interface;
+using FHICORC.Core.Services.Model.Converter;
+using FHICORC.Core.Services.Model.EuDCCModel.ValueSet;
+using FHICORC.Services;
 using FHICORC.Services.Interfaces;
 using FHICORC.Utils;
 using FHICORC.ViewModels.Base;
@@ -47,19 +50,19 @@ namespace FHICORC.ViewModels.Certificates
 
         #endregion
 
-        public string VaccineMarketingAuthorizationValue => PassportViewModel.PassportData.MarketingAuthorizationHolder;
+        public string VaccineMarketingAuthorizationValue => _translator.Translate(DGCValueSetEnum.VaccineAuthorityHolder, PassportViewModel.PassportData.MarketingAuthorizationHolder ?? "").ToString();
         public string VaccineCurrentDoseValue => string.Format(CurrentDoseTemplate,
             PassportViewModel.PassportData.DoseNumber,
             PassportViewModel.PassportData.TotalNumberOfDose);
-        public string VaccineTypeValue => PassportViewModel.PassportData.VaccinationType;
-        public string VaccineVaccineNameValue => PassportViewModel.PassportData.MedicinialProduct;
+        public string VaccineTypeValue => _translator.Translate(DGCValueSetEnum.VaccineProphylaxis, PassportViewModel.PassportData.VaccinationType ?? "").ToString();
+        public string VaccineVaccineNameValue => _translator.Translate(DGCValueSetEnum.VaccineMedicinalProduct, PassportViewModel.PassportData.MedicinialProduct ?? "").ToString();
         public string VaccineVaccinationCountryValue => PassportViewModel.PassportData.VaccinationCountry;
         public string VaccineCertificateIssuerValue => ShowCertificate ? PassportViewModel.PassportData.CertificateIssuer : "-";
         public string VaccinePassportNumberValue => ShowCertificate ? PassportViewModel.PassportData.CertificateIdentifier : "-";
         public string VaccineCertificateSchemaValue => ShowCertificate ? PassportViewModel.PassportData.CertificateSchemaVersion : "-";
-        public string VaccineHeaderValue => ShowHeader ? PassportViewModel.PassportData.MarketingAuthorizationHolder : "-";
+        public string VaccineHeaderValue => ShowHeader ? _translator.Translate(DGCValueSetEnum.VaccineAuthorityHolder, PassportViewModel.PassportData.MarketingAuthorizationHolder ?? "").ToString() : "-";
         public string VaccineVaccinationDateValue => PassportViewModel.PassportData.VaccinationDate;
-        public string VaccineTargetDisease => PassportViewModel.PassportData.Disease;
+        public string VaccineTargetDisease => _translator.Translate(DGCValueSetEnum.Disease, PassportViewModel.PassportData.Disease ?? "").ToString();
 
         public PassportViewModel PassportViewModel { get; set; } = new PassportViewModel();
 
@@ -67,7 +70,12 @@ namespace FHICORC.ViewModels.Certificates
         public bool ShowHeader { get; set; }
         public bool ShowTextInEnglish { get; set; }
 
-        public InfoVaccineTextViewModel(ITimer timer) : base(timer) { }
+        private IDgcValueSetTranslator _translator;
+
+        public InfoVaccineTextViewModel(ITimer timer, IDigitalGreenValueSetTranslatorFactory digitalGreenValueSetTranslatorFactory) : base(timer)
+        {
+            _translator = digitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
+        }
 
 
         public void UpdateView()

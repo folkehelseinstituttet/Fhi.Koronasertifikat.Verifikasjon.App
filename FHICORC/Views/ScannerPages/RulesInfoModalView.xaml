@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<views:ContentSheetPageNoBackButtonOnIOS
+    xmlns:views="clr-namespace:FHICORC.Views"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:effects="clr-namespace:FHICORC.Controls"
+    xmlns:controls="clr-namespace:FHICORC.Controls"
+    x:Class="FHICORC.Views.ScannerPages.RulesInfoModalView"
+    NavigationPage.HasNavigationBar="False"
+    x:Name="RuleModal">
+    <ContentPage.Resources >
+        <ResourceDictionary>
+            <DataTemplate x:Key="failedRulesFirst">
+                <ViewCell>
+                    <Grid
+                        Margin="25,30,25,0"
+                        RowSpacing="0"
+                        ColumnSpacing="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            AutomationProperties.IsInAccessibleTree="True"
+                            AutomationId="{Binding BindingContext.NumberOfRulesFailedAccessibilityText,Source={x:Reference Name=RuleModal}}"
+                            Text="{Binding BindingContext.NumberOfRulesFailed, Source={x:Reference Name=RuleModal}}"
+                            Margin="0,0,0,10"
+                            Style="{StaticResource ContentStyle}"/>
+                        <BoxView
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.RowSpan="2"
+                            VerticalOptions="Fill"
+                            WidthRequest="20"
+                            BackgroundColor="{StaticResource InvalidBorderColor}"/>
+                        <Label
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            Margin="0,10,0,0"
+                            Text="{Binding RuleIdentifier}"
+                            HorizontalTextAlignment="Start"
+                            Style="{StaticResource SubtitleStyle}"/>
+                        <Label
+                            Grid.Column="1"
+                            Grid.Row="2"
+                            Margin="0,0,0,10"
+                            Text="{Binding RuleDescription}"
+                            HorizontalTextAlignment="Start"
+                            Style="{StaticResource ContentStyle}"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="failedRules">
+                <ViewCell>
+                    <Grid
+                        Margin="25,30,25,0"
+                        RowSpacing="0"
+                        ColumnSpacing="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <BoxView
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.RowSpan="2"
+                            VerticalOptions="Fill"
+                            WidthRequest="20"
+                            BackgroundColor="{StaticResource InvalidBorderColor}"/>
+                        <Label
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            Margin="0,10,0,0"
+                            Text="{Binding RuleIdentifier}"
+                            HorizontalTextAlignment="Start"
+                            Style="{StaticResource SubtitleStyle}"/>
+                        <Label
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            Margin="0,0,0,10"
+                            Text="{Binding RuleDescription}"
+                            HorizontalTextAlignment="Start"
+                            Style="{StaticResource ContentStyle
+                            }"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="passedRulesFirst">
+                <ViewCell>
+                    <Grid
+                        Margin="25,30,25,0"
+                        RowSpacing="0"
+                        ColumnSpacing="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Margin="0,0,0,10"
+                            AutomationProperties.IsInAccessibleTree="True"
+                            AutomationId="{Binding BindingContext.NumberOfRulesPassedAccessibilityText,Source={x:Reference Name=RuleModal}}"
+                            Text="{Binding BindingContext.NumberOfRulesPassed, Source={x:Reference Name=RuleModal}}"
+                            Style="{StaticResource ContentStyle}"/>
+                        <BoxView
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.RowSpan="2"
+                            VerticalOptions="Fill"
+                            WidthRequest="20"
+                            BackgroundColor="{StaticResource SuccessBorderColor}"/>
+                        <Label
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            Margin="0,10,0,0"
+                            Text="{Binding RuleIdentifier}"
+                            HorizontalTextAlignment="Start"
+                            Style="{StaticResource SubtitleStyle}"/>
+                        <Label
+                            Grid.Column="1"
+                            Grid.Row="2"
+                            Margin="0,0,0,10"
+                            Text="{Binding RuleDescription}"
+                            HorizontalTextAlignment="Start"
+                            Style="{StaticResource ContentStyle}"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="passedRules">
+                <ViewCell>
+                    <Grid
+                        Margin="25,30,25,0"
+                        RowSpacing="0"
+                        ColumnSpacing="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <BoxView
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.RowSpan="2"
+                            VerticalOptions="Fill"
+                            WidthRequest="20"
+                            BackgroundColor="{StaticResource SuccessBorderColor}"/>
+                        <Label
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            Margin="0,10,0,0"
+                            Text="{Binding RuleIdentifier}"
+                            HorizontalTextAlignment="Start"
+                            Style="{StaticResource SubtitleStyle}"/>
+                        <Label
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            Margin="0,0,0,10"
+                            Text="{Binding RuleDescription}"
+                            HorizontalTextAlignment="Start"
+                            Style="{StaticResource ContentStyle}"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="openRulesFirst">
+                <ViewCell>
+                    <Grid
+                        Margin="25,30,25,0"
+                        RowSpacing="0"
+                        ColumnSpacing="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Margin="0,0,0,10"
+                            AutomationProperties.IsInAccessibleTree="True"
+                            AutomationId="{Binding BindingContext.NumberOfRulesOpenAccessibilityText, Source={x:Reference Name=RuleModal}}"
+                            Text="{Binding BindingContext.NumberOfRulesOpen, Source={x:Reference Name=RuleModal}}"
+                            Style="{StaticResource ContentStyle}"/>
+                        <BoxView
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.RowSpan="2"
+                            VerticalOptions="Fill"
+                            WidthRequest="20"
+                            BackgroundColor="{StaticResource ExpiredBorderColor}"/>
+                        <Label
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            Margin="0,10,0,0"
+                            Text="{Binding RuleIdentifier}"
+                            HorizontalTextAlignment="Start"
+                            Style="{StaticResource SubtitleStyle}"/>
+                        <Label
+                            Grid.Column="1"
+                            Grid.Row="2"
+                            Margin="0,0,0,10"
+                            Text="{Binding RuleDescription}"
+                            HorizontalTextAlignment="Start"
+                            Style="{StaticResource ContentStyle}"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="openRules">
+                <ViewCell>
+                    <Grid
+                        Margin="25,30,25,0"
+                        RowSpacing="0"
+                        ColumnSpacing="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <BoxView
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.RowSpan="2"
+                            VerticalOptions="Fill"
+                            WidthRequest="20"
+                            BackgroundColor="{StaticResource ExpiredBorderColor}"/>
+                        <Label
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            Margin="0,10,0,0"
+                            Text="{Binding RuleIdentifier}"
+                            HorizontalTextAlignment="Start"
+                            Style="{StaticResource SubtitleStyle}"/>
+                        <Label
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            Margin="0,0,0,10"
+                            Text="{Binding RuleDescription}"
+                            HorizontalTextAlignment="Start"
+                            Style="{StaticResource ContentStyle}"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <controls:RuleDataTemplateSelector
+                x:Key="ruleDataTemplateSelector"
+                PassedRuleTemplate="{StaticResource passedRules}"
+                FailedRuleTemplate="{StaticResource failedRules}"
+                OpenRuleTemplate="{StaticResource openRules}"
+                FailedRuleFirstTemplate="{StaticResource failedRulesFirst}"
+                PassedRuleFirstTemplate="{StaticResource passedRulesFirst}"
+                OpenRuleFirstTemplate="{StaticResource openRulesFirst}"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content
+        BackgroundColor="{StaticResource DefaultBackgroundColor}">
+        <StackLayout
+            BackgroundColor="{StaticResource DefaultBackgroundColor}">
+            <ImageButton
+                Margin="0,20,20,0"
+                VerticalOptions="Center"
+                HorizontalOptions="End"
+                BackgroundColor="Transparent"
+                Source="{StaticResource CloseIconBlue}"
+                Command="{Binding BackCommand}"
+                AutomationProperties.Name="{Binding Strings[CLOSE_BUTTON]}"/>
+            <Label
+                Text="{Binding RuleTypeHeader}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Style="{StaticResource TitleStyle}"/>
+            <ListView
+                ItemsSource="{Binding RulesFeedback}"
+                HasUnevenRows="True"
+                SelectionMode="None"
+                CachingStrategy="RecycleElement"
+                SeparatorVisibility="None"
+                ItemTemplate="{StaticResource ruleDataTemplateSelector}"
+                BackgroundColor="{StaticResource DefaultBackgroundColor}">
+            </ListView>
+
+            <StackLayout
+                VerticalOptions="End"
+                Margin="25,30,25,50">
+                <controls:SingleLineButton
+                    Style="{StaticResource CombinedButtonPrimaryStyle}"
+                    Command="{Binding BackCommand}"
+                    Text="{Binding Strings[CLOSE_BUTTON]}"
+                    AutomationProperties.IsInAccessibleTree="True"
+                    AutomationProperties.Name="{Binding ButtonTitle}"
+                    TextColor="{StaticResource DefaultBackgroundColor}"
+                    effects:FontSizeLabelEffectParams.MaxFontSize="32"
+                    effects:FontSizeLabelEffectParams.MinFontSize="12">
+                    <controls:SingleLineButton.Effects>
+                        <effects:FontSizeLabelEffect />
+                    </controls:SingleLineButton.Effects>
+                </controls:SingleLineButton>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</views:ContentSheetPageNoBackButtonOnIOS>

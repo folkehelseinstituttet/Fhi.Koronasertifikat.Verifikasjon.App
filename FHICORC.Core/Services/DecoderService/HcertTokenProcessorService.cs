@@ -10,8 +10,12 @@ using FHICORC.Core.Services.Model.CoseModel;
 using FHICORC.Core.Services.Model.EuDCCModel;
 using FHICORC.Core.Services.Utils;
 using FHICORC.Core.Services.Model.NO;
-using System.Text.RegularExpressions;
 using System.Linq;
+using FHICORC.Core.Interfaces;
+using FHICORC.Core.Services.Model.EuDCCModel._1._3._0;
+using FHICORC.Core.Services.Model.BusinessRules;
+using System.Collections.Generic;
+using FHICORC.Core.Data;
 
 namespace FHICORC.Core.Services.DecoderServices
 {
@@ -19,23 +23,36 @@ namespace FHICORC.Core.Services.DecoderServices
     {
         private readonly ICertificationService _certificationService;
         private readonly IDateTimeService _dateTimeService;
+        private readonly IRuleVerifierService _ruleVerifierService;
+        private readonly IRuleSelectorService _ruleSelectorService;
+        private readonly IPreferencesService _preferencesService;
+        private readonly IDigitalGreenValueSetTranslatorFactory _digitalGreenValueSetTranslatorFactory;
 
         private IDgcValueSetTranslator _translator;
 
         public HcertTokenProcessorService(
-            ICertificationService certificationService, IDateTimeService dateTimeService)
+            ICertificationService certificationService,
+            IDateTimeService dateTimeService,
+            IRuleSelectorService ruleSelectorService,
+            IRuleVerifierService ruleVerifierService,
+            IPreferencesService preferencesService,
+            IDigitalGreenValueSetTranslatorFactory digitalGreenValueSetTranslatorFactory)
         {
             _certificationService = certificationService;
             _dateTimeService = dateTimeService;
-            _translator = DigitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
-            DigitalGreenValueSetTranslatorFactory.Init();
+            _ruleSelectorService = ruleSelectorService;
+            _ruleVerifierService = ruleVerifierService;
+            _preferencesService = preferencesService;
+            _digitalGreenValueSetTranslatorFactory = digitalGreenValueSetTranslatorFactory;
+            _translator = _digitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
+            _digitalGreenValueSetTranslatorFactory.Init();
         }
 
         public void SetDgcValueSetTranslator(IDgcValueSetTranslator translator)
         {
             _translator = translator;
-            DigitalGreenValueSetTranslatorFactory.DgcValueSetTranslator = translator;
-            DigitalGreenValueSetTranslatorFactory.Init();
+            _digitalGreenValueSetTranslatorFactory.DgcValueSetTranslator = translator;
+            _digitalGreenValueSetTranslatorFactory.Init();
         }
 
         public async Task<TokenValidateResultModel> DecodePassportTokenToModel(string base45String)
@@ -54,9 +71,26 @@ namespace FHICORC.Core.Services.DecoderServices
 #endif
                 string jsonStringFromBytes = coseSign1Object.GetJson();
 
-                ITokenPayload decodedModel = MapToModelFromJson(jsonStringFromBytes, base45String.Substring(0, 3));
+                bool international = _preferencesService.GetUserPreferenceAsBoolean("BORDER_CONTROL_ON");
+
+                ITokenPayload decodedModel;
+                if (international)
+                    decodedModel = InternationalMapToModelFromJson(jsonStringFromBytes, base45String.Substring(0, 3));
+                else
+                    decodedModel = DomesticMapToModelFromJson(jsonStringFromBytes, base45String.Substring(0, 3));
+
+                if (decodedModel == null)
+                {
+                    resultModel.ValidationResult = TokenValidateResult.UnsupportedType;
+                    return resultModel;
+                }
+
                 DateTime? expiration = decodedModel.ExpiredDateTime();
                 DateTime? issueAt = decodedModel.IssueDateTime();
+
+                if (decodedModel is DCCPayload dccPayload)
+                    resultModel.RulesFeedBacks = VerifyRules(dccPayload, international);
+
                 if (expiration != null)
                 {
                     if (_dateTimeService.Now.CompareTo(issueAt) <= 0)
@@ -88,6 +122,15 @@ namespace FHICORC.Core.Services.DecoderServices
             
         }
 
+        private List<RulesFeedbackData> VerifyRules(DCCPayload dccPayload, bool international)
+        {
+            var external = _ruleSelectorService.ApplyExternalData(dccPayload, international);
+            var applicableRules = _ruleSelectorService.SelectRules(dccPayload, international);
+            var verifyRulesModel = new VerifyRulesModel { HCert = dccPayload.DCCPayloadData.DCC, External = external };
+            
+            return _ruleVerifierService.Verify(applicableRules, verifyRulesModel) ?? new List<RulesFeedbackData>();
+        }
+
         private CoseSign1Object DecodeToCOSEFlow(string base45String)
         {
             // The app only expect passport with these prefix
@@ -111,7 +154,7 @@ namespace FHICORC.Core.Services.DecoderServices
             return cborMessageFromCOSE;
         }
 
-        private ITokenPayload MapToModelFromJson(string json, string tokenPrefix)
+        private ITokenPayload DomesticMapToModelFromJson(string json, string tokenPrefix)
         {
             switch (TokenTypeExtension.GetTokenType(tokenPrefix))
             {
@@ -120,17 +163,30 @@ namespace FHICORC.Core.Services.DecoderServices
                     return GetNODigitalGreenModelV1ByVersion(defaultPayload, json);
                 case TokenType.HC1:
                     var deserialized = JsonConvert
-                        .DeserializeObject<Model.EuDCCModel._1._3._0.DCCPayload>(json);
+                        .DeserializeObject<DCCPayload>(json);
                     ValidateCwt(deserialized);
                     return deserialized;
             }
-            throw new InvalidDataException("The provided token is not a valid NO token or token based on hcert 1 specification");
+            return null;
+        }
+
+        private ITokenPayload InternationalMapToModelFromJson(string json, string tokenPrefix)
+        {
+            switch (TokenTypeExtension.GetTokenType(tokenPrefix))
+            {
+                case TokenType.HC1:
+                    var deserialized = JsonConvert
+                        .DeserializeObject<DCCPayload>(json);
+                    ValidateCwt(deserialized);
+                    return deserialized;
+            }
+            return null;
         }
 
         private ITokenPayload GetNODigitalGreenModelV1ByVersion(DefaultCWTPayload defaultCwtPayload, string json)
         {
             //override the current translator in case multiple translator exist 
-            DigitalGreenValueSetTranslatorFactory.DgcValueSetTranslator = _translator;
+            _digitalGreenValueSetTranslatorFactory.DgcValueSetTranslator = _translator;
             switch (defaultCwtPayload.DGCPayloadData.euHcertV1Schema.Version)
             {
                 case "1.0.0":
@@ -143,7 +199,7 @@ namespace FHICORC.Core.Services.DecoderServices
             throw exception;
         }
 
-        private void ValidateCwt(Model.EuDCCModel._1._3._0.DCCPayload cwt)
+        private void ValidateCwt(DCCPayload cwt)
         {
             if (string.IsNullOrEmpty(cwt.DCCPayloadData.DCC.PersonName.StandardisedSurname))
             {

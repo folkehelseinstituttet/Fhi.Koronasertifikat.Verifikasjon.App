@@ -11,10 +11,12 @@ namespace FHICORC.ViewModels.Menu
         public string HelpUrl => "HELP_URL".Translate();
         public string PrivacyUrl => "PRIVACY_URL".Translate();
         public string AccessibilityUrl => "ACCESSIBILITY_URL".Translate();
+        public string TermsOfServiceUrl => "TERMS_OF_SERVICE_URL".Translate();
+
 
         public ICommand OpenHelpLinkCommand => new Command(async () => await Launcher.OpenAsync(HelpUrl));
         public ICommand OpenPrivacyLinkCommand => new Command(async () => await Launcher.OpenAsync(PrivacyUrl));
         public ICommand OpenAccessibilityLinkCommand => new Command(async () => await Launcher.OpenAsync(AccessibilityUrl));
-
+        public ICommand TermsOfServiceLinkCommand => new Command(async () => await Launcher.OpenAsync(TermsOfServiceUrl));
     }
 }
