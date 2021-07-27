@@ -44,6 +44,7 @@
                         <Label
                             Grid.Column="1"
                             Grid.Row="1"
+                            AutomationProperties.IsInAccessibleTree="True"
                             Margin="0,10,0,0"
                             Text="{Binding RuleIdentifier}"
                             HorizontalTextAlignment="Start"
@@ -52,6 +53,7 @@
                             Grid.Column="1"
                             Grid.Row="2"
                             Margin="0,0,0,10"
+                            AutomationProperties.IsInAccessibleTree="True"
                             Text="{Binding RuleDescription}"
                             HorizontalTextAlignment="Start"
                             Style="{StaticResource ContentStyle}"/>
@@ -82,6 +84,7 @@
                         <Label
                             Grid.Column="1"
                             Grid.Row="0"
+                            AutomationProperties.IsInAccessibleTree="True"
                             Margin="0,10,0,0"
                             Text="{Binding RuleIdentifier}"
                             HorizontalTextAlignment="Start"
@@ -89,11 +92,11 @@
                         <Label
                             Grid.Column="1"
                             Grid.Row="1"
+                            AutomationProperties.IsInAccessibleTree="True"
                             Margin="0,0,0,10"
                             Text="{Binding RuleDescription}"
                             HorizontalTextAlignment="Start"
-                            Style="{StaticResource ContentStyle
-                            }"/>
+                            Style="{StaticResource ContentStyle}"/>
                     </Grid>
                 </ViewCell>
             </DataTemplate>
@@ -132,6 +135,7 @@
                             Grid.Column="1"
                             Grid.Row="1"
                             Margin="0,10,0,0"
+                            AutomationProperties.IsInAccessibleTree="True"
                             Text="{Binding RuleIdentifier}"
                             HorizontalTextAlignment="Start"
                             Style="{StaticResource SubtitleStyle}"/>
@@ -139,6 +143,7 @@
                             Grid.Column="1"
                             Grid.Row="2"
                             Margin="0,0,0,10"
+                            AutomationProperties.IsInAccessibleTree="True"
                             Text="{Binding RuleDescription}"
                             HorizontalTextAlignment="Start"
                             Style="{StaticResource ContentStyle}"/>
@@ -170,12 +175,14 @@
                             Grid.Column="1"
                             Grid.Row="0"
                             Margin="0,10,0,0"
+                            AutomationProperties.IsInAccessibleTree="True"
                             Text="{Binding RuleIdentifier}"
                             HorizontalTextAlignment="Start"
                             Style="{StaticResource SubtitleStyle}"/>
                         <Label
                             Grid.Column="1"
                             Grid.Row="1"
+                            AutomationProperties.IsInAccessibleTree="True"
                             Margin="0,0,0,10"
                             Text="{Binding RuleDescription}"
                             HorizontalTextAlignment="Start"
@@ -219,12 +226,14 @@
                             Grid.Row="1"
                             Margin="0,10,0,0"
                             Text="{Binding RuleIdentifier}"
+                            AutomationProperties.IsInAccessibleTree="True"
                             HorizontalTextAlignment="Start"
                             Style="{StaticResource SubtitleStyle}"/>
                         <Label
                             Grid.Column="1"
                             Grid.Row="2"
                             Margin="0,0,0,10"
+                            AutomationProperties.IsInAccessibleTree="True"
                             Text="{Binding RuleDescription}"
                             HorizontalTextAlignment="Start"
                             Style="{StaticResource ContentStyle}"/>
@@ -258,11 +267,13 @@
                             Margin="0,10,0,0"
                             Text="{Binding RuleIdentifier}"
                             HorizontalTextAlignment="Start"
+                            AutomationProperties.IsInAccessibleTree="True"
                             Style="{StaticResource SubtitleStyle}"/>
                         <Label
                             Grid.Column="1"
                             Grid.Row="1"
                             Margin="0,0,0,10"
+                            AutomationProperties.IsInAccessibleTree="True"
                             Text="{Binding RuleDescription}"
                             HorizontalTextAlignment="Start"
                             Style="{StaticResource ContentStyle}"/>
