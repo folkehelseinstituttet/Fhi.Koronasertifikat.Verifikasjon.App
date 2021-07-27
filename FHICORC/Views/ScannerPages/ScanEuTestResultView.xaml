@@ -44,7 +44,7 @@
                     Padding="0"
                     Spacing="0">
                     <Label
-                        Margin="-60, 0"
+                        Margin="-200, 0"
                         Padding="0, 2"
                         VerticalTextAlignment="Center"
                         MaxLines="1"
@@ -52,10 +52,9 @@
                         Style="{StaticResource RegularLabelBoldStyle}"
                         TextColor="{StaticResource WhiteTextColor}"
                         Text="{Binding RepeatedText}"
-                        FontSize="17"
                         AutomationProperties.IsInAccessibleTree="False"
-                        effects:FontSizeLabelEffectParams.MaxFontSize="32"
-                        effects:FontSizeLabelEffectParams.MinFontSize="18">
+                        effects:FontSizeLabelEffectParams.MaxFontSize="15.00"
+                        effects:FontSizeLabelEffectParams.MinFontSize="15.00">
                         <Label.Effects>
                             <effects:FontSizeLabelEffect />
                         </Label.Effects>
@@ -107,7 +106,13 @@
                             Text="{Binding NumberOfRulesFulfilled}"
                             HorizontalOptions="Center"
                             VerticalOptions="CenterAndExpand"
-                            Style="{StaticResource SubtitleStyle}" />
+                            Style="{StaticResource SubtitleStyle}"
+                            effects:FontSizeLabelEffectParams.MaxFontSize="32"
+                            effects:FontSizeLabelEffectParams.MinFontSize="18">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect />
+                            </Label.Effects>
+                        </Label>
                     </StackLayout>
 
                     <Grid Margin="20,30,20,30">

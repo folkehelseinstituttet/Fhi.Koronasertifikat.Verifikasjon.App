@@ -34,7 +34,7 @@ namespace FHICORC.Tests.TokenDecryptionTest
                         new MockBusinessRulesService(),
                         IoCContainer.Resolve<IDigitalGreenValueSetTranslatorFactory>()
                     ),
-                new RuleVerifierService(),
+                new RuleVerifierService(new MockPreferencesService()),
                 new MockPreferencesService(),
                 IoCContainer.Resolve<IDigitalGreenValueSetTranslatorFactory>());
         }

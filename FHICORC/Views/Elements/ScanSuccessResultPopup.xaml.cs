@@ -35,5 +35,10 @@ namespace FHICORC.Views.Elements
             ((ScanSuccessResultPopupViewModel) BindingContext).Timer.Enabled = false;
             base.OnDisappearing();
         }
+
+        void SwipeGestureRecognizer_Swiped(System.Object sender, Xamarin.Forms.SwipedEventArgs e)
+        {
+            ((ScanSuccessResultPopupViewModel)BindingContext).ClosePopupCommand.Execute(null);
+        }
     }
 }

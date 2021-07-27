@@ -5,13 +5,16 @@ using FHICORC.Core.Services;
 using FHICORC.Core.Services.Enum;
 using FHICORC.Core.Services.Model.BusinessRules;
 using FHICORC.Core.Services.Model.EuDCCModel._1._3._0;
+using FHICORC.Tests.TestMocks;
 using NUnit.Framework;
 
 namespace FHICORC.Tests.ServiceTests
 {
     public class RuleVerifierServiceTests
     {
-        private readonly IRuleVerifierService ruleVerifierService = new RuleVerifierService();
+        private readonly IRuleVerifierService ruleVerifierService = new RuleVerifierService(
+            new MockPreferencesService()
+        );
 
         [Test]
         public void Verify_VaccineRulePositive()
@@ -195,6 +198,7 @@ namespace FHICORC.Tests.ServiceTests
             {
                 new BusinessRule
                 {
+                    Description = new List<RuleDescriptionTranslation>{ new RuleDescriptionTranslation { Description = "test", LanguageCode = "en" } },
                     Logic = @"{ ""if"": [{ ""and"": [{ ""==="": [{ ""var"": ""payload.v.0.dn"" }, 1] }, { ""==="": [{ ""var"": ""payload.v.0.sd"" }, 1] } ] }, { ""after"": [{ ""plusTime"": [{ ""var"": ""external.validationClock"" }, 0, ""day""] }, { ""plusTime"": [{ ""var"": ""payload.v.0.dt"" }, 21, ""day""] } ] }, true ] }"
                 }
             };
@@ -240,6 +244,7 @@ namespace FHICORC.Tests.ServiceTests
             {
                 new BusinessRule
                 {
+                    Description = new List<RuleDescriptionTranslation>{ new RuleDescriptionTranslation { Description = "test", LanguageCode = "en" } },
                     Logic = @"{ ""before"": [{ ""plusTime"": [{ ""var"": ""external.validationClock"" }, 0, ""day""] }, { ""plusTime"": [{ ""var"": ""payload.t.0.sc"" }, 24, ""hour""] } ] }"
                 }
             };
@@ -285,6 +290,7 @@ namespace FHICORC.Tests.ServiceTests
             {
                 new BusinessRule
                 {
+                    Description = new List<RuleDescriptionTranslation>{ new RuleDescriptionTranslation { Description = "test", LanguageCode = "en" } },
                     Logic = @"{""after"": [{ ""plusTime"": [{ ""var"": ""payload.r.0.fr"" }, 183, ""day""] }, { ""plusTime"": [{ ""var"": ""external.validationClock"" }, 0, ""day""] }, { ""plusTime"": [{ ""var"": ""payload.r.0.fr"" }, 10, ""day""] } ]}"
                 }
             };

@@ -44,7 +44,7 @@
                     Padding="0"
                     Spacing="0">
                     <Label
-                        Margin="-60, 0"
+                        Margin="-200, 0"
                         Padding="0, 2"
                         VerticalTextAlignment="Center"
                         MaxLines="1"
@@ -52,8 +52,12 @@
                         Style="{StaticResource RegularLabelBoldStyle}"
                         TextColor="{StaticResource WhiteTextColor}"
                         Text="{Binding RepeatedText}"
-                        FontSize="17"
-                        AutomationProperties.IsInAccessibleTree="False">
+                        AutomationProperties.IsInAccessibleTree="False"
+                        effects:FontSizeLabelEffectParams.MaxFontSize="15.00"
+                        effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                        <Label.Effects>
+                            <effects:FontSizeLabelEffect/>
+                        </Label.Effects>
                     </Label>
                 </StackLayout>
             </StackLayout>
