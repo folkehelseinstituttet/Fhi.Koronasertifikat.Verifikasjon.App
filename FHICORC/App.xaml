@@ -19,14 +19,16 @@
             <Color x:Key="GreyTextColor">#6C768E</Color>
             <Color x:Key="DarkTextColor">#22215D</Color>
             <Color x:Key="LinkColor">#3B37E2</Color>
+            <Color x:Key="ErrorTitleColor">#FBB5AD</Color>
 
             <!--  Background Colour  -->
             <Color x:Key="DefaultBackgroundColor">#E1EAED</Color>
+            <Color x:Key="ErrorBackgroundColor">#32345C</Color>
             <Color x:Key="NavigationHeaderBackgroundColor">#E1EAED</Color>
             <Color x:Key="LandingPageColorStart">#4B4E6F</Color>
             <Color x:Key="MainPageBackgroundColor">#E7F2F2</Color>
             <Color x:Key="SuccessBorderColor">#D9F0D4</Color>
-            <Color x:Key="InvalidBorderColor">#FBB5AD</Color>
+            <Color x:Key="InvalidBorderColor">#F5858c</Color>
             <Color x:Key="ExpiredBorderColor">#F5E360</Color>
 
 
@@ -99,6 +101,13 @@
                 <Setter Property="LineHeight" Value="1.1" />
             </Style>
 
+            <Style x:Key="ErrorTitleStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansBold" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="TextColor" Value="{StaticResource ErrorTitleColor}" />
+                <Setter Property="LineHeight" Value="1.1" />
+            </Style>
+
             <Style x:Key="BigTitleStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="PTSansBold" />
                 <Setter Property="FontSize" Value="Title" />
@@ -135,6 +144,13 @@
                 <Setter Property="FontFamily" Value="PTSansRegular" />
                 <Setter Property="FontSize" Value="Medium" />
                 <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+                <Setter Property="LineHeight" Value="1.2" />
+            </Style>
+
+            <Style x:Key="ErrorContentStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansRegular" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="TextColor" Value="{StaticResource FHIWhite}" />
             </Style>
 
             <Style x:Key="TitleItalicStyle" TargetType="Label">
