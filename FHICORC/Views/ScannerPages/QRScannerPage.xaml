@@ -128,9 +128,6 @@
               InputTransparent="True"
               Margin="28,0,28,0"
               IsVisible="{Binding HasCameraPermissions}">
-            <Grid.GestureRecognizers>
-                <TapGestureRecognizer Tapped="ScannerOverlay_OnTapped"/>
-            </Grid.GestureRecognizers>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FHICORC.Configuration;
+﻿using FHICORC.Configuration;
 using FHICORC.Services.Interfaces;
 using FHICORC.Utils;
 using FHICORC.ViewModels.QrScannerViewModels;
