@@ -570,33 +570,6 @@
     <ImageAsset Include="AppAssets.xcassets\recovery.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine%402x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine%403x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\test.imageset\test.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\test.imageset\test%402x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\test.imageset\test%403x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery%402x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery%403x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="AppAssets.xcassets\check_shield.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -645,6 +618,15 @@
     <ImageAsset Include="AppAssets.xcassets\close_icon_blue.imageset\close_blue.png" />
     <ImageAsset Include="AppAssets.xcassets\close_icon_blue.imageset\close_blue%402x.png" />
     <ImageAsset Include="AppAssets.xcassets\close_icon_blue.imageset\close_blue%403x.png" />
+    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery.png" />
+    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery%402x.png" />
+    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery%403x.png" />
+    <ImageAsset Include="AppAssets.xcassets\test.imageset\test.png" />
+    <ImageAsset Include="AppAssets.xcassets\test.imageset\test%402x.png" />
+    <ImageAsset Include="AppAssets.xcassets\test.imageset\test%403x.png" />
+    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine.png" />
+    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine%402x.png" />
+    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
