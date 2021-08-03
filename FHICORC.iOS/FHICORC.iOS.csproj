@@ -192,6 +192,7 @@
     </BundleResource>
     <Compile Include="Custom Renderers\CustomSwitchRenderer.cs" />
     <Compile Include="Services\IosDeepLinkingService.cs" />
+    <BundleResource Include="Resources\.DS_Store" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="AppAssets.xcassets\valid_passport_icon_green.imageset\Contents.json">
@@ -255,25 +256,10 @@
     <ImageAsset Include="AppAssets.xcassets\question_mark_white.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\landing_page_background.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\landing_page_background.imageset\landing_page_background.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\landing_page_background.imageset\landing_page_background%402x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\landing_page_background.imageset\landing_page_background%403x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="AppAssets.xcassets\landing_page_logo.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="AppAssets.xcassets\landing_page_logo.imageset\landing_page_logo%403x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\landing_page_stock_image.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="AppAssets.xcassets\error_lock.imageset\Contents.json">
@@ -325,15 +311,6 @@
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="AppAssets.xcassets\question_mark_white.imageset\question_mark_white.pdf">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\landing_page_stock_image.imageset\FHI_Frontpage_100521 1.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\landing_page_stock_image.imageset\FHI_Frontpage_100521 1-1.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\landing_page_stock_image.imageset\FHI_Frontpage_100521 1-2.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="AppAssets.xcassets\x_mark_circle.imageset\x_mark_circle.pdf">
@@ -415,15 +392,6 @@
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\SplashBackground.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\SplashBackground-1.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\SplashBackground-2.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="AppAssets.xcassets\error_maintenance.imageset\Contents.json">
@@ -645,6 +613,13 @@
     <ImageAsset Include="AppAssets.xcassets\close_icon_blue.imageset\close_blue.png" />
     <ImageAsset Include="AppAssets.xcassets\close_icon_blue.imageset\close_blue%402x.png" />
     <ImageAsset Include="AppAssets.xcassets\close_icon_blue.imageset\close_blue%403x.png" />
+    <ImageAsset Include="AppAssets.xcassets\splash_logo.imageset\Contents.json" />
+    <ImageAsset Include="AppAssets.xcassets\splash_logo.imageset\splash_logo.png" />
+    <ImageAsset Include="AppAssets.xcassets\splash_logo.imageset\splash_logo%402x.png" />
+    <ImageAsset Include="AppAssets.xcassets\splash_logo.imageset\splash_logo%403x.png" />
+    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\splash_image.png" />
+    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\splash_image%402x.png" />
+    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\splash_image%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -747,6 +722,8 @@
     <Folder Include="AppAssets.xcassets\menu_help_icon.imageset\" />
     <Folder Include="AppAssets.xcassets\landingpage_help_icon.imageset\" />
     <Folder Include="AppAssets.xcassets\close_icon_blue.imageset\" />
+    <Folder Include="AppAssets.xcassets\background_gradient.imageset\" />
+    <Folder Include="AppAssets.xcassets\splash_logo.imageset\" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
