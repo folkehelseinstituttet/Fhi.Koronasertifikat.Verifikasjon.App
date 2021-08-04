@@ -1143,6 +1143,9 @@
       <Generator></Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable-xxxhdpi\flashlight_on.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
     <AndroidResource Include="Resources\drawable-mdpi\splash_logo.png">
       <SubType></SubType>
       <Generator></Generator>
