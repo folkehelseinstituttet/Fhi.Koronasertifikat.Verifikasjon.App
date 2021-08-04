@@ -194,13 +194,13 @@
             <Style x:Key="InfoPaneHeaderStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="PTSansBold" />
                 <Setter Property="FontSize" Value="Large" />
-                <Setter Property="TextColor" Value="{StaticResource BaseTextColor}" />
+                <Setter Property="TextColor" Value="{StaticResource FHIWhite}" />
             </Style>
 
             <Style x:Key="InfoPaneSubHeaderStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="PTSansItalic" />
                 <Setter Property="FontSize" Value="Body" />
-                <Setter Property="TextColor" Value="{StaticResource BaseTextColor}" />
+                <Setter Property="TextColor" Value="{StaticResource FHIWhite}" />
             </Style>
 
             <Style x:Key="InfoPaneItemHeader" TargetType="Label">

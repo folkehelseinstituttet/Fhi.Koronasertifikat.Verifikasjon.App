@@ -192,7 +192,6 @@
     </BundleResource>
     <Compile Include="Custom Renderers\CustomSwitchRenderer.cs" />
     <Compile Include="Services\IosDeepLinkingService.cs" />
-    <BundleResource Include="Resources\.DS_Store" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="AppAssets.xcassets\valid_passport_icon_green.imageset\Contents.json">
@@ -538,33 +537,6 @@
     <ImageAsset Include="AppAssets.xcassets\recovery.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine%402x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine%403x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\test.imageset\test.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\test.imageset\test%402x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\test.imageset\test%403x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery%402x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery%403x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="AppAssets.xcassets\check_shield.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -620,6 +592,15 @@
     <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\splash_image.png" />
     <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\splash_image%402x.png" />
     <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\splash_image%403x.png" />
+    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery.png" />
+    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery%402x.png" />
+    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery%403x.png" />
+    <ImageAsset Include="AppAssets.xcassets\test.imageset\test.png" />
+    <ImageAsset Include="AppAssets.xcassets\test.imageset\test%402x.png" />
+    <ImageAsset Include="AppAssets.xcassets\test.imageset\test%403x.png" />
+    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine.png" />
+    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine%402x.png" />
+    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

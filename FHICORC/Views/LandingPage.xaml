@@ -213,7 +213,7 @@
                         Command="{Binding OpenScannerCommand}"
                         Style="{StaticResource LandingButtonStyle}"
                         Text="{Binding OpenScannerText}"
-                        IsVisible="{Binding IsScannerButtonVisible}"
+                        IsEnabled="{Binding IsScannerButtonEnabled}"
                         HorizontalOptions="Center"
                         effects:FontSizeLabelEffectParams.MaxFontSize="28.00"
                         effects:FontSizeLabelEffectParams.MinFontSize="15.00">
