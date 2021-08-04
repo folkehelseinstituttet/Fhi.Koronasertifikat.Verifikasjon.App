@@ -459,15 +459,6 @@
     <ImageAsset Include="AppAssets.xcassets\AppIcon-2.appiconset\167px.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\error_lock.imageset\error_lock.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\error_lock.imageset\error_lock-1.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\error_lock.imageset\error_lock-2.png">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="AppAssets.xcassets\certificate_logo.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -579,6 +570,9 @@
     <ImageAsset Include="AppAssets.xcassets\flashlight_on.imageset\flashlight_on%403x.png" />
     <ImageAsset Include="AppAssets.xcassets\flashlight_on.imageset\flashlight_on%402x.png" />
     <ImageAsset Include="AppAssets.xcassets\flashlight_on.imageset\flashlight_on.png" />
+    <ImageAsset Include="AppAssets.xcassets\error_lock.imageset\error_lock.png" />
+    <ImageAsset Include="AppAssets.xcassets\error_lock.imageset\error_lock%402x.png" />
+    <ImageAsset Include="AppAssets.xcassets\error_lock.imageset\error_lock%403x.png" />
     <ImageAsset Include="AppAssets.xcassets\splash_logo.imageset\Contents.json" />
     <ImageAsset Include="AppAssets.xcassets\splash_logo.imageset\splash_logo.png" />
     <ImageAsset Include="AppAssets.xcassets\splash_logo.imageset\splash_logo%402x.png" />

@@ -25,7 +25,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="50" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Label
             Grid.Row="0"
@@ -43,13 +43,14 @@
             effects:FontSizeLabelEffectParams.MaxFontSize="22"
             effects:FontSizeLabelEffectParams.MinFontSize="12"
             AutomationProperties.IsInAccessibleTree="True"
+            LineHeight="1.1"
             Style="{StaticResource ContentStyle}"
             Text="{Binding Body}">
             <Label.Effects>
                 <effects:FontSizeLabelEffect />
             </Label.Effects>
         </Label>
-        <Grid Grid.Row="2" HorizontalOptions="FillAndExpand" IsVisible="{Binding CancelButtonVisible}">
+        <Grid Grid.Row="2" HorizontalOptions="FillAndExpand" IsVisible="{Binding CancelButtonVisible}" ColumnSpacing="10" Margin="0,10,0,10" >
             <Grid Grid.Column="0">
                 <Button
                     Grid.Row="0"
@@ -103,7 +104,7 @@
                 </Label>
             </Grid>
         </Grid>
-        <Grid Grid.Row="2" HorizontalOptions="FillAndExpand" IsVisible="{Binding CancelButtonVisible ,Converter={StaticResource BoolToInverseBoolConverter}}">
+        <Grid Grid.Row="2" HorizontalOptions="FillAndExpand" IsVisible="{Binding CancelButtonVisible ,Converter={StaticResource BoolToInverseBoolConverter}}" Margin="0,10,0,10">
             <Grid>
                 <Button
                     Grid.Row="0"

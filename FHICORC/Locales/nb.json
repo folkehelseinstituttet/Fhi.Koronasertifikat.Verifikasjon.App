@@ -121,7 +121,7 @@
   "ERROR_SUBTITLE_FORCE_UPDATE_REQUIRED": "Du må oppdatere appen til nyeste versjon for å fortsette å bruke den.",
   "ERROR_BUTTON_FORCE_UPDATE_REQUIRED": "Oppdater appen",
   "ROOTCHECK_TITLE": "Telefonen din er sannsynligvis ikke trygg å bruke.",
-  "ROOTCHECK_DESCRIPTION": "Appen har oppdaget at telefonen din har rottilgang og ikke er trygg å bruke.\n\nDu burde undersøke hva som er galt. Du kan fortsatt bruke appen.",
+  "ROOTCHECK_DESCRIPTION": "Appen har oppdaget at telefonen din har rottilgang og ikke er trygg å bruke. Du burde undersøke hva som er galt. Du kan fortsatt bruke appen.",
   "ROOTCHECK_PROCEED_BUTTON": "OK, fortsett likevel",
   "APP_TITLE": "Kontroll av koronasertifikat",
   "BACK_BUTTON": "Tilbake",
