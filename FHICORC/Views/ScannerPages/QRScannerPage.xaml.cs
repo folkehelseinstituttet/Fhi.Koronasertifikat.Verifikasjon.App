@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using FHICORC.Configuration;
 using FHICORC.Services;
@@ -23,14 +21,26 @@ namespace FHICORC.Views
     public partial class QRScannerPage : ContentPage
     {
         private static int DelayBetweenContinousScans = 100;
-        private static int DelayBetweenAnalyzingFrames = 50;
+        private static int DelayBetweenAnalyzingFrames = 100;
         private static int MinResolutionHeightThreshold = 720;
-
         private bool _hasAskedForCameraPermission = false;
         private bool _inTabbar = false;
-        private ZXingScannerView _scannerView;
+        private static ZXingScannerView _scannerView;
+        private MobileBarcodeScanningOptions _scanningOptions = new MobileBarcodeScanningOptions
+        {
+            DelayBetweenAnalyzingFrames = DelayBetweenAnalyzingFrames,
+            DelayBetweenContinuousScans = DelayBetweenContinousScans,
+            PossibleFormats = new List<BarcodeFormat> { BarcodeFormat.QR_CODE },
+            TryHarder = true,
+            UseNativeScanning = false,
+            InitialDelayBeforeAnalyzingFrames = 0,
+            CameraResolutionSelector = SelectLowestResolution,
+            TryInverted = true,
+        };
 
         public bool IsLoading { get; set; }
+
+        private TimeSpan _focusAssistTimespan = new TimeSpan(0, 0, 2);
 
         public QRScannerPage()
         {
@@ -50,6 +60,10 @@ namespace FHICORC.Views
             if (!_inTabbar) return;
             if (_scannerView != null) return;
 
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                IoCContainer.Resolve<INavigationService>().SetStatusBar(Color.Transparent, Color.White);
+            }
             await CreateScannerView();
         }
 
@@ -74,6 +88,7 @@ namespace FHICORC.Views
             //Initialize camera from the front page
             IoCContainer.Resolve<INavigationService>().SetStatusBar(FHICORCColor.NavigationHeaderBackgroundColor.Color(), Color.Black);
             await CreateScannerView();
+
             base.OnAppearing();
         }
 
@@ -101,29 +116,20 @@ namespace FHICORC.Views
                 if (viewModel.HasCameraPermissions)
                 {
                     viewModel.RaisePropertyChanged(() => viewModel.HasCameraPermissions);
-                    
-                    _scannerView = new ZXingScannerView();
+
+                    _scannerView ??= new ZXingScannerView();
                     _scannerView.OnScanResult += OnScanResult;
-                    _scannerView.Options = new MobileBarcodeScanningOptions()
-                    {
-                        DelayBetweenAnalyzingFrames = DelayBetweenAnalyzingFrames,
-                        DelayBetweenContinuousScans = DelayBetweenContinousScans,
-                        PossibleFormats = new List<BarcodeFormat> { BarcodeFormat.QR_CODE },
-                        TryHarder = true,
-                        UseNativeScanning = false,
-                        InitialDelayBeforeAnalyzingFrames = 0,
-                        CameraResolutionSelector = SelectLowestResolution
-                    };
+                    _scannerView.Options = _scanningOptions;
 
                     await Device.InvokeOnMainThreadAsync(() =>
                     {
+                        if (_scannerView == null) return;
                         ScannerContainer.Children.Add(_scannerView);
                         _scannerView.IsScanning = true;
                         _scannerView.IsAnalyzing = true;
                     });
 
-                    TimeSpan ts = new TimeSpan(0, 0, 1);
-                    Device.StartTimer(ts, () =>
+                    Device.StartTimer(_focusAssistTimespan, () =>
                     {
                         if (_scannerView == null)
                         {
@@ -194,16 +200,16 @@ namespace FHICORC.Views
         /// <returns>
         /// Lowest resolution within tolerance.
         /// </returns>
-        private CameraResolution SelectLowestResolution(List<CameraResolution> availableResolutions)
-        {            
+        private static CameraResolution SelectLowestResolution(List<CameraResolution> availableResolutions)
+        {
             CameraResolution result = null;
             double aspectTolerance = 0.1;
             var targetRatio = DeviceDisplay.MainDisplayInfo.Height / DeviceDisplay.MainDisplayInfo.Width;
             var targetHeight = DeviceDisplay.MainDisplayInfo.Height;
             var minDiff = double.MaxValue;
-            
+
             availableResolutions
-                .Where(r => Math.Abs(((double) r.Width / r.Height) - targetRatio) < aspectTolerance)
+                .Where(r => Math.Abs(((double)r.Width / r.Height) - targetRatio) < aspectTolerance)
                 .ForEach(
                     res =>
                     {
@@ -213,7 +219,7 @@ namespace FHICORC.Views
                             result = res;
                         }
                     });
-            
+
             return result;
         }
 
@@ -228,12 +234,20 @@ namespace FHICORC.Views
             _scannerView = null;
         }
 
-        private void ScannerOverlay_OnTapped(object sender, EventArgs e)
+        public void DisableScannerView()
         {
-            if (ScannerContainer.Children.FirstOrDefault() is ZXingScannerView scanner)
-            {
-                scanner.AutoFocus();
-            }
+            if (_scannerView == null) return;
+
+            _scannerView.IsAnalyzing = false;
+            _scannerView.OnScanResult -= OnScanResult;
+        }
+
+        public void EnableScannerView()
+        {
+            if (_scannerView == null) return;
+
+            _scannerView.IsAnalyzing = true;
+            _scannerView.OnScanResult += OnScanResult;
         }
 
         protected override bool OnBackButtonPressed()
@@ -243,10 +257,9 @@ namespace FHICORC.Views
         }
 
         protected async Task ExecuteOnceAsync(Func<Task> awaitableTask)
-        {
+        { 
             if (IsLoading) return;
-            IsLoading = true;
-
+                IsLoading = true;
             try
             {
                 await awaitableTask();
