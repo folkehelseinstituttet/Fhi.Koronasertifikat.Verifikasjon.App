@@ -90,14 +90,14 @@ namespace FHICORC.ViewModels
         }
 
 
-        private bool _isScannerButtonVisible;
-        public bool IsScannerButtonVisible
+        private bool _isScannerButtonEnabled;
+        public bool IsScannerButtonEnabled
         {
-            get => _isScannerButtonVisible;
+            get => _isScannerButtonEnabled;
             set
             {
-                _isScannerButtonVisible = value;
-                OnPropertyChanged(nameof(IsScannerButtonVisible));
+                _isScannerButtonEnabled = value;
+                OnPropertyChanged(nameof(IsScannerButtonEnabled));
             }
         }
 
@@ -166,9 +166,9 @@ namespace FHICORC.ViewModels
         private void UpdateScannerButton()
         {
             if (!BorderControlOn && !DomesticControlOn)
-                IsScannerButtonVisible = false;
+                IsScannerButtonEnabled = false;
             else
-                IsScannerButtonVisible = true;
+                IsScannerButtonEnabled = true;
         }
     }
 }

@@ -49,5 +49,7 @@
 	<false/>
 	<key>XSAppIconAssets</key>
 	<string>AppAssets.xcassets/AppIcon-2.appiconset</string>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
 </dict>
 </plist>
