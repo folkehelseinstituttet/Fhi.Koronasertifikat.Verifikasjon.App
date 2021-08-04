@@ -196,7 +196,7 @@
                TextColor="{StaticResource WhiteTextColor}"
                VerticalOptions="Center"
                HorizontalOptions="Center"
-               Margin="40,0,40,0"
+               Margin="40,0,40,40"
                AutomationProperties.IsInAccessibleTree="True"
                LineBreakMode="WordWrap"
                HorizontalTextAlignment="Center" 
@@ -207,5 +207,23 @@
                 <effects:FontSizeLabelEffect/>
             </Label.Effects>
         </Label>
+        <Button
+            Command="{Binding ToggleFlashlight}"
+            Margin="0,0,15,20"      
+            Grid.Row="2"
+            IsEnabled="{Binding IsFlashlightSupported}"
+            BackgroundColor="Transparent"
+            CornerRadius="24"
+            BorderRadius="24"
+            BorderColor="White"
+            BorderWidth="1"
+            HeightRequest="48"
+            WidthRequest="48"
+            HorizontalOptions="EndAndExpand"
+            VerticalOptions="EndAndExpand"
+            ImageSource="{Binding CurrentFlashlightStateIconPath}"
+            IsVisible="{Binding HasFlashlightPermissions}"
+            AutomationProperties.IsInAccessibleTree="True"
+            AutomationProperties.Name="{Binding Strings[SCANNER_FLASHLIGHT]}" />
     </Grid>
 </ContentPage>

@@ -71,6 +71,8 @@
             <x:String x:Key="CloseIcon">close_white.png</x:String>
             <x:String x:Key="CloseIconBlue">close_icon_blue.png</x:String>
             <x:String x:Key="ErrorCheckLayout">error_layout.png</x:String>
+            <x:String x:Key="ScannerFlashlightOnIcon">flashlight_on.png</x:String>
+            <x:String x:Key="ScannerFlashlightOffIcon">flashlight_off.png</x:String>
             
 
             <!--  Others  -->

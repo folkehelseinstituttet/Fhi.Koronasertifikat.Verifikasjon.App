@@ -631,6 +631,14 @@
     <ImageAsset Include="AppAssets.xcassets\error_layout.imageset\White-1.png" />
     <ImageAsset Include="AppAssets.xcassets\error_layout.imageset\White-2.png" />
     <ImageAsset Include="AppAssets.xcassets\hourGlass.imageset\V2.pdf" />
+    <ImageAsset Include="AppAssets.xcassets\flashlight_off.imageset\Contents.json" />
+    <ImageAsset Include="AppAssets.xcassets\flashlight_on.imageset\Contents.json" />
+    <ImageAsset Include="AppAssets.xcassets\flashlight_off.imageset\flashlight_off%403x.png" />
+    <ImageAsset Include="AppAssets.xcassets\flashlight_off.imageset\flashlight_off%402x.png" />
+    <ImageAsset Include="AppAssets.xcassets\flashlight_off.imageset\flashlight_off.png" />
+    <ImageAsset Include="AppAssets.xcassets\flashlight_on.imageset\flashlight_on%403x.png" />
+    <ImageAsset Include="AppAssets.xcassets\flashlight_on.imageset\flashlight_on%402x.png" />
+    <ImageAsset Include="AppAssets.xcassets\flashlight_on.imageset\flashlight_on.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -733,6 +741,8 @@
     <Folder Include="AppAssets.xcassets\menu_help_icon.imageset\" />
     <Folder Include="AppAssets.xcassets\landingpage_help_icon.imageset\" />
     <Folder Include="AppAssets.xcassets\close_icon_blue.imageset\" />
+    <Folder Include="AppAssets.xcassets\flashlight_off.imageset\" />
+    <Folder Include="AppAssets.xcassets\flashlight_on.imageset\" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
