@@ -40,7 +40,7 @@
                 <StackLayout
                     BackgroundColor="{Binding BannerColor}"
                     Margin="0,20,0,0"
-                    Padding="0"
+                    Padding="0,8,0,11"
                     Spacing="0">
                     <Label
                         Margin="-200, 0"
@@ -114,20 +114,24 @@
                         </Label>
                     </StackLayout>
 
-                    <Grid Margin="20,30,20,30">
+                    <Grid Margin="0"
+                          Padding="0,25,0,27"
+                          BackgroundColor="{StaticResource FHIPrimaryBlue}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2*" />
                             <ColumnDefinition Width="70" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="0.3*" />
                         </Grid.ColumnDefinitions>
-                        <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" 
+                        <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" 
                                Source="{StaticResource RecoveryIcon}"
                                VerticalOptions="Center" 
                                HorizontalOptions="Start" />
-                        <Label Grid.Row="0" Grid.Column="1" 
+                        <Label Grid.Row="0" Grid.Column="2" 
                                Style="{StaticResource InfoPaneHeaderStyle}"
                                Text="{Binding RecoveryHeaderText}"
                                AutomationId="{Binding RecoveryHeaderText}"
@@ -138,7 +142,7 @@
                                 <effects:FontSizeLabelEffect/>
                             </Label.Effects>
                         </Label>
-                        <Label Grid.Row="1" Grid.Column="1" 
+                        <Label Grid.Row="1" Grid.Column="2" 
                                Style="{StaticResource InfoPaneSubHeaderStyle}"
                                Text="{Binding RecoveryHeaderValue}" 
                                HorizontalOptions="Start"
@@ -150,11 +154,6 @@
                             </Label.Effects>
                         </Label>
                     </Grid>
-                    <BoxView Margin="20,0,20,0" 
-                             BackgroundColor="{StaticResource DefaultBackgroundColor}"
-                             HeightRequest="2" 
-                             VerticalOptions="Center" 
-                             HorizontalOptions="FillAndExpand" />
                     <Grid Margin="20,0,20,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -180,7 +179,7 @@
                             <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,0"
+                        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,20,0,0"
                                AutomationId="{Binding RecoveryDiseaseText_Accessibility}"
                                Text="{Binding RecoveryDiseaseText}" 
                                Style="{StaticResource InfoPaneItemHeader}"
