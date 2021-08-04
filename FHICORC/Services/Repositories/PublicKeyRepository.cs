@@ -13,7 +13,10 @@ namespace FHICORC.Services.WebServices
         public async Task<ApiResponse<List<PublicKeyDto>>> GetPublicKey()
         {
             string url = Urls.URL_GET_PUBLIC_KEY;
-            return await _restClient.Get<List<PublicKeyDto>>(url);
+            var response = await _restClient.Get<List<PublicKeyDto>>(url);
+            response.StatusCode = 410;
+            response.ErrorType = ServiceErrorType.Gone;
+            return response;
         }
     }
 }
