@@ -30,7 +30,7 @@ namespace FHICORC.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            IoCContainer.Resolve<INavigationService>().SetStatusBar(FHICORCColor.DefaultBackgroundColor.Color(), Color.Black);
+            IoCContainer.Resolve<INavigationService>().SetStatusBar(FHICORCColor.FHIPrimaryBlue.Color(), Color.White);
         }
 
         protected override bool OnBackButtonPressed()

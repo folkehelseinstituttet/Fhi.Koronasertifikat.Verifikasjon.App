@@ -19,24 +19,26 @@
             <Color x:Key="GreyTextColor">#6C768E</Color>
             <Color x:Key="DarkTextColor">#22215D</Color>
             <Color x:Key="LinkColor">#3B37E2</Color>
+            <Color x:Key="ErrorTitleColor">#FBB5AD</Color>
 
             <!--  Background Colour  -->
             <Color x:Key="DefaultBackgroundColor">#E1EAED</Color>
+            <Color x:Key="ErrorBackgroundColor">#32345C</Color>
             <Color x:Key="NavigationHeaderBackgroundColor">#E1EAED</Color>
             <Color x:Key="LandingPageColorStart">#4B4E6F</Color>
             <Color x:Key="MainPageBackgroundColor">#E7F2F2</Color>
             <Color x:Key="SuccessBorderColor">#D9F0D4</Color>
-            <Color x:Key="InvalidBorderColor">#FBB5AD</Color>
+            <Color x:Key="InvalidBorderColor">#F5858c</Color>
             <Color x:Key="ExpiredBorderColor">#F5E360</Color>
 
 
             <!--  Image  -->
             <x:String x:Key="LandingPageFhiLogo">landing_page_fhi_logo.png</x:String>
-            <x:String x:Key="LandingPageBackground">landing_page_background</x:String>
             <x:String x:Key="LandingPageLogo">landing_page_logo</x:String>
             <x:String x:Key="LandingPageTitle">certificate_title_white</x:String>
+            <x:String x:Key="SplashImage">splash_image</x:String>
+            <x:String x:Key="SplashLogo">splash_logo</x:String>
             <x:String x:Key="ImagerLogo">imager_logo.png</x:String>
-            <x:String x:Key="LandingPageStockImage">landing_page_stock_image</x:String>
             <x:String x:Key="ArrowBack">navigation_arrow_back</x:String>
             <x:String x:Key="ValidIconNo">scan_valid_no.png</x:String>
             <x:String x:Key="ValidPassportIconGreen">valid_passport_icon_green.png</x:String>
@@ -69,6 +71,8 @@
             <x:String x:Key="CloseIcon">close_white.png</x:String>
             <x:String x:Key="CloseIconBlue">close_icon_blue.png</x:String>
             <x:String x:Key="ErrorCheckLayout">error_layout.png</x:String>
+            <x:String x:Key="ScannerFlashlightOnIcon">flashlight_on.png</x:String>
+            <x:String x:Key="ScannerFlashlightOffIcon">flashlight_off.png</x:String>
             
 
             <!--  Others  -->
@@ -96,6 +100,13 @@
                 <Setter Property="FontFamily" Value="PTSansBold" />
                 <Setter Property="FontSize" Value="Large" />
                 <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+                <Setter Property="LineHeight" Value="1.1" />
+            </Style>
+
+            <Style x:Key="ErrorTitleStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansBold" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="TextColor" Value="{StaticResource ErrorTitleColor}" />
                 <Setter Property="LineHeight" Value="1.1" />
             </Style>
 
@@ -135,6 +146,13 @@
                 <Setter Property="FontFamily" Value="PTSansRegular" />
                 <Setter Property="FontSize" Value="Medium" />
                 <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+                <Setter Property="LineHeight" Value="1.2" />
+            </Style>
+
+            <Style x:Key="ErrorContentStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansRegular" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="TextColor" Value="{StaticResource FHIWhite}" />
             </Style>
 
             <Style x:Key="TitleItalicStyle" TargetType="Label">
@@ -194,13 +212,13 @@
             <Style x:Key="InfoPaneHeaderStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="PTSansBold" />
                 <Setter Property="FontSize" Value="Large" />
-                <Setter Property="TextColor" Value="{StaticResource BaseTextColor}" />
+                <Setter Property="TextColor" Value="{StaticResource FHIWhite}" />
             </Style>
 
             <Style x:Key="InfoPaneSubHeaderStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="PTSansItalic" />
                 <Setter Property="FontSize" Value="Body" />
-                <Setter Property="TextColor" Value="{StaticResource BaseTextColor}" />
+                <Setter Property="TextColor" Value="{StaticResource FHIWhite}" />
             </Style>
 
             <Style x:Key="InfoPaneItemHeader" TargetType="Label">

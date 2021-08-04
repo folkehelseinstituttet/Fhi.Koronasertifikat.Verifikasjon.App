@@ -107,7 +107,7 @@ namespace FHICORC.Core.WebServices
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.StackTrace);
+                    Debug.WriteLine(e.StackTrace);
                 }
             }
         }

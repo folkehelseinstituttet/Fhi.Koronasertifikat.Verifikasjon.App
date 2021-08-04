@@ -20,7 +20,7 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             || TokenValidateResultModel.ValidationResult == TokenValidateResult.UnsupportedType;
         public TokenValidateResultModel TokenValidateResultModel { get; set; } = new TokenValidateResultModel();
 
-        public string RepeatedText => string.Concat(Enumerable.Repeat(PageTitle.PadLeft(15), 10));
+        public string RepeatedText => string.Concat(Enumerable.Repeat(PageTitle.PadLeft(12), 10));
         public ICommand ScanAgainCommand => new Command(async () =>
             await ExecuteOnceAsync(async () => await Task.Run(ClosePage)));
 
