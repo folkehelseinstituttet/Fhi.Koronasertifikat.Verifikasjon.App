@@ -31,6 +31,7 @@
         </Grid.RowDefinitions>
         <ImageButton
             Grid.Row="0"
+            Margin="0,2,0,0"
             BackgroundColor="Transparent"
             Command="{Binding CloseCommand}"
             Source="{StaticResource XMark}"
@@ -51,7 +52,7 @@
                 <effects:FontSizeLabelEffect />
             </Label.Effects>
         </Label>
-        <input:RadioButtonGroupView Grid.Row="2" Margin="0, 20, 0, 10">
+        <input:RadioButtonGroupView Grid.Row="2" Margin="0, 22, 0, 10">
             <Grid RowSpacing="15"
                   RadioButtonGroup.GroupName="Language">
                 <Grid.RowDefinitions>
@@ -149,7 +150,7 @@
             </Grid>
         </input:RadioButtonGroupView>
         <Grid Grid.Row="3"
-              Margin="0,20,5,0"
+              Margin="0,25,5,10"
               HorizontalOptions="FillAndExpand">
             <Grid>
                 <Button

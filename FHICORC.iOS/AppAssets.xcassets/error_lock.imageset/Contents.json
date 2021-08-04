@@ -4,17 +4,17 @@
       "idiom": "universal"
     },
     {
-      "filename": "error_lock-2.png",
+      "filename": "error_lock.png",
       "scale": "1x",
       "idiom": "universal"
     },
     {
-      "filename": "error_lock-1.png",
+      "filename": "error_lock@2x.png",
       "scale": "2x",
       "idiom": "universal"
     },
     {
-      "filename": "error_lock.png",
+      "filename": "error_lock@3x.png",
       "scale": "3x",
       "idiom": "universal"
     },
