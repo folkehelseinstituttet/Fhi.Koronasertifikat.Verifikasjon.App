@@ -228,24 +228,6 @@
     </AndroidResource>
     <AndroidResource Include="Resources\drawable-xxxhdpi\valid_passport_icon.png">
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable-mdpi\landing_page_background.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable-hdpi\landing_page_background.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable-xhdpi\lanidng_page_background.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\drawable-xhdpi\landing_page_logo.png">
       <SubType>
       </SubType>
@@ -258,19 +240,7 @@
       <Generator>
       </Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable-xxhdpi\lanidng_page_background.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\drawable-xxxhdpi\landing_page_logo.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\lanidng_page_background.png">
       <SubType>
       </SubType>
       <Generator>
@@ -516,12 +486,6 @@
       <Generator>
       </Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\landing_page_stock_image.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\drawable\x_mark.xml">
       <SubType>
       </SubType>
@@ -625,18 +589,6 @@
       </Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable-xxxhdpi\landing_page_fhi_logo.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\landing_page_stock_image.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\splash_screen.png">
       <SubType>
       </SubType>
       <Generator>
@@ -1151,6 +1103,46 @@
       <Generator></Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable-xxxhdpi\close_icon_blue.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-mdpi\splash_logo.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-hdpi\splash_logo.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-xxhdpi\splash_logo.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-xhdpi\splash_logo.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\splash_logo.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-mdpi\splash_image.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-hdpi\splash_image.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-xhdpi\splash_image.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-xxhdpi\splash_image.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\splash_image.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>

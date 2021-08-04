@@ -32,11 +32,11 @@
 
             <!--  Image  -->
             <x:String x:Key="LandingPageFhiLogo">landing_page_fhi_logo.png</x:String>
-            <x:String x:Key="LandingPageBackground">landing_page_background</x:String>
             <x:String x:Key="LandingPageLogo">landing_page_logo</x:String>
             <x:String x:Key="LandingPageTitle">certificate_title_white</x:String>
+            <x:String x:Key="SplashImage">splash_image</x:String>
+            <x:String x:Key="SplashLogo">splash_logo</x:String>
             <x:String x:Key="ImagerLogo">imager_logo.png</x:String>
-            <x:String x:Key="LandingPageStockImage">landing_page_stock_image</x:String>
             <x:String x:Key="ArrowBack">navigation_arrow_back</x:String>
             <x:String x:Key="ValidIconNo">scan_valid_no.png</x:String>
             <x:String x:Key="ValidPassportIconGreen">valid_passport_icon_green.png</x:String>

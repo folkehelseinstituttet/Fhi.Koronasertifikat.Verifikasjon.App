@@ -24,8 +24,8 @@
                                 <autoresizingMask key="autoresizingMask"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="certificate_logo" translatesAutoresizingMaskIntoConstraints="NO" id="iLu-Vd-Ubj">
-                                <rect key="frame" x="153" y="387.66666666666669" width="108" height="75"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" highlightedImage="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="iLu-Vd-Ubj">
+                                <rect key="frame" x="153" y="374.66666666666669" width="108" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="108" id="PKX-c6-HmW"/>
                                     <constraint firstAttribute="height" constant="75" id="guK-xE-Vng"/>
@@ -34,7 +34,7 @@
                         </subviews>
                         <color key="tintColor" red="0.94901960784313721" green="0.95686274509803915" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="iLu-Vd-Ubj" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" constant="-23" id="LWp-cw-jvZ"/>
+                            <constraint firstItem="iLu-Vd-Ubj" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" constant="-36" id="LWp-cw-jvZ"/>
                             <constraint firstItem="iLu-Vd-Ubj" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX" id="kPZ-Yu-wXK"/>
                         </constraints>
                     </view>
@@ -45,7 +45,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="certificate_logo" width="108" height="75"/>
-        <image name="splash_image" width="125" height="270.66665649414062"/>
+        <image name="splash_image" width="375" height="812"/>
+        <image name="splash_logo" width="108" height="75"/>
     </resources>
 </document>

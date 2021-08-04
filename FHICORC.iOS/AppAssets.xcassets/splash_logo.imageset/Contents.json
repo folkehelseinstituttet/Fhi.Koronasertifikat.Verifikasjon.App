@@ -22,7 +22,7 @@
       "idiom" : "universal"
     },
     {
-      "filename" : "error_lock-2.png",
+      "filename" : "splash_logo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -47,7 +47,7 @@
       "scale" : "1x"
     },
     {
-      "filename" : "error_lock-1.png",
+      "filename" : "splash_logo@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -72,7 +72,7 @@
       "scale" : "2x"
     },
     {
-      "filename" : "error_lock.png",
+      "filename" : "splash_logo@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
