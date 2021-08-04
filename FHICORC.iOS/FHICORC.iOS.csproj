@@ -255,25 +255,10 @@
     <ImageAsset Include="AppAssets.xcassets\question_mark_white.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\landing_page_background.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\landing_page_background.imageset\landing_page_background.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\landing_page_background.imageset\landing_page_background%402x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\landing_page_background.imageset\landing_page_background%403x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="AppAssets.xcassets\landing_page_logo.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="AppAssets.xcassets\landing_page_logo.imageset\landing_page_logo%403x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\landing_page_stock_image.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="AppAssets.xcassets\error_lock.imageset\Contents.json">
@@ -325,15 +310,6 @@
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="AppAssets.xcassets\question_mark_white.imageset\question_mark_white.pdf">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\landing_page_stock_image.imageset\FHI_Frontpage_100521 1.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\landing_page_stock_image.imageset\FHI_Frontpage_100521 1-1.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\landing_page_stock_image.imageset\FHI_Frontpage_100521 1-2.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="AppAssets.xcassets\x_mark_circle.imageset\x_mark_circle.pdf">
@@ -412,15 +388,6 @@
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\SplashBackground.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\SplashBackground-1.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\SplashBackground-2.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="AppAssets.xcassets\error_maintenance.imageset\Contents.json">
@@ -549,33 +516,6 @@
     <ImageAsset Include="AppAssets.xcassets\recovery.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine%402x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine%403x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\test.imageset\test.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\test.imageset\test%402x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\test.imageset\test%403x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery%402x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery%403x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="AppAssets.xcassets\check_shield.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -639,6 +579,22 @@
     <ImageAsset Include="AppAssets.xcassets\flashlight_on.imageset\flashlight_on%403x.png" />
     <ImageAsset Include="AppAssets.xcassets\flashlight_on.imageset\flashlight_on%402x.png" />
     <ImageAsset Include="AppAssets.xcassets\flashlight_on.imageset\flashlight_on.png" />
+    <ImageAsset Include="AppAssets.xcassets\splash_logo.imageset\Contents.json" />
+    <ImageAsset Include="AppAssets.xcassets\splash_logo.imageset\splash_logo.png" />
+    <ImageAsset Include="AppAssets.xcassets\splash_logo.imageset\splash_logo%402x.png" />
+    <ImageAsset Include="AppAssets.xcassets\splash_logo.imageset\splash_logo%403x.png" />
+    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\splash_image.png" />
+    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\splash_image%402x.png" />
+    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\splash_image%403x.png" />
+    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery.png" />
+    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery%402x.png" />
+    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery%403x.png" />
+    <ImageAsset Include="AppAssets.xcassets\test.imageset\test.png" />
+    <ImageAsset Include="AppAssets.xcassets\test.imageset\test%402x.png" />
+    <ImageAsset Include="AppAssets.xcassets\test.imageset\test%403x.png" />
+    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine.png" />
+    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine%402x.png" />
+    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -743,6 +699,8 @@
     <Folder Include="AppAssets.xcassets\close_icon_blue.imageset\" />
     <Folder Include="AppAssets.xcassets\flashlight_off.imageset\" />
     <Folder Include="AppAssets.xcassets\flashlight_on.imageset\" />
+    <Folder Include="AppAssets.xcassets\background_gradient.imageset\" />
+    <Folder Include="AppAssets.xcassets\splash_logo.imageset\" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
