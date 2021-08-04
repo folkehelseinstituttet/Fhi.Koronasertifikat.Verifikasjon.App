@@ -47,8 +47,8 @@
             </elements:NavigationHeader.RightButtonHeightRequest>
             <elements:NavigationHeader.Padding>
                 <OnPlatform x:TypeArguments="Thickness">
-                    <On Platform="iOS" Value="0,50,0,0" />
-                    <On Platform="Android" Value="0,15,0,0" />
+                    <On Platform="iOS" Value="0,43,0,0" />
+                    <On Platform="Android" Value="0,8,0,0" />
                 </OnPlatform>
             </elements:NavigationHeader.Padding>
         </elements:NavigationHeader>
@@ -128,9 +128,6 @@
               InputTransparent="True"
               Margin="28,0,28,0"
               IsVisible="{Binding HasCameraPermissions}">
-            <Grid.GestureRecognizers>
-                <TapGestureRecognizer Tapped="ScannerOverlay_OnTapped"/>
-            </Grid.GestureRecognizers>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
