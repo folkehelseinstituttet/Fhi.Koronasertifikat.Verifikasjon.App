@@ -94,6 +94,7 @@ namespace FHICORC.Views
 
         protected override void OnDisappearing()
         {
+            (BindingContext as QRScannerViewModel)?.ResetFlashlightState();
             if (_inTabbar) return;
             if (_scannerView == null) return;
 
@@ -116,10 +117,22 @@ namespace FHICORC.Views
                 if (viewModel.HasCameraPermissions)
                 {
                     viewModel.RaisePropertyChanged(() => viewModel.HasCameraPermissions);
-
+                    // Note: We only want to show the flashlight switch in the view, if we have both Camera and Flashlight permissions
+                    await Task.Run(() => (BindingContext as QRScannerViewModel)?.CheckFlashlightPermissions() ?? Task.CompletedTask);
                     _scannerView ??= new ZXingScannerView();
                     _scannerView.OnScanResult += OnScanResult;
                     _scannerView.Options = _scanningOptions;
+                    _scannerView.SetBinding(ZXingScannerView.IsTorchOnProperty, nameof(QRScannerViewModel.IsFlashlighthOn));
+                    try
+                    {
+                        // Check that Flashlight feature is available by triggering ZXingScannerView.IsTorchOnProperty
+                        (BindingContext as QRScannerViewModel)?.ResetFlashlightState();
+                    }
+                    catch (FeatureNotSupportedException)
+                    {
+                        // Handle not supported on device, by disabling flashlight functionality from view.
+                        ((QRScannerViewModel)BindingContext).IsFlashlightSupported = false;
+                    }
 
                     await Device.InvokeOnMainThreadAsync(() =>
                     {
@@ -164,6 +177,7 @@ namespace FHICORC.Views
                             {
                                 _hasAskedForCameraPermission = true;
                                 viewModel.RaisePropertyChanged(() => viewModel.HasCameraPermissions);
+                                await Task.Run(() => (BindingContext as QRScannerViewModel)?.CheckFlashlightPermissions() ?? Task.CompletedTask);
                                 await CreateScannerView();
                             }
                             else

@@ -36,7 +36,7 @@
                 <StackLayout
                     BackgroundColor="{StaticResource ExpiredBorderColor}"
                     IsVisible="{Binding ShowInvalidPage, Converter={StaticResource BoolToInverseBoolConverter}}"
-                    Padding="0"
+                    Padding="0,9,0,9"
                     Spacing="0">
                     <Label
                         Margin="-50, 0"
@@ -47,19 +47,15 @@
                         Style="{StaticResource SecondaryContentBoldStyle}"
                         TextColor="{StaticResource BaseTextColor}"
                         Text="{Binding RepeatedText}"
-                        effects:FontSizeLabelEffectParams.MaxFontSize="15.00"
-                        effects:FontSizeLabelEffectParams.MinFontSize="15.00"
+                        FontSize="20"
                         AutomationProperties.IsInAccessibleTree="False">
-                        <Label.Effects>
-                            <effects:FontSizeLabelEffect/>
-                        </Label.Effects>
                     </Label>
                 </StackLayout>
 
                 <StackLayout
                     BackgroundColor="{StaticResource InvalidBorderColor}"
                     IsVisible="{Binding ShowInvalidPage}"
-                    Padding="0"
+                    Padding="0,9,0,9"
                     Spacing="0">
                     <Label
                         Margin="-50, 0"
@@ -69,13 +65,9 @@
                         LineBreakMode="NoWrap"
                         Style="{StaticResource SecondaryContentBoldStyle}"
                         TextColor="{StaticResource BaseTextColor}"
-                        Text="{Binding RepeatedText}" 
-                        effects:FontSizeLabelEffectParams.MaxFontSize="15.00"
-                        effects:FontSizeLabelEffectParams.MinFontSize="15.00"
+                        Text="{Binding RepeatedText}"
+                        FontSize="20"
                         AutomationProperties.IsInAccessibleTree="False">
-                        <Label.Effects>
-                            <effects:FontSizeLabelEffect/>
-                        </Label.Effects>
                     </Label>
                 </StackLayout>
             </StackLayout>
@@ -92,7 +84,7 @@
                     <StackLayout
                         IsVisible="{Binding ShowInvalidPage, Converter={StaticResource BoolToInverseBoolConverter}}"
                         Orientation="Vertical"
-                        Spacing="18">
+                        Spacing="20">
                         <Image Source="{StaticResource HourGlass}" />
                         <Label
                             Style="{StaticResource BigTitleStyle}"
@@ -114,8 +106,8 @@
                     <StackLayout
                         IsVisible="{Binding ShowInvalidPage}"
                         Orientation="Vertical"
-                        Spacing="18">
-                        <Image Source="{StaticResource xMarkCircle}" />
+                        Spacing="20">
+                        <Image Source="{StaticResource ErrorCheckLayout}" />
                         <Label
                             HorizontalTextAlignment="Center"
                             Style="{StaticResource BigTitleStyle}"

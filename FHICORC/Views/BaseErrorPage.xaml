@@ -8,7 +8,7 @@
     xmlns:elements="clr-namespace:FHICORC.Views.Elements"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     ios:Page.UseSafeArea="true"
-    BackgroundColor="{StaticResource DefaultBackgroundColor}"
+    BackgroundColor="{StaticResource ErrorBackgroundColor}"
     NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Content>
@@ -24,6 +24,7 @@
                 effects:FontSizeLabelEffectParams.MaxFontSize="32"
                 effects:FontSizeLabelEffectParams.MinFontSize="12"
                 HorizontalTextAlignment="Center"
+                TextColor="{StaticResource FHIWhite}"
                 LineHeight="1"
                 Style="{StaticResource TitleStyle}"
                 Text="{Binding HeaderText}">
@@ -54,14 +55,14 @@
                         FontSize="28"
                         HorizontalTextAlignment="Center"
                         LineHeight="1.2"
-                        Style="{StaticResource TitleStyle}"
+                        Style="{StaticResource ErrorTitleStyle}"
                         Text="{Binding ErrorTitle}" />
 
                     <Label
                         Grid.Row="2"
                         Margin="36,0,36,0"
                         HorizontalTextAlignment="Center"
-                        Style="{StaticResource ContentStyle}"
+                        Style="{StaticResource ErrorContentStyle}"
                         Text="{Binding ErrorSubtitle}"
                         effects:FontSizeLabelEffectParams.MaxFontSize="32"
                         effects:FontSizeLabelEffectParams.MinFontSize="12">
@@ -84,9 +85,10 @@
                     Style="{StaticResource CombinedButtonPrimaryStyle}"
                     Command="{Binding OkButtonCommand}"
                     Text="{Binding ButtonTitle}"
+                    BackgroundColor="{StaticResource FHIWhite}"
                     AutomationProperties.IsInAccessibleTree="True"
                     AutomationProperties.Name="{Binding ButtonTitle}"
-                    TextColor="{StaticResource DefaultBackgroundColor}"
+                    TextColor="{StaticResource FHIPrimaryBlue}"
                     effects:FontSizeLabelEffectParams.MaxFontSize="32"
                     effects:FontSizeLabelEffectParams.MinFontSize="12">
                     <controls:SingleLineButton.Effects>
