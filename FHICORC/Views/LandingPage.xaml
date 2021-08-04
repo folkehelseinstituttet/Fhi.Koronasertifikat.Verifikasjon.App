@@ -26,21 +26,9 @@
                 Grid.Row="0"
                 Grid.RowSpan="4"
                 Aspect="Fill"
-                Source="{StaticResource LandingPageStockImage}"
+                Source="{StaticResource SplashImage}"
                 VerticalOptions="Fill" />
 
-            <Frame
-                Grid.Row="0"
-                Grid.RowSpan="4">
-                <Frame.Background>
-                    <LinearGradientBrush
-                        StartPoint="0.5, 0"
-                            EndPoint="0.5, 1" >
-                        <GradientStop Color="{StaticResource FHIPrimaryBlueTransparent}" Offset="0.1"/>
-                        <GradientStop Color="{StaticResource FHIPrimaryBlue}" Offset="1"/>
-                    </LinearGradientBrush>
-                </Frame.Background>
-            </Frame>
             <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -225,7 +213,7 @@
                         Command="{Binding OpenScannerCommand}"
                         Style="{StaticResource LandingButtonStyle}"
                         Text="{Binding OpenScannerText}"
-                        IsVisible="{Binding IsScannerButtonVisible}"
+                        IsEnabled="{Binding IsScannerButtonEnabled}"
                         HorizontalOptions="Center"
                         effects:FontSizeLabelEffectParams.MaxFontSize="28.00"
                         effects:FontSizeLabelEffectParams.MinFontSize="15.00">
