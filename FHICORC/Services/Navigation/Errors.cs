@@ -11,7 +11,7 @@ namespace FHICORC.Services.Navigation
             Title = "ERROR_GENERIC_TITLE".Translate(),
             Message = "ERROR_GENERIC_TEXT".Translate(),
             Image = FHICORCImage.ErrorUnknown.Image(),
-            ButtonTitle = "ERROR_OK_BUTTON".Translate(),
+            ButtonTitle = "CLOSE_BUTTON".Translate(),
             HasSecondButton = false
         };
         public static readonly ErrorPageModel NoInternetError = new ErrorPageModel

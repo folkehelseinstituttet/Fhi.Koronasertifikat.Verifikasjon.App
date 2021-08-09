@@ -1,6 +1,7 @@
 ﻿using System;
 using FHICORC.iOS;
 using FHICORC.Services.Interfaces;
+using UIKit;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof (StatusBarService))]
@@ -14,7 +15,10 @@ namespace FHICORC.iOS
 
         public void SetStatusBarColor(Color backgroundColor, Color textColor)
         {
-            //This is handled automatically by setting BarTextColor on NavigationPage in Forms.
+            if (textColor == Color.White)
+                UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.LightContent;
+            else if (textColor == Color.Black)
+                UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.DarkContent;
         }
 
     }

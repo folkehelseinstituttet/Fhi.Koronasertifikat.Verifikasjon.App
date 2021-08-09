@@ -36,6 +36,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Image
+                        x:Name="FhiImg"
                         Grid.Column="0"
                         HorizontalOptions="Start"
                         Source="{StaticResource LandingPageFhiLogo}"
@@ -49,6 +50,7 @@
                     </Image>
 
                     <ImageButton
+                        x:Name="HelpBtn"
                         Grid.Column="2"
                         AutomationProperties.IsInAccessibleTree="True"
                         AutomationProperties.Name="{Binding Strings[HELP_TITLE_BUTTON]}"
@@ -101,6 +103,7 @@
                 <StackLayout
                     Grid.Row="2">
                     <Label
+                        x:Name="TitleLbl"
                         Margin="0, 54, 0, 0"
                         Style="{StaticResource ContentTitleStyle}"
                         TextColor="{StaticResource FHIPrimaryWhite}"
@@ -215,6 +218,8 @@
                         Text="{Binding OpenScannerText}"
                         IsEnabled="{Binding IsScannerButtonEnabled}"
                         HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Padding="4"
                         effects:FontSizeLabelEffectParams.MaxFontSize="28.00"
                         effects:FontSizeLabelEffectParams.MinFontSize="15.00">
                         <controls:SingleLineButton.Effects>
@@ -226,8 +231,11 @@
                 <StackLayout
                     Grid.Row="4"
                     Margin="0,34,0,0"
+                    Orientation="Vertical"
+                    HorizontalOptions="Center"
                     VerticalOptions="Center">
                     <controls:SingleLineButton
+                        x:Name="ChangeLanguageSingleLineButton"
                         AutomationId="OpenScannerButton"
                         AutomationProperties.IsInAccessibleTree="True"
                         AutomationProperties.Name="{Binding LanguageChangeButtonText}"
@@ -242,6 +250,15 @@
                             <effects:FontSizeLabelEffect/>
                         </controls:SingleLineButton.Effects>
                     </controls:SingleLineButton>
+                    <controls:ImageButtonView
+                        x:Name="ChangeLanguageImageButton"
+                        AutomationId="OpenScannerButton"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        AutomationProperties.Name="{Binding LanguageChangeButtonText}"
+                        Command="{Binding ChangeLanguageCommand}"
+                        Source="{StaticResource ArrowRightWhite}"
+                        BackgroundColor= "Transparent">
+                    </controls:ImageButtonView>
                 </StackLayout>
             </Grid>
             </ScrollView>

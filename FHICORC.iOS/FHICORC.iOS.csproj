@@ -548,9 +548,6 @@
     <ImageAsset Include="AppAssets.xcassets\menu_help_icon.imageset\menu_helpsupport%402x.png" />
     <ImageAsset Include="AppAssets.xcassets\menu_help_icon.imageset\menu_helpsupport%403x.png" />
     <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\Contents.json" />
-    <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\landing_helpsupport.png" />
-    <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\landing_helpsupport%402x.png" />
-    <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\landing_helpsupport%403x.png" />
     <ImageAsset Include="AppAssets.xcassets\close_icon_blue.imageset\Contents.json" />
     <ImageAsset Include="AppAssets.xcassets\close_icon_blue.imageset\close_blue.png" />
     <ImageAsset Include="AppAssets.xcassets\close_icon_blue.imageset\close_blue%402x.png" />
@@ -589,6 +586,9 @@
     <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine.png" />
     <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine%402x.png" />
     <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine%403x.png" />
+    <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\landingpage_help_icon.png" />
+    <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\landingpage_help_icon_2.png" />
+    <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\landingpage_help_icon_3.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
