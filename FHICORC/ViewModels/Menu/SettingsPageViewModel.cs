@@ -252,7 +252,7 @@ namespace FHICORC.ViewModels.Menu
             IsChangeLanguageSelected = true;
             string title = $"{"SETTINGS_CHOOSE_LANGUAGE_DIALOG_TITLE_NB".Translate()}/\n"
                 + "SETTINGS_CHOOSE_LANGUAGE_DIALOG_TITLE_EN".Translate();
-            string content = $"{"SETTINGS_CHOOSE_LANGUAGE_DIALOG_CONTENT_NB".Translate()}\n"
+            string content = $"{"SETTINGS_CHOOSE_LANGUAGE_DIALOG_CONTENT_NB".Translate()}/\n"
                 + "SETTINGS_CHOOSE_LANGUAGE_DIALOG_CONTENT_EN".Translate();
             string accept = "DIALOG_OK_BUTTON".Translate();
             string cancel = "DIALOG_CANCEL_BUTTON".Translate();
