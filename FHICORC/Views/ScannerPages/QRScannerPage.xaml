@@ -111,7 +111,7 @@
             </StackLayout>
             <StackLayout
                 Grid.Row="1"
-                Margin="20, 0, 20, 40"
+                Margin="20, 0, 20, 80"
                 VerticalOptions="End">
                 <effects:SingleLineButton
                 Text="{Binding ButtonText}"
