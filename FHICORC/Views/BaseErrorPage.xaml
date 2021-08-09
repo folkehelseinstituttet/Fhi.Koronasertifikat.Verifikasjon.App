@@ -100,9 +100,10 @@
                     IsVisible="{Binding HasSecondButton}"
                     Grid.Row="1"
                     Style="{StaticResource SecondaryButtonStyle}"
+                    BorderColor="{StaticResource FHIPrimaryWhite}"
                     Command="{Binding BackCommand}"
                     Text="{Binding SecondButtonTitle}"
-                    TextColor="{StaticResource FHIPrimaryBlue}"
+                    TextColor="{StaticResource FHIPrimaryWhite}"
                     effects:FontSizeLabelEffectParams.MaxFontSize="32"
                     effects:FontSizeLabelEffectParams.MinFontSize="12">
                     <controls:SingleLineButton.Effects>
