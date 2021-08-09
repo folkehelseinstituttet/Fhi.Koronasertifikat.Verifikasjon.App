@@ -24,7 +24,7 @@ namespace FHICORC.Controls
 
         private static void ImageSourcePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = (ImageButtonView)bindable;
+            ImageButtonView control = (ImageButtonView)bindable;
             control.imgSource.Source = ImageSource.FromFile(newValue.ToString());
         }
         public string Source
@@ -97,7 +97,7 @@ namespace FHICORC.Controls
 
         private static void CornerRadiusPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = (ImageButtonView)bindable;
+            ImageButtonView control = (ImageButtonView)bindable;
             control.frmObject.CornerRadius = (int)newValue;
         }
         #endregion
@@ -113,7 +113,7 @@ namespace FHICORC.Controls
 
         private static void ImageHeightRequestPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = (ImageButtonView)bindable;
+            ImageButtonView control = (ImageButtonView)bindable;
             control.imgSource.HeightRequest = (double)newValue;
         }
 
@@ -134,7 +134,7 @@ namespace FHICORC.Controls
 
         private static void ImageWidthRequestPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = (ImageButtonView)bindable;
+            ImageButtonView control = (ImageButtonView)bindable;
             control.imgSource.WidthRequest = (double)newValue;
         }
 
@@ -165,7 +165,7 @@ namespace FHICORC.Controls
 
         private static void CommandPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = (ImageButtonView)bindable;
+            ImageButtonView control = (ImageButtonView)bindable;
 
             // this gesture recognizer will inovke the command event whereever it is used
             control.frmObject.GestureRecognizers.Add(new TapGestureRecognizer
