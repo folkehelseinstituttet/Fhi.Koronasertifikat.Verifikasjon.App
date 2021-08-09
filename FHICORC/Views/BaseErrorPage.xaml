@@ -82,13 +82,11 @@
                 </Grid.RowDefinitions>
                 <controls:SingleLineButton
                     Grid.Row="0"
-                    Style="{StaticResource CombinedButtonPrimaryStyle}"
+                    Style="{StaticResource ErrorButtonStyle}"
                     Command="{Binding OkButtonCommand}"
                     Text="{Binding ButtonTitle}"
-                    BackgroundColor="{StaticResource FHIWhite}"
                     AutomationProperties.IsInAccessibleTree="True"
                     AutomationProperties.Name="{Binding ButtonTitle}"
-                    TextColor="{StaticResource FHIPrimaryBlue}"
                     effects:FontSizeLabelEffectParams.MaxFontSize="32"
                     effects:FontSizeLabelEffectParams.MinFontSize="12">
                     <controls:SingleLineButton.Effects>

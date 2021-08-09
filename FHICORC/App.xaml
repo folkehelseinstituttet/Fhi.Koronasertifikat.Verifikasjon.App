@@ -456,6 +456,32 @@
                 </Setter>
             </Style>
 
+            <Style x:Key="ErrorButtonStyle" TargetType="Button">
+                <Setter Property="MinimumHeightRequest" Value="45" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="FontSize" Value="Body" />
+                <Setter Property="FontFamily" Value="PTSansRegular" />
+                <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource FHIPrimaryWhite}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource DefaultBackgroundColor}" />
+                                    <Setter Property="HeightRequest" Value="41" />
+                                    <Setter Property="Margin" Value="2" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
             <!--  Converters  -->
             <converters:BoolToInverseBoolConverter x:Key="BoolToInverseBoolConverter" />
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
