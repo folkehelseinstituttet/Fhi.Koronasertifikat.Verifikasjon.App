@@ -25,7 +25,7 @@
             <Color x:Key="DefaultBackgroundColor">#E1EAED</Color>
             <Color x:Key="ErrorBackgroundColor">#32345C</Color>
             <Color x:Key="NavigationHeaderBackgroundColor">#E1EAED</Color>
-            <Color x:Key="LandingPageColorStart">#4B4E6F</Color>
+            <Color x:Key="LandingPageColorStart">#425070</Color>
             <Color x:Key="MainPageBackgroundColor">#E7F2F2</Color>
             <Color x:Key="SuccessBorderColor">#D9F0D4</Color>
             <Color x:Key="InvalidBorderColor">#F5858c</Color>
@@ -449,6 +449,32 @@
                             <VisualState x:Name="Pressed">
                                 <VisualState.Setters>
                                     <Setter Property="BackgroundColor" Value="{StaticResource MenuButtonPressed}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style x:Key="ErrorButtonStyle" TargetType="Button">
+                <Setter Property="MinimumHeightRequest" Value="45" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="FontSize" Value="Body" />
+                <Setter Property="FontFamily" Value="PTSansRegular" />
+                <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource FHIPrimaryWhite}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource DefaultBackgroundColor}" />
+                                    <Setter Property="HeightRequest" Value="41" />
+                                    <Setter Property="Margin" Value="2" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
