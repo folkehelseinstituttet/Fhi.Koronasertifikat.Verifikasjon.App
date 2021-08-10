@@ -58,6 +58,7 @@ namespace FHICORC.Views.Elements
             else if (propertyName == CenterLabelTextProperty.PropertyName)
             {
                 CenterLabel.Text = CenterLabelText;
+                UpdateIconsSizesAccessibility();
             }
             else if (propertyName == CenterLabelHeightRequestProperty.PropertyName)
             {
@@ -195,6 +196,35 @@ namespace FHICORC.Views.Elements
         {
             get { return (string)GetValue(RightButtonAccessibilityTextProperty); }
             set { SetValue(RightButtonAccessibilityTextProperty, value); }
+        }
+        private void UpdateIconsSizesAccessibility()
+        {
+            double fontSize = CenterLabel.FontSize;
+            const int threshold = 22;
+            double delta = fontSize - threshold;
+            double scaleValue = 1.0;
+
+            if (Device.RuntimePlatform == Device.iOS && fontSize > threshold)
+            {
+                scaleValue = 1.0 + 0.01 * delta;
+
+            }
+            else if (Device.RuntimePlatform == Device.Android && fontSize > threshold)
+            {
+                scaleValue = 1.0 + 0.015 * delta;
+            }
+
+            if (scaleValue >= 1.4)
+            {
+                scaleValue = 1.4;
+            }
+            else if (scaleValue < 1.0)
+            {
+                scaleValue = 1.0;
+            }
+
+            LeftButton.Scale = scaleValue;
+            RightButton.Scale = scaleValue;
         }
     }
 }
