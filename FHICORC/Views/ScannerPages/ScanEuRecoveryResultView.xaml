@@ -115,23 +115,22 @@
                     </StackLayout>
 
                     <Grid Margin="0"
-                          Padding="0,25,0,27"
+                          Padding="20,25,20,27"
+                          RowSpacing="0"
                           BackgroundColor="{StaticResource FHIPrimaryBlue}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.2*" />
                             <ColumnDefinition Width="70" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="0.3*" />
                         </Grid.ColumnDefinitions>
-                        <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" 
+                        <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" 
                                Source="{StaticResource RecoveryIcon}"
                                VerticalOptions="Center" 
                                HorizontalOptions="Start" />
-                        <Label Grid.Row="0" Grid.Column="2" 
+                        <Label Grid.Row="0" Grid.Column="1" 
                                Style="{StaticResource InfoPaneHeaderStyle}"
                                Text="{Binding RecoveryHeaderText}"
                                AutomationId="{Binding RecoveryHeaderText}"
@@ -142,7 +141,7 @@
                                 <effects:FontSizeLabelEffect/>
                             </Label.Effects>
                         </Label>
-                        <Label Grid.Row="1" Grid.Column="2" 
+                        <Label Grid.Row="1" Grid.Column="1" 
                                Style="{StaticResource InfoPaneSubHeaderStyle}"
                                Text="{Binding RecoveryHeaderValue}" 
                                HorizontalOptions="Start"

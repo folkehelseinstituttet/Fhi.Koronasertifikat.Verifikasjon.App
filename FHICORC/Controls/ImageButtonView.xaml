@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="FHICORC.Controls.ImageButtonView"
+             xmlns:effects="clr-namespace:FHICORC.Controls"
+                 xmlns:viewModel="clr-namespace:FHICORC.ViewModels"
+                 x:DataType="viewModel:LandingViewModel">
+    <ContentView.Content>
+                <Frame  x:Name="frmObject"  HasShadow="false">
+                    <StackLayout>
+                        <Grid
+                           ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                             <ColumnDefinition Width="0.9*" />
+                             <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <Label
+                                HorizontalTextAlignment="Center"
+                                x:Name="lblText"
+                                Text="{Binding LanguageChangeButtonText}"
+                                Grid.Column="0"
+                                VerticalOptions="CenterAndExpand"
+                                HorizontalOptions="CenterAndExpand"
+                                Padding="4"
+                                MaxLines="2"
+                                Margin="0,0,2,0"
+                                FontSize="Body"
+                                FontFamily="PTSansRegular"
+                                TextColor="White"
+                                LineBreakMode="TailTruncation"
+                                effects:FontSizeLabelEffectParams.MaxFontSize="28.00"
+                                effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                                     <Label.Effects>
+                                        <effects:FontSizeLabelEffect />
+                                    </Label.Effects> 
+                            </Label>
+                            <Image
+                                x:Name="imgSource"
+                                Grid.Column="1"
+                                VerticalOptions="Center"
+                                HorizontalOptions="CenterAndExpand"
+                                Margin="0,4,0,0"/>        
+                        </Grid>
+                       </StackLayout>
+                </Frame>
+    </ContentView.Content>
+</ContentView>
