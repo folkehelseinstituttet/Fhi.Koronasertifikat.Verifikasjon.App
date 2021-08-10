@@ -43,6 +43,7 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Label
+                            x:Name="LabelSettings"
                             Grid.Row="0"
                             Margin="20,35,20,15"
                             AutomationId="{Binding Strings[SETTINGS_SECTION_1_TITLE_ACC]}"
@@ -210,8 +211,8 @@
                                         <effects:FontSizeLabelEffect/>
                                     </Label.Effects>
                                 </Label>
-
                                 <Switch
+                                    x:Name="SwitchToggledSound"
                                     Grid.Column="1"
                                     Margin="0,0,16,0"
                                     AutomationProperties.IsInAccessibleTree="True"
@@ -242,8 +243,8 @@
                                         <effects:FontSizeLabelEffect/>
                                     </Label.Effects>
                                 </Label>
-
                                 <Switch
+                                    x:Name="SwitchToggledVibration"
                                     Grid.Column="1"
                                     Margin="0,0,16,0"
                                     AutomationProperties.IsInAccessibleTree="True"
@@ -267,8 +268,8 @@
                                     <On Platform="Android" Value="20,50,20,30" />
                                 </OnPlatform>
                             </Grid.Margin>
-
                             <controls:SingleLineButton
+                                x:Name="FetchSingleLineButton"
                                 Grid.Row="0"
                                 Padding="50,0,50,0"
                                 ImageSource="{StaticResource SyncIcon}"
