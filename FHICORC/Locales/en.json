@@ -110,7 +110,7 @@
   "HELP_MORE_INFO_BUTTON": "Link to Helsenorge.no",
   "PRIVACY_URL": "https://www.fhi.no/om/koronasertifikat/personvern/",
   "ACCESSIBILITY_URL": "https://www.fhi.no/om/koronasertifikat/tilgjengelighetserklaring-koronasertifikat/",
-  "TERMS_OF_SERVICE_URL": "https://www.fhi.no",
+  "TERMS_OF_SERVICE_URL": "https://www.fhi.no/om/koronasertifikat/bruksvilkar-for-kontroll-av-koronasertifikat-app/",
   "ERROR_NO_INTERNET_TITLE": "No internet",
   "ERROR_NO_INTERNET_TEXT": "The app has tried to download new control keys, but there is no internet connection. \nPlease connect and try again",
   "ERROR_GENERIC_TITLE": "Something went wrong, \nwe're working on it",
