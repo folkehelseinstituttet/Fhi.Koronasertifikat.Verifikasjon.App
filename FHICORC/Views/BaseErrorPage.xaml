@@ -14,9 +14,9 @@
     <ContentPage.Content>
         <Grid Padding="0,30,0,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <Label
@@ -36,7 +36,7 @@
 
             <ScrollView Grid.Row="1" VerticalOptions="Center">
 
-                <Grid Padding="0,70,0,30">
+                <Grid Padding="0,0,0,30">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -77,8 +77,8 @@
                   RowSpacing="10"
                   Margin="20,0,20,40">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.5*" />
-                    <RowDefinition Height="0.5*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <controls:SingleLineButton
                     Grid.Row="0"
