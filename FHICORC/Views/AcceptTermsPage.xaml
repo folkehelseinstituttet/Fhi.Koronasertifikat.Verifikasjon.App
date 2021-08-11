@@ -3,6 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:effects="clr-namespace:FHICORC.Controls"
     x:Class="FHICORC.Views.AcceptTermsPage"
     NavigationPage.HasNavigationBar="False"
     ios:Page.UseSafeArea="true"
@@ -14,6 +15,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <ImageButton
+                x:Name="BackImageButton"
                 Grid.Row="0"
                 Padding="15,15,0,0"
                 HeightRequest="50"
@@ -267,6 +269,7 @@
                         Style="{StaticResource ContentStyle}"
                         Text="{Binding Strings[ACCEPT_TERMS_PARAGRAPH_NINE_SECTION_TWO]}" />
                     <Label
+                        x:Name="AcceptLabel"
                         Margin="20, 0, 20, 0"
                         Grid.Row="30"
                         TextColor="{StaticResource FHIPrimaryBlue}"
@@ -276,17 +279,35 @@
                         Grid.Row="31"
                         HorizontalOptions="Center"
                         Orientation="Horizontal">
-                        <Label Text="{Binding AcceptTermsLabelText}" VerticalTextAlignment="Center" VerticalOptions="Center" Style="{StaticResource RegularLabelBoldStyle}"/>
-                        <Switch IsToggled="{Binding TermsAccepted, Mode=TwoWay}"  />
+                        <Label
+                            Text="{Binding AcceptTermsLabelText}"
+                            VerticalTextAlignment="Center"
+                            VerticalOptions="Center"
+                            Margin="0,0,10,0"
+                            Style="{StaticResource RegularLabelBoldStyle}"
+                            effects:FontSizeLabelEffectParams.MaxFontSize="44.00"
+                            effects:FontSizeLabelEffectParams.MinFontSize="18.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Switch x:Name="ToggleSwitch" Margin="10,0,0,0" VerticalOptions="Center" IsToggled="{Binding TermsAccepted, Mode=TwoWay}"  />
                     </StackLayout>
                     <StackLayout
                         Grid.Row="32"
                         Margin="20, 0, 20, 0">
                         <Button
+                            Padding="4"
                             Text="{Binding Strings[CONFIRM_BUTTON]}"
                             Command="{Binding NextButtonCommand}"
                             IsEnabled="{Binding TermsAccepted}"
-                            Style="{StaticResource CombinedButtonPrimaryStyle}"/>
+                            Style="{StaticResource CombinedButtonPrimaryStyle}"
+                            effects:FontSizeLabelEffectParams.MaxFontSize="44.00"
+                            effects:FontSizeLabelEffectParams.MinFontSize="18.00">
+                        <Button.Effects>
+                            <effects:FontSizeLabelEffect/>
+                        </Button.Effects>
+                        </Button>
                     </StackLayout>
                 </Grid>
             </ScrollView>
