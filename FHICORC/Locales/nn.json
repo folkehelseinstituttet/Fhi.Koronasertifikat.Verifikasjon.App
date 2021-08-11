@@ -110,7 +110,7 @@
   "HELP_MORE_INFO_BUTTON": "Gå til Helsenorge.no",
   "PRIVACY_URL": "https://www.fhi.no/om/koronasertifikat/personvern/",
   "ACCESSIBILITY_URL": "https://www.fhi.no/om/koronasertifikat/tilgjengelighetserklaring-koronasertifikat/",
-  "TERMS_OF_SERVICE_URL": "https://www.fhi.no",
+  "TERMS_OF_SERVICE_URL": "https://www.fhi.no/om/koronasertifikat/bruksvilkar-for-kontroll-av-koronasertifikat-app/",
   "ERROR_NO_INTERNET_TITLE": "Ikkje noko internett",
   "ERROR_NO_INTERNET_TEXT": "Appen har freista å laste ned nye kontrollnøkler, men du har ikkje noko internettilkopling. \nVer venleg, kople til og prøv igjen.",
   "ERROR_GENERIC_TITLE": "Noko gjekk gale, vi jobbar med saka",
