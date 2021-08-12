@@ -19,12 +19,15 @@ using FHICORC.Views.ScannerPages;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using ZXing;
-using FHICORC.Services;
 
 namespace FHICORC.ViewModels
 {
     public class QRScannerViewModel : BaseViewModel
     {
+
+        private static readonly string _flashlightOnIconPath;
+        private static readonly string _flashlightOffIconPath;
+
         private const double ScanFailureVibrationDuration = 500;
         private const double ScanSuccessVibrationDuration = 250;
         
@@ -34,8 +37,55 @@ namespace FHICORC.ViewModels
         private readonly IPreferencesService _preferencesService;
 
         private bool _inTabbar = false;
-
+        private bool _isFlashlightSupported = true;
+        private bool _isTorchOn;
+        private string _currentFlashlightStateIconPath = _flashlightOffIconPath;
         private SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
+
+        public bool IsFlashlightSupported
+        {
+            get => _isFlashlightSupported;
+            set
+            {
+                _isFlashlightSupported = value;
+                OnPropertyChanged(nameof(IsFlashlightSupported));
+            }
+        }
+        public bool IsFlashlighthOn
+        {
+            get => _isTorchOn;
+            private set
+            {
+                _isTorchOn = value;
+                OnPropertyChanged(nameof(IsFlashlighthOn));
+            }
+        }
+        public string CurrentFlashlightStateIconPath
+        {
+            get => _currentFlashlightStateIconPath;
+            private set
+            {
+                _currentFlashlightStateIconPath = value;
+                OnPropertyChanged(nameof(CurrentFlashlightStateIconPath));
+            }
+        }
+
+        private bool _hasFlashlightPermissions;
+        public bool HasFlashlightPermissions
+        {
+            get => _hasFlashlightPermissions;
+            private set
+            {
+                _hasFlashlightPermissions = value;
+                OnPropertyChanged(nameof(HasFlashlightPermissions));
+            }
+        }
+
+        static QRScannerViewModel()
+        {
+            _flashlightOnIconPath = App.Current.Resources["ScannerFlashlightOnIcon"].ToString();
+            _flashlightOffIconPath = App.Current.Resources["ScannerFlashlightOffIcon"].ToString();
+        }
 
         private string buttonText;
         public string ButtonText {
@@ -227,6 +277,39 @@ namespace FHICORC.ViewModels
         private async Task<bool> IsResultOpen()
         {
             return await _navigationService.FindCurrentPageAsync() is IScanResultView;
+        }
+
+        public async Task<bool> CheckFlashlightPermissions()
+        {
+            var hasPermissions = await Permissions.CheckStatusAsync<Permissions.Flashlight>() == PermissionStatus.Granted;
+            HasFlashlightPermissions = hasPermissions;
+            return hasPermissions;
+        }
+
+        public ICommand ToggleFlashlight => new Command(async () =>
+        {
+            if (await CheckFlashlightPermissions())
+            {
+                IsFlashlighthOn = !IsFlashlighthOn;
+                CurrentFlashlightStateIconPath = IsFlashlighthOn ? _flashlightOnIconPath : _flashlightOffIconPath;
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    if (IsFlashlighthOn)
+                        await Flashlight.TurnOnAsync();
+                    else
+                        await Flashlight.TurnOffAsync();
+                }
+            }
+        });
+
+        public async void ResetFlashlightState()
+        {
+            if (Device.RuntimePlatform == Device.iOS && IsFlashlighthOn)
+            {
+                await Flashlight.TurnOffAsync();
+            }
+            CurrentFlashlightStateIconPath = _flashlightOffIconPath;
+            IsFlashlighthOn = false;
         }
     }
 }

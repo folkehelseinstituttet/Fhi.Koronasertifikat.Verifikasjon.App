@@ -8,15 +8,15 @@
     xmlns:elements="clr-namespace:FHICORC.Views.Elements"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     ios:Page.UseSafeArea="true"
-    BackgroundColor="{StaticResource DefaultBackgroundColor}"
+    BackgroundColor="{StaticResource ErrorBackgroundColor}"
     NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Content>
         <Grid Padding="0,30,0,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <Label
@@ -24,6 +24,7 @@
                 effects:FontSizeLabelEffectParams.MaxFontSize="32"
                 effects:FontSizeLabelEffectParams.MinFontSize="12"
                 HorizontalTextAlignment="Center"
+                TextColor="{StaticResource FHIWhite}"
                 LineHeight="1"
                 Style="{StaticResource TitleStyle}"
                 Text="{Binding HeaderText}">
@@ -35,7 +36,7 @@
 
             <ScrollView Grid.Row="1" VerticalOptions="Center">
 
-                <Grid Padding="0,70,0,30">
+                <Grid Padding="0,0,0,30">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -54,14 +55,14 @@
                         FontSize="28"
                         HorizontalTextAlignment="Center"
                         LineHeight="1.2"
-                        Style="{StaticResource TitleStyle}"
+                        Style="{StaticResource ErrorTitleStyle}"
                         Text="{Binding ErrorTitle}" />
 
                     <Label
                         Grid.Row="2"
                         Margin="36,0,36,0"
                         HorizontalTextAlignment="Center"
-                        Style="{StaticResource ContentStyle}"
+                        Style="{StaticResource ErrorContentStyle}"
                         Text="{Binding ErrorSubtitle}"
                         effects:FontSizeLabelEffectParams.MaxFontSize="32"
                         effects:FontSizeLabelEffectParams.MinFontSize="12">
@@ -74,19 +75,18 @@
             </ScrollView>
             <Grid Grid.Row="2" VerticalOptions="End"
                   RowSpacing="10"
-                  Margin="20,0,20,10">
+                  Margin="20,0,20,40">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.5*" />
-                    <RowDefinition Height="0.5*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <controls:SingleLineButton
                     Grid.Row="0"
-                    Style="{StaticResource CombinedButtonPrimaryStyle}"
+                    Style="{StaticResource ErrorButtonStyle}"
                     Command="{Binding OkButtonCommand}"
                     Text="{Binding ButtonTitle}"
                     AutomationProperties.IsInAccessibleTree="True"
                     AutomationProperties.Name="{Binding ButtonTitle}"
-                    TextColor="{StaticResource DefaultBackgroundColor}"
                     effects:FontSizeLabelEffectParams.MaxFontSize="32"
                     effects:FontSizeLabelEffectParams.MinFontSize="12">
                     <controls:SingleLineButton.Effects>
@@ -98,9 +98,10 @@
                     IsVisible="{Binding HasSecondButton}"
                     Grid.Row="1"
                     Style="{StaticResource SecondaryButtonStyle}"
+                    BorderColor="{StaticResource FHIPrimaryWhite}"
                     Command="{Binding BackCommand}"
                     Text="{Binding SecondButtonTitle}"
-                    TextColor="{StaticResource FHIPrimaryBlue}"
+                    TextColor="{StaticResource FHIPrimaryWhite}"
                     effects:FontSizeLabelEffectParams.MaxFontSize="32"
                     effects:FontSizeLabelEffectParams.MinFontSize="12">
                     <controls:SingleLineButton.Effects>

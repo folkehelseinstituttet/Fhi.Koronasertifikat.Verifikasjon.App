@@ -5,6 +5,9 @@ using Xamarin.Forms;
 using FHICORC.Models;
 using FHICORC.Views.Menu;
 using FHICORC.Services;
+using FHICORC.Services.Interfaces;
+using FHICORC.Configuration;
+using FHICORC.Utils;
 
 namespace FHICORC.ViewModels.Error
 {

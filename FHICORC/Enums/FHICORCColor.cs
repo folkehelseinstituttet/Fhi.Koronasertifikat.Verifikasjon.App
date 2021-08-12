@@ -16,7 +16,7 @@ namespace FHICORC.Utils
         BaseTextColor,
         DefaultBackgroundColor,
         NavigationHeaderBackgroundColor,
-
+        FHIPrimaryBlue,
         ButtonBlue,
         ButtonDisable,
 

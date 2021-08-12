@@ -22,7 +22,6 @@ namespace FHICORC.Core.Services.Utils
             operators.AddOperator(">=", GenericArgsSatisfy((prev, next) => prev >= next, (prev, next) => string.CompareOrdinal(prev, next) >= 0));
             operators.AddOperator("plusTime", (logic, tokens, data) =>
             {
-                Console.WriteLine(data);
                 var date = Convert.ToString(logic.Apply(tokens[0], data));
                 var value = Convert.ToDouble(logic.Apply(tokens[1], data));
                 var unit = Convert.ToString(logic.Apply(tokens[2], data));
