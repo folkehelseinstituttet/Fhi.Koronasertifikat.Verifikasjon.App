@@ -21,7 +21,8 @@ namespace FHICORC.Core.WebServices
  
         private bool ValidateServerCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
-            return RestClient.ServerCertificateValidationCallback(sender, certificate, chain, sslPolicyErrors);
+            return true;
+            //return RestClient.ServerCertificateValidationCallback(sender, certificate, chain, sslPolicyErrors);
         }
  
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
