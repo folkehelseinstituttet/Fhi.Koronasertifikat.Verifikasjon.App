@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FHICORC.Configuration;
+using FHICORC.Enums;
 using FHICORC.Services;
 using FHICORC.Services.Interfaces;
 using FHICORC.Utils;
@@ -23,9 +24,12 @@ namespace FHICORC.Views
         private static int DelayBetweenContinousScans = 100;
         private static int DelayBetweenAnalyzingFrames = 100;
         private static int MinResolutionHeightThreshold = 720;
+        private static ZXingScannerView _scannerView;
+
         private bool _hasAskedForCameraPermission = false;
         private bool _inTabbar = false;
-        private static ZXingScannerView _scannerView;
+        private FlashlightState _perviousState = FlashlightState.Default;
+        private TimeSpan _focusAssistTimespan = new TimeSpan(0, 0, 2);
         private MobileBarcodeScanningOptions _scanningOptions = new MobileBarcodeScanningOptions
         {
             DelayBetweenAnalyzingFrames = DelayBetweenAnalyzingFrames,
@@ -39,8 +43,6 @@ namespace FHICORC.Views
         };
 
         public bool IsLoading { get; set; }
-
-        private TimeSpan _focusAssistTimespan = new TimeSpan(0, 0, 2);
 
         public QRScannerPage()
         {
@@ -81,6 +83,7 @@ namespace FHICORC.Views
             if (_inTabbar) return;
             if (_scannerView != null)
             {
+                (BindingContext as QRScannerViewModel)?.SetFlashlightState(_perviousState);
                 _scannerView.IsAnalyzing = true;
                 return;
             }
@@ -88,13 +91,14 @@ namespace FHICORC.Views
             //Initialize camera from the front page
             IoCContainer.Resolve<INavigationService>().SetStatusBar(FHICORCColor.NavigationHeaderBackgroundColor.Color(), Color.Black);
             await CreateScannerView();
-
             base.OnAppearing();
         }
 
         protected override void OnDisappearing()
         {
-            (BindingContext as QRScannerViewModel)?.ResetFlashlightState();
+            _perviousState = (BindingContext as QRScannerViewModel).IsFlashlighthOn ? FlashlightState.On : FlashlightState.Off;
+            (BindingContext as QRScannerViewModel)?.SetFlashlightState(FlashlightState.Off);
+
             if (_inTabbar) return;
             if (_scannerView == null) return;
 
@@ -126,12 +130,14 @@ namespace FHICORC.Views
                     try
                     {
                         // Check that Flashlight feature is available by triggering ZXingScannerView.IsTorchOnProperty
-                        (BindingContext as QRScannerViewModel)?.ResetFlashlightState();
+                        ((QRScannerViewModel)BindingContext).IsFlashlightSupported = true;
+                        (BindingContext as QRScannerViewModel)?.SetFlashlightState(FlashlightState.EnabledAndOff);
                     }
                     catch (FeatureNotSupportedException)
                     {
                         // Handle not supported on device, by disabling flashlight functionality from view.
                         ((QRScannerViewModel)BindingContext).IsFlashlightSupported = false;
+                        (BindingContext as QRScannerViewModel)?.SetFlashlightState(FlashlightState.DisabledAndOff);
                     }
 
                     await Device.InvokeOnMainThreadAsync(() =>
