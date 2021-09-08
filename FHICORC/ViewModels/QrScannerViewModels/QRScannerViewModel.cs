@@ -295,10 +295,10 @@ namespace FHICORC.ViewModels
         public ICommand ToggleFlashlight => new Command(async () =>
         {
             if (await CheckFlashlightPermissions() && IsFlashlightSupported)
-                await SetFlashlightState(IsFlashlighthOn ? FlashlightState.Off : FlashlightState.On);
+                await SetFlashlightStateAsync(IsFlashlighthOn ? FlashlightState.Off : FlashlightState.On);
         });
 
-        public async Task SetFlashlightState(FlashlightState state)
+        public Task SetFlashlightStateAsync(FlashlightState state) => Device.InvokeOnMainThreadAsync(async () =>
         {
             if (state.HasFlag(FlashlightState.On))
             {
@@ -327,6 +327,6 @@ namespace FHICORC.ViewModels
             {
                 IsFlashlightButtonEnabled = true;
             }
-        }
+        });
     }
 }
