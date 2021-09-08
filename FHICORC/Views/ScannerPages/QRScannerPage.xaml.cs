@@ -83,7 +83,7 @@ namespace FHICORC.Views
             if (_inTabbar) return;
             if (_scannerView != null)
             {
-                (BindingContext as QRScannerViewModel)?.SetFlashlightState(_perviousState);
+                await (BindingContext as QRScannerViewModel)?.SetFlashlightStateAsync(_perviousState);
                 _scannerView.IsAnalyzing = true;
                 return;
             }
@@ -94,10 +94,10 @@ namespace FHICORC.Views
             base.OnAppearing();
         }
 
-        protected override void OnDisappearing()
+        protected override async void OnDisappearing()
         {
             _perviousState = (BindingContext as QRScannerViewModel).IsFlashlighthOn ? FlashlightState.On : FlashlightState.Off;
-            (BindingContext as QRScannerViewModel)?.SetFlashlightState(FlashlightState.Off);
+            await (BindingContext as QRScannerViewModel)?.SetFlashlightStateAsync(FlashlightState.Off);
 
             if (_inTabbar) return;
             if (_scannerView == null) return;
@@ -131,13 +131,13 @@ namespace FHICORC.Views
                     {
                         // Check that Flashlight feature is available by triggering ZXingScannerView.IsTorchOnProperty
                         ((QRScannerViewModel)BindingContext).IsFlashlightSupported = true;
-                        (BindingContext as QRScannerViewModel)?.SetFlashlightState(FlashlightState.EnabledAndOff);
+                        await (BindingContext as QRScannerViewModel)?.SetFlashlightStateAsync(FlashlightState.EnabledAndOff);
                     }
                     catch (FeatureNotSupportedException)
                     {
                         // Handle not supported on device, by disabling flashlight functionality from view.
                         ((QRScannerViewModel)BindingContext).IsFlashlightSupported = false;
-                        (BindingContext as QRScannerViewModel)?.SetFlashlightState(FlashlightState.DisabledAndOff);
+                        await (BindingContext as QRScannerViewModel)?.SetFlashlightStateAsync(FlashlightState.DisabledAndOff);
                     }
 
                     await Device.InvokeOnMainThreadAsync(() =>
