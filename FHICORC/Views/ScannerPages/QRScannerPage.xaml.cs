@@ -28,7 +28,7 @@ namespace FHICORC.Views
 
         private bool _hasAskedForCameraPermission = false;
         private bool _inTabbar = false;
-        private FlashlightState _perviousState = FlashlightState.Default;
+        private FlashlightState _previousFlashlightState = FlashlightState.Default;
         private TimeSpan _focusAssistTimespan = new TimeSpan(0, 0, 2);
         private MobileBarcodeScanningOptions _scanningOptions = new MobileBarcodeScanningOptions
         {
@@ -83,7 +83,7 @@ namespace FHICORC.Views
             if (_inTabbar) return;
             if (_scannerView != null)
             {
-                await (BindingContext as QRScannerViewModel)?.SetFlashlightStateAsync(_perviousState);
+                await (BindingContext as QRScannerViewModel)?.SetFlashlightStateAsync(_previousFlashlightState);
                 _scannerView.IsAnalyzing = true;
                 return;
             }
@@ -96,7 +96,7 @@ namespace FHICORC.Views
 
         protected override async void OnDisappearing()
         {
-            _perviousState = (BindingContext as QRScannerViewModel).IsFlashlighthOn ? FlashlightState.On : FlashlightState.Off;
+            _previousFlashlightState = (BindingContext as QRScannerViewModel).IsFlashlighthOn ? FlashlightState.On : FlashlightState.Off;
             await (BindingContext as QRScannerViewModel)?.SetFlashlightStateAsync(FlashlightState.Off);
 
             if (_inTabbar) return;
