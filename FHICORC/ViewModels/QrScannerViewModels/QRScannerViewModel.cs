@@ -19,12 +19,12 @@ using FHICORC.Views.ScannerPages;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using ZXing;
+using FHICORC.Enums;
 
 namespace FHICORC.ViewModels
 {
     public class QRScannerViewModel : BaseViewModel
     {
-
         private static readonly string _flashlightOnIconPath;
         private static readonly string _flashlightOffIconPath;
 
@@ -37,20 +37,26 @@ namespace FHICORC.ViewModels
         private readonly IPreferencesService _preferencesService;
 
         private bool _inTabbar = false;
-        private bool _isFlashlightSupported = true;
+        private bool _isFlashlightEnabled;
         private bool _isTorchOn;
         private string _currentFlashlightStateIconPath = _flashlightOffIconPath;
         private SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
 
-        public bool IsFlashlightSupported
+        public bool IsFlashlightSupported { get; set; }
+
+        public bool IsFlashlightButtonEnabled
         {
-            get => _isFlashlightSupported;
+            get => _isFlashlightEnabled;
             set
             {
-                _isFlashlightSupported = value;
-                OnPropertyChanged(nameof(IsFlashlightSupported));
+                if (!IsFlashlightSupported)
+                    return;
+
+                _isFlashlightEnabled = value;
+                OnPropertyChanged(nameof(IsFlashlightButtonEnabled));
             }
         }
+
         public bool IsFlashlighthOn
         {
             get => _isTorchOn;
@@ -221,9 +227,9 @@ namespace FHICORC.ViewModels
             bool anyRecovery = false;
             if (tokenValidateResultModel.DecodedModel is Core.Services.Model.EuDCCModel._1._3._0.DCCPayload cwtPayload)
             {
-                anyVaccinations = cwtPayload.DCCPayloadData.DCC.Vaccinations?.Any()?? false;
+                anyVaccinations = cwtPayload.DCCPayloadData.DCC.Vaccinations?.Any() ?? false;
                 anyTestResults = cwtPayload.DCCPayloadData.DCC.Tests?.Any() ?? false;
-                anyRecovery = cwtPayload.DCCPayloadData.DCC.Recovery?.Any()?? false;                
+                anyRecovery = cwtPayload.DCCPayloadData.DCC.Recovery?.Any() ?? false;
             }
             else
             {
@@ -288,28 +294,39 @@ namespace FHICORC.ViewModels
 
         public ICommand ToggleFlashlight => new Command(async () =>
         {
-            if (await CheckFlashlightPermissions())
-            {
-                IsFlashlighthOn = !IsFlashlighthOn;
-                CurrentFlashlightStateIconPath = IsFlashlighthOn ? _flashlightOnIconPath : _flashlightOffIconPath;
-                if (Device.RuntimePlatform == Device.iOS)
-                {
-                    if (IsFlashlighthOn)
-                        await Flashlight.TurnOnAsync();
-                    else
-                        await Flashlight.TurnOffAsync();
-                }
-            }
+            if (await CheckFlashlightPermissions() && IsFlashlightSupported)
+                await SetFlashlightStateAsync(IsFlashlighthOn ? FlashlightState.Off : FlashlightState.On);
         });
 
-        public async void ResetFlashlightState()
+        public Task SetFlashlightStateAsync(FlashlightState state) => Device.InvokeOnMainThreadAsync(async () =>
         {
-            if (Device.RuntimePlatform == Device.iOS && IsFlashlighthOn)
+            if (state.HasFlag(FlashlightState.On))
             {
-                await Flashlight.TurnOffAsync();
+                if (Device.RuntimePlatform is Device.iOS)
+                {
+                    await Flashlight.TurnOnAsync();
+                }
+
+                CurrentFlashlightStateIconPath = _flashlightOnIconPath;
+                IsFlashlighthOn = true;
             }
-            CurrentFlashlightStateIconPath = _flashlightOffIconPath;
-            IsFlashlighthOn = false;
-        }
+            if (state.HasFlag(FlashlightState.Off))
+            {
+                if (Device.RuntimePlatform is Device.iOS)
+                {
+                    await Flashlight.TurnOffAsync();
+                }
+                CurrentFlashlightStateIconPath = _flashlightOffIconPath;
+                IsFlashlighthOn = false;
+            }
+            if (state.HasFlag(FlashlightState.Disabled))
+            {
+                IsFlashlightButtonEnabled = false;
+            }
+            if (state.HasFlag(FlashlightState.Enabled))
+            {
+                IsFlashlightButtonEnabled = true;
+            }
+        });
     }
 }
