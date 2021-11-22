@@ -30,7 +30,9 @@ namespace FHICORC.Droid
         {
             global::Xamarin.Forms.Forms.SetFlags(new string[] { "Expander_Experimental" });
 
+#if !DEBUG && !TEST
             Window.AddFlags(WindowManagerFlags.Secure);
+#endif
 
             CrossCurrentActivity.Current.Activity = this;
 
