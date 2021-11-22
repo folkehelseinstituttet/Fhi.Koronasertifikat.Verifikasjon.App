@@ -27,7 +27,7 @@ stages:
   condition: eq(${{ parameters.doBuild }}, true)
 
   pool:
-    vmImage: 'macOS-10.15'
+    vmImage: 'macOS-11'
 
   jobs:
   - job: 'Build_Android_Job_to_${{ parameters.env }}'
@@ -218,7 +218,7 @@ stages:
     - group : Appcenter-${{ parameters.env }}
    
   pool:
-    vmImage: 'macOS-10.15'
+    vmImage: 'macOS-11'
 
   jobs:
   - job: 'Deploy_Android_Job'
