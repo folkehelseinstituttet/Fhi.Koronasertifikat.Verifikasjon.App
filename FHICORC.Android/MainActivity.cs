@@ -29,9 +29,9 @@ namespace FHICORC.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             global::Xamarin.Forms.Forms.SetFlags(new string[] { "Expander_Experimental" });
-
+#if !DEBUG && !DEVELOPMENT
             Window.AddFlags(WindowManagerFlags.Secure);
-
+#endif
             CrossCurrentActivity.Current.Activity = this;
 
             if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
