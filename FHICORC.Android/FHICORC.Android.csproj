@@ -34,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <AndroidSupportedAbis>armeabi-v7a;arm64-v8a;x86;x86_64</AndroidSupportedAbis>
     <DebugType>
     </DebugType>
@@ -49,6 +50,7 @@
     <ErrorReport>prompt</ErrorReport>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <AndroidSupportedAbis>armeabi-v7a;arm64-v8a;x86;x86_64</AndroidSupportedAbis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Unittests|AnyCPU' ">
@@ -82,6 +84,7 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <AndroidSupportedAbis>armeabi-v7a;x86;arm64-v8a;x86_64</AndroidSupportedAbis>
+    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <EnableLLVM>true</EnableLLVM>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|AnyCPU' ">
@@ -99,6 +102,7 @@
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <AndroidSupportedAbis>x86;arm64-v8a;x86_64;armeabi-v7a</AndroidSupportedAbis>
     <AndroidPackageFormat>aab</AndroidPackageFormat>
+    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <EnableLLVM>true</EnableLLVM>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStoreBeta|AnyCPU' ">
@@ -116,6 +120,7 @@
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <AndroidSupportedAbis>x86;arm64-v8a;x86_64;armeabi-v7a</AndroidSupportedAbis>
     <AndroidPackageFormat>aab</AndroidPackageFormat>
+    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <EnableLLVM>true</EnableLLVM>
   </PropertyGroup>
   <ItemGroup>
