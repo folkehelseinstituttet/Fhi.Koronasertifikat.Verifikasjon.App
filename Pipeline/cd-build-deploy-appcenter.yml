@@ -2,7 +2,7 @@
 # ~~~~~~~~~~~~~~
 #
 # Template pipeline for building xamarin iOS and Android apps
-# and deploy to App Center. 
+# and deploy to App Center. Last changed: November 2021
 
 parameters:
 - name: solution
