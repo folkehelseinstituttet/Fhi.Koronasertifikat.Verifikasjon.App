@@ -94,7 +94,9 @@ stages:
       inputs:
         projectFile: '**/*Android*.csproj'
         outputDirectory: '$(outputDirectory)'
-        configuration: '$(buildConfig)' 
+        configuration: '$(buildConfig)'
+        msbuildVersionOption: '16.0'
+        jdkVersionOption: '1.11' 
         msbuildArguments: '-restore /t:SignAndroidPackage /p:AndroidBuildApplicationPackage=True /p:AndroidPackageFormat=aab /p:OutputPath=$(outputDirectory) /p:AndroidKeyStore=True /p:AndroidSigningKeyStore=$(downloadKeyStore.secureFilePath) /p:AndroidSigningStorePass=$(keystorePassword) /p:AndroidSigningKeyAlias=$(keyAlias) /p:AndroidSigningKeyPass=$(keyPassword)'
 
     - task: Bundletool@1
