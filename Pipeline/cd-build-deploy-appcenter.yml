@@ -95,7 +95,6 @@ stages:
         projectFile: '**/*Android*.csproj'
         outputDirectory: '$(outputDirectory)'
         configuration: '$(buildConfig)'
-        msbuildVersionOption: '16.0'
         jdkVersionOption: '1.11' 
         msbuildArguments: '-restore /t:SignAndroidPackage /p:AndroidBuildApplicationPackage=True /p:AndroidPackageFormat=aab /p:OutputPath=$(outputDirectory) /p:AndroidKeyStore=True /p:AndroidSigningKeyStore=$(downloadKeyStore.secureFilePath) /p:AndroidSigningStorePass=$(keystorePassword) /p:AndroidSigningKeyAlias=$(keyAlias) /p:AndroidSigningKeyPass=$(keyPassword)'
 
@@ -126,6 +125,7 @@ stages:
         ArtifactName: 'fhicorc-android-${{ parameters.env }}-$(Build.BuildId)'
     
   - job: 'Build_iOS_Job_to_${{ parameters.env }}'
+    condition: never
     variables:
     - group: 'FHICORC - App CI'
     - group: Appcenter-${{ parameters.env }}
