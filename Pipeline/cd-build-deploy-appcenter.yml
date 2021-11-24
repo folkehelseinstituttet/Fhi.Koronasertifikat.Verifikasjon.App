@@ -125,7 +125,6 @@ stages:
         ArtifactName: 'fhicorc-android-${{ parameters.env }}-$(Build.BuildId)'
     
   - job: 'Build_iOS_Job_to_${{ parameters.env }}'
-    condition: false
     variables:
     - group: 'FHICORC - App CI'
     - group: Appcenter-${{ parameters.env }}

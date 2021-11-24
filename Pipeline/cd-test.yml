@@ -25,4 +25,4 @@ extends:
     versionName: ${{ variables.versionName }}
     env: ${{ variables.env }}
     doBuild: true
-    doDeploy: false
+    doDeploy: true
