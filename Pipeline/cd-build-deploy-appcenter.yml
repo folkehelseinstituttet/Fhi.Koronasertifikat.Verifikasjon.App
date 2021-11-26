@@ -2,7 +2,7 @@
 # ~~~~~~~~~~~~~~
 #
 # Template pipeline for building xamarin iOS and Android apps
-# and deploy to App Center. 
+# and deploy to App Center.
 
 parameters:
 - name: solution
@@ -10,7 +10,7 @@ parameters:
   default: '**/*.sln'
 - name: versionName
   type: object
-  default: 2.1.1
+  default: 2.2
 - name: env
   type: string
   default: 'test'
@@ -94,7 +94,8 @@ stages:
       inputs:
         projectFile: '**/*Android*.csproj'
         outputDirectory: '$(outputDirectory)'
-        configuration: '$(buildConfig)' 
+        configuration: '$(buildConfig)'
+        jdkVersionOption: '1.11' 
         msbuildArguments: '-restore /t:SignAndroidPackage /p:AndroidBuildApplicationPackage=True /p:AndroidPackageFormat=aab /p:OutputPath=$(outputDirectory) /p:AndroidKeyStore=True /p:AndroidSigningKeyStore=$(downloadKeyStore.secureFilePath) /p:AndroidSigningStorePass=$(keystorePassword) /p:AndroidSigningKeyAlias=$(keyAlias) /p:AndroidSigningKeyPass=$(keyPassword)'
 
     - task: Bundletool@1
