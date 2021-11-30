@@ -50,7 +50,7 @@
                         MaxLines="1"
                         LineBreakMode="NoWrap"
                         Style="{StaticResource RegularLabelBoldStyle}"
-                        TextColor="{StaticResource WhiteTextColor}"
+                        TextColor="{Binding BannerTextColor}"
                         Text="{Binding RepeatedText}"
                         AutomationProperties.IsInAccessibleTree="False"
                         effects:FontSizeLabelEffectParams.MaxFontSize="15.00"
@@ -102,8 +102,8 @@
                             HorizontalOptions="Fill">
                         <Label
                             AutomationProperties.IsInAccessibleTree="True"
-                            AutomationId="{Binding NumberOfRulesFulfilledAccessibilityText}"
-                            Text="{Binding NumberOfRulesFulfilled}"
+                            AutomationId="{Binding RulesAccessibilityText}"
+                            Text="{Binding RulesFulfilledText}"
                             HorizontalOptions="Center"
                             VerticalOptions="CenterAndExpand"
                             Style="{StaticResource SubtitleStyle}"
@@ -118,6 +118,7 @@
                     <Grid Margin="0"
                           Padding="20,25,20,27"
                           RowSpacing="0"
+                          IsVisible="{Binding IsBorderControlOn}"
                           BackgroundColor="{StaticResource FHIPrimaryBlue}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -152,7 +153,8 @@
                             </Label.Effects>
                         </Label>
                     </Grid>
-                    <Grid Margin="20,0,20,0">
+                    <Grid Margin="20,0,20,0"
+                          IsVisible="{Binding IsBorderControlOn}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
