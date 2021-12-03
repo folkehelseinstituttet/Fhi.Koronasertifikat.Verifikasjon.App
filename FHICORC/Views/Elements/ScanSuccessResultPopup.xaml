@@ -115,16 +115,16 @@
 
             <StackLayout
                 Grid.Row="3"
-                HeightRequest="41"
                 BackgroundColor="{StaticResource SuccessBorderColor}"
                 Margin="0, 30, 0, 0"
-                Padding="0, 2">
+                Padding="0, 2"
+                Spacing="0">
                 <Label Text="{Binding SuccessBannerText}"
                        Style="{StaticResource SubtitleStyle}"
                        TextColor="{StaticResource FHIPrimaryBlue}"
                        LineBreakMode="NoWrap"
                        MaxLines="1"
-                       Margin="0,8,0,0"
+                       Padding="0, 10"
                        FontSize="17"
                        VerticalTextAlignment="Center"
                        VerticalOptions="Center"
