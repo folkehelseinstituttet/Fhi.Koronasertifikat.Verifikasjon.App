@@ -90,12 +90,7 @@
                         <Image Source="{StaticResource HourGlass}" />
                         <Label
                             Style="{StaticResource BigTitleStyle}"
-                            Text="{Binding Strings[SCANNER_ERROR_EXPIRED_TITLE]}"
-                            HorizontalTextAlignment="Center" >
-                        </Label>
-                        <Label
-                            Style="{StaticResource ContentStyle}"
-                            Text="{Binding Strings [SCANNER_ERROR_EXPIRED_CONTENT]}"
+                            Text="{Binding Strings[SCANNER_ERROR_EXPIRED_CONTENT]}"
                             HorizontalTextAlignment="Center" >
                         </Label>
                         <Label
