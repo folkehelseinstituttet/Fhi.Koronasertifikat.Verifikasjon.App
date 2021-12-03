@@ -72,7 +72,8 @@
                                      Spacing="6"
                                      Padding="0"
                                      Margin="0, 30">
-                            <Label Text="{Binding FullName}"
+                            <Label AutomationId="{Binding FullNameAccessibilityText}"
+                                   Text="{Binding FullName}"
                                    AutomationProperties.IsInAccessibleTree="True"
                                    Style="{StaticResource ContentTitleStyle}"
                                    HorizontalTextAlignment="Center"
@@ -83,7 +84,8 @@
                                     <effects:FontSizeLabelEffect/>
                                 </Label.Effects>
                             </Label>
-                            <Label Text="{Binding DateOfBirth}"
+                            <Label AutomationProperties.Name="{Binding DateOfBirthAccessibilityText}"
+                                   Text="{Binding DateOfBirth}"
                                    Style="{StaticResource ContentStyle}"
                                    HorizontalTextAlignment="Center"
                                    HorizontalOptions="Center"
