@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -22,8 +23,6 @@ namespace FHICORC.ViewModels.QrScannerViewModels
     public class ScanEuVaccineResultViewModel : InfoVaccineTextViewModel
     {
         private string _fullName;
-        private string _dateOfBirth;
-
         public string FullName
         {
             get => _fullName;
@@ -34,6 +33,18 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             }
         }
 
+        public string _fullNameAccessibilityText;
+        public string FullNameAccessibilityText
+        {
+            get => _fullNameAccessibilityText;
+            set
+            {
+                _fullNameAccessibilityText = value;
+                OnPropertyChanged(nameof(FullNameAccessibilityText));
+            }
+        }
+
+        private string _dateOfBirth;
         public string DateOfBirth
         {
             get => _dateOfBirth;
@@ -41,6 +52,17 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             {
                 _dateOfBirth = value;
                 OnPropertyChanged(nameof(DateOfBirth));
+            }
+        }
+
+        private string _dateOfBirthAccessibilityText;
+        public string DateOfBirthAccessibilityText
+        {
+            get => _dateOfBirthAccessibilityText;
+            set
+            {
+                _dateOfBirthAccessibilityText = value;
+                OnPropertyChanged(nameof(DateOfBirthAccessibilityText));
             }
         }
 
@@ -166,7 +188,10 @@ namespace FHICORC.ViewModels.QrScannerViewModels
                     if (tokenValidateResultModel.DecodedModel is Core.Services.Model.EuDCCModel._1._3._0.DCCPayload cwt)
                     {
                         FullName = cwt.DCCPayloadData.DCC.PersonName.FullName;
+                        FullNameAccessibilityText = cwt.DCCPayloadData.DCC.PersonName.FullName.ToLower();
                         DateOfBirth = cwt.DCCPayloadData.DCC.DateOfBirth;
+                        var dateOfBirthAccessibility = DateTime.ParseExact(DateOfBirth, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                        DateOfBirthAccessibilityText = String.Format("{0:dd. MMMM yyyy}", dateOfBirthAccessibility);
                         PassportViewModel.PassportData = new PassportData(string.Empty, cwt);
                         RulesFeedbackViewModel = new RulesFeedbackViewModel(tokenValidateResultModel.RulesFeedBacks);
                         RulesEnginePassed = RulesFeedbackViewModel.RulesEngineResult.Where(x => x.Result == RulesFeedbackResult.TRUE).Count();
