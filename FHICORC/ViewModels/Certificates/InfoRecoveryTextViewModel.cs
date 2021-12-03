@@ -50,6 +50,8 @@ namespace FHICORC.ViewModels.Certificates
         public string RecoveryValidToValue => ShowCertificate ? PassportViewModel.PassportData.CertificateValidTo?.ToLocaleDateFormat() : "-";
         public string RecoveryHeaderValue => ShowHeader ? _translator.Translate(DGCValueSetEnum.Disease, PassportViewModel.PassportData.RecoveryDisease ?? "").ToString() : "-";
         public string RecoveryIdentifierValue => ShowCertificate ? PassportViewModel.PassportData.CertificateIdentifier : "-";
+        public string RecoveryValidFromValueAccessibility => PassportViewModel.PassportData.CertificateValidFrom?.DateToScannerResultFormat();
+        public string RecoveryValidToValueAccessibility => PassportViewModel.PassportData.CertificateValidTo?.DateToScannerResultFormat();
 
         public PassportViewModel PassportViewModel { get; set; } = new PassportViewModel();
 
@@ -83,6 +85,8 @@ namespace FHICORC.ViewModels.Certificates
                 OnPropertyChanged(nameof(RecoveryValidFromValue));
                 OnPropertyChanged(nameof(RecoveryValidToValue));
                 OnPropertyChanged(nameof(RecoveryIdentifierValue));
+                OnPropertyChanged(nameof(RecoveryValidFromValueAccessibility));
+                OnPropertyChanged(nameof(RecoveryValidToValueAccessibility));
             }
             if (ShowHeader)
             {

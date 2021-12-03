@@ -308,10 +308,10 @@
                                 <effects:FontSizeLabelEffect/>
                             </Label.Effects>
                         </Label>
-                        <Label Grid.Row="14" Grid.Column="0" 
+                        <Label Grid.Row="14" Grid.Column="0"
+                               AutomationProperties.Name="{Binding RecoveryValidFromValueAccessibility}"
                                Text="{Binding RecoveryValidFromValue}"
                                Style="{StaticResource InfoPaneItemValue}" 
-                               AutomationProperties.IsInAccessibleTree="False"
                                HorizontalOptions="Start"
                                IsVisible="{Binding ShowCertificate}"
                                effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
@@ -333,10 +333,10 @@
                                 <effects:FontSizeLabelEffect/>
                             </Label.Effects>
                         </Label>
-                        <Label Grid.Row="14" Grid.Column="1" 
+                        <Label Grid.Row="14" Grid.Column="1"
+                               AutomationProperties.Name="{Binding RecoveryValidToValueAccessibility}"
                                Text="{Binding RecoveryValidToValue}"
                                Style="{StaticResource InfoPaneItemValue}" 
-                               AutomationProperties.IsInAccessibleTree="False"
                                HorizontalOptions="Start"
                                IsVisible="{Binding ShowCertificate}"
                                effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
