@@ -435,7 +435,13 @@
                     Command="{Binding ScanAgainCommand}"
                     ImageSource="{StaticResource ScanRectangle}"
                     Style="{StaticResource CombinedButtonPrimaryStyle}"
-                    Text="{Binding Strings[SCANNER_ERROR_BUTTON_TEXT]}" />
+                    Text="{Binding Strings[SCANNER_ERROR_BUTTON_TEXT]}"
+                    effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                    effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                    <controls:SingleLineButton.Effects>
+                        <effects:FontSizeLabelEffect/>
+                    </controls:SingleLineButton.Effects>
+                </controls:SingleLineButton>
 
                 <!--  Seconds left before the page closes  -->
                 <Label
