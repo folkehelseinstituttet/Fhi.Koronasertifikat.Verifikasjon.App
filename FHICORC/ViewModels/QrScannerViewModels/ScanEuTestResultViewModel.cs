@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -22,8 +23,6 @@ namespace FHICORC.ViewModels.QrScannerViewModels
     public class ScanEuTestResultViewModel : InfoTestTextViewModel
     {
         private string _fullName;
-        private string _dateOfBirth;
-
         public string FullName
         {
             get => _fullName;
@@ -34,6 +33,18 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             }
         }
 
+        public string _fullNameAccessibilityText;
+        public string FullNameAccessibilityText
+        {
+            get => _fullNameAccessibilityText;
+            set
+            {
+                _fullNameAccessibilityText = value;
+                OnPropertyChanged(nameof(FullNameAccessibilityText));
+            }
+        }
+
+        private string _dateOfBirth;
         public string DateOfBirth
         {
             get => _dateOfBirth;
@@ -41,6 +52,17 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             {
                 _dateOfBirth = value;
                 OnPropertyChanged(nameof(DateOfBirth));
+            }
+        }
+
+        private string _dateOfBirthAccessibilityText;
+        public string DateOfBirthAccessibilityText
+        {
+            get => _dateOfBirthAccessibilityText;
+            set
+            {
+                _dateOfBirthAccessibilityText = value;
+                OnPropertyChanged(nameof(DateOfBirthAccessibilityText));
             }
         }
 
@@ -102,6 +124,41 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             }
         }
 
+        private Color _bannerTextColor;
+        public Color BannerTextColor
+        {
+            get => _bannerTextColor;
+            set
+            {
+                _bannerTextColor = value;
+                OnPropertyChanged(nameof(BannerTextColor));
+            }
+        }
+
+        private string _rulesFulfilledText;
+        public string RulesFulfilledText
+        {
+            get => _rulesFulfilledText;
+            set
+            {
+                _rulesFulfilledText = value;
+                OnPropertyChanged(nameof(RulesFulfilledText));
+            }
+        }
+
+        private string _rulesAccessibilityText;
+        public string RulesAccessibilityText
+        {
+            get => _rulesAccessibilityText;
+            set
+            {
+                _rulesFulfilledText = value;
+                OnPropertyChanged(nameof(RulesAccessibilityText));
+            }
+        }
+
+        public bool IsBorderControlOn => _preferencesService.GetUserPreferenceAsBoolean(PreferencesKeys.BORDER_CONTROL_ON);
+
         public RulesFeedbackViewModel RulesFeedbackViewModel { get; set; }
 
         private readonly IPreferencesService _preferencesService;
@@ -133,21 +190,17 @@ namespace FHICORC.ViewModels.QrScannerViewModels
                     if (tokenValidateResultModel.DecodedModel is Core.Services.Model.EuDCCModel._1._3._0.DCCPayload cwt)
                     {
                         FullName = cwt.DCCPayloadData.DCC.PersonName.FullName;
+                        FullNameAccessibilityText = cwt.DCCPayloadData.DCC.PersonName.FullName.ToLower();
                         DateOfBirth = cwt.DCCPayloadData.DCC.DateOfBirth;
+                        var dateOfBirthAccessibility = DateTime.ParseExact(DateOfBirth, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                        DateOfBirthAccessibilityText = String.Format("{0:dd. MMMM yyyy}", dateOfBirthAccessibility);
                         PassportViewModel.PassportData = new PassportData(string.Empty, cwt);
                         RulesFeedbackViewModel = new RulesFeedbackViewModel(tokenValidateResultModel.RulesFeedBacks);
                         RulesEnginePassed = RulesFeedbackViewModel.RulesEngineResult.Where(x => x.Result == RulesFeedbackResult.TRUE).Count();
                         RulesEngineResultCount = RulesFeedbackViewModel.RulesEngineResult.Count;
                         NumberOfRulesFulfilled = string.Format("RULES_ENGINE_FULFILLED_COUNT".Translate(), RulesEnginePassed, RulesEngineResultCount);
                         NumberOfRulesFulfilledAccessibilityText = string.Format("RULES_ENGINE_FULFILLED_COUNT_ACCESSIBILITY_TEXT".Translate(), RulesEnginePassed, RulesEngineResultCount);
-                        if (RulesEnginePassed == RulesEngineResultCount)
-                        {
-                            RuleBackgroundColor = Color.FromHex("#D9F0D4");
-                        }
-                        else
-                        {
-                            RuleBackgroundColor = Color.FromHex("#FBB5AD");
-                        }
+                        UpdateRuleColorAndText();
                         UpdateView();
                     }
                 }
@@ -170,12 +223,46 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             if (_preferencesService.GetUserPreferenceAsBoolean(PreferencesKeys.BORDER_CONTROL_ON))
             {
                 BannerColor = Color.FromHex("#32345C");
+                BannerTextColor = Color.FromHex("#F3F9FB");
                 BannerText = "SCANNER_EU_BANNER_TEXT".Translate();
             }
             else
             {
-                BannerColor = Color.FromHex("#B22A5A");
+                BannerColor = Color.FromHex("F3F9FB");
+                BannerTextColor = Color.FromHex("#32345C");
                 BannerText = "SCANNER_NO_BANNER_TEXT".Translate();
+            }
+        }
+
+        private void UpdateRuleColorAndText()
+        {
+            if (RulesEnginePassed == RulesEngineResultCount)
+            {
+                RuleBackgroundColor = Color.FromHex("#D9F0D4");
+                if (IsBorderControlOn)
+                {
+                    RulesFulfilledText = NumberOfRulesFulfilled;
+                    RulesAccessibilityText = NumberOfRulesFulfilledAccessibilityText;
+                }
+                else
+                {
+                    RulesFulfilledText = "RULES_ENGINE_DOMESTIC_FULFILLED".Translate();
+                    RulesAccessibilityText = "RULES_ENGINE_DOMESTIC_FULFILLED".Translate();
+                }
+            }
+            else
+            {
+                RuleBackgroundColor = Color.FromHex("#FBB5AD");
+                if (IsBorderControlOn)
+                {
+                    RulesFulfilledText = NumberOfRulesFulfilled;
+                    RulesAccessibilityText = NumberOfRulesFulfilledAccessibilityText;
+                }
+                else
+                {
+                    RulesFulfilledText = "RULES_ENGINE_DOMESTIC_NOT_FULFILLED".Translate();
+                    RulesAccessibilityText = "RULES_ENGINE_DOMESTIC_NOT_FULFILLED".Translate();
+                }
             }
         }
     }

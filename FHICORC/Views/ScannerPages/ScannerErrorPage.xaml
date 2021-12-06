@@ -90,18 +90,21 @@
                         <Image Source="{StaticResource HourGlass}" />
                         <Label
                             Style="{StaticResource BigTitleStyle}"
-                            Text="{Binding Strings[SCANNER_ERROR_EXPIRED_TITLE]}"
-                            HorizontalTextAlignment="Center" >
-                        </Label>
-                        <Label
-                            Style="{StaticResource ContentStyle}"
-                            Text="{Binding Strings [SCANNER_ERROR_EXPIRED_CONTENT]}"
-                            HorizontalTextAlignment="Center" >
+                            Text="{Binding Strings[SCANNER_ERROR_EXPIRED_CONTENT]}"
+                            HorizontalTextAlignment="Center"
+                            effects:FontSizeLabelEffectParams.MaxFontSize="32.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
                         </Label>
                         <Label
                             Style="{StaticResource ContentStyle}"
                             Text="{Binding Strings [SCANNER_ERROR_EXPIRED_CONTENT_2]}"
-                            HorizontalTextAlignment="Center" >
+                            HorizontalTextAlignment="Center"
+                            effects:FontSizeLabelEffectParams.MaxFontSize="26.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
                         </Label>
                     </StackLayout>
 
@@ -113,12 +116,20 @@
                         <Label
                             HorizontalTextAlignment="Center"
                             Style="{StaticResource BigTitleStyle}"
-                            Text="{Binding Strings[SCANNER_ERROR_INVALID_TITLE]}" >
+                            Text="{Binding Strings[SCANNER_ERROR_INVALID_TITLE]}"
+                            effects:FontSizeLabelEffectParams.MaxFontSize="32.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
                         </Label>
                         <Label
                             HorizontalTextAlignment="Center"
                             Style="{StaticResource ContentStyle}"
-                            Text="{Binding InvalidContentText}" >
+                            Text="{Binding InvalidContentText}"
+                            effects:FontSizeLabelEffectParams.MaxFontSize="26.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
                         </Label>
                     </StackLayout>
                 </StackLayout>
@@ -137,19 +148,26 @@
                     AutomationProperties.IsInAccessibleTree="True"
                     AutomationProperties.Name="{Binding Strings[SCANNER_ERROR_BUTTON_TEXT]}"
                     Style="{StaticResource CombinedButtonPrimaryStyle}"
-                    Text="{Binding Strings[SCANNER_ERROR_BUTTON_TEXT]}" />
+                    Text="{Binding Strings[SCANNER_ERROR_BUTTON_TEXT]}"
+                    effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                    effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                    <controls:SingleLineButton.Effects>
+                        <effects:FontSizeLabelEffect/>
+                    </controls:SingleLineButton.Effects>
+                </controls:SingleLineButton>
+
 
                 <!--  Seconds left before the page closes  -->
                 <Label
                     Margin="0,20"
                     HorizontalOptions="Center"
-                    Style="{StaticResource ContentStyle}"
-                    FontSize="Small"
+                    Style="{StaticResource TertierStyle}"
                     Text="{Binding SecondsRemainingText}"
                     TextColor="{StaticResource BaseTextColor}"
                     AutomationProperties.IsInAccessibleTree="True"
                     AutomationId="{Binding SecondsRemainingText_Accessibility}"
-                    effects:FontSizeLabelEffectParams.MaxFontSize="18.00">
+                    effects:FontSizeLabelEffectParams.MaxFontSize="24.00"
+                    effects:FontSizeLabelEffectParams.MinFontSize="12.00">
                     <Label.Effects>
                         <effects:FontSizeLabelEffect/>
                     </Label.Effects>

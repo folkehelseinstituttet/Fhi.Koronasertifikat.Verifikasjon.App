@@ -29,6 +29,19 @@ namespace FHICORC.Views.ScannerPages
         {
             ((ScanEuVaccineResultViewModel)BindingContext).Timer.Enabled = true;
             base.OnAppearing();
+            SetAccessibilityText();
+        }
+
+        private void SetAccessibilityText()
+        {
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                AutomationProperties.SetName(DateOfBirthLabel, ((ScanEuVaccineResultViewModel)BindingContext).DateOfBirthAccessibilityText);
+            }
+            else
+            {
+                AutomationProperties.SetName(DateOfBirthLabel, "");
+            }
         }
     }
 }

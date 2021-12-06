@@ -18,6 +18,7 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
+
             <StackLayout Grid.Row="0"
                          BackgroundColor="{StaticResource DefaultBackgroundColor}"
                          VerticalOptions="Start"
@@ -49,7 +50,7 @@
                         MaxLines="1"
                         LineBreakMode="NoWrap"
                         Style="{StaticResource RegularLabelBoldStyle}"
-                        TextColor="{StaticResource WhiteTextColor}"
+                        TextColor="{Binding BannerTextColor}"
                         Text="{Binding RepeatedText}"
                         AutomationProperties.IsInAccessibleTree="False"
                         effects:FontSizeLabelEffectParams.MaxFontSize="15.00"
@@ -70,7 +71,8 @@
                                      Spacing="6"
                                      Padding="0"
                                      Margin="0, 30">
-                            <Label Text="{Binding FullName}"
+                            <Label AutomationId="{Binding FullNameAccessibilityText}"
+                                   Text="{Binding FullName}"
                                    AutomationProperties.IsInAccessibleTree="True"
                                    Style="{StaticResource ContentTitleStyle}"
                                    HorizontalTextAlignment="Center"
@@ -81,7 +83,9 @@
                                     <effects:FontSizeLabelEffect/>
                                 </Label.Effects>
                             </Label>
-                            <Label Text="{Binding DateOfBirth}"
+                            <Label x:Name="DateOfBirthLabel"
+                                   AutomationId="{Binding DateOfBirthAccessibilityText}"
+                                   Text="{Binding DateOfBirth}"
                                    Style="{StaticResource ContentStyle}"
                                    HorizontalTextAlignment="Center"
                                    HorizontalOptions="Center"
@@ -100,8 +104,8 @@
                             HorizontalOptions="Fill">
                         <Label
                             AutomationProperties.IsInAccessibleTree="True"
-                            AutomationId="{Binding NumberOfRulesFulfilledAccessibilityText}"
-                            Text="{Binding NumberOfRulesFulfilled}"
+                            AutomationId="{Binding RulesAccessibilityText}"
+                            Text="{Binding RulesFulfilledText}"
                             HorizontalOptions="Center"
                             MaxLines="1"
                             VerticalOptions="CenterAndExpand"
@@ -117,6 +121,7 @@
                     <Grid Margin="0"
                           Padding="20,25,20,27"
                           RowSpacing="0"
+                          IsVisible="{Binding IsBorderControlOn}"
                           BackgroundColor="{StaticResource FHIPrimaryBlue}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -153,7 +158,8 @@
                             </Label.Effects>
                         </Label>
                     </Grid>
-                    <Grid Margin="20,0,20,0">
+                    <Grid Margin="20,0,20,0"
+                          IsVisible="{Binding IsBorderControlOn}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -305,10 +311,10 @@
                                 <effects:FontSizeLabelEffect/>
                             </Label.Effects>
                         </Label>
-                        <Label Grid.Row="14" Grid.Column="0" 
+                        <Label Grid.Row="14" Grid.Column="0"
+                               AutomationProperties.Name="{Binding RecoveryValidFromValueAccessibility}"
                                Text="{Binding RecoveryValidFromValue}"
                                Style="{StaticResource InfoPaneItemValue}" 
-                               AutomationProperties.IsInAccessibleTree="False"
                                HorizontalOptions="Start"
                                IsVisible="{Binding ShowCertificate}"
                                effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
@@ -330,10 +336,10 @@
                                 <effects:FontSizeLabelEffect/>
                             </Label.Effects>
                         </Label>
-                        <Label Grid.Row="14" Grid.Column="1" 
+                        <Label Grid.Row="14" Grid.Column="1"
+                               AutomationProperties.Name="{Binding RecoveryValidToValueAccessibility}"
                                Text="{Binding RecoveryValidToValue}"
                                Style="{StaticResource InfoPaneItemValue}" 
-                               AutomationProperties.IsInAccessibleTree="False"
                                HorizontalOptions="Start"
                                IsVisible="{Binding ShowCertificate}"
                                effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
