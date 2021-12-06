@@ -83,7 +83,8 @@
                                     <effects:FontSizeLabelEffect/>
                                 </Label.Effects>
                             </Label>
-                            <Label AutomationProperties.Name="{Binding DateOfBirthAccessibilityText}"
+                            <Label x:Name="DateOfBirthLabel"
+                                   AutomationId="{Binding DateOfBirthAccessibilityText}"
                                    Text="{Binding DateOfBirth}"
                                    Style="{StaticResource ContentStyle}"
                                    HorizontalTextAlignment="Center"
