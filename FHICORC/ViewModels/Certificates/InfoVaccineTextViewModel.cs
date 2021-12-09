@@ -112,8 +112,15 @@ namespace FHICORC.ViewModels.Certificates
 
         public void SetAccessibilityTextDate()
         {
-            var vaccinationDate = DateTime.ParseExact(VaccineVaccinationDateValue, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-            VaccineVaccinationDateValueAccessibilityText = string.Format("{0:dd. MMMM yyyy}", vaccinationDate);
+            try
+            {
+                var vaccinationDate = DateTime.ParseExact(VaccineVaccinationDateValue, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                VaccineVaccinationDateValueAccessibilityText = string.Format("{0:dd. MMMM yyyy}", vaccinationDate);
+            }
+            catch (FormatException)
+            {
+
+            }
         }
     }
 }

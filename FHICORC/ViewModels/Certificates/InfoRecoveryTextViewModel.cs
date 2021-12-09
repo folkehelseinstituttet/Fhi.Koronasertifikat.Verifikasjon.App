@@ -100,8 +100,15 @@ namespace FHICORC.ViewModels.Certificates
 
         public void SetAccessibilityTextDate()
         {
-            var recoveryFirstPositiveDate = DateTime.ParseExact(RecoveryDateValue, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-            RecoveryDateFirstPositiveAccessibilityText = string.Format("{0:dd. MMMM yyyy}", recoveryFirstPositiveDate);
+            try
+            {
+                var recoveryFirstPositiveDate = DateTime.ParseExact(RecoveryDateValue, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                RecoveryDateFirstPositiveAccessibilityText = string.Format("{0:dd. MMMM yyyy}", recoveryFirstPositiveDate);
+            }
+            catch (FormatException)
+            {
+
+            }
         }
     }
 }
