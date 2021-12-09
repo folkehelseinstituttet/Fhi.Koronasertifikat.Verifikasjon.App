@@ -37,10 +37,12 @@ namespace FHICORC.Views.ScannerPages
             if (Device.RuntimePlatform == Device.iOS)
             {
                 AutomationProperties.SetName(DateOfBirthLabel, ((ScanEuRecoveryResultViewModel)BindingContext).DateOfBirthAccessibilityText);
+                AutomationProperties.SetName(RecoveryDateFirstPositive, ((ScanEuRecoveryResultViewModel)BindingContext).RecoveryDateFirstPositiveAccessibilityText);
             }
             else
             {
                 AutomationProperties.SetName(DateOfBirthLabel, "");
+                AutomationProperties.SetName(RecoveryDateFirstPositive, "");
             }
         }
     }

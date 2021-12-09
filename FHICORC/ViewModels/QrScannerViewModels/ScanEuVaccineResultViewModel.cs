@@ -200,6 +200,7 @@ namespace FHICORC.ViewModels.QrScannerViewModels
                         NumberOfRulesFulfilledAccessibilityText = string.Format("RULES_ENGINE_FULFILLED_COUNT_ACCESSIBILITY_TEXT".Translate(), RulesEnginePassed, RulesEngineResultCount);
                         UpdateRuleColorAndText();
                         UpdateView();
+                        SetAccessibilityTextDate();
                     }
                 }
             }

@@ -219,7 +219,9 @@
                                 <effects:FontSizeLabelEffect/>
                             </Label.Effects>
                         </Label>
-                        <Label Grid.Row="4" Grid.Column="0" 
+                        <Label Grid.Row="4" Grid.Column="0"
+                               x:Name="RecoveryDateFirstPositive"
+                               AutomationId="{Binding RecoveryDateFirstPositiveAccessibilityText}"
                                Text="{Binding RecoveryDateValue}"
                                Style="{StaticResource InfoPaneItemValue}" HorizontalOptions="Start"
                                effects:FontSizeLabelEffectParams.MaxFontSize="26.00"

@@ -1,4 +1,6 @@
-﻿using FHICORC.Core.Services.Interface;
+﻿using System;
+using System.Globalization;
+using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Model.Converter;
 using FHICORC.Core.Services.Model.EuDCCModel.ValueSet;
 using FHICORC.Services;
@@ -69,6 +71,7 @@ namespace FHICORC.ViewModels.Certificates
         public bool ShowCertificate { get; set; } = true;
         public bool ShowHeader { get; set; }
         public bool ShowTextInEnglish { get; set; }
+        public string VaccineVaccinationDateValueAccessibilityText { get; set; }
 
         private IDgcValueSetTranslator _translator;
 
@@ -92,6 +95,7 @@ namespace FHICORC.ViewModels.Certificates
             OnPropertyChanged(nameof(VaccineVaccinationCountryValue));
             OnPropertyChanged(nameof(VaccineVaccinationDateValue));
             OnPropertyChanged(nameof(VaccineTargetDisease));
+            OnPropertyChanged(nameof(VaccineVaccinationDateValueAccessibilityText));
 
             if (ShowCertificate)
             {
@@ -104,6 +108,12 @@ namespace FHICORC.ViewModels.Certificates
                 OnPropertyChanged(nameof(VaccineHeaderValue));
             }
 
+        }
+
+        public void SetAccessibilityTextDate()
+        {
+            var vaccinationDate = DateTime.ParseExact(VaccineVaccinationDateValue, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            VaccineVaccinationDateValueAccessibilityText = string.Format("{0:dd. MMMM yyyy}", vaccinationDate);
         }
     }
 }
