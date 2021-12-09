@@ -107,7 +107,7 @@ namespace FHICORC.ViewModels.Certificates
             }
             catch (FormatException)
             {
-
+                RecoveryDateFirstPositiveAccessibilityText = RecoveryDateValue;
             }
         }
     }

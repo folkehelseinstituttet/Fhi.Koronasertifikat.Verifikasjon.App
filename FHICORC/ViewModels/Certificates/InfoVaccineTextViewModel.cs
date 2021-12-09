@@ -119,7 +119,7 @@ namespace FHICORC.ViewModels.Certificates
             }
             catch (FormatException)
             {
-
+                VaccineVaccinationDateValueAccessibilityText = VaccineVaccinationDateValue;
             }
         }
     }
