@@ -202,7 +202,9 @@
                                 <effects:FontSizeLabelEffect/>
                             </Label.Effects>
                         </Label>
-                        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                               x:Name="VaccineVaccinationDate"
+                               AutomationId="{Binding VaccineVaccinationDateValueAccessibilityText}"
                                Text="{Binding VaccineVaccinationDateValue}" 
                                Style="{StaticResource InfoPaneItemValue}" 
                                HorizontalOptions="Start"

@@ -1,4 +1,6 @@
-﻿using FHICORC.Core.Services.Interface;
+﻿using System;
+using System.Globalization;
+using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Model.Converter;
 using FHICORC.Core.Services.Model.EuDCCModel.ValueSet;
 using FHICORC.Services;
@@ -58,6 +60,7 @@ namespace FHICORC.ViewModels.Certificates
         public bool ShowCertificate { get; set; } = true;
         public bool ShowHeader { get; set; }
         public bool ShowTextInEnglish { get; set; }
+        public string RecoveryDateFirstPositiveAccessibilityText { get; set; }
 
         private IDgcValueSetTranslator _translator;
 
@@ -87,12 +90,25 @@ namespace FHICORC.ViewModels.Certificates
                 OnPropertyChanged(nameof(RecoveryIdentifierValue));
                 OnPropertyChanged(nameof(RecoveryValidFromValueAccessibility));
                 OnPropertyChanged(nameof(RecoveryValidToValueAccessibility));
+                OnPropertyChanged(nameof(RecoveryDateFirstPositiveAccessibilityText));
             }
             if (ShowHeader)
             {
                 OnPropertyChanged(nameof(RecoveryHeaderValue));
             }
+        }
 
+        public void SetAccessibilityTextDate()
+        {
+            try
+            {
+                var recoveryFirstPositiveDate = DateTime.ParseExact(RecoveryDateValue, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                RecoveryDateFirstPositiveAccessibilityText = string.Format("{0:dd. MMMM yyyy}", recoveryFirstPositiveDate);
+            }
+            catch (FormatException)
+            {
+                RecoveryDateFirstPositiveAccessibilityText = RecoveryDateValue;
+            }
         }
     }
 }
