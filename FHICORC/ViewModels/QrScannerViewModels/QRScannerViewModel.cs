@@ -27,6 +27,7 @@ namespace FHICORC.ViewModels
     {
         private static readonly string _flashlightOnIconPath;
         private static readonly string _flashlightOffIconPath;
+        private static readonly string _SMARTHealthCardPrefix = "shc:/";
 
         private const double ScanFailureVibrationDuration = 500;
         private const double ScanSuccessVibrationDuration = 250;
@@ -193,7 +194,16 @@ namespace FHICORC.ViewModels
                 if (PopupNavigation.Instance.PopupStack.Any()) return;
                 if (await IsResultOpen()) return;
 
-                TokenValidateResultModel model = await _tokenProcessorService.DecodePassportTokenToModel(result.Text);
+                TokenValidateResultModel model;
+                if (result.Text.StartsWith(_SMARTHealthCardPrefix))
+                {
+                    Console.WriteLine(result.Text);
+                    model = await _tokenProcessorService.DecodeSHCPassportTokenToModel(result.Text);
+                }
+                else
+                {
+                    model = await _tokenProcessorService.DecodeDCCPassportTokenToModel(result.Text);
+                }
 
                 if (model == null) return;
                 

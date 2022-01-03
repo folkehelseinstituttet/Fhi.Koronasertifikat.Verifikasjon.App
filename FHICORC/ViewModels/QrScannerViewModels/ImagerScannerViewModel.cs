@@ -105,7 +105,7 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             {
                 _handlingResult = true;
 
-                TokenValidateResultModel model = await _tokenProcessorService.DecodePassportTokenToModel(result);
+                TokenValidateResultModel model = await _tokenProcessorService.DecodeDCCPassportTokenToModel(result);
 
                 if (model == null) return;
 

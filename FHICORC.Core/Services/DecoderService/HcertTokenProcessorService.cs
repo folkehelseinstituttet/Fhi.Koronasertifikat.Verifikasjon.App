@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 using FHICORC.Core.Services.Enum;
 using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Model;
-using FHICORC.Core.Services.Model.Converter;
 using FHICORC.Core.Services.Model.CoseModel;
 using FHICORC.Core.Services.Model.EuDCCModel;
 using FHICORC.Core.Services.Utils;
@@ -16,6 +15,8 @@ using FHICORC.Core.Services.Model.EuDCCModel._1._3._0;
 using FHICORC.Core.Services.Model.BusinessRules;
 using System.Collections.Generic;
 using FHICORC.Core.Data;
+using System.Text;
+using FHICORC.Core.Services.Model.SmartHealthCardModel.Jws;
 
 namespace FHICORC.Core.Services.DecoderServices
 {
@@ -55,7 +56,7 @@ namespace FHICORC.Core.Services.DecoderServices
             _digitalGreenValueSetTranslatorFactory.Init();
         }
 
-        public async Task<TokenValidateResultModel> DecodePassportTokenToModel(string base45String)
+        public async Task<TokenValidateResultModel> DecodeDCCPassportTokenToModel(string base45String)
         {
             TokenValidateResultModel resultModel = new TokenValidateResultModel();
             try
@@ -211,6 +212,69 @@ namespace FHICORC.Core.Services.DecoderServices
                 if (!validDoseNumber)
                     throw new InvalidDataException("invalid dose number");
             }
+        }
+
+        public async Task<TokenValidateResultModel> DecodeSHCPassportTokenToModel(string qrCodeToken)
+        {
+            TokenValidateResultModel resultModel = new TokenValidateResultModel();
+
+            try
+            {
+                // Step 1. Decode QR -> Numeric -> JWS Token
+                StringBuilder StringBuilder = new StringBuilder();
+                string unprefixed = qrCodeToken.Substring(5); // delete shc:/
+                foreach (string Number in Spliter(unprefixed, 2))
+                {
+                    if (int.TryParse(Number, out int IntNumber))
+                    {
+                        StringBuilder.Append(Convert.ToChar(IntNumber + 45));
+                    }
+                }
+                var jwsToken = StringBuilder.ToString();
+                Console.WriteLine(jwsToken);
+
+                // Step 2. Split JWS Token into parts
+                if (string.IsNullOrEmpty(jwsToken))
+                {
+                    throw new InvalidDataException("jws cannot be empty");
+                }
+
+                var jwsParts = JwsParts.ParseToken(jwsToken);
+
+                byte[] DecodedPayload = Base64UrlDecodingUtils.Base64UrlDecode(jwsParts.Payload);
+                string SmartHealthCardJson = await DeflateCompression.UncompressAsync(DecodedPayload);
+
+                // Step 3. Verify SHC COVID-19 type
+                //TODO
+
+                // Step 4. Verify signature
+                await _certificationService.VerifySHCSignature(jwsParts, SmartHealthCardJson);
+
+                // Step 5. Verify that the issuer is trusted
+                //TODO
+
+                // Step 6. (Optional, not in scope) Revocation
+                //TODO
+
+                // Step 7. Create Model
+                //TODO
+
+                return resultModel;
+
+            }
+            catch (Exception e)
+            {
+                //If any exception is thrown - assume the code is invalid.
+                Console.WriteLine(">> Exception thrown from decoding: " + e.Message + ">>>>" + e.StackTrace);
+
+                return resultModel;
+            }
+        }
+
+        private IEnumerable<string> Spliter(string str, int chunkSize)
+        {
+            return Enumerable.Range(0, str.Length / chunkSize)
+                .Select(i => str.Substring(i * chunkSize, chunkSize));
         }
     }
 }
