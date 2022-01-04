@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -60,7 +61,7 @@ namespace FHICORC.Core.Services.DecoderServices
 
         public async Task VerifySHCSignature(JwsParts jws, string shcJson)
         {
-            Console.WriteLine($"SmartHealthCardJson: {shcJson}");
+            Debug.Print($"{nameof(CertificationService)}.{nameof(VerifySHCSignature)}: Decoded JWS Payload - {shcJson}");
             JObject payloadData = JObject.Parse(shcJson);
             string iss = (string)payloadData.GetValue("iss") ?? null;
             if (string.IsNullOrEmpty(iss))
@@ -70,25 +71,24 @@ namespace FHICORC.Core.Services.DecoderServices
 
             byte[] DecodedHeader = Base64UrlDecodingUtils.Base64UrlDecode(jws.Header);
             string HeaderJson = Encoding.UTF8.GetString(DecodedHeader);
-            Console.WriteLine($"HeaderJson: {HeaderJson}");
+            Debug.Print($"{nameof(CertificationService)}.{nameof(VerifySHCSignature)}: Decoded JWS Header - {HeaderJson}");
             JObject headerData = JObject.Parse(HeaderJson);
             string kid = (string)headerData.GetValue("kid") ?? null;
-
             if (string.IsNullOrEmpty(kid))
             {
                 throw new InvalidDataException("kid is missing");
             }
 
-            var key = await GetX5cForGivenKidAsync(kid, iss + "/.well-known/jwks.json");
-            var pubKeyString = key.X5c[0];
-            var pubKeyBytesBase64 = Base64UrlDecodingUtils.Base64UrlDecode(pubKeyString);
-            var pubKeyCertParser = new X509CertificateParser();
-            var pubKeyCert = pubKeyCertParser.ReadCertificate(pubKeyBytesBase64);
+            JsonWebKey jwk = await GetX5cForGivenKidAsync(kid, iss + "/.well-known/jwks.json");
+            string publicKeyString = jwk.X5c[0];
+            byte[] publicKeyBase64BytesArray = Base64UrlDecodingUtils.Base64UrlDecode(publicKeyString);
+            X509Certificate publicKeyX509Cert = new X509CertificateParser().ReadCertificate(publicKeyBase64BytesArray);
 
             byte[] MessageBytes = Encoding.UTF8.GetBytes(jws.Header + '.' + jws.Payload);
             byte[] Signature = Base64UrlDecodingUtils.Base64UrlDecode(jws.Signature);
 
-            var isSignatureValid = VerifySignature(pubKeyCert, Signature, MessageBytes);
+            var isSignatureValid = VerifySignature(publicKeyX509Cert, Signature, MessageBytes);
+            Debug.Print($"{nameof(CertificationService)}.{nameof(VerifySHCSignature)}: JWS verification result - {(isSignatureValid ? "PASSED" : "FAILED")}");
             if (!isSignatureValid)
             {
                 throw new Exception("Failed to verify JWS signature");
@@ -107,9 +107,9 @@ namespace FHICORC.Core.Services.DecoderServices
 
             if (matchingKey == null)
             {
-                return null;
+                throw new Exception($"{nameof(CertificationService)}.{nameof(GetX5cForGivenKidAsync)}: " +
+                    $"No matching key for kid {kid} is found at URL {url}");
             }
-
             return matchingKey;
         }
 
