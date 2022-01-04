@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using FHICORC.Core.Services.Interface;
@@ -17,6 +18,7 @@ using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Utilities.Encoders;
+using Org.BouncyCastle.X509;
 
 namespace FHICORC.Core.Services.DecoderServices
 {
@@ -79,26 +81,14 @@ namespace FHICORC.Core.Services.DecoderServices
 
             var key = await GetX5cForGivenKidAsync(kid, iss + "/.well-known/jwks.json");
             var pubKeyString = key.X5c[0];
-            var pubKeyBytes = HexStringToByteArray(pubKeyString);
+            var pubKeyBytesBase64 = Base64UrlDecodingUtils.Base64UrlDecode(pubKeyString);
+            var pubKeyCertParser = new X509CertificateParser();
+            var pubKeyCert = pubKeyCertParser.ReadCertificate(pubKeyBytesBase64);
 
-            //BigInteger xbi = new BigInteger(pubkeybytes.Take(32).ToArray());
-            //BigInteger ybi = new BigInteger(pubkeybytes.Skip(32).ToArray());
-
-            X9ECParameters curve = SecNamedCurves.GetByName("secp128r1");
-            ECDomainParameters domain = new ECDomainParameters(curve.Curve, curve.G, curve.N, curve.H);
-            var q = curve.Curve.DecodePoint(Hex.Decode(pubKeyBytes));
-            // Alternatively, try creating Q from X/Y
-            //var xbi = new BigInteger(Base64UrlDecode(key.X));
-            //var ybi = new BigInteger(Base64UrlDecode(key.Y));
-            //curve.Curve.CreatePoint(xbi, ybi);
-
-            ECPublicKeyParameters publicKey = new ECPublicKeyParameters("ECDSA", q, domain);
-
-            byte[] BytesToSign = Utf8EncodingSupport.GetBytes(jws.Header, (byte)'.', jws.Payload);
+            byte[] MessageBytes = Encoding.UTF8.GetBytes(jws.Header + '.' + jws.Payload);
             byte[] Signature = Base64UrlDecodingUtils.Base64UrlDecode(jws.Signature);
 
-            var isSignatureValid = VerifySignature(publicKey, Signature, BytesToSign);
-
+            var isSignatureValid = VerifySignature(pubKeyCert, Signature, MessageBytes);
             if (!isSignatureValid)
             {
                 throw new Exception("Failed to verify JWS signature");
@@ -123,14 +113,14 @@ namespace FHICORC.Core.Services.DecoderServices
             return matchingKey;
         }
 
-        private bool VerifySignature(ECPublicKeyParameters pubKey, byte[] sigBytes, byte[] msgBytes)
+        private bool VerifySignature(X509Certificate pubKeyCert, byte[] sigBytes, byte[] msgBytes)
         {
             try
             {
-                ISigner signer = SignerUtilities.GetSigner("SHA-256withECDSA");
-                //var signer = SignerUtilities.GetSigner("SHA-256withPLAIN-ECDSA");
+                var publicKey = pubKeyCert.GetPublicKey();
+                var signer = SignerUtilities.GetSigner("SHA-256withPLAIN-ECDSA");
 
-                signer.Init(false, pubKey);
+                signer.Init(false, publicKey);
                 signer.BlockUpdate(msgBytes, 0, msgBytes.Length);
                 return signer.VerifySignature(sigBytes);
             }
@@ -139,22 +129,6 @@ namespace FHICORC.Core.Services.DecoderServices
                 Console.WriteLine("Verification failed with the error: " + exc.ToString());
                 return false;
             }
-        }
-
-        public static byte[] HexStringToByteArray(string Hex)
-        {
-            byte[] Bytes = new byte[Hex.Length / 2];
-            int[] HexValue = new int[] { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-                                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0A, 0x0B, 0x0C, 0x0D,
-                                 0x0E, 0x0F };
-
-            for (int x = 0, i = 0; i < Hex.Length; i += 2, x += 1)
-            {
-                Bytes[x] = (byte)(HexValue[Char.ToUpper(Hex[i + 0]) - '0'] << 4 |
-                                  HexValue[Char.ToUpper(Hex[i + 1]) - '0']);
-            }
-
-            return Bytes;
         }
     }
 }
