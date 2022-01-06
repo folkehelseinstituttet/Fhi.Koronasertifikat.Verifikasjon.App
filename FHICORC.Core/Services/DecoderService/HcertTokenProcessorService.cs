@@ -220,32 +220,17 @@ namespace FHICORC.Core.Services.DecoderServices
 
             try
             {
-                // Step 1. Decode QR -> Numeric -> JWS Token
-                StringBuilder StringBuilder = new StringBuilder();
-                string unprefixed = qrCodeToken.Substring(5); // delete shc:/
-                foreach (string Number in Spliter(unprefixed, 2))
-                {
-                    if (int.TryParse(Number, out int IntNumber))
-                    {
-                        StringBuilder.Append(Convert.ToChar(IntNumber + 45));
-                    }
-                }
-                var jwsToken = StringBuilder.ToString();
-                Console.WriteLine(jwsToken);
+                // Step 1. Decode JWS token
+                string jwsToken = DecodeSHCJwsToken(qrCodeToken);
 
                 // Step 2. Split JWS Token into parts
-                if (string.IsNullOrEmpty(jwsToken))
-                {
-                    throw new InvalidDataException("jws cannot be empty");
-                }
-
                 var jwsParts = JwsParts.ParseToken(jwsToken);
 
                 byte[] DecodedPayload = Base64UrlDecodingUtils.Base64UrlDecode(jwsParts.Payload);
                 string SmartHealthCardJson = await DeflateCompression.UncompressAsync(DecodedPayload);
 
                 // Step 3. Verify SHC COVID-19 type
-                //TODO
+                VerifiableCredentialTypeSupport.VerifyType(SmartHealthCardJson);
 
                 // Step 4. Verify signature
                 await _certificationService.VerifySHCSignature(jwsParts, SmartHealthCardJson);
@@ -264,11 +249,34 @@ namespace FHICORC.Core.Services.DecoderServices
             }
             catch (Exception e)
             {
-                //If any exception is thrown - assume the code is invalid.
+                // If any exception is thrown - assume the code is invalid.
                 Console.WriteLine(">> Exception thrown from decoding: " + e.Message + ">>>>" + e.StackTrace);
 
                 return resultModel;
             }
+        }
+
+        private string DecodeSHCJwsToken(string qrCode)
+        {
+            // Decode QR -> Numeric -> JWS Token
+            StringBuilder StringBuilder = new StringBuilder();
+            string unprefixed = qrCode.Substring(5); // delete shc:/
+            foreach (string Number in Spliter(unprefixed, 2))
+            {
+                if (int.TryParse(Number, out int IntNumber))
+                {
+                    StringBuilder.Append(Convert.ToChar(IntNumber + 45));
+                }
+            }
+
+            string jwsToken = StringBuilder.ToString();
+            Console.WriteLine(jwsToken);
+            if (string.IsNullOrEmpty(jwsToken))
+            {
+                throw new InvalidDataException("jws cannot be empty");
+            }
+
+            return jwsToken;
         }
 
         private IEnumerable<string> Spliter(string str, int chunkSize)
