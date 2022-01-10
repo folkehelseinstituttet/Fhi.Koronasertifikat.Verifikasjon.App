@@ -89,5 +89,9 @@
     <Folder Include="ModelTests\" />
     <Folder Include="ViewModelTests\" />
     <Folder Include="BusinessRules\" />
+    <Folder Include="Factories\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Factories\" />
   </ItemGroup>
 </Project>

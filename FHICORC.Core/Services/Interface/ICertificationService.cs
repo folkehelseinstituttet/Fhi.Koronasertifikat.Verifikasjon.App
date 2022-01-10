@@ -7,6 +7,6 @@ namespace FHICORC.Core.Services.Interface
     public interface ICertificationService
     {
         public Task VerifyCoseSign1Object(CoseSign1Object coseSign1Object);
-        public Task VerifySHCSignature(JwsParts jws, string shcJson);
+        public Task VerifySHCSignature(JwsParts jws);
     }
 }
