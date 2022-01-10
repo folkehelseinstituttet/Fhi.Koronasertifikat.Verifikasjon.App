@@ -34,6 +34,8 @@ namespace FHICORC.Core.WebServices
         private SemaphoreSlim _semaphoreSlim;
 
         public HttpClient HttpClient { get; private set; }
+        // For calls without auth and cert verification
+        private readonly HttpClient SimpleHttpClient; 
         public static object HttpClientHandler
         {
             get => _httpClientHandler;
@@ -82,6 +84,7 @@ namespace FHICORC.Core.WebServices
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 ServicePointManager.ServerCertificateValidationCallback = ServerCertificateValidationCallback;
             }
+            SimpleHttpClient = new HttpClient();
 
             HttpClient.Timeout = TimeSpan.FromSeconds(_settingsService.DefaultTimeout);
             HttpClient.BaseAddress = new Uri(_settingsService.BaseUrl);
@@ -170,6 +173,11 @@ namespace FHICORC.Core.WebServices
             }
 
             return result;
+        }
+
+        public async Task<string> GetSimpleString(string url)
+        {
+            return await SimpleHttpClient.GetStringAsync(url);
         }
 
         public async Task<ApiResponse> Post(string url)
