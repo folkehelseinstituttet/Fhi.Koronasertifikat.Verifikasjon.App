@@ -1,7 +1,8 @@
-﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json.Linq;
 
-namespace FHICORC.Core.Services.Model.SmartHealthCardModel.Shc
+namespace FHICORC.Core.Services.Model
 {
     public enum VerifiableCredentialType
     {
@@ -20,38 +21,36 @@ namespace FHICORC.Core.Services.Model.SmartHealthCardModel.Shc
           { "https://smarthealth.cards#immunization", VerifiableCredentialType.Immunization },
           { "https://smarthealth.cards#laboratory", VerifiableCredentialType.Laboratory }
         };
-    }
-
-    [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
-    public sealed class EnumInfoAttribute : Attribute
-    {
-        readonly string literal;
-        readonly string description;
-
-        /// <summary>
-        // This is a positional argument
-        /// </summary>
-        /// <param name="literal"></param>
-        /// <param name="description"></param>
-        public EnumInfoAttribute(string literal, string description)
+ 
+        public static void VerifyType(string SmartHealthCard)
         {
-            this.literal = literal;
-            this.description = description;
-        }
+            JObject payloadData = JObject.Parse(SmartHealthCard);
+            JArray types = (JArray)payloadData["vc"]["type"];
+            bool isCovid = false;
+            bool isHealthCard = false;
+            foreach (string item in types)
+            {
+                if (VerifiableCredentialTypeDictionary.TryGetValue(item, out var type))
+                {
+                    if (type == VerifiableCredentialType.Covid19)
+                    {
+                        isCovid = true;
+                    }
+                    if (type == VerifiableCredentialType.HealthCard)
+                    {
+                        isHealthCard = true;
+                    }
+                }
+            }
 
-        public EnumInfoAttribute(string literal)
-        {
-            this.literal = literal;
-            this.description = "Enum description not defined";
-        }
-
-        public string Literal
-        {
-            get { return literal; }
-        }
-        public string Description
-        {
-            get { return description; }
+            if (!isCovid)
+            {
+                throw new InvalidDataException("Smart health card types must contain covid19");
+            }
+            if (!isHealthCard)
+            {
+                throw new InvalidDataException("Smart health card types must contain health card");
+            }
         }
     }
 }
