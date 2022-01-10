@@ -21,7 +21,7 @@ using FHICORC.Core.Services.Model.SmartHealthCardModel.Shc;
 
 namespace FHICORC.Core.Services.DecoderServices
 {
-    public class HcertTokenProcessorService : ITokenProcessorService
+    public class HcertTokenProcessorService: ITokenProcessorService
     {
         private readonly ICertificationService _certificationService;
         private readonly IDateTimeService _dateTimeService;
@@ -69,7 +69,7 @@ namespace FHICORC.Core.Services.DecoderServices
                 //Decode token to a cose sign 1 object
                 CoseSign1Object coseSign1Object = DecodeToCOSEFlow(base45String);
 #if !UNITTESTS
-                //await _certificationService.VerifyCoseSign1Object(coseSign1Object);
+                await _certificationService.VerifyCoseSign1Object(coseSign1Object);
 #endif
                 string jsonStringFromBytes = coseSign1Object.GetJson();
 
@@ -136,7 +136,7 @@ namespace FHICORC.Core.Services.DecoderServices
         private CoseSign1Object DecodeToCOSEFlow(string base45String)
         {
             // The app only expect passport with these prefix
-            if (TokenTypeExtension.GetTokenType(base45String.Substring(0, 3)) == TokenType.Unknown)
+            if (TokenTypeExtension.GetTokenType(base45String.Substring(0,3)) == TokenType.Unknown)
             {
                 throw new InvalidDataException("The provided token is not a valid DK token or token based on hcert 1 specification");
             }

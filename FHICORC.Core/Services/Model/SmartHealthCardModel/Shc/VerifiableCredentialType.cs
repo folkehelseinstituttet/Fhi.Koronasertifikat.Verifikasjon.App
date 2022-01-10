@@ -21,7 +21,7 @@ namespace FHICORC.Core.Services.Model
           { "https://smarthealth.cards#immunization", VerifiableCredentialType.Immunization },
           { "https://smarthealth.cards#laboratory", VerifiableCredentialType.Laboratory }
         };
- 
+
         public static void VerifyType(string SmartHealthCard)
         {
             JObject payloadData = JObject.Parse(SmartHealthCard);

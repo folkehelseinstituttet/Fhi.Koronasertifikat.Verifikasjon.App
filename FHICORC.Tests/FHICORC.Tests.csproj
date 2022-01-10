@@ -15,47 +15,47 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Development|AnyCPU'" />
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Unittests|AnyCPU' ">
-    <IntermediateOutputPath>obj\Unittests\netcoreapp3.1</IntermediateOutputPath>
+    <IntermediateOutputPath>obj\Unittests</IntermediateOutputPath>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Unittests\netcoreapp3.1</OutputPath>
+    <OutputPath>bin\Unittests</OutputPath>
     <DefineConstants>NETCOREAPP;NETCOREAPP3_1;DEBUG;UNITTEST</DefineConstants>
     <NoWarn>1701;1702</NoWarn>
     <NoStdLib>false</NoStdLib>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
-    <IntermediateOutputPath>obj\Test\netcoreapp3.1</IntermediateOutputPath>
+    <IntermediateOutputPath>obj\Test</IntermediateOutputPath>
     <DebugType></DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Test\netcoreapp3.1</OutputPath>
+    <OutputPath>bin\Test</OutputPath>
     <DefineConstants></DefineConstants>
     <NoWarn></NoWarn>
     <NoStdLib>false</NoStdLib>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|AnyCPU' ">
-    <IntermediateOutputPath>obj\AppStore\netcoreapp3.1</IntermediateOutputPath>
+    <IntermediateOutputPath>obj\AppStore</IntermediateOutputPath>
     <DebugType></DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\AppStore\netcoreapp3.1</OutputPath>
+    <OutputPath>bin\AppStore</OutputPath>
     <DefineConstants>APPSTORE</DefineConstants>
     <NoWarn></NoWarn>
     <NoStdLib>false</NoStdLib>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStoreBeta|AnyCPU' ">
-    <IntermediateOutputPath>obj\AppStoreBeta\netcoreapp3.1</IntermediateOutputPath>
+    <IntermediateOutputPath>obj\AppStoreBeta</IntermediateOutputPath>
     <DebugType></DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\AppStoreBeta\netcoreapp3.1</OutputPath>
+    <OutputPath>bin\AppStoreBeta</OutputPath>
     <DefineConstants></DefineConstants>
     <NoWarn></NoWarn>
     <NoStdLib>false</NoStdLib>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStoreBeta|iPhone' ">
-    <IntermediateOutputPath>obj\iPhone\AppStoreBeta\netcoreapp3.1</IntermediateOutputPath>
+    <IntermediateOutputPath>obj\iPhone\AppStoreBeta</IntermediateOutputPath>
     <DebugType></DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\iPhone\AppStoreBeta\netcoreapp3.1</OutputPath>
+    <OutputPath>bin\iPhone\AppStoreBeta</OutputPath>
     <DefineConstants></DefineConstants>
     <NoWarn></NoWarn>
     <NoStdLib>false</NoStdLib>

@@ -10,19 +10,19 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
     <DebugType></DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Test\netstandard2.0</OutputPath>
+    <OutputPath>bin\Test</OutputPath>
     <DefineConstants>APPCENTER;TEST;NETSTANDARD;NETSTANDARD2_0;</DefineConstants>
     <WarningLevel>4</WarningLevel>
-    <IntermediateOutputPath>obj\Test\netstandard2.0</IntermediateOutputPath>
+    <IntermediateOutputPath>obj\Test</IntermediateOutputPath>
     <NoWarn>1701;1702</NoWarn>
     <NoStdLib>false</NoStdLib>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|AnyCPU' ">
-    <IntermediateOutputPath>obj\AppStore\netstandard2.0</IntermediateOutputPath>
+    <IntermediateOutputPath>obj\AppStore</IntermediateOutputPath>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\AppStore\netstandard2.0</OutputPath>
+    <OutputPath>bin\AppStore</OutputPath>
     <DefineConstants>APPSTORE;NETSTANDARD;NETSTANDARD2_0;</DefineConstants>
     <NoWarn>1701;1702</NoWarn>
     <NoStdLib>false</NoStdLib>
@@ -32,11 +32,11 @@
     <DebugType>full</DebugType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStoreBeta|AnyCPU' ">
-    <IntermediateOutputPath>obj\AppStoreBeta\netstandard2.0</IntermediateOutputPath>
+    <IntermediateOutputPath>obj\AppStoreBeta</IntermediateOutputPath>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\AppStoreBeta\netstandard2.0</OutputPath>
+    <OutputPath>bin\AppStoreBeta</OutputPath>
     <DefineConstants>APPSTOREBETA;NETSTANDARD;NETSTANDARD2_0;</DefineConstants>
     <NoWarn></NoWarn>
     <NoStdLib>false</NoStdLib>
