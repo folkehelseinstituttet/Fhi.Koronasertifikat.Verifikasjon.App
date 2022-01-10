@@ -10,19 +10,19 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
     <DebugType></DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Test</OutputPath>
+    <OutputPath>bin\Test\netstandard2.0</OutputPath>
     <DefineConstants>APPCENTER;TEST;NETSTANDARD;NETSTANDARD2_0;</DefineConstants>
     <WarningLevel>4</WarningLevel>
-    <IntermediateOutputPath>obj\Test</IntermediateOutputPath>
+    <IntermediateOutputPath>obj\Test\netstandard2.0</IntermediateOutputPath>
     <NoWarn>1701;1702</NoWarn>
     <NoStdLib>false</NoStdLib>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|AnyCPU' ">
-    <IntermediateOutputPath>obj\AppStore</IntermediateOutputPath>
+    <IntermediateOutputPath>obj\AppStore\netstandard2.0</IntermediateOutputPath>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\AppStore</OutputPath>
+    <OutputPath>bin\AppStore\netstandard2.0</OutputPath>
     <DefineConstants>APPSTORE;NETSTANDARD;NETSTANDARD2_0;</DefineConstants>
     <NoWarn>1701;1702</NoWarn>
     <NoStdLib>false</NoStdLib>
@@ -32,11 +32,11 @@
     <DebugType>full</DebugType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStoreBeta|AnyCPU' ">
-    <IntermediateOutputPath>obj\AppStoreBeta</IntermediateOutputPath>
+    <IntermediateOutputPath>obj\AppStoreBeta\netstandard2.0</IntermediateOutputPath>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\AppStoreBeta</OutputPath>
+    <OutputPath>bin\AppStoreBeta\netstandard2.0</OutputPath>
     <DefineConstants>APPSTOREBETA;NETSTANDARD;NETSTANDARD2_0;</DefineConstants>
     <NoWarn></NoWarn>
     <NoStdLib>false</NoStdLib>
@@ -52,6 +52,7 @@
     <Folder Include="Services\BusinessRules\" />
     <Folder Include="Services\Model\SmartHealthCardModel\" />
     <Folder Include="Services\Model\SmartHealthCardModel\Jws\" />
+    <Folder Include="Services\Model\SmartHealthCardModel\Shc\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Com.AugustCellars.COSE" Version="1.7.0" />
@@ -87,6 +88,7 @@
     <None Remove="Services\Model\SmartHealthCardModel\Jws\" />
     <None Remove="Microsoft.IdentityModel.Tokens" />
     <None Remove="Portable.BouncyCastle" />
+    <None Remove="Services\Model\SmartHealthCardModel\Shc\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\covid-19-lab-test-type.json" />
