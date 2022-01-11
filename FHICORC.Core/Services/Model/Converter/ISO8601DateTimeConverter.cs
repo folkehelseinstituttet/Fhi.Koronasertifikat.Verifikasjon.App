@@ -13,14 +13,14 @@ namespace FHICORC.Core.Services.Model.Converter
     {
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            Regex yearOnly = new Regex(@"\d{4}");
-            Regex yearMonth = new Regex(@"\d{4}-\d{2}");
+            Regex yearOnly = new Regex(@"\d{4}$");
+            Regex yearMonth = new Regex(@"\d{4}-\d{2}$");
 
-            if (yearMonth.IsMatch((string)reader.Value))
+            if (yearMonth.IsMatch(reader.Value.ToString()))
             {
                 return DateTime.Parse(reader.Value.ToString() + "-01");
             }
-            else if (yearOnly.IsMatch((string)reader.Value))
+            else if (yearOnly.IsMatch(reader.Value.ToString()))
             {
                 return DateTime.Parse(reader.Value.ToString() + "-01-01");
             }

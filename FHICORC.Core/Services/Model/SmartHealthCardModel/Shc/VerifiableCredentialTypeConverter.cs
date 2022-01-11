@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace FHICORC.Core.Services.Model.SmartHealthCardModel.Shc
@@ -24,12 +25,13 @@ namespace FHICORC.Core.Services.Model.SmartHealthCardModel.Shc
                 }
                 else
                 {
-                    throw new Exception($"One of the VerifiableCredentialTypes (vc.type) was not an allowed value, type found was: {VerifiableCredentialTypeString}. The supported types are: {GetSupportedVerifiableCredentialTypeUriStringList()}");
+                    Debug.Print($"One of the VerifiableCredentialTypes (vc.type) was of unknown type, type found was: {VerifiableCredentialTypeString}. The supported types are: {GetSupportedVerifiableCredentialTypeUriStringList()}");
+                    return VerifiableCredentialType.Unknown;
                 }
             }
             else
             {
-                throw new Exception($"Must provide at least one VerifiableCredentialTypes (vc.type). The supported types are: {GetSupportedVerifiableCredentialTypeUriStringList()}");
+                throw new Exception($"Must provide at least one VerifiableCredentialTypes (vc.type)");
             }
         }
 
