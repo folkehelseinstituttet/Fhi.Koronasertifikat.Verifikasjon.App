@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using FHICORC.Core.Data;
 using System.Text;
 using FHICORC.Core.Services.Model.SmartHealthCardModel.Jws;
-using FHICORC.Core.Services.Model.SmartHealthCardModel.Shc;
+using System.Diagnostics;
 
 namespace FHICORC.Core.Services.DecoderServices
 {
@@ -225,16 +225,14 @@ namespace FHICORC.Core.Services.DecoderServices
                 string jwsToken = DecodeSHCJwsToken(qrCodeToken);
 
                 // Step 2. Split JWS Token into parts
-                var jwsParts = JwsParts.ParseToken(jwsToken);
-
-                byte[] DecodedPayload = Base64UrlDecodingUtils.Base64UrlDecode(jwsParts.Payload);
-                string SmartHealthCardJson = await DeflateCompression.UncompressAsync(DecodedPayload);
+                JwsParts jwsParts = JwsParts.ParseToken(jwsToken);
 
                 // Step 3. Verify SHC COVID-19 type
-                VerifiableCredentialTypeSupport.VerifyType(SmartHealthCardJson);
+                string SmartHealthCard = await jwsParts.DecodedPayload();
+                VerifiableCredentialTypeSupport.VerifyType(SmartHealthCard);
 
                 // Step 4. Verify signature
-                await _certificationService.VerifySHCSignature(jwsParts, SmartHealthCardJson);
+                await _certificationService.VerifySHCSignature(jwsParts);
 
                 // Step 5. Verify that the issuer is trusted
                 //TODO
@@ -272,7 +270,7 @@ namespace FHICORC.Core.Services.DecoderServices
             }
 
             string jwsToken = StringBuilder.ToString();
-            Console.WriteLine(jwsToken);
+            Debug.Print($"{nameof(HcertTokenProcessorService)}: Decoded JWS token - {jwsToken}");
             if (string.IsNullOrEmpty(jwsToken))
             {
                 throw new InvalidDataException("jws cannot be empty");

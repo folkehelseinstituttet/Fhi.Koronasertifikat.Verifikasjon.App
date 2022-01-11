@@ -8,6 +8,8 @@ namespace FHICORC.Tests.TestMocks
 {
     public class MockRestClient : IRestClient
     {
+        public string GetSimpleStringResponse = "Test";
+
         public bool ServerCertificateValidationCallback(object sender, X509Certificate certificate, X509Chain chain,
             SslPolicyErrors sslPolicyErrors)
         {
@@ -32,6 +34,11 @@ namespace FHICORC.Tests.TestMocks
         public Task<ApiResponse<Stream>> GetFileAsStreamAsync(string url)
         {
             return Task.FromResult(new ApiResponse<Stream>((ApiResponse) null));
+        }
+
+        public async Task<string> GetSimpleString(string url)
+        {
+            return await Task.FromResult(GetSimpleStringResponse);
         }
 
         public Task RegisterAccessTokenHeader()
