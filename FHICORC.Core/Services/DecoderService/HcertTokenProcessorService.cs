@@ -18,6 +18,7 @@ using FHICORC.Core.Data;
 using System.Text;
 using FHICORC.Core.Services.Model.SmartHealthCardModel.Jws;
 using System.Diagnostics;
+using FHICORC.Core.Services.Model.SmartHealthCardModel.Shc;
 
 namespace FHICORC.Core.Services.DecoderServices
 {
@@ -241,7 +242,7 @@ namespace FHICORC.Core.Services.DecoderServices
                 //TODO
 
                 // Step 7. Create Model
-                ITokenPayload decodedModel = JsonConvert.DeserializeObject<SmartHealthCardModel>(SmartHealthCardJson);
+                ITokenPayload decodedModel = JsonConvert.DeserializeObject<SmartHealthCardModel>(SmartHealthCard);
                 resultModel.DecodedModel = decodedModel;
 
                 return resultModel;
