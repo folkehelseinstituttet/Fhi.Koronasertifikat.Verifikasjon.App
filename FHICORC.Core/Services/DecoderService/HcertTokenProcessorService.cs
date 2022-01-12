@@ -18,6 +18,7 @@ using FHICORC.Core.Data;
 using System.Text;
 using FHICORC.Core.Services.Model.SmartHealthCardModel.Jws;
 using System.Diagnostics;
+using FHICORC.Core.Services.Model.SmartHealthCardModel.Shc;
 
 namespace FHICORC.Core.Services.DecoderServices
 {
@@ -121,7 +122,7 @@ namespace FHICORC.Core.Services.DecoderServices
                 // If any exceptions are throw, assume it invalid
                 return resultModel;
             }
-            
+
         }
 
         private List<RulesFeedbackData> VerifyRules(DCCPayload dccPayload, bool international)
@@ -129,7 +130,7 @@ namespace FHICORC.Core.Services.DecoderServices
             var external = _ruleSelectorService.ApplyExternalData(dccPayload, international);
             var applicableRules = _ruleSelectorService.SelectRules(dccPayload, international);
             var verifyRulesModel = new VerifyRulesModel { HCert = dccPayload.DCCPayloadData.DCC, External = external };
-            
+
             return _ruleVerifierService.Verify(applicableRules, verifyRulesModel) ?? new List<RulesFeedbackData>();
         }
 
@@ -146,12 +147,12 @@ namespace FHICORC.Core.Services.DecoderServices
             {
                 base45String = base45String.Substring(1);
             }
-            
+
             byte[] compressedBytesFromBase45Token = base45String.Base45Decode();
-            
+
             byte[] decompressedSignedCOSEBytes = ZlibCompressionUtils.Decompress(compressedBytesFromBase45Token);
-            
-            
+
+
             CoseSign1Object cborMessageFromCOSE = CoseSign1Object.Decode(decompressedSignedCOSEBytes);
             return cborMessageFromCOSE;
         }
@@ -241,7 +242,8 @@ namespace FHICORC.Core.Services.DecoderServices
                 //TODO
 
                 // Step 7. Create Model
-                //TODO
+                ITokenPayload decodedModel = JsonConvert.DeserializeObject<SmartHealthCardModel>(SmartHealthCard);
+                resultModel.DecodedModel = decodedModel;
 
                 return resultModel;
 

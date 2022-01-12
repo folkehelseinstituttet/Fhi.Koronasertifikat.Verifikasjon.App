@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json.Linq;
 
@@ -9,7 +9,8 @@ namespace FHICORC.Core.Services.Model
         HealthCard,
         Covid19,
         Immunization,
-        Laboratory
+        Laboratory,
+        Unknown
     }
 
     public static class VerifiableCredentialTypeSupport
@@ -19,9 +20,10 @@ namespace FHICORC.Core.Services.Model
           { "https://smarthealth.cards#covid19", VerifiableCredentialType.Covid19 },
           { "https://smarthealth.cards#health-card", VerifiableCredentialType.HealthCard },
           { "https://smarthealth.cards#immunization", VerifiableCredentialType.Immunization },
-          { "https://smarthealth.cards#laboratory", VerifiableCredentialType.Laboratory }
+          { "https://smarthealth.cards#laboratory", VerifiableCredentialType.Laboratory },
+          { "Unknown", VerifiableCredentialType.Unknown }
         };
- 
+
         public static void VerifyType(string SmartHealthCard)
         {
             JObject payloadData = JObject.Parse(SmartHealthCard);
