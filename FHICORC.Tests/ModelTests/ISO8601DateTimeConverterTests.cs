@@ -10,7 +10,7 @@ namespace FHICORC.Tests.ModelTests
     {
         [JsonPropertyName("datetime")]
         [Newtonsoft.Json.JsonConverter(typeof(ISO8601DateTimeConverter))]
-        public DateTime? DateTime { get; set; }
+        public DateTime DateTime { get; set; }
     }
 
     public class ISO8601DateTimeConverterTests
@@ -19,7 +19,7 @@ namespace FHICORC.Tests.ModelTests
         [TestCase("1951-03-01 00:00:00", "{\"datetime\":\"1951-03\"}")]
         [TestCase("1951-01-01 00:00:00", "{\"datetime\":\"1951\"}")]
         [TestCase("2021-02-28 05:50:06", "{\"datetime\":\"2021-02-28 05:50:06\"}")]
-        [TestCase("2015-02-07 18:28:17", "{\"datetime\":\"2015-02-07T13:28:17-05:00\"}")]
+        [TestCase("2015-02-07 18:28:17-00:00", "{\"datetime\":\"2015-02-07T13:28:17-05:00\"}")]
         [TestCase("2017-01-01 00:00:00", "{\"datetime\":\"2017-01-01T00:00:00.000Z\"}")]
         public void ISO8601DateTimeConverter_ShouldParseJsonToDateTime(DateTime expectedDate, string dateTime)
         {
