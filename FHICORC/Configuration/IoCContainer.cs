@@ -8,7 +8,6 @@ using FHICORC.Services;
 using FHICORC.Services.Interfaces;
 using FHICORC.Services.Mocks;
 using FHICORC.Services.Repositories;
-using FHICORC.Services.Translator;
 using FHICORC.Services.WebServices;
 using FHICORC.ViewModels;
 using FHICORC.ViewModels.Error;
@@ -20,6 +19,7 @@ using FHICORC.Services.DataManagers;
 using FHICORC.Core.Services.BusinessRules;
 using FHICORC.Core.Services.Model.Converter;
 using FHICORC.Core.Services.Model.EuDCCModel.ValueSet;
+using FHICORC.Core.Services.Repositories;
 
 namespace FHICORC.Configuration
 {
@@ -85,6 +85,7 @@ namespace FHICORC.Configuration
             _container.Register<IValueSetService, ValueSetService>();
             _container.Register<IDigitalGreenValueSetTranslatorFactory, DigitalGreenValueSetTranslatorFactory>();
             _container.Register<IValueSetRepository, ValueSetRepository>();
+            _container.Register<IUrlService, UrlService>();
         }
 
         //The services that need to be reset after the user logs out.
@@ -94,17 +95,6 @@ namespace FHICORC.Configuration
             _container.Register<IRestClient, RestClient>();
             _container.Register<IPublicKeyService, PublicKeyDataManager>().AsSingleton();
             _container.Register<IBusinessRulesService, BusinessRulesDataManager>().AsSingleton();
-        }
-
-        public static void ResetIoCContainer()
-        {
-            _container.Unregister<ISettingsService>();
-            _container.Unregister<IRestClient>();
-
-            RegisterProfileService();
-
-            bool useMocks = IoCContainer.Resolve<ISettingsService>().UseMockServices;
-            UpdateDependencies(useMocks);
         }
 
         public static void UpdateDependencies(bool useMockServices)
@@ -129,7 +119,7 @@ namespace FHICORC.Configuration
 
         public static void RegisterInstance<TInterface>(TInterface instance) where TInterface : class
         {
-            _container.Register<TInterface>(instance);
+            _container.Register(instance);
         }
 
         public static T Resolve<T>() where T : class

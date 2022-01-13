@@ -54,6 +54,7 @@
     <Folder Include="Services\Model\SmartHealthCardModel\Jws\" />
     <Folder Include="Services\Model\SmartHealthCardModel\Shc\" />
     <Folder Include="Services\Model\Exceptions\" />
+    <Folder Include="Services\Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Com.AugustCellars.COSE" Version="1.7.0" />
@@ -91,6 +92,7 @@
     <None Remove="Portable.BouncyCastle" />
     <None Remove="Services\Model\SmartHealthCardModel\Shc\" />
     <None Remove="Services\Model\Exceptions\" />
+    <None Remove="Services\Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\covid-19-lab-test-type.json" />
