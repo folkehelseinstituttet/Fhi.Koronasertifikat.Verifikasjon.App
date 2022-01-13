@@ -1,11 +1,8 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
+﻿using System.Net;
 using NUnit.Framework;
-using FHICORC.Configuration;
 using FHICORC.Core.WebServices;
 
-namespace FHICORC.Tests.Models
+namespace FHICORC.Tests.ModelTests
 {
     public class ApiResponseTests
     {

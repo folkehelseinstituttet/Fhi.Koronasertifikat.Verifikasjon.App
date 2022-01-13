@@ -3,7 +3,7 @@ using System;
 using NUnit.Framework;
 using FHICORC.Core.Services.Model;
 
-namespace FHICORC.Tests.Models
+namespace FHICORC.Tests.ModelTests
 {
     public class VerifiableCredentialTypeTests
     {

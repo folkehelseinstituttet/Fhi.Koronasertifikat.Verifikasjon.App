@@ -20,6 +20,7 @@ using FHICORC.Core.Services.BusinessRules;
 using FHICORC.Core.Services.Model.Converter;
 using FHICORC.Core.Services.Model.EuDCCModel.ValueSet;
 using FHICORC.Core.Services.Repositories;
+using FHICORC.Core.Services.DecoderService;
 
 namespace FHICORC.Configuration
 {
@@ -85,6 +86,8 @@ namespace FHICORC.Configuration
             _container.Register<IValueSetService, ValueSetService>();
             _container.Register<IDigitalGreenValueSetTranslatorFactory, DigitalGreenValueSetTranslatorFactory>();
             _container.Register<IValueSetRepository, ValueSetRepository>();
+            _container.Register<ISmartHealthCardRepository, SmartHealthCardRepository>();
+            _container.Register<ICodingService, CodingService>();
             _container.Register<IUrlService, UrlService>();
         }
 

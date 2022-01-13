@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
-using FHICORC.Core.Services.Enum;
 using FHICORC.Core.Services.Model.SmartHealthCardModel.Shc;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
@@ -18,7 +16,6 @@ namespace FHICORC.Tests.ModelTests
         [TestCase("Anyperson, Jane C.", "{\"resourceType\":\"Bundle\",\"type\":\"collection\",\"entry\":[{\"fullUrl\":\"resource:0\",\"resource\":{\"resourceType\":\"Patient\",\"name\":[{\"family\":\"Anyperson\",\"given\":[\"Jane\",\"C.\"]}],\"birthDate\":\"1961\"}},{\"fullUrl\":\"resource:1\",\"resource\":{\"resourceType\":\"Immunization\",\"meta\":{\"security\":[{\"system\":\"https://smarthealth.cards/ial\",\"code\":\"IAL2\"}]},\"status\":\"completed\",\"vaccineCode\":{\"coding\":[{\"system\":\"http://hl7.org/fhir/sid/cvx\",\"code\":\"208\"}]},\"patient\":{\"reference\":\"resource:0\"},\"occurrenceDateTime\":\"2021-01-01\",\"performer\":[{\"actor\":{\"display\":\"ABC General Hospital\"}}],\"lotNumber\":\"0000002\"}},{\"fullUrl\":\"resource:2\",\"resource\":{\"resourceType\":\"Immunization\",\"status\":\"completed\",\"vaccineCode\":{\"coding\":[{\"system\":\"http://hl7.org/fhir/sid/cvx\",\"code\":\"208\"}]},\"patient\":{\"reference\":\"resource:0\"},\"occurrenceDateTime\":\"2021-01-29\",\"performer\":[{\"actor\":{\"display\":\"ABC General Hospital\"}}],\"lotNumber\":\"0000008\"}}]}")]
         [TestCase("Anyperson, James T.", "{\"resourceType\":\"Bundle\",\"type\":\"collection\",\"entry\":[{\"fullUrl\":\"resource:0\",\"resource\":{\"resourceType\":\"Patient\",\"name\":[{\"family\":\"Anyperson\",\"given\":[\"James\",\"T.\"]}],\"birthDate\":\"1951-02\"}},{\"fullUrl\":\"resource:1\",\"resource\":{\"resourceType\":\"Observation\",\"meta\":{\"security\":[{\"system\":\"https://smarthealth.cards/ial\",\"code\":\"IAL2\"}]},\"status\":\"final\",\"code\":{\"coding\":[{\"system\":\"http://loinc.org\",\"code\":\"94558-4\"}]},\"subject\":{\"reference\":\"resource:0\"},\"effectiveDateTime\":\"2021-02-17\",\"valueCodeableConcept\":{\"coding\":[{\"system\":\"http://snomed.info/sct\",\"code\":\"260373001\"}]},\"performer\":[{\"display\":\"ABC General Hospital\"}]}}]}")]
         [TestCase("Anyperson, James T.", "{\"resourceType\":\"Bundle\",\"type\":\"collection\",\"entry\":[{\"fullUrl\":\"resource:0\",\"resource\":{\"resourceType\":\"Patient\",\"name\":[{\"family\":\"Anyperson\",\"given\":[\"James\",\"T.\"]}],\"birthDate\":\"1951-03-31 09:50:00\"}},{\"fullUrl\":\"resource:1\",\"resource\":{\"resourceType\":\"Observation\",\"meta\":{\"security\":[{\"system\":\"https://smarthealth.cards/ial\",\"code\":\"IAL2\"}]},\"status\":\"final\",\"code\":{\"coding\":[{\"system\":\"http://loinc.org\",\"code\":\"94558-4\"}]},\"subject\":{\"reference\":\"resource:0\"},\"effectiveDateTime\":\"2021-02-17\",\"valueCodeableConcept\":{\"coding\":[{\"system\":\"http://snomed.info/sct\",\"code\":\"260373001\"}]},\"performer\":[{\"display\":\"ABC General Hospital\"}]}}]}")]
-
         public void CredentialSubject_Patient_FullName_ShouldParseJson(string expected, string fhirBundleString)
         {
             string fhirVersion = "4.0.1";

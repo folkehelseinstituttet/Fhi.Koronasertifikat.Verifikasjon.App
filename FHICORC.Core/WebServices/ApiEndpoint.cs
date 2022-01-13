@@ -11,7 +11,8 @@ namespace FHICORC.Core.WebServices
         PublicKey,
         Text,
         BusinessRules,
-        ValueSets
+        ValueSets,
+        ShcVaccineInfo
     }
 
     public static class ApiEndpointExtension
@@ -28,6 +29,8 @@ namespace FHICORC.Core.WebServices
                     return "/rule";
                 case ApiEndpoint.ValueSets:
                     return "/valueset";
+                case ApiEndpoint.ShcVaccineInfo:
+                    return "/shc/vaccineinfo";
             }
 
             throw new NotImplementedException($"String not added for api endpoint {endpoint}");
