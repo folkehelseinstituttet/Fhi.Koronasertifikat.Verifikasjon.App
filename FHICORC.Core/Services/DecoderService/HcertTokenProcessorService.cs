@@ -244,6 +244,7 @@ namespace FHICORC.Core.Services.DecoderServices
                 // Step 7. Create Model
                 ITokenPayload decodedModel = JsonConvert.DeserializeObject<SmartHealthCardModel>(SmartHealthCard);
                 resultModel.DecodedModel = decodedModel;
+                resultModel.ValidationResult = TokenValidateResult.Valid;
 
                 return resultModel;
 

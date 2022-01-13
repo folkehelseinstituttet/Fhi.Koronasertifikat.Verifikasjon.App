@@ -241,6 +241,17 @@ namespace FHICORC.ViewModels
                 anyTestResults = cwtPayload.DCCPayloadData.DCC.Tests?.Any() ?? false;
                 anyRecovery = cwtPayload.DCCPayloadData.DCC.Recovery?.Any() ?? false;
             }
+            else if (tokenValidateResultModel.DecodedModel is Core.Services.Model.SmartHealthCardModel.Shc.SmartHealthCardModel shc)
+            {
+                if (shc.VerifiableCredential.CredentialSubject.Immunizations?.Any() ?? false)
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        if (await IsResultOpen()) return;
+                        await _navigationService.PushPage(new ScanSHCVaccineResultView(), true, PageNavigationStyle.PushModallyFullscreen, tokenValidateResultModel);
+                    });
+                }
+            }
             else
             {
                 if (await IsResultOpen()) return;

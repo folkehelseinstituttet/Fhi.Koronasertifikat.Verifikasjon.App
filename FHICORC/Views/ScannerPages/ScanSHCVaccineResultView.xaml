@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:elements="clr-namespace:FHICORC.Views.Elements;assembly=FHICORC"
+    xmlns:controls="clr-namespace:FHICORC.Controls;assembly=FHICORC"
+    xmlns:effects="clr-namespace:FHICORC.Controls"
+    x:Class="FHICORC.Views.ScannerPages.ScanSHCVaccineResultView"
+    BackgroundColor="{StaticResource NavigationHeaderBackgroundColor}"
+    NavigationPage.HasNavigationBar="False"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    ios:Page.UseSafeArea="False">
+    <ContentPage.Content>
+        <Grid BackgroundColor="{StaticResource FHIWhite}"
+              RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0"
+                         BackgroundColor="{StaticResource DefaultBackgroundColor}"
+                         VerticalOptions="Start"
+                         Padding="0"
+                         Spacing="0">
+                <elements:NavigationHeader
+                    CenterLabelText="{Binding Strings[SCANNER_EU_TITLE_TEXT]}"
+                    RightButtonCommand="{Binding BackCommand}"
+                    RightButtonAccessibilityText="{Binding Strings[CLOSE_BUTTON]}"
+                    RightButtonImageSource="{StaticResource XMark}"
+                    VerticalOptions="Center">
+                    <elements:NavigationHeader.Padding>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="iOS" Value="0,50,0,0" />
+                            <On Platform="Android" Value="0,0,0,0" />
+                        </OnPlatform>
+                    </elements:NavigationHeader.Padding>
+                </elements:NavigationHeader>
+
+                <StackLayout
+                    BackgroundColor="#32345C"
+                    Margin="0,20,0,0"
+                    Padding="0,8,0,11"
+                    Spacing="0">
+                    <Label
+                        Margin="-200, 0"
+                        Padding="0, 2"
+                        VerticalTextAlignment="Center"
+                        MaxLines="1"
+                        LineBreakMode="NoWrap"
+                        Style="{StaticResource RegularLabelBoldStyle}"
+                        TextColor="{Binding BannerTextColor}"
+                        Text="{Binding RepeatedText}"
+                        AutomationProperties.IsInAccessibleTree="False"
+                        effects:FontSizeLabelEffectParams.MaxFontSize="15.00"
+                        effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                        <Label.Effects>
+                            <effects:FontSizeLabelEffect/>
+                        </Label.Effects>
+                    </Label>
+                </StackLayout>
+            </StackLayout>
+
+            <ScrollView Grid.Row="1">
+                <StackLayout Padding="0"
+                             BackgroundColor="{StaticResource FHIWhite}"
+                             Spacing="0">
+                    <Grid BackgroundColor="{StaticResource DefaultBackgroundColor}">
+                        <StackLayout Orientation="Vertical"
+                                     Spacing="6"
+                                     Padding="0"
+                                     Margin="0, 30">
+                            <Label Text="{Binding FullName}"
+                                   AutomationProperties.IsInAccessibleTree="True"
+                                   Style="{StaticResource ContentTitleStyle}"
+                                   HorizontalTextAlignment="Center"
+                                   HorizontalOptions="Center"
+                                   effects:FontSizeLabelEffectParams.MaxFontSize="32.00"
+                                   effects:FontSizeLabelEffectParams.MinFontSize="20.00">
+                                <Label.Effects>
+                                    <effects:FontSizeLabelEffect/>
+                                </Label.Effects>
+                            </Label>
+                            <Label x:Name="DateOfBirthLabel"
+                                   Text="{Binding DateOfBirth}"
+                                   Style="{StaticResource ContentStyle}"
+                                   HorizontalTextAlignment="Center"
+                                   HorizontalOptions="Center"
+                                   effects:FontSizeLabelEffectParams.MaxFontSize="28.00"
+                                   effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                                <Label.Effects>
+                                    <effects:FontSizeLabelEffect/>
+                                </Label.Effects>
+                            </Label>
+                        </StackLayout>
+                    </Grid>
+
+                    <Grid Margin="0"
+                          Padding="20,25,20,27"
+                          RowSpacing="0"
+                          BackgroundColor="{StaticResource FHIPrimaryBlue}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Source="{StaticResource VaccineIcon}"
+                               VerticalOptions="Center" HorizontalOptions="Start" />
+                        <Label Grid.Row="0" Grid.Column="1"
+                               Style="{StaticResource InfoPaneHeaderStyle}"
+                               Text="COVID-19 - Vaksine"
+                               HorizontalOptions="Start" VerticalOptions="Center"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="32.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="20.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label Grid.Row="1"
+                               Grid.Column="1"
+                               Style="{StaticResource InfoPaneSubHeaderStyle}"
+                               Text="Smarth Health Card"
+                               HorizontalOptions="Start" VerticalOptions="Center"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="28.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                    </Grid>
+
+                    <Grid
+                        Margin="20,0,20,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0"
+                               Margin="0,20,0,0" 
+                               AutomationProperties.IsInAccessibleTree="True"
+                               Text="Vaksinasjonsdato" 
+                               Style="{StaticResource InfoPaneItemHeader}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="30.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label Grid.Row="1"
+                               x:Name="VaccineVaccinationDate"
+                               Text="{Binding VaccinationDate}" 
+                               Style="{StaticResource InfoPaneItemValue}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <BoxView Grid.Row="2" Margin="0,10,0,10" BackgroundColor="{StaticResource DefaultBackgroundColor}" HeightRequest="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+
+                        <Label Grid.Row="3"
+                               Margin="0,10,0,0" 
+                               AutomationProperties.IsInAccessibleTree="True"
+                               Text="Vaccine status" 
+                               Style="{StaticResource InfoPaneItemHeader}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="30.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label Grid.Row="4"
+                               Text="{Binding VaccineStatus}" 
+                               Style="{StaticResource InfoPaneItemValue}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <BoxView Grid.Row="5" Margin="0,10,0,10" BackgroundColor="{StaticResource DefaultBackgroundColor}" HeightRequest="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+
+                        <Label Grid.Row="6"
+                               Margin="0,10,0,0" 
+                               AutomationProperties.IsInAccessibleTree="True"
+                               Text="Vaccine Code" 
+                               Style="{StaticResource InfoPaneItemHeader}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="30.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label Grid.Row="7"
+                               Text="{Binding VaccineType}" 
+                               Style="{StaticResource InfoPaneItemValue}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <BoxView Grid.Row="8" Margin="0,10,0,10" BackgroundColor="{StaticResource DefaultBackgroundColor}" HeightRequest="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+
+            <StackLayout Grid.Row="2"
+                         Orientation="Vertical"
+                         VerticalOptions="End"
+                         Padding="0"
+                         Spacing="10"
+                         Margin="20">
+
+                <controls:SingleLineButton
+                    Padding="80,0,80,0"
+                    Command="{Binding ScanAgainCommand}"
+                    ImageSource="{StaticResource ScanRectangle}"
+                    Style="{StaticResource CombinedButtonPrimaryStyle}"
+                    Text="{Binding Strings[SCANNER_ERROR_BUTTON_TEXT]}"
+                    effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                    effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                    <controls:SingleLineButton.Effects>
+                        <effects:FontSizeLabelEffect/>
+                    </controls:SingleLineButton.Effects>
+                </controls:SingleLineButton>
+
+                <!--  Seconds left before the page closes  -->
+                <Label
+                    Margin="0,20"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource TertierStyle}"
+                    Text="{Binding SecondsRemainingText}"
+                    AutomationProperties.IsInAccessibleTree="True"
+                    AutomationId="{Binding SecondsRemainingText_Accessibility}"
+                    AutomationProperties.Name="{Binding SecondsRemainingText_Accessibility}"
+                    TextColor="{StaticResource LightTextColor}"
+                    effects:FontSizeLabelEffectParams.MaxFontSize="24.00"
+                    effects:FontSizeLabelEffectParams.MinFontSize="12.00">
+                    <Label.Effects>
+                        <effects:FontSizeLabelEffect/>
+                    </Label.Effects>
+                </Label>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
