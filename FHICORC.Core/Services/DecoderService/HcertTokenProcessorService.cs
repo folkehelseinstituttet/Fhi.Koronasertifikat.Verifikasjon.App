@@ -240,7 +240,7 @@ namespace FHICORC.Core.Services.DecoderServices
                 await _certificationService.VerifySHCSignature(jwsParts);
 
                 // Step 5. Verify that the issuer is trusted
-                //TODO
+                await _certificationService.VerifySHCIssuer(jwsParts);
 
                 // Step 6. (Optional, not in scope) Revocation
                 //TODO

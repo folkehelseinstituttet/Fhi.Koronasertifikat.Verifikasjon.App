@@ -5,7 +5,6 @@ using FHICORC.Tests.TestMocks;
 using FHICORC.Core.Services.Model.SmartHealthCardModel.Jws;
 using FHICORC.Tests.Factories;
 using System.Collections.Generic;
-using System.IO;
 using System;
 using FHICORC.Core.Services.Model.Exceptions;
 
@@ -14,14 +13,18 @@ namespace FHICORC.Tests.ServiceTests
     public class CertificationServiceTests
     {
         private readonly ICertificationService certificationService;
+
         private readonly MockRestClient restClient;
+        private readonly MockSmartHealthCardRepository smartHealthCardRepository;
 
         public CertificationServiceTests()
         {
             restClient = new MockRestClient();
+            smartHealthCardRepository = new MockSmartHealthCardRepository();
             certificationService = new CertificationService(
                 new MockPublicKeyDataManager(),
-                restClient
+                restClient,
+                smartHealthCardRepository
             );
         }
 
@@ -59,6 +62,24 @@ namespace FHICORC.Tests.ServiceTests
             JwsParts parts = JwsParts.ParseToken(SmartHealthCardFactory.CreateJwsToken());
 
             Assert.ThrowsAsync<Exception>(async () => await certificationService.VerifySHCSignature(parts));
+        }
+
+        [Test]
+        public void VerifySHCIssuer_TrustedIssuer_DoesNotThrowException()
+        {
+            smartHealthCardRepository.GetIssuerTrustResponse.Trusted = true;
+            JwsParts parts = JwsParts.ParseToken(SmartHealthCardFactory.CreateJwsToken());
+
+            Assert.DoesNotThrowAsync(async () => await certificationService.VerifySHCIssuer(parts));
+        }
+
+        [Test]
+        public void VerifySHCIssuer_NotTrustedIssuer_ThrowsException()
+        {
+            smartHealthCardRepository.GetIssuerTrustResponse.Trusted = false;
+            JwsParts parts = JwsParts.ParseToken(SmartHealthCardFactory.CreateJwsToken());
+
+            Assert.ThrowsAsync<Exception>(async () => await certificationService.VerifySHCIssuer(parts));
         }
     }
 }
