@@ -1,35 +1,35 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
 
 namespace FHICORC.Core.Services.Model.SmartHealthCardModel.Shc
 {
-    public class SmartHealthCardCoding
+    public class CodeableConcept
     {
         [JsonIgnore]
         public string Id
         {
             get
             {
-                return System + Code;
+                return Coding.Count().ToString()
+                 + string.Join("-", Coding.Select(x => x.Id).OrderBy(x => x));
             }
         }
 
-        [JsonProperty("system")]
-        public string System { get; set; }
-
-        [JsonProperty("code")]
-        public string Code { get; set; }
+        [JsonProperty("coding")]
+        public SmartHealthCardCoding[] Coding { get; set; }
 
         public override bool Equals(object obj)
         {
             //Check for null and compare run-time types.
-            if ((obj == null) || !GetType().Equals(obj.GetType()))
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
             {
                 return false;
             }
             else
             {
-                SmartHealthCardCoding p = (SmartHealthCardCoding)obj;
-                return Id.Equals(p.Id);
+                CodeableConcept p = (CodeableConcept)obj;
+                return p.Id.Equals(Id);
             }
         }
 

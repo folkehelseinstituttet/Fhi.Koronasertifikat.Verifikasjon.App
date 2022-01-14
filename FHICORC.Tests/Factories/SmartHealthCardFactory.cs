@@ -1,4 +1,6 @@
-﻿namespace FHICORC.Tests.Factories
+﻿using FHICORC.Core.Services.Model.SmartHealthCardModel.Shc;
+
+namespace FHICORC.Tests.Factories
 {
     public class SmartHealthCardFactory
     {
@@ -32,7 +34,26 @@
                 "\"x\":\"PQHApUWm94mflvswQgAnfHlETMwJFqjUVSs7WU6LQy4\"," +
                 "\"y\":\"7mj8IO-8V5VZjDbRVsJINC_Rq5ai5CDhFX18ceRsLWQ\"}]}";
         }
+
+        public static SmartHealthCardImmunization CreateImmunization()
+        {
+            SmartHealthCardImmunization immunization = new SmartHealthCardImmunization();
+            immunization.VaccineCode = CreateCodeableConcept();
+            return immunization;
+        }
+
+        public static CodeableConcept CreateCodeableConcept()
+        {
+            CodeableConcept codeableConcept = new CodeableConcept();
+            SmartHealthCardCoding firstCoding = new SmartHealthCardCoding();
+            SmartHealthCardCoding seccondCoding = new SmartHealthCardCoding();
+
+            firstCoding.System = "system1";
+            firstCoding.Code = "code1";
+            seccondCoding.System = "system2";
+            seccondCoding.Code = "code2";
+            codeableConcept.Coding = new SmartHealthCardCoding[] { firstCoding, seccondCoding };
+            return codeableConcept;
+        }
     }
-
-
 }
