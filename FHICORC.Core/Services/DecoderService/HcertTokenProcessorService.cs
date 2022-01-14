@@ -250,14 +250,9 @@ namespace FHICORC.Core.Services.DecoderServices
                 List<SmartHealthCardVaccineInfo> vaccineInfo = await _codingService.GetShcVaccineInfo(
                     decodedModel.VerifiableCredential.CredentialSubject.Immunizations);
 
-                // Vaccine lookup example (to be removed)
-                foreach (var immunization in decodedModel.VerifiableCredential.CredentialSubject.Immunizations)
-                {
-                    SmartHealthCardVaccineInfo info = vaccineInfo.First(x => x.Id.Equals(immunization.VaccineCode.Id));
-                    Debug.Print($"{immunization.OccurrenceDateTime} - {info.Name}, {info.Type}, {info.Manufacturer}");
-                }
+                resultModel.DecodedModel = new SmartHealthCardWrapper(decodedModel, vaccineInfo);
+                resultModel.ValidationResult = TokenValidateResult.Valid;
 
-                resultModel.DecodedModel = decodedModel;
                 return resultModel;
             }
             catch (Exception e)

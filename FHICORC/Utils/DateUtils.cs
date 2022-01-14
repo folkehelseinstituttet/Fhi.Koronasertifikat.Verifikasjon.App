@@ -14,7 +14,7 @@ namespace FHICORC.Utils
 
         public static string ToLocaleDateFormat(this DateTime date)
         {
-            return date.ToString("d", CultureInfo.CreateSpecificCulture(LocaleService.Current.GetLanguage().ToISOCode()));
+            return date.ToString("yyyy-MM-dd", CultureInfo.CreateSpecificCulture(LocaleService.Current.GetLanguage().ToISOCode()));
         }
 
         public static string ToLocaleTimeFormat(this DateTime date)
