@@ -138,6 +138,12 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <Label Grid.Row="0"
@@ -189,6 +195,7 @@
                         </Label>
                         <BoxView Grid.Row="5" Margin="0,10,0,10" BackgroundColor="{StaticResource DefaultBackgroundColor}" HeightRequest="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
 
+                        <!-- Vaccine name -->
                         <Label Grid.Row="6"
                                Margin="0,10,0,0" 
                                AutomationProperties.IsInAccessibleTree="True"
@@ -213,7 +220,58 @@
                         </Label>
                         <BoxView Grid.Row="8" Margin="0,10,0,10" BackgroundColor="{StaticResource DefaultBackgroundColor}" HeightRequest="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
 
+                         <!-- Vaccine type -->
                         <Label Grid.Row="9"
+                               Margin="0,10,0,0" 
+                               AutomationProperties.IsInAccessibleTree="True"
+                               Text="{Binding VaccineTypeText}"
+                               Style="{StaticResource InfoPaneItemHeader}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="30.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label Grid.Row="10"
+                               Text="{Binding VaccineType}" 
+                               Style="{StaticResource InfoPaneItemValue}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <BoxView Grid.Row="11" Margin="0,10,0,10" BackgroundColor="{StaticResource DefaultBackgroundColor}" HeightRequest="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+
+                        <!-- Vaccine manufacturer -->
+                        <Label Grid.Row="12"
+                               Margin="0,10,0,0" 
+                               AutomationProperties.IsInAccessibleTree="True"
+                               Text="{Binding VaccineManufacturerText}"
+                               Style="{StaticResource InfoPaneItemHeader}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="30.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label Grid.Row="13"
+                               Text="{Binding VaccineManufacturer}" 
+                               Style="{StaticResource InfoPaneItemValue}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <BoxView Grid.Row="14" Margin="0,10,0,10" BackgroundColor="{StaticResource DefaultBackgroundColor}" HeightRequest="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+
+
+                        <Label Grid.Row="15"
                                Margin="0,10,0,0" 
                                AutomationProperties.IsInAccessibleTree="True"
                                Text="{Binding VaccineNumberOfDosesText}"
@@ -225,7 +283,7 @@
                                 <effects:FontSizeLabelEffect/>
                             </Label.Effects>
                         </Label>
-                        <Label Grid.Row="10"
+                        <Label Grid.Row="16"
                                Text="{Binding VaccineNumberOfDoses}" 
                                Style="{StaticResource InfoPaneItemValue}" 
                                HorizontalOptions="Start"

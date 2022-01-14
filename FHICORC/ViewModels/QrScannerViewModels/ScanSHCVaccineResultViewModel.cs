@@ -6,12 +6,14 @@ using System.Windows.Input;
 using FHICORC.Core.Data;
 using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Model;
+using FHICORC.Core.Services.Model.SmartHealthCardModel.Shc;
 using FHICORC.Data;
 using FHICORC.Services;
 using FHICORC.Services.Interfaces;
 using FHICORC.ViewModels.Base;
 using Xamarin.Forms;
 using FHICORC.Utils;
+using FHICORC.Core.Services.Model.SmartHealthCardModel.Coding;
 
 namespace FHICORC.ViewModels.QrScannerViewModels
 {
@@ -72,6 +74,28 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             }
         }
 
+        private string _vaccineType;
+        public string VaccineType
+        {
+            get => _vaccineType;
+            set
+            {
+                _vaccineType = value;
+                OnPropertyChanged(nameof(VaccineType));
+            }
+        }
+
+        private string _vaccineManufacturer;
+        public string VaccineManufacturer
+        {
+            get => _vaccineManufacturer;
+            set
+            {
+                _vaccineManufacturer = value;
+                OnPropertyChanged(nameof(VaccineManufacturer));
+            }
+        }
+
         private string _vaccineNumberOfDoses;
         public string VaccineNumberOfDoses
         {
@@ -125,6 +149,8 @@ namespace FHICORC.ViewModels.QrScannerViewModels
         public string VaccineStatusText => "SHC_VACCINE_STATUS_TEXT".Translate();
         public string VaccineDateOfVaccinationText => "INTERNATIONAL_INFO_VACCINE_DATE_OF_VACCINATION_TEXT".Translate();
         public string VaccineNameText => "INTERNATIONAL_INFO_VACCINE_VACCINE_NAME_TEXT".Translate();
+        public string VaccineTypeText => "INTERNATIONAL_INFO_VACCINE_TYPE_TEXT".Translate();
+        public string VaccineManufacturerText =>  "INTERNATIONAL_INFO_VACCINE_MARKETING_AUTHORISATION_HOLDER_TEXT".Translate();
         public string VaccineNumberOfDosesText => "INTERNATIONAL_INFO_VACCINE_DOSE_TITLE_TEXT".Translate();
 
         public ICommand ScanAgainCommand => new Command(async () =>
@@ -143,14 +169,21 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             {
                 if (navigationData is TokenValidateResultModel tokenValidateResultModel)
                 {
-                    if (tokenValidateResultModel.DecodedModel is Core.Services.Model.SmartHealthCardModel.Shc.SmartHealthCardModel shc)
+                    if (tokenValidateResultModel.DecodedModel is SmartHealthCardWrapper shc)
                     {
-                        FullName = shc.VerifiableCredential.CredentialSubject.Patients.First().PersonName.FullName;
-                        DateOfBirth = shc.VerifiableCredential.CredentialSubject.Patients.First().DateOfBirth?.ToLocaleDateFormat();
-                        VaccinationDate = shc.VerifiableCredential.CredentialSubject.Immunizations.OrderByDescending(x => x.OccurrenceDateTime).First().OccurrenceDateTime?.ToLocaleDateFormat();
-                        VaccineStatus = shc.VerifiableCredential.CredentialSubject.Immunizations.OrderByDescending(x => x.OccurrenceDateTime).First().Status;
-                        VaccineName = shc.VerifiableCredential.CredentialSubject.Immunizations.OrderByDescending(x => x.OccurrenceDateTime).First().VaccineCode.Coding[0].Code;
-                        VaccineNumberOfDoses = shc.VerifiableCredential.CredentialSubject.Immunizations.Count().ToString();
+                        // Assumes one patient and one type if vaccine/immunization
+                        SmartHealthCardPatient patient = shc.SmartHealthCard.VerifiableCredential.CredentialSubject.Patients.First();
+                        SmartHealthCardImmunization immunization = shc.SmartHealthCard.VerifiableCredential.CredentialSubject.Immunizations.OrderByDescending(x => x.OccurrenceDateTime).First();
+                        SmartHealthCardVaccineInfo vaccineInfo = shc.VaccineInfo.First(x => x.Id.Equals(immunization.VaccineCode.Id));
+
+                        FullName = patient.PersonName.FullName;
+                        DateOfBirth = patient.DateOfBirth?.ToLocaleDateFormat();
+                        VaccinationDate = immunization.OccurrenceDateTime?.ToLocaleDateFormat();
+                        VaccineStatus = immunization.Status;
+                        VaccineName = vaccineInfo.Name;
+                        VaccineType = vaccineInfo.Type;
+                        VaccineManufacturer = vaccineInfo.Manufacturer;
+                        VaccineNumberOfDoses = shc.SmartHealthCard.VerifiableCredential.CredentialSubject.Immunizations.Count().ToString();
                     }
                 }
             }

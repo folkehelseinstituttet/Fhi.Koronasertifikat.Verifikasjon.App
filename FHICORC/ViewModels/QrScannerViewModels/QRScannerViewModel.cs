@@ -241,9 +241,9 @@ namespace FHICORC.ViewModels
                 anyTestResults = cwtPayload.DCCPayloadData.DCC.Tests?.Any() ?? false;
                 anyRecovery = cwtPayload.DCCPayloadData.DCC.Recovery?.Any() ?? false;
             }
-            else if (tokenValidateResultModel.DecodedModel is Core.Services.Model.SmartHealthCardModel.Shc.SmartHealthCardModel shc)
+            else if (tokenValidateResultModel.DecodedModel is Core.Services.Model.SmartHealthCardModel.Shc.SmartHealthCardWrapper shc)
             {
-                if (shc.VerifiableCredential.CredentialSubject.Immunizations?.Any() ?? false)
+                if (shc.SmartHealthCard.VerifiableCredential.CredentialSubject.Immunizations?.Any() ?? false)
                 {
                     Device.BeginInvokeOnMainThread(async () =>
                     {
