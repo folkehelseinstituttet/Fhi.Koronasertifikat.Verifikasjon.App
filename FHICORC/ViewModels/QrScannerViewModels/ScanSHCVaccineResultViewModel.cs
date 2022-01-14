@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using FHICORC.Core.Data;
+using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Model;
 using FHICORC.Data;
 using FHICORC.Services;
 using FHICORC.Services.Interfaces;
 using FHICORC.ViewModels.Base;
 using Xamarin.Forms;
+using FHICORC.Utils;
 
 namespace FHICORC.ViewModels.QrScannerViewModels
 {
@@ -59,14 +61,25 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             }
         }
 
-        private string _vaccineType;
-        public string VaccineType
+        private string _vaccineName;
+        public string VaccineName
         {
-            get => _vaccineType;
+            get => _vaccineName;
             set
             {
-                _vaccineType = value;
-                OnPropertyChanged(nameof(VaccineType));
+                _vaccineName = value;
+                OnPropertyChanged(nameof(VaccineName));
+            }
+        }
+
+        private string _vaccineNumberOfDoses;
+        public string VaccineNumberOfDoses
+        {
+            get => _vaccineNumberOfDoses;
+            set
+            {
+                _vaccineNumberOfDoses = value;
+                OnPropertyChanged(nameof(VaccineNumberOfDoses));
             }
         }
 
@@ -108,6 +121,12 @@ namespace FHICORC.ViewModels.QrScannerViewModels
 
         public string RepeatedText => string.Concat(Enumerable.Repeat($"{BannerText}         ", 10));
 
+        public string VaccineHeaderText => "INTERNATIONAL_INFO_VACCINE_HEADER_TEXT".Translate();
+        public string VaccineStatusText => "SHC_VACCINE_STATUS_TEXT".Translate();
+        public string VaccineDateOfVaccinationText => "INTERNATIONAL_INFO_VACCINE_DATE_OF_VACCINATION_TEXT".Translate();
+        public string VaccineNameText => "INTERNATIONAL_INFO_VACCINE_VACCINE_NAME_TEXT".Translate();
+        public string VaccineNumberOfDosesText => "INTERNATIONAL_INFO_VACCINE_DOSE_TITLE_TEXT".Translate();
+
         public ICommand ScanAgainCommand => new Command(async () =>
             await ExecuteOnceAsync(async () => await Task.Run(ClosePage)));
 
@@ -127,10 +146,11 @@ namespace FHICORC.ViewModels.QrScannerViewModels
                     if (tokenValidateResultModel.DecodedModel is Core.Services.Model.SmartHealthCardModel.Shc.SmartHealthCardModel shc)
                     {
                         FullName = shc.VerifiableCredential.CredentialSubject.Patients.First().PersonName.FullName;
-                        DateOfBirth = shc.VerifiableCredential.CredentialSubject.Patients.First().DateOfBirth.ToString();
-                        VaccinationDate = shc.VerifiableCredential.CredentialSubject.Immunizations.OrderByDescending(x => x.OccurrenceDateTime).First().OccurrenceDateTime.ToString();
+                        DateOfBirth = shc.VerifiableCredential.CredentialSubject.Patients.First().DateOfBirth?.ToLocaleDateFormat();
+                        VaccinationDate = shc.VerifiableCredential.CredentialSubject.Immunizations.OrderByDescending(x => x.OccurrenceDateTime).First().OccurrenceDateTime?.ToLocaleDateFormat();
                         VaccineStatus = shc.VerifiableCredential.CredentialSubject.Immunizations.OrderByDescending(x => x.OccurrenceDateTime).First().Status;
-                        VaccineType = shc.VerifiableCredential.CredentialSubject.Immunizations.OrderByDescending(x => x.OccurrenceDateTime).First().VaccineCode.Coding[0].Code;
+                        VaccineName = shc.VerifiableCredential.CredentialSubject.Immunizations.OrderByDescending(x => x.OccurrenceDateTime).First().VaccineCode.Coding[0].Code;
+                        VaccineNumberOfDoses = shc.VerifiableCredential.CredentialSubject.Immunizations.Count().ToString();
                     }
                 }
             }

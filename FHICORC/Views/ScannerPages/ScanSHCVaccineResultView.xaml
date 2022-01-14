@@ -39,7 +39,7 @@
                 </elements:NavigationHeader>
 
                 <StackLayout
-                    BackgroundColor="#32345C"
+                    BackgroundColor="{Binding BannerColor}"
                     Margin="0,20,0,0"
                     Padding="0,8,0,11"
                     Spacing="0">
@@ -99,6 +99,7 @@
                     <Grid Margin="0"
                           Padding="20,25,20,27"
                           RowSpacing="0"
+                          IsVisible="{Binding IsBorderControlOn}"
                           BackgroundColor="{StaticResource FHIPrimaryBlue}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -112,7 +113,7 @@
                                VerticalOptions="Center" HorizontalOptions="Start" />
                         <Label Grid.Row="0" Grid.Column="1"
                                Style="{StaticResource InfoPaneHeaderStyle}"
-                               Text="COVID-19 - Vaksine"
+                               Text="{Binding VaccineHeaderText}"
                                HorizontalOptions="Start" VerticalOptions="Center"
                                effects:FontSizeLabelEffectParams.MaxFontSize="32.00"
                                effects:FontSizeLabelEffectParams.MinFontSize="20.00">
@@ -120,22 +121,15 @@
                                 <effects:FontSizeLabelEffect/>
                             </Label.Effects>
                         </Label>
-                        <Label Grid.Row="1"
-                               Grid.Column="1"
-                               Style="{StaticResource InfoPaneSubHeaderStyle}"
-                               Text="Smarth Health Card"
-                               HorizontalOptions="Start" VerticalOptions="Center"
-                               effects:FontSizeLabelEffectParams.MaxFontSize="28.00"
-                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
-                            <Label.Effects>
-                                <effects:FontSizeLabelEffect/>
-                            </Label.Effects>
-                        </Label>
                     </Grid>
 
                     <Grid
-                        Margin="20,0,20,0">
+                        Margin="20,0,20,0"
+                        IsVisible="{Binding IsBorderControlOn}">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -149,7 +143,7 @@
                         <Label Grid.Row="0"
                                Margin="0,20,0,0" 
                                AutomationProperties.IsInAccessibleTree="True"
-                               Text="Vaksinasjonsdato" 
+                               Text="{Binding VaccineDateOfVaccinationText}" 
                                Style="{StaticResource InfoPaneItemHeader}" 
                                HorizontalOptions="Start"
                                effects:FontSizeLabelEffectParams.MaxFontSize="30.00"
@@ -174,7 +168,7 @@
                         <Label Grid.Row="3"
                                Margin="0,10,0,0" 
                                AutomationProperties.IsInAccessibleTree="True"
-                               Text="Vaccine status" 
+                               Text="{Binding VaccineStatusText}" 
                                Style="{StaticResource InfoPaneItemHeader}" 
                                HorizontalOptions="Start"
                                effects:FontSizeLabelEffectParams.MaxFontSize="30.00"
@@ -198,7 +192,7 @@
                         <Label Grid.Row="6"
                                Margin="0,10,0,0" 
                                AutomationProperties.IsInAccessibleTree="True"
-                               Text="Vaccine Code" 
+                               Text="{Binding VaccineNameText}"
                                Style="{StaticResource InfoPaneItemHeader}" 
                                HorizontalOptions="Start"
                                effects:FontSizeLabelEffectParams.MaxFontSize="30.00"
@@ -208,7 +202,7 @@
                             </Label.Effects>
                         </Label>
                         <Label Grid.Row="7"
-                               Text="{Binding VaccineType}" 
+                               Text="{Binding VaccineName}" 
                                Style="{StaticResource InfoPaneItemValue}" 
                                HorizontalOptions="Start"
                                effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
@@ -218,6 +212,29 @@
                             </Label.Effects>
                         </Label>
                         <BoxView Grid.Row="8" Margin="0,10,0,10" BackgroundColor="{StaticResource DefaultBackgroundColor}" HeightRequest="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+
+                        <Label Grid.Row="9"
+                               Margin="0,10,0,0" 
+                               AutomationProperties.IsInAccessibleTree="True"
+                               Text="{Binding VaccineNumberOfDosesText}"
+                               Style="{StaticResource InfoPaneItemHeader}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="30.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label Grid.Row="10"
+                               Text="{Binding VaccineNumberOfDoses}" 
+                               Style="{StaticResource InfoPaneItemValue}" 
+                               HorizontalOptions="Start"
+                               effects:FontSizeLabelEffectParams.MaxFontSize="26.00"
+                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
                     </Grid>
                 </StackLayout>
             </ScrollView>
