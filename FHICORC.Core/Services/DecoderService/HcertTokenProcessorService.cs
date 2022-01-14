@@ -19,6 +19,7 @@ using System.Text;
 using FHICORC.Core.Services.Model.SmartHealthCardModel.Jws;
 using System.Diagnostics;
 using FHICORC.Core.Services.Model.SmartHealthCardModel.Shc;
+using FHICORC.Core.Services.Model.SmartHealthCardModel.Coding;
 
 namespace FHICORC.Core.Services.DecoderServices
 {
@@ -30,6 +31,7 @@ namespace FHICORC.Core.Services.DecoderServices
         private readonly IRuleSelectorService _ruleSelectorService;
         private readonly IPreferencesService _preferencesService;
         private readonly IDigitalGreenValueSetTranslatorFactory _digitalGreenValueSetTranslatorFactory;
+        private readonly ICodingService _codingService;
 
         private IDgcValueSetTranslator _translator;
 
@@ -39,7 +41,8 @@ namespace FHICORC.Core.Services.DecoderServices
             IRuleSelectorService ruleSelectorService,
             IRuleVerifierService ruleVerifierService,
             IPreferencesService preferencesService,
-            IDigitalGreenValueSetTranslatorFactory digitalGreenValueSetTranslatorFactory)
+            IDigitalGreenValueSetTranslatorFactory digitalGreenValueSetTranslatorFactory,
+            ICodingService codingService)
         {
             _certificationService = certificationService;
             _dateTimeService = dateTimeService;
@@ -49,6 +52,7 @@ namespace FHICORC.Core.Services.DecoderServices
             _digitalGreenValueSetTranslatorFactory = digitalGreenValueSetTranslatorFactory;
             _translator = _digitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
             _digitalGreenValueSetTranslatorFactory.Init();
+            _codingService = codingService;
         }
 
         public void SetDgcValueSetTranslator(IDgcValueSetTranslator translator)
@@ -241,18 +245,25 @@ namespace FHICORC.Core.Services.DecoderServices
                 // Step 6. (Optional, not in scope) Revocation
                 //TODO
 
-                // Step 7. Create Model
-                ITokenPayload decodedModel = JsonConvert.DeserializeObject<SmartHealthCardModel>(SmartHealthCard);
+                // Step 7. Create Models
+                SmartHealthCardModel decodedModel = JsonConvert.DeserializeObject<SmartHealthCardModel>(SmartHealthCard);
+                List<SmartHealthCardVaccineInfo> vaccineInfo = await _codingService.GetShcVaccineInfo(
+                    decodedModel.VerifiableCredential.CredentialSubject.Immunizations);
+
+                // Vaccine lookup example (to be removed)
+                foreach (var immunization in decodedModel.VerifiableCredential.CredentialSubject.Immunizations)
+                {
+                    SmartHealthCardVaccineInfo info = vaccineInfo.First(x => x.Id.Equals(immunization.VaccineCode.Id));
+                    Debug.Print($"{immunization.OccurrenceDateTime} - {info.Name}, {info.Type}, {info.Manufacturer}");
+                }
+
                 resultModel.DecodedModel = decodedModel;
-
                 return resultModel;
-
             }
             catch (Exception e)
             {
                 // If any exception is thrown - assume the code is invalid.
-                Console.WriteLine(">> Exception thrown from decoding: " + e.Message + ">>>>" + e.StackTrace);
-
+                Debug.Print(">> Exception thrown from decoding: " + e.Message + ">>>>" + e.StackTrace);
                 return resultModel;
             }
         }

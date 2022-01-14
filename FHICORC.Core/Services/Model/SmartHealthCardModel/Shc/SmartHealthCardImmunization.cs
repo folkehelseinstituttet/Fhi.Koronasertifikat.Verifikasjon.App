@@ -20,12 +20,6 @@ namespace FHICORC.Core.Services.Model.SmartHealthCardModel.Shc
         public DateTime? OccurrenceDateTime { get; set; }
     }
 
-    public class CodeableConcept
-    {
-        [JsonProperty("coding")]
-        public SmartHealthCardCoding[] Coding { get; set; }
-    }
-
     public class Patient
     {
         [JsonProperty("reference")]

@@ -3,7 +3,7 @@ using FHICORC.Core.Services.Model.SmartHealthCardModel.Jws;
 using System.Threading.Tasks;
 using FHICORC.Tests.Factories;
 
-namespace FHICORC.Tests.Models
+namespace FHICORC.Tests.ModelTests
 {
     public class JwsPartsTests
     {
