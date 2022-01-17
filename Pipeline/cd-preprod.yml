@@ -14,7 +14,7 @@ pr:
 
 variables:
   solution: '**/*.sln'
-  versionName: 2.2
+  versionName: 2.3
   env: ${{ replace( variables['Build.DefinitionName'], '-cd-build-deploy-appcenter', '') }}
       
 name: $(Build.Reason)-$(versionName).$(Build.BuildId).$(env)
