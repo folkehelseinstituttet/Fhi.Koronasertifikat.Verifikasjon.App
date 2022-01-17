@@ -20,11 +20,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Unittests|AnyCPU' ">
-    <IntermediateOutputPath>obj\Unittests\netstandard2.0\netstandard2.0</IntermediateOutputPath>
+    <IntermediateOutputPath>obj\Unittests</IntermediateOutputPath>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Unittests\netstandard2.0\netstandard2.0</OutputPath>
+    <OutputPath>bin\Unittests</OutputPath>
     <DefineConstants>DEBUG;UNITTEST;UNITTESTS;NETSTANDARD;NETSTANDARD2_0;UITEST</DefineConstants>
     <NoWarn>1701;1702</NoWarn>
     <NoStdLib>false</NoStdLib>
@@ -32,29 +32,29 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
     <DebugType></DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Test\netstandard2.0\netstandard2.0</OutputPath>
+    <OutputPath>bin\Test</OutputPath>
     <DefineConstants>TRACE;SIT;TEST;NETSTANDARD;NETSTANDARD2_0;UITEST</DefineConstants>
     <WarningLevel>4</WarningLevel>
-    <IntermediateOutputPath>obj\Test\netstandard2.0\netstandard2.0</IntermediateOutputPath>
+    <IntermediateOutputPath>obj\Test</IntermediateOutputPath>
     <NoWarn>1701;1702</NoWarn>
     <NoStdLib>false</NoStdLib>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|AnyCPU' ">
-    <IntermediateOutputPath>obj\AppStore\netstandard2.0\netstandard2.0</IntermediateOutputPath>
+    <IntermediateOutputPath>obj\AppStore</IntermediateOutputPath>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>pdbonly</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\AppStore\netstandard2.0\netstandard2.0</OutputPath>
+    <OutputPath>bin\AppStore</OutputPath>
     <DefineConstants>TRACE;APPSTORE;NETSTANDARD;NETSTANDARD2_0;</DefineConstants>
     <NoWarn>1701;1702</NoWarn>
     <NoStdLib>false</NoStdLib>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStoreBeta|AnyCPU' ">
-    <IntermediateOutputPath>obj\AppStoreBeta\netstandard2.0\netstandard2.0</IntermediateOutputPath>
+    <IntermediateOutputPath>obj\AppStoreBeta</IntermediateOutputPath>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>pdbonly</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\AppStoreBeta\netstandard2.0\netstandard2.0</OutputPath>
+    <OutputPath>bin\AppStoreBeta</OutputPath>
     <DefineConstants>TRACE;APPSTOREBETA;NETSTANDARD;NETSTANDARD2_0;</DefineConstants>
     <NoWarn>1701;1702</NoWarn>
     <NoStdLib>false</NoStdLib>
