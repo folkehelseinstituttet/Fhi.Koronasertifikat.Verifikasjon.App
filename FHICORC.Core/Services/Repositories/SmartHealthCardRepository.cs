@@ -4,6 +4,7 @@ using FHICORC.Core.Services.Model.SmartHealthCardModel.Coding;
 using FHICORC.Core.Services.Model.SmartHealthCardModel.Shc;
 using FHICORC.Core.WebServices;
 using System;
+using FHICORC.Core.Services.Model.SmartHealthCardModel.Issuer;
 
 namespace FHICORC.Core.Services.Repositories
 {
@@ -24,6 +25,20 @@ namespace FHICORC.Core.Services.Repositories
             if (response.ErrorType != ServiceErrorType.None)
             {
                 throw new Exception($"Error when getting vaccine info, error type: {response.ErrorType}");
+            }
+
+            return response.Data;
+        }
+
+        public async Task<SmartHealthCardIssuer> GetIssuerTrust(string issuer)
+        {
+            string url = _urlService.ResolveUrl(ApiEndpoint.ShcIssuerTrust);
+            SmartHealthCardIssuerRequest body = new SmartHealthCardIssuerRequest(issuer);
+            ApiResponse<SmartHealthCardIssuer> response = await _restClient.Post<SmartHealthCardIssuer>(body, url);
+
+            if (response.ErrorType != ServiceErrorType.None)
+            {
+                throw new Exception($"Error when getting issuer trust, error type: {response.ErrorType}");
             }
 
             return response.Data;

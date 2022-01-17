@@ -5,9 +5,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FHICORC.Core.Interfaces;
 using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Model.CoseModel;
 using FHICORC.Core.Services.Model.Exceptions;
+using FHICORC.Core.Services.Model.SmartHealthCardModel.Issuer;
 using FHICORC.Core.Services.Model.SmartHealthCardModel.Jws;
 using FHICORC.Core.Services.Utils;
 using FHICORC.Core.WebServices;
@@ -22,15 +24,19 @@ namespace FHICORC.Core.Services.DecoderServices
     {
         private readonly IPublicKeyService _publicKeyService;
         private readonly IRestClient _restClient;
+        private readonly ISmartHealthCardRepository _smartHealthCardRepository;
 
         public CertificationService(
             IPublicKeyService publicKeyService,
-            IRestClient restClient
+            IRestClient restClient,
+            ISmartHealthCardRepository smartHealthCardRepository
         )
         {
             _publicKeyService = publicKeyService;
             _restClient = restClient;
+            _smartHealthCardRepository = smartHealthCardRepository;
         }
+
         public async Task VerifyCoseSign1Object(CoseSign1Object coseSign1Object)
         {
             string kidBase64 = Convert.ToBase64String(coseSign1Object.GetKeyIdentifier());
@@ -80,6 +86,19 @@ namespace FHICORC.Core.Services.DecoderServices
             if (!isSignatureValid)
             {
                 throw new Exception("Failed to verify JWS signature");
+            }
+        }
+
+        public async Task VerifySHCIssuer(JwsParts jws)
+        {
+            string payloadJson = await jws.DecodedPayload();
+            string issuerString = GetJsonValue(payloadJson, "iss");
+            SmartHealthCardIssuer issuer = await _smartHealthCardRepository.GetIssuerTrust(issuerString);
+
+            Debug.Print($"Looked up SHC issuer {issuerString}, found name \"{issuer.Name}\", with trusted state: {issuer.Trusted}");
+            if (!issuer.Trusted)
+            {
+                throw new Exception($"SHC issuer {issuerString} is not trusted");
             }
         }
 

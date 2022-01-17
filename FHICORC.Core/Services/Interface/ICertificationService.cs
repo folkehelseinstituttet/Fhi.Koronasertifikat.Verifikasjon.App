@@ -8,5 +8,6 @@ namespace FHICORC.Core.Services.Interface
     {
         public Task VerifyCoseSign1Object(CoseSign1Object coseSign1Object);
         public Task VerifySHCSignature(JwsParts jws);
+        public Task VerifySHCIssuer(JwsParts jws);
     }
 }
