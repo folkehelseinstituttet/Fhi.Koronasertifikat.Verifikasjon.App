@@ -15,8 +15,14 @@ using FHICORC.Core.Services.Utils;
 using FHICORC.Core.WebServices;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Linq;
+using Org.BouncyCastle.Asn1.Bsi;
+using Org.BouncyCastle.Asn1.Sec;
+using Org.BouncyCastle.Asn1.X9;
+using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Math;
+using Org.BouncyCastle.Math.EC;
 using Org.BouncyCastle.Security;
-using Org.BouncyCastle.X509;
 
 namespace FHICORC.Core.Services.DecoderServices
 {
@@ -73,20 +79,11 @@ namespace FHICORC.Core.Services.DecoderServices
             string payloadJson = await jws.DecodedPayload();
             string issuer = GetJsonValue(payloadJson, "iss");
 
-            // Get public key
-            string publicKeyString = await GetX5cForGivenKidAsync(kid, issuer + "/.well-known/jwks.json");
-            byte[] publicKeyBase64BytesArray = Base64UrlDecodingUtils.Base64UrlDecode(publicKeyString);
-            X509Certificate publicKeyX509Cert = new X509CertificateParser().ReadCertificate(publicKeyBase64BytesArray);
+            // Get public key for jwk (Elliptic Curve)
+            ECPublicKeyParameters jwkSignature = await GetJWKSignature(kid, issuer + "/.well-known/jwks.json");
 
             // Verify signature
-            byte[] MessageBytes = Encoding.UTF8.GetBytes(jws.EncodedPart(JwtPartsIndex.Header) + '.' + jws.EncodedPart(JwtPartsIndex.Payload));
-            byte[] Signature = jws.DecodedSignature();
-            var isSignatureValid = VerifySignature(publicKeyX509Cert, Signature, MessageBytes);
-            Debug.Print($"{nameof(CertificationService)}.{nameof(VerifySHCSignature)}: JWS verification result - {(isSignatureValid ? "PASSED" : "FAILED")}");
-            if (!isSignatureValid)
-            {
-                throw new Exception("Failed to verify JWS signature");
-            }
+            VerifySignature(jwkSignature, jws);
         }
 
         public async Task VerifySHCIssuer(JwsParts jws)
@@ -113,44 +110,41 @@ namespace FHICORC.Core.Services.DecoderServices
             return value;
         }
 
-        private async Task<string> GetX5cForGivenKidAsync(string kid, string url)
+        private async Task<ECPublicKeyParameters> GetJWKSignature(string kid, string url)
         {
             string responseJson = await _restClient.GetSimpleString(url);
 
             JsonWebKeySet jwks = new JsonWebKeySet(responseJson);
             List<JsonWebKey> keyList = new List<JsonWebKey>(jwks.Keys);
-
             JsonWebKey matchingKey = keyList.FirstOrDefault(x => x.Kid == kid);
-
             if (matchingKey == null)
             {
-                throw new KeyNotFoundException($"{nameof(CertificationService)}.{nameof(GetX5cForGivenKidAsync)}: " +
+                throw new KeyNotFoundException($"{nameof(CertificationService)}.{nameof(GetJWKSignature)}: " +
                     $"No matching key for kid {kid} is found at URL {url}");
             }
-            if (matchingKey.X5c.IsNullOrEmpty())
-            {
-                throw new MissingDataException($"{nameof(CertificationService)}.{nameof(GetX5cForGivenKidAsync)}: " +
-                    $"No X.509 public keys found for kid {kid} at URL {url}");
-            }
 
-            return matchingKey.X5c[0];
+            X9ECParameters parameters = ECNamedCurveTable.GetByOid(SecObjectIdentifiers.SecP256r1);
+            ECPoint point = parameters.Curve.CreatePoint(
+                new BigInteger(1, Base64UrlDecodingUtils.Base64UrlDecode(matchingKey.X)),
+                new BigInteger(1, Base64UrlDecodingUtils.Base64UrlDecode(matchingKey.Y)));
+            ECDomainParameters domainParameters = new ECDomainParameters(parameters.Curve, parameters.G, parameters.N, parameters.H, parameters.GetSeed());
+            return new ECPublicKeyParameters(point, domainParameters);
         }
 
-        private bool VerifySignature(X509Certificate pubKeyCert, byte[] sigBytes, byte[] msgBytes)
+        private void VerifySignature(ECPublicKeyParameters jwkSignature, JwsParts jws)
         {
-            try
-            {
-                var publicKey = pubKeyCert.GetPublicKey();
-                var signer = SignerUtilities.GetSigner("SHA-256withPLAIN-ECDSA");
+            byte[] MessageBytes = Encoding.UTF8.GetBytes(jws.EncodedPart(JwtPartsIndex.Header) + '.' + jws.EncodedPart(JwtPartsIndex.Payload));
+            byte[] Signature = jws.DecodedSignature();
 
-                signer.Init(false, publicKey);
-                signer.BlockUpdate(msgBytes, 0, msgBytes.Length);
-                return signer.VerifySignature(sigBytes);
-            }
-            catch (Exception exc)
+            ISigner signer = SignerUtilities.GetSigner(BsiObjectIdentifiers.ecdsa_plain_SHA256);
+            signer.Init(false, jwkSignature);
+            signer.BlockUpdate(MessageBytes, 0, MessageBytes.Length);
+            bool isSignatureValid = signer.VerifySignature(Signature);
+
+            Debug.Print($"{nameof(CertificationService)}.{nameof(VerifySHCSignature)}: JWS verification result - {(isSignatureValid ? "PASSED" : "FAILED")}");
+            if (!isSignatureValid)
             {
-                Console.WriteLine("Verification failed with the error: " + exc.ToString());
-                return false;
+                throw new InvalidSignatureException("Failed to verify JWS signature");
             }
         }
     }

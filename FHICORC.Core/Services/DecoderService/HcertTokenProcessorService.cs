@@ -153,9 +153,7 @@ namespace FHICORC.Core.Services.DecoderServices
             }
 
             byte[] compressedBytesFromBase45Token = base45String.Base45Decode();
-
             byte[] decompressedSignedCOSEBytes = ZlibCompressionUtils.Decompress(compressedBytesFromBase45Token);
-
 
             CoseSign1Object cborMessageFromCOSE = CoseSign1Object.Decode(decompressedSignedCOSEBytes);
             return cborMessageFromCOSE;
@@ -249,6 +247,9 @@ namespace FHICORC.Core.Services.DecoderServices
                 SmartHealthCardModel decodedModel = JsonConvert.DeserializeObject<SmartHealthCardModel>(SmartHealthCard);
                 List<SmartHealthCardVaccineInfo> vaccineInfo = await _codingService.GetShcVaccineInfo(
                     decodedModel.VerifiableCredential.CredentialSubject.Immunizations);
+                Debug.Print("Smart health card decoded with " +
+                    $"{decodedModel.VerifiableCredential.CredentialSubject.Immunizations.Count()} immunizations " +
+                    $"and {decodedModel.VerifiableCredential.CredentialSubject.Observations.Count()} observations.");
 
                 resultModel.DecodedModel = new SmartHealthCardWrapper(decodedModel, vaccineInfo);
                 resultModel.ValidationResult = TokenValidateResult.Valid;
