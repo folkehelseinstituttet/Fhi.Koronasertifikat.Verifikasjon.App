@@ -73,11 +73,9 @@ namespace FHICORC.Core.Services.DecoderServices
                 }
                 //Decode token to a cose sign 1 object
                 CoseSign1Object coseSign1Object = DecodeToCOSEFlow(base45String);
-#if !UNITTESTS
                 await _certificationService.VerifyCoseSign1Object(coseSign1Object);
-#endif
-                string jsonStringFromBytes = coseSign1Object.GetJson();
 
+                string jsonStringFromBytes = coseSign1Object.GetJson();
                 bool international = _preferencesService.GetUserPreferenceAsBoolean("BORDER_CONTROL_ON");
 
                 ITokenPayload decodedModel;
