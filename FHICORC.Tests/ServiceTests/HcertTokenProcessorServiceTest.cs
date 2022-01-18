@@ -9,6 +9,7 @@ using FHICORC.Core.Services;
 using FHICORC.Configuration;
 using FHICORC.Core.WebServices;
 using FHICORC.Services.Interfaces;
+using FHICORC.Tests.Factories;
 
 namespace FHICORC.Tests.ServiceTests
 {
@@ -136,6 +137,62 @@ namespace FHICORC.Tests.ServiceTests
                 "HC1:RRQT 9GO0+$F%47N23.G2O609CKIA03XK4F35KC:CE2F3EFG2LU/IC6TAY50.FKP1LLWEYWEYPCZ$E7ZKPEDMHG7ECMUDQF60R6BB87M8BL6-A6HPCTB8IECDJCD7AW.CXJD7%E7WE KEVKEZ$EI3DA8D0EC*KE: CZ CGVC*JC1A6NA73W5KF6TF6$PC1ECFNGGPCEVCD8FI-AIPCZEDIEC EDM-DKPCG/DZKE/34QEDA/DOCCQF6$PCEEC5JD%96IA7B46646WX6JECFWEB1A-:8$966469L6OF6WX6F$DP9EJY8L/5M/5546.96VF6YPC4$C+70AVCPQEX47B46IL6646I*6UPCZ$ETB8RPC24EQ DPF6BW5E%6Z*83W5746JPCIEC6JD846Y968464W5Z57HWE/TEEOL2ECY$D9Q31ECOPC..DBWE-3EB441$CKWEDZCQ-A1$C..D734FM6K/EN9E%961A69L6QW6B46GPC8%E% D3IA4W5646946846.96SPC3$C.UDRYA 96NF6L/5SW6Z57LQE+CEJPC+EDQDD+Q6TW6FA7C46IPC34E/IC3UA*VDFWECM8KF6 590G6A*8746C562VCCWENF6OF63W56L6*96ZPC24EOD0P/EH.EY$5Y$5XPCZ CJAG8VCOPCPVC..49A61TAOF6LA7WW68463:6QF6A46UF6+Q6RF6//6SF6H%6NF6SF6646.Q627B5JQ0H3/.HJ2S%3U7SKVGH835.R7JL24/N$5TJZ2V32NCUPSOAWNNJSY$23RS+5TT4M862*O6IPDVZ8L1P0FQR6KHFC9Z7VDF";
             var result = await service.DecodeDCCPassportTokenToModel(prefixCompressedCose);
             Assert.AreEqual(result.ValidationResult, TokenValidateResult.Invalid);
+        }
+
+        [Test]
+        public async Task TestDecodeSHC_ValidToken_ReturnsValid()
+        {
+            var result = await service.DecodeSHCPassportTokenToModel(SmartHealthCardFactory.CreateEncodedJwsToken());
+
+            Assert.AreEqual(TokenValidateResult.Valid, result.ValidationResult);
+        }
+
+        [Test]
+        public async Task TestDecodeSHC_EmptyToken_ReturnsInvalid()
+        {
+            var result = await service.DecodeSHCPassportTokenToModel("shc:/");
+
+            Assert.AreEqual(TokenValidateResult.Invalid, result.ValidationResult);
+        }
+
+        [Test]
+        public async Task TestDecodeSHC_ThreeInvalidParts_ReturnsInvalid()
+        {
+            // 01 = .
+            var result = await service.DecodeSHCPassportTokenToModel("shc:/123545645234" +
+                "01" +
+                "341654231213" +
+                "01" +
+                "3121232134322");
+
+            Assert.AreEqual(TokenValidateResult.Invalid, result.ValidationResult);
+        }
+
+        [Test]
+        public async Task TestDecodeSHC_TwoParts_ReturnsInvalid()
+        {
+            // 01 = .
+            var result = await service.DecodeSHCPassportTokenToModel("shc:/123545645234" +
+                "341654231213" +
+                "01" +
+                "3121232134322");
+
+            Assert.AreEqual(TokenValidateResult.Invalid, result.ValidationResult);
+        }
+
+        [Test]
+        public async Task TestDecodeSHC_FourParts_ReturnsInvalid()
+        {
+            // 01 = .
+            var result = await service.DecodeSHCPassportTokenToModel("shc:/123545645234" +
+                "01" +
+                "341654231213" +
+                "01" +
+                "3423121303" +
+                "01" +
+                "3121232134322");
+
+            Assert.AreEqual(TokenValidateResult.Invalid, result.ValidationResult);
         }
     }
 }
