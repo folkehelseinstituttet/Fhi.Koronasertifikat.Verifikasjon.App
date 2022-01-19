@@ -1,18 +1,10 @@
-﻿using System;
-using FHICORC.Configuration;
-using FHICORC.Utils;
+﻿using FHICORC.Utils;
 using NUnit.Framework;
 using Xamarin.Forms;
-using Xamarin.Forms.Mocks;
-using FHICORC.Services.Interfaces;
-using FHICORC.Services.Mocks;
-using FHICORC.Tests.TestMocks;
-using FHICORC.Core.Data;
-using FHICORC.Core.Interfaces;
 
-namespace FHICORC.Tests.UtilsTests
+namespace FHICORC.Tests.UITests
 {
-    public class FHICORCColorTest : BaseUITests
+    public class FHICORCColorUITests : BaseUITests
     {
         [TestCase(FHICORCColor.TitleTextColor, "#1c1999")]
         [TestCase(FHICORCColor.LightTextColor, "#77819A")]
