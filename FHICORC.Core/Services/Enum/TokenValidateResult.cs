@@ -5,6 +5,7 @@
         Invalid,
         Expired,
         Valid,
-        UnsupportedType
+        UnsupportedType,
+        NoInternet
     }
 }

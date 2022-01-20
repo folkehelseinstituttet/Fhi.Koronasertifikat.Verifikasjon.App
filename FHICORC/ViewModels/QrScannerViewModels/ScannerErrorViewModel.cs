@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -13,14 +14,73 @@ namespace FHICORC.ViewModels.QrScannerViewModels
 {
     public class ScannerErrorViewModel : BaseScanViewModel
     {
-        public string PageTitle => ShowInvalidPage ? "SCANNER_ERROR_INVALID_TITLE".Translate() : "SCANNER_ERROR_EXPIRED_TITLE".Translate();
-        public string InvalidContentText => TokenValidateResultModel.ValidationResult == TokenValidateResult.Invalid ? "SCANNER_ERROR_INVALID_CONTENT".Translate()
-            : "SCANNER_ERROR_UNKNOWN_TYPE_CONTENT".Translate();
-        public bool ShowInvalidPage => TokenValidateResultModel.ValidationResult == TokenValidateResult.Invalid
-            || TokenValidateResultModel.ValidationResult == TokenValidateResult.UnsupportedType;
         public TokenValidateResultModel TokenValidateResultModel { get; set; } = new TokenValidateResultModel();
 
-        public string RepeatedText => string.Concat(Enumerable.Repeat(PageTitle.PadLeft(12), 10));
+        private string _pageTitle;
+        public string PageTitle
+        {
+            get => _pageTitle;
+            set
+            {
+                _pageTitle = value;
+                OnPropertyChanged(nameof(PageTitle));
+            }
+        }
+
+        private string _invalidContentText;
+        public string InvalidContentText
+        {
+            get => _invalidContentText;
+            set
+            {
+                _invalidContentText = value;
+                OnPropertyChanged(nameof(InvalidContentText));
+            }
+        }
+
+        private string _repeatedText;
+        public string RepeatedText
+        {
+            get => _repeatedText;
+            set
+            {
+                _repeatedText = value;
+                OnPropertyChanged(nameof(RepeatedText));
+            }
+        }
+
+        private bool _showInvalidPage = false;
+        public bool ShowInvalidPage
+        {
+            get => _showInvalidPage;
+            set
+            {
+                _showInvalidPage = value;
+                OnPropertyChanged(nameof(ShowInvalidPage));
+            }
+        }
+
+        private bool _showExpiredPage = false;
+        public bool ShowExpiredPage
+        {
+            get => _showExpiredPage;
+            set
+            {
+                _showExpiredPage = value;
+                OnPropertyChanged(nameof(ShowExpiredPage));
+            }
+        }
+
+        private bool _showNoInternetPage = false;
+        public bool ShowNoInternetPage
+        {
+            get => _showNoInternetPage;
+            set
+            {
+                _showNoInternetPage = value;
+                OnPropertyChanged(nameof(ShowNoInternetPage));
+            }
+        }
         public ICommand ScanAgainCommand => new Command(async () =>
             await ExecuteOnceAsync(async () => await Task.Run(ClosePage)));
 
@@ -33,13 +93,49 @@ namespace FHICORC.ViewModels.QrScannerViewModels
 
             TokenValidateResultModel = tokenValidateResultModel;
 
+            UpdateErrorScreenUI();
+
             OnPropertyChanged(nameof(TokenValidateResultModel));
             OnPropertyChanged(nameof(ShowInvalidPage));
+            OnPropertyChanged(nameof(ShowExpiredPage));
+            OnPropertyChanged(nameof(ShowNoInternetPage));
             OnPropertyChanged(nameof(PageTitle));
             OnPropertyChanged(nameof(RepeatedText));
             OnPropertyChanged(nameof(InvalidContentText));
 
             return base.InitializeAsync(navigationData);
         }
+
+        public void UpdateErrorScreenUI()
+        {
+            if (TokenValidateResultModel.ValidationResult == TokenValidateResult.Expired)
+            {
+                PageTitle = "SCANNER_ERROR_EXPIRED_TITLE".Translate();
+                InvalidContentText = "SCANNER_ERROR_EXPIRED_CONTENT".Translate();
+                RepeatedText = string.Concat(Enumerable.Repeat(PageTitle.PadLeft(12), 10));
+                ShowExpiredPage = true;
+            }
+            else if (TokenValidateResultModel.ValidationResult == TokenValidateResult.NoInternet)
+            {
+                PageTitle = "SCANNER_ERROR_NO_INTERNET_TITLE".Translate();
+                InvalidContentText = "SCANNER_ERROR_NO_INTERNET_CONTENT".Translate();
+                RepeatedText = string.Concat(Enumerable.Repeat(PageTitle.PadLeft(20), 4));
+                ShowNoInternetPage = true;
+            }
+            else if (TokenValidateResultModel.ValidationResult == TokenValidateResult.UnsupportedType)
+            {
+                PageTitle = "SCANNER_ERROR_INVALID_TITLE".Translate();
+                InvalidContentText = "SCANNER_ERROR_UNKNOWN_TYPE_CONTENT".Translate();
+                RepeatedText = string.Concat(Enumerable.Repeat(PageTitle.PadLeft(12), 10));
+                ShowInvalidPage = true;
+            }
+            else
+            {
+                PageTitle = "SCANNER_ERROR_INVALID_TITLE".Translate();
+                InvalidContentText = "SCANNER_ERROR_INVALID_CONTENT".Translate();
+                RepeatedText = string.Concat(Enumerable.Repeat(PageTitle.PadLeft(12), 10));
+                ShowInvalidPage = true;
+            }
+        } 
     }
 }

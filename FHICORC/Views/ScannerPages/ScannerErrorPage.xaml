@@ -35,7 +35,7 @@
                 <!--  Repeating text for Expired and Invalid page  -->
                 <StackLayout
                     BackgroundColor="{StaticResource ExpiredBorderColor}"
-                    IsVisible="{Binding ShowInvalidPage, Converter={StaticResource BoolToInverseBoolConverter}}"
+                    IsVisible="{Binding ShowExpiredPage}"
                     Margin="0,20,0,0"
                     Padding="0,9,0,9"
                     Spacing="0">
@@ -72,6 +72,26 @@
                         AutomationProperties.IsInAccessibleTree="False">
                     </Label>
                 </StackLayout>
+
+                <StackLayout
+                    BackgroundColor="{StaticResource ExpiredBorderColor}"
+                    IsVisible="{Binding ShowNoInternetPage}"
+                    Margin="0,20,0,0"
+                    Padding="0,9,0,9"
+                    Spacing="0">
+                    <Label
+                        Margin="-50, 0"
+                        Padding="0, 2"
+                        VerticalTextAlignment="Center"
+                        MaxLines="1"
+                        LineBreakMode="NoWrap"
+                        Style="{StaticResource SecondaryContentBoldStyle}"
+                        TextColor="{StaticResource BaseTextColor}"
+                        Text="{Binding RepeatedText}"
+                        FontSize="20"
+                        AutomationProperties.IsInAccessibleTree="False">
+                    </Label>
+                </StackLayout>
             </StackLayout>
 
 
@@ -84,13 +104,13 @@
                     Margin="43,0,43,0">
                     <!--  Title for Expired and Invalid page  -->
                     <StackLayout
-                        IsVisible="{Binding ShowInvalidPage, Converter={StaticResource BoolToInverseBoolConverter}}"
+                        IsVisible="{Binding ShowExpiredPage}"
                         Orientation="Vertical"
                         Spacing="20">
                         <Image Source="{StaticResource HourGlass}" />
                         <Label
                             Style="{StaticResource BigTitleStyle}"
-                            Text="{Binding Strings[SCANNER_ERROR_EXPIRED_CONTENT]}"
+                            Text="{Binding InvalidContentText}"
                             HorizontalTextAlignment="Center"
                             effects:FontSizeLabelEffectParams.MaxFontSize="32.00">
                             <Label.Effects>
@@ -116,7 +136,32 @@
                         <Label
                             HorizontalTextAlignment="Center"
                             Style="{StaticResource BigTitleStyle}"
-                            Text="{Binding Strings[SCANNER_ERROR_INVALID_TITLE]}"
+                            Text="{Binding PageTitle}"
+                            effects:FontSizeLabelEffectParams.MaxFontSize="32.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            Style="{StaticResource ContentStyle}"
+                            Text="{Binding InvalidContentText}"
+                            effects:FontSizeLabelEffectParams.MaxFontSize="26.00">
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                    </StackLayout>
+
+                    <StackLayout
+                        IsVisible="{Binding ShowNoInternetPage}"
+                        Orientation="Vertical"
+                        Spacing="20">
+                        <Image Source="{StaticResource ErrorCheckLayout}" />
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            Style="{StaticResource BigTitleStyle}"
+                            Text="{Binding PageTitle}"
                             effects:FontSizeLabelEffectParams.MaxFontSize="32.00">
                             <Label.Effects>
                                 <effects:FontSizeLabelEffect/>
