@@ -31,8 +31,6 @@
                     RightButtonCommand="{Binding ScanAgainCommand}"
                     RightButtonImageSource="{StaticResource XMark}" />
 
-
-                <!--  Repeating text for Expired and Invalid page  -->
                 <StackLayout
                     BackgroundColor="{StaticResource ExpiredBorderColor}"
                     IsVisible="{Binding ShowExpiredPage}"
@@ -102,7 +100,6 @@
                     Padding="0"
                     Spacing="0"
                     Margin="43,0,43,0">
-                    <!--  Title for Expired and Invalid page  -->
                     <StackLayout
                         IsVisible="{Binding ShowExpiredPage}"
                         Orientation="Vertical"
