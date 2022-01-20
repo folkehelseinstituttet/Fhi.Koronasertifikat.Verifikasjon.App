@@ -1,5 +1,4 @@
-﻿using System;
-using FHICORC.Configuration;
+﻿using FHICORC.Configuration;
 using FHICORC.Core.Data;
 using FHICORC.Core.Interfaces;
 using FHICORC.Core.WebServices;
@@ -8,12 +7,13 @@ using FHICORC.Tests.TestMocks;
 using Xamarin.Forms;
 using Xamarin.Forms.Mocks;
 
-namespace FHICORC.Tests
+namespace FHICORC.Tests.UITests
 {
     public class BaseUITests
     {
         public BaseUITests()
         {
+            //See navigation mocks details on https://github.com/jonathanpeppers/Xamarin.Forms.Mocks
             MockForms.Init();
 
             IoCContainer.RegisterInterface<IConfigurationProvider, MockConfigurationProvider>();

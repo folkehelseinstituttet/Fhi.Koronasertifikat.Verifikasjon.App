@@ -47,21 +47,50 @@ namespace FHICORC.Tests.ServiceTests
         }
 
         [Test]
-        public void VerifySHCSignature_WithoutPublicKey_ThrowsException()
+        public void VerifySHCSignature_WithEmptyXCoordinate_ThrowsException()
         {
-            restClient.GetSimpleStringResponse = SmartHealthCardFactory.CreateJwksJson(x5c: "");
+            restClient.GetSimpleStringResponse = SmartHealthCardFactory.CreateJwksJson(x: "");
             JwsParts parts = JwsParts.ParseToken(SmartHealthCardFactory.CreateJwsToken());
 
-            Assert.ThrowsAsync<MissingDataException>(async () => await certificationService.VerifySHCSignature(parts));
+            Assert.ThrowsAsync<ArgumentException>(async () => await certificationService.VerifySHCSignature(parts));
         }
 
         [Test]
-        public void VerifySHCSignature_WithoutMatchingPublicKey_ThrowsException()
+        public void VerifySHCSignature_NotEqualXCoordinate_ThrowsException()
         {
-            restClient.GetSimpleStringResponse = SmartHealthCardFactory.CreateJwksJson(x5c: "\"notmatching\"");
+            restClient.GetSimpleStringResponse = SmartHealthCardFactory.CreateJwksJson(x: "UIHmslmdrBoRHAnFoTLvuTf9KdY9Kw3JddnzRIJDfQw");
             JwsParts parts = JwsParts.ParseToken(SmartHealthCardFactory.CreateJwsToken());
 
-            Assert.ThrowsAsync<Exception>(async () => await certificationService.VerifySHCSignature(parts));
+            Assert.ThrowsAsync<ArgumentException>(async () => await certificationService.VerifySHCSignature(parts));
+        }
+
+        [Test]
+        public void VerifySHCSignature_WithEmptyYCoordinate_ThrowsException()
+        {
+            restClient.GetSimpleStringResponse = SmartHealthCardFactory.CreateJwksJson(y: "");
+            JwsParts parts = JwsParts.ParseToken(SmartHealthCardFactory.CreateJwsToken());
+
+            Assert.ThrowsAsync<ArgumentException>(async () => await certificationService.VerifySHCSignature(parts));
+        }
+
+        [Test]
+        public void VerifySHCSignature_NotEqualYCoordinate_ThrowsException()
+        {
+            restClient.GetSimpleStringResponse = SmartHealthCardFactory.CreateJwksJson(y: "xvwMv_9g1Sl8GAySbhlhqbZYQ9XcXJXCC-dktsNpJjA");
+            JwsParts parts = JwsParts.ParseToken(SmartHealthCardFactory.CreateJwsToken());
+
+            Assert.ThrowsAsync<ArgumentException>(async () => await certificationService.VerifySHCSignature(parts));
+        }
+
+        [Test]
+        public void VerifySHCSignature_NotEqualXAndYCoordinate_ThrowsException()
+        {
+            restClient.GetSimpleStringResponse = SmartHealthCardFactory.CreateJwksJson(
+                x: "UIHmslmdrBoRHAnFoTLvuTf9KdY9Kw3JddnzRIJDfQw",
+                y: "xvwMv_9g1Sl8GAySbhlhqbZYQ9XcXJXCC-dktsNpJjA");
+            JwsParts parts = JwsParts.ParseToken(SmartHealthCardFactory.CreateJwsToken());
+
+            Assert.ThrowsAsync<InvalidSignatureException>(async () => await certificationService.VerifySHCSignature(parts));
         }
 
         [Test]

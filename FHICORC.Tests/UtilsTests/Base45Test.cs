@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using FHICORC.Core.Services.Utils;
 
-namespace FHICORC.Tests.TokenDecryptionTest
+namespace FHICORC.Tests.UtilsTests
 {
     public class Base45Test
     {

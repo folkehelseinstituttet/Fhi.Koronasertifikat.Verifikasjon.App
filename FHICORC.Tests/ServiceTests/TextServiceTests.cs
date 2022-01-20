@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Moq;
 using NUnit.Framework;
 using FHICORC.Enums;
 using FHICORC.Services;
@@ -28,7 +27,7 @@ namespace FHICORC.Tests.ServiceTests
         public void SetUp()
         {
             preferencesService = new MockPreferencesService();
-            textService = new TextService(preferencesService, new Mock<ITextRepository>().Object, new MockDateTimeService(), new MockNavigationTaskManager());
+            textService = new TextService(preferencesService, new MockTextRepository(), new MockDateTimeService(), new MockNavigationTaskManager());
             IoCContainer.RegisterInterface<ISettingsService, MockSettingsService>();
             IoCContainer.RegisterInterface<IPreferencesService, MockPreferencesService>();
         }

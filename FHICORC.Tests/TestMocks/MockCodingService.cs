@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Model.SmartHealthCardModel.Coding;
@@ -11,7 +10,10 @@ namespace FHICORC.Tests.TestMocks
     {
         public Task<List<SmartHealthCardVaccineInfo>> GetShcVaccineInfo(List<SmartHealthCardImmunization> Immunizations)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(new List<SmartHealthCardVaccineInfo>() {
+                new SmartHealthCardVaccineInfo(),
+                new SmartHealthCardVaccineInfo()
+            });
         }
     }
 }
