@@ -32,6 +32,7 @@ namespace FHICORC.Core.Services.DecoderServices
         private readonly IPreferencesService _preferencesService;
         private readonly IDigitalGreenValueSetTranslatorFactory _digitalGreenValueSetTranslatorFactory;
         private readonly ICodingService _codingService;
+        private readonly IConnectivityService _connectivityService;
 
         private IDgcValueSetTranslator _translator;
 
@@ -42,7 +43,8 @@ namespace FHICORC.Core.Services.DecoderServices
             IRuleVerifierService ruleVerifierService,
             IPreferencesService preferencesService,
             IDigitalGreenValueSetTranslatorFactory digitalGreenValueSetTranslatorFactory,
-            ICodingService codingService)
+            ICodingService codingService,
+            IConnectivityService connectivityService)
         {
             _certificationService = certificationService;
             _dateTimeService = dateTimeService;
@@ -53,6 +55,7 @@ namespace FHICORC.Core.Services.DecoderServices
             _translator = _digitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
             _digitalGreenValueSetTranslatorFactory.Init();
             _codingService = codingService;
+            _connectivityService = connectivityService;
         }
 
         public void SetDgcValueSetTranslator(IDgcValueSetTranslator translator)
@@ -258,6 +261,10 @@ namespace FHICORC.Core.Services.DecoderServices
             {
                 // If any exception is thrown - assume the code is invalid.
                 Debug.Print(">> Exception thrown from decoding: " + e.Message + ">>>>" + e.StackTrace);
+                if (!_connectivityService.HasInternetConnection())
+                {
+                    resultModel.ValidationResult = TokenValidateResult.NoInternet;
+                }
                 return resultModel;
             }
         }
