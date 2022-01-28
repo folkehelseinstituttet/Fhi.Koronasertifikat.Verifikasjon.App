@@ -145,10 +145,9 @@
                         </Label>
                         <Label Grid.Row="1" Grid.Column="1"
                                Style="{StaticResource InfoPaneSubHeaderStyle}"
-                               Text="{Binding TestHeaderValue}" 
+                               Text="{Binding Strings[DCC_INFO_TITLE]}" 
                                HorizontalOptions="Start" 
                                VerticalOptions="Center"
-                               Padding="10,0,20,0"
                                effects:FontSizeLabelEffectParams.MaxFontSize="28.00"
                                effects:FontSizeLabelEffectParams.MinFontSize="15.00">
                             <Label.Effects>

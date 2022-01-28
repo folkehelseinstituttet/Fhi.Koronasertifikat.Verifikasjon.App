@@ -148,7 +148,7 @@
                         </Label>
                         <Label Grid.Row="1" Grid.Column="1" 
                                Style="{StaticResource InfoPaneSubHeaderStyle}"
-                               Text="{Binding RecoveryHeaderValue}" 
+                               Text="{Binding Strings[DCC_INFO_TITLE]}" 
                                HorizontalOptions="Start"
                                VerticalOptions="Center"
                                effects:FontSizeLabelEffectParams.MaxFontSize="28.00"

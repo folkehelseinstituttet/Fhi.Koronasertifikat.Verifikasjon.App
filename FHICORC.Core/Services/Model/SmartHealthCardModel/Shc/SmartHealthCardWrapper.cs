@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Model.SmartHealthCardModel.Coding;
+using FHICORC.Core.Services.Model.SmartHealthCardModel.Issuer;
 
 namespace FHICORC.Core.Services.Model.SmartHealthCardModel.Shc
 {
@@ -15,6 +16,8 @@ namespace FHICORC.Core.Services.Model.SmartHealthCardModel.Shc
         }
 
         public SmartHealthCardModel SmartHealthCard { get; private set; }
+
+        public SmartHealthCardIssuer SmartHealthCardIssuer { get; private set; }
 
         public List<SmartHealthCardVaccineInfo> VaccineInfo { get; private set; }
 

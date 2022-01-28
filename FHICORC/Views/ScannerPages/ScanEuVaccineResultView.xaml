@@ -144,8 +144,9 @@
                                 <effects:FontSizeLabelEffect/>
                             </Label.Effects>
                         </Label>
-                        <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource InfoPaneSubHeaderStyle}"
-                               Text="{Binding VaccineHeaderValue}" HorizontalOptions="Start" VerticalOptions="Center"
+                        <Label Grid.Row="1" Grid.Column="1"
+                               Style="{StaticResource InfoPaneSubHeaderStyle}"
+                               Text="{Binding Strings[DCC_INFO_TITLE]}" HorizontalOptions="Start" VerticalOptions="Center"
                                effects:FontSizeLabelEffectParams.MaxFontSize="28.00"
                                effects:FontSizeLabelEffectParams.MinFontSize="15.00">
                             <Label.Effects>
