@@ -1,8 +1,7 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using FHICORC.Core.Data;
 using FHICORC.Core.Services.Enum;
 using FHICORC.Core.Services.Model;
 using FHICORC.Services;
@@ -24,6 +23,17 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             {
                 _pageTitle = value;
                 OnPropertyChanged(nameof(PageTitle));
+            }
+        }
+
+        private string _invalidContentTitle;
+        public string InvalidContentTitle
+        {
+            get => _invalidContentTitle;
+            set
+            {
+                _invalidContentTitle = value;
+                OnPropertyChanged(nameof(InvalidContentTitle));
             }
         }
 
@@ -81,10 +91,15 @@ namespace FHICORC.ViewModels.QrScannerViewModels
                 OnPropertyChanged(nameof(ShowNoInternetPage));
             }
         }
+
+        private readonly IPreferencesService _preferencesService;
         public ICommand ScanAgainCommand => new Command(async () =>
             await ExecuteOnceAsync(async () => await Task.Run(ClosePage)));
 
-        public ScannerErrorViewModel(ITimer timer) : base(timer) { }
+        public ScannerErrorViewModel(ITimer timer, IPreferencesService preferencesService) : base(timer)
+        {
+            _preferencesService = preferencesService;
+        }
 
         public override Task InitializeAsync(object navigationData)
         {
@@ -101,6 +116,7 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             OnPropertyChanged(nameof(ShowNoInternetPage));
             OnPropertyChanged(nameof(PageTitle));
             OnPropertyChanged(nameof(RepeatedText));
+            OnPropertyChanged(nameof(InvalidContentTitle));
             OnPropertyChanged(nameof(InvalidContentText));
 
             return base.InitializeAsync(navigationData);
@@ -110,14 +126,23 @@ namespace FHICORC.ViewModels.QrScannerViewModels
         {
             if (TokenValidateResultModel.ValidationResult == TokenValidateResult.Expired)
             {
-                PageTitle = "SCANNER_ERROR_EXPIRED_TITLE".Translate();
-                InvalidContentText = "SCANNER_ERROR_EXPIRED_CONTENT".Translate();
+                PageTitle = "SCANNER_ERROR_EXPIRED_PAGE_TITLE".Translate();
+                InvalidContentTitle = "SCANNER_ERROR_EXPIRED_TITLE".Translate();
+                if (_preferencesService.GetUserPreferenceAsBoolean("BORDER_CONTROL_ON"))
+                {
+                    InvalidContentText = "SCANNER_ERROR_EXPIRED_CONTENT_BORDER_CONTROL".Translate();
+                }
+                else
+                {
+                    InvalidContentText = "SCANNER_ERROR_EXPIRED_CONTENT".Translate();
+                }
                 RepeatedText = string.Concat(Enumerable.Repeat(PageTitle.PadLeft(12), 10));
                 ShowExpiredPage = true;
             }
             else if (TokenValidateResultModel.ValidationResult == TokenValidateResult.NoInternet)
             {
                 PageTitle = "SCANNER_ERROR_NO_INTERNET_TITLE".Translate();
+                InvalidContentTitle = "SCANNER_ERROR_NO_INTERNET_TITLE".Translate();
                 InvalidContentText = "SCANNER_ERROR_NO_INTERNET_CONTENT".Translate();
                 RepeatedText = string.Concat(Enumerable.Repeat(PageTitle.PadLeft(20), 4));
                 ShowNoInternetPage = true;
@@ -125,6 +150,7 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             else if (TokenValidateResultModel.ValidationResult == TokenValidateResult.UnsupportedType)
             {
                 PageTitle = "SCANNER_ERROR_INVALID_TITLE".Translate();
+                InvalidContentTitle = "SCANNER_ERROR_INVALID_TITLE".Translate();
                 InvalidContentText = "SCANNER_ERROR_UNKNOWN_TYPE_CONTENT".Translate();
                 RepeatedText = string.Concat(Enumerable.Repeat(PageTitle.PadLeft(12), 10));
                 ShowInvalidPage = true;
@@ -132,6 +158,7 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             else
             {
                 PageTitle = "SCANNER_ERROR_INVALID_TITLE".Translate();
+                InvalidContentTitle = "SCANNER_ERROR_INVALID_TITLE".Translate();
                 InvalidContentText = "SCANNER_ERROR_INVALID_CONTENT".Translate();
                 RepeatedText = string.Concat(Enumerable.Repeat(PageTitle.PadLeft(12), 10));
                 ShowInvalidPage = true;

@@ -242,7 +242,6 @@ namespace FHICORC.Core.Services.DecoderServices
                 await _certificationService.VerifySHCIssuer(jwsParts);
 
                 // Step 6. (Optional, not in scope) Revocation
-                //TODO
 
                 // Step 7. Create Models
                 SmartHealthCardModel decodedModel = JsonConvert.DeserializeObject<SmartHealthCardModel>(SmartHealthCard);
@@ -252,9 +251,10 @@ namespace FHICORC.Core.Services.DecoderServices
                     $"{decodedModel.VerifiableCredential.CredentialSubject.Immunizations.Count()} immunizations " +
                     $"and {decodedModel.VerifiableCredential.CredentialSubject.Observations.Count()} observations.");
 
-                resultModel.DecodedModel = new SmartHealthCardWrapper(decodedModel, vaccineInfo);
-                resultModel.ValidationResult = TokenValidateResult.Valid;
-
+                // Step 8. Wrap and verify token result
+                SmartHealthCardWrapper wrapper = new SmartHealthCardWrapper(decodedModel, vaccineInfo);
+                resultModel.DecodedModel = wrapper;
+                resultModel.ValidationResult = wrapper.Validate();
                 return resultModel;
             }
             catch (Exception e)
