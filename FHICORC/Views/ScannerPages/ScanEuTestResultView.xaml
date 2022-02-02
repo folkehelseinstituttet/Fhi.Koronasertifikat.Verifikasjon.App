@@ -25,7 +25,7 @@
                          Padding="0"
                          Spacing="0">
                 <elements:NavigationHeader
-                    CenterLabelText="{Binding Strings[SCANNER_EU_TITLE_TEXT]}"
+                    CenterLabelText="{Binding Strings[DCC_INFO_TITLE]}"
                     RightButtonCommand="{Binding BackCommand}"
                     RightButtonAccessibilityText="{Binding Strings[CLOSE_BUTTON]}"
                     RightButtonImageSource="{StaticResource XMark}"
@@ -139,17 +139,6 @@
                                HorizontalOptions="Start" VerticalOptions="Center"
                                effects:FontSizeLabelEffectParams.MaxFontSize="32.00"
                                effects:FontSizeLabelEffectParams.MinFontSize="20.00">
-                            <Label.Effects>
-                                <effects:FontSizeLabelEffect/>
-                            </Label.Effects>
-                        </Label>
-                        <Label Grid.Row="1" Grid.Column="1"
-                               Style="{StaticResource InfoPaneSubHeaderStyle}"
-                               Text="{Binding Strings[DCC_INFO_TITLE]}" 
-                               HorizontalOptions="Start" 
-                               VerticalOptions="Center"
-                               effects:FontSizeLabelEffectParams.MaxFontSize="28.00"
-                               effects:FontSizeLabelEffectParams.MinFontSize="15.00">
                             <Label.Effects>
                                 <effects:FontSizeLabelEffect/>
                             </Label.Effects>
