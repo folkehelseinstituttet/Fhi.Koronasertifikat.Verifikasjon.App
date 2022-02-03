@@ -30,7 +30,6 @@
                     RightButtonAccessibilityText="{Binding Strings[CLOSE_BUTTON]}"
                     RightButtonCommand="{Binding ScanAgainCommand}"
                     RightButtonImageSource="{StaticResource XMark}" />
-
                 <StackLayout
                     BackgroundColor="{StaticResource ExpiredBorderColor}"
                     IsVisible="{Binding ShowExpiredPage}"
@@ -50,7 +49,6 @@
                         AutomationProperties.IsInAccessibleTree="False">
                     </Label>
                 </StackLayout>
-
                 <StackLayout
                     BackgroundColor="{StaticResource InvalidBorderColor}"
                     IsVisible="{Binding ShowInvalidPage}"
@@ -70,7 +68,6 @@
                         AutomationProperties.IsInAccessibleTree="False">
                     </Label>
                 </StackLayout>
-
                 <StackLayout
                     BackgroundColor="{StaticResource ExpiredBorderColor}"
                     IsVisible="{Binding ShowNoInternetPage}"
@@ -92,7 +89,6 @@
                 </StackLayout>
             </StackLayout>
 
-
             <ScrollView Grid.Row="1" VerticalOptions="FillAndExpand">
                 <StackLayout 
                     Orientation="Vertical"
@@ -101,64 +97,15 @@
                     Spacing="0"
                     Margin="43,0,43,0">
                     <StackLayout
-                        IsVisible="{Binding ShowExpiredPage}"
                         Orientation="Vertical"
                         Spacing="20">
-                        <Image Source="{StaticResource HourGlass}" />
-                        <Label
-                            Style="{StaticResource BigTitleStyle}"
-                            Text="{Binding InvalidContentText}"
-                            HorizontalTextAlignment="Center"
-                            effects:FontSizeLabelEffectParams.MaxFontSize="32.00">
-                            <Label.Effects>
-                                <effects:FontSizeLabelEffect/>
-                            </Label.Effects>
-                        </Label>
-                        <Label
-                            Style="{StaticResource ContentStyle}"
-                            Text="{Binding Strings [SCANNER_ERROR_EXPIRED_CONTENT_2]}"
-                            HorizontalTextAlignment="Center"
-                            effects:FontSizeLabelEffectParams.MaxFontSize="26.00">
-                            <Label.Effects>
-                                <effects:FontSizeLabelEffect/>
-                            </Label.Effects>
-                        </Label>
-                    </StackLayout>
-
-                    <StackLayout
-                        IsVisible="{Binding ShowInvalidPage}"
-                        Orientation="Vertical"
-                        Spacing="20">
-                        <Image Source="{StaticResource ErrorCheckLayout}" />
+                        <Image IsVisible="{Binding ShowInvalidPage}" Source="{StaticResource ErrorCheckLayout}" />
+                        <Image IsVisible="{Binding ShowNoInternetPage}" Source="{StaticResource ErrorCheckLayout}" />
+                        <Image IsVisible="{Binding ShowExpiredPage}" Source="{StaticResource HourGlass}" />
                         <Label
                             HorizontalTextAlignment="Center"
                             Style="{StaticResource BigTitleStyle}"
-                            Text="{Binding PageTitle}"
-                            effects:FontSizeLabelEffectParams.MaxFontSize="32.00">
-                            <Label.Effects>
-                                <effects:FontSizeLabelEffect/>
-                            </Label.Effects>
-                        </Label>
-                        <Label
-                            HorizontalTextAlignment="Center"
-                            Style="{StaticResource ContentStyle}"
-                            Text="{Binding InvalidContentText}"
-                            effects:FontSizeLabelEffectParams.MaxFontSize="26.00">
-                            <Label.Effects>
-                                <effects:FontSizeLabelEffect/>
-                            </Label.Effects>
-                        </Label>
-                    </StackLayout>
-
-                    <StackLayout
-                        IsVisible="{Binding ShowNoInternetPage}"
-                        Orientation="Vertical"
-                        Spacing="20">
-                        <Image Source="{StaticResource ErrorCheckLayout}" />
-                        <Label
-                            HorizontalTextAlignment="Center"
-                            Style="{StaticResource BigTitleStyle}"
-                            Text="{Binding PageTitle}"
+                            Text="{Binding InvalidContentTitle}"
                             effects:FontSizeLabelEffectParams.MaxFontSize="32.00">
                             <Label.Effects>
                                 <effects:FontSizeLabelEffect/>
@@ -197,7 +144,6 @@
                         <effects:FontSizeLabelEffect/>
                     </controls:SingleLineButton.Effects>
                 </controls:SingleLineButton>
-
 
                 <!--  Seconds left before the page closes  -->
                 <Label
