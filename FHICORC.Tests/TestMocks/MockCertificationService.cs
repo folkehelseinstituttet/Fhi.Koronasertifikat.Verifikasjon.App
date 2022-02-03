@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Model.CoseModel;
+using FHICORC.Core.Services.Model.SmartHealthCardModel.Issuer;
 using FHICORC.Core.Services.Model.SmartHealthCardModel.Jws;
 
 namespace FHICORC.Tests.TestMocks
@@ -12,9 +13,9 @@ namespace FHICORC.Tests.TestMocks
             return Task.FromResult(true);
         }
 
-        public Task VerifySHCIssuer(JwsParts jws)
+        public Task<SmartHealthCardIssuer> VerifySHCIssuer(JwsParts jws)
         {
-            return Task.FromResult(true);
+            return Task.FromResult(new SmartHealthCardIssuer());
         }
 
         public Task VerifySHCSignature(JwsParts jws)
