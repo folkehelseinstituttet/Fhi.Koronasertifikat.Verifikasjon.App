@@ -20,6 +20,7 @@ using FHICORC.Core.Services.Model.SmartHealthCardModel.Jws;
 using System.Diagnostics;
 using FHICORC.Core.Services.Model.SmartHealthCardModel.Shc;
 using FHICORC.Core.Services.Model.SmartHealthCardModel.Coding;
+using FHICORC.Core.Services.Model.SmartHealthCardModel.Issuer;
 
 namespace FHICORC.Core.Services.DecoderServices
 {
@@ -239,7 +240,7 @@ namespace FHICORC.Core.Services.DecoderServices
                 await _certificationService.VerifySHCSignature(jwsParts);
 
                 // Step 5. Verify that the issuer is trusted
-                await _certificationService.VerifySHCIssuer(jwsParts);
+                SmartHealthCardIssuer issuer = await _certificationService.VerifySHCIssuer(jwsParts);
 
                 // Step 6. (Optional, not in scope) Revocation
 
@@ -252,7 +253,7 @@ namespace FHICORC.Core.Services.DecoderServices
                     $"and {decodedModel.VerifiableCredential.CredentialSubject.Observations.Count()} observations.");
 
                 // Step 8. Wrap and verify token result
-                SmartHealthCardWrapper wrapper = new SmartHealthCardWrapper(decodedModel, vaccineInfo);
+                SmartHealthCardWrapper wrapper = new SmartHealthCardWrapper(decodedModel, vaccineInfo, issuer);
                 resultModel.DecodedModel = wrapper;
                 resultModel.ValidationResult = wrapper.Validate();
                 return resultModel;

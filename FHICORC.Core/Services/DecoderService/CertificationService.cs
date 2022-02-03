@@ -86,7 +86,7 @@ namespace FHICORC.Core.Services.DecoderServices
             VerifySignature(jwkSignature, jws);
         }
 
-        public async Task VerifySHCIssuer(JwsParts jws)
+        public async Task<SmartHealthCardIssuer> VerifySHCIssuer(JwsParts jws)
         {
             string payloadJson = await jws.DecodedPayload();
             string issuerString = GetJsonValue(payloadJson, "iss");
@@ -97,6 +97,7 @@ namespace FHICORC.Core.Services.DecoderServices
             {
                 throw new Exception($"SHC issuer {issuerString} is not trusted");
             }
+            return issuer;
         }
 
         private string GetJsonValue(string json, string jsonKey)

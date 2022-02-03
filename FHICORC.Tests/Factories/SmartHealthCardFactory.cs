@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FHICORC.Core.Services.Model.SmartHealthCardModel.Coding;
+using FHICORC.Core.Services.Model.SmartHealthCardModel.Issuer;
 using FHICORC.Core.Services.Model.SmartHealthCardModel.Shc;
 using Newtonsoft.Json.Linq;
 
@@ -87,7 +88,8 @@ namespace FHICORC.Tests.Factories
                         CredentialSubject = CreateCredentialSubject()
                     }
                 },
-                new List<SmartHealthCardVaccineInfo>()
+                new List<SmartHealthCardVaccineInfo>(),
+                new SmartHealthCardIssuer()
                 );
             return wrapper;
         }
