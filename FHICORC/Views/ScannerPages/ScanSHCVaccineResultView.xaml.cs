@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using FHICORC.Configuration;
+﻿using FHICORC.Configuration;
 using FHICORC.ViewModels.QrScannerViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
