@@ -9,10 +9,11 @@ namespace FHICORC.Core.Services.Model.SmartHealthCardModel.Shc
     public class SmartHealthCardWrapper : ITokenPayload
     {
         public SmartHealthCardWrapper(SmartHealthCardModel smartHealthCardModel,
-            List<SmartHealthCardVaccineInfo> vaccineInfo)
+            List<SmartHealthCardVaccineInfo> vaccineInfo, SmartHealthCardIssuer smartHealthCardIssuer)
         {
             SmartHealthCard = smartHealthCardModel;
             VaccineInfo = vaccineInfo;
+            SmartHealthCardIssuer = smartHealthCardIssuer;
         }
 
         public SmartHealthCardModel SmartHealthCard { get; private set; }
