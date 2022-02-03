@@ -1,11 +1,10 @@
 ﻿using System;
-using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Model.Converter;
 using Newtonsoft.Json;
 
 namespace FHICORC.Core.Services.Model.SmartHealthCardModel.Shc
 {
-    public class SmartHealthCardModel : ITokenPayload
+    public class SmartHealthCardModel
     {
         [JsonProperty("iss", Required = Required.Always)]
         public Uri Issuer { get; set; }
@@ -20,9 +19,5 @@ namespace FHICORC.Core.Services.Model.SmartHealthCardModel.Shc
         [JsonProperty("exp")]
         [JsonConverter(typeof(EpochDatetimeConverter))]
         public DateTime? ExpirationDate { get; set; }
-
-        public DateTime? ExpiredDateTime() => ExpirationDate;
-
-        public DateTime? IssueDateTime() => IssuanceDate;
     }
 }
