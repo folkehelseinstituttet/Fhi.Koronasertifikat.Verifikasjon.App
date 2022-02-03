@@ -19,7 +19,6 @@ namespace FHICORC.Core.Services.Model.SmartHealthCardModel.Shc
         }
 
         [JsonProperty("birthDate")]
-        [JsonConverter(typeof(ISO8601DateTimeConverter))]
-        public DateTime? DateOfBirth { get; set; }
+        public string DateOfBirth { get; set; }
     }
 }

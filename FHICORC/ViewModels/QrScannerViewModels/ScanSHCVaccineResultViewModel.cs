@@ -193,7 +193,7 @@ namespace FHICORC.ViewModels.QrScannerViewModels
                         SmartHealthCardIssuer issuer = shc.SmartHealthCardIssuer;
 
                         FullName = patient.PersonName.FullName;
-                        DateOfBirth = patient.DateOfBirth?.ToLocaleDateFormat();
+                        DateOfBirth = patient.DateOfBirth;
                         VaccinationDate = immunization.OccurrenceDateTime?.ToLocaleDateFormat();
                         VaccineName = vaccineInfo.Name;
                         VaccineType = vaccineInfo.Type;
