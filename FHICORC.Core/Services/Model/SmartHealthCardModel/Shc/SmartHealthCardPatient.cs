@@ -1,6 +1,4 @@
-﻿using System;
-using FHICORC.Core.Services.Model.Converter;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace FHICORC.Core.Services.Model.SmartHealthCardModel.Shc
 {

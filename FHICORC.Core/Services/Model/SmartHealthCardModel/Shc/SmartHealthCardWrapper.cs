@@ -54,15 +54,8 @@ namespace FHICORC.Core.Services.Model.SmartHealthCardModel.Shc
         public bool ValidDateOfBirth()
         {
             string dateOfBirth = SmartHealthCard.VerifiableCredential.CredentialSubject.Patients.First().DateOfBirth;
-            Regex dateTimeRegex = new Regex(@"^([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?");
-            if (dateTimeRegex.IsMatch(dateOfBirth))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            Regex dateTimeRegex = new Regex(@"^([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?$");
+            return dateTimeRegex.IsMatch(dateOfBirth);
         }
     }
 }

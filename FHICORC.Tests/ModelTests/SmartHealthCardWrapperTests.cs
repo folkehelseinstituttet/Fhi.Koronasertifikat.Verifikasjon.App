@@ -35,11 +35,36 @@ namespace FHICORC.Tests.ModelTests
         }
 
         [Test]
-        public void Validate_WithMultiplePatiants_IsInvalid()
+        public void Validate_WithMultiplePatients_IsInvalid()
         {
             wrapper.SmartHealthCard.VerifiableCredential.CredentialSubject.Patients.Add(
                 new SmartHealthCardPatient()
                 );
+
+            TokenValidateResult result = wrapper.Validate();
+
+            Assert.AreEqual(TokenValidateResult.Invalid, result);
+        }
+
+        [TestCase("2021-02-28")]
+        [TestCase("1955-02")]
+        [TestCase("1955")]
+        public void Validate_WithValidBirthDate_IsValid(string date)
+        {
+            wrapper.SmartHealthCard.VerifiableCredential.CredentialSubject.Patients[0].DateOfBirth = date;
+
+            TokenValidateResult result = wrapper.Validate();
+
+            Assert.AreEqual(TokenValidateResult.Valid, result);
+        }
+
+        [TestCase("2017-01-01T00:00:00.000Z")]
+        [TestCase("2015-02-07T13:28:17-05:00")]
+        [TestCase("date")]
+        [TestCase("22")]
+        public void Validate_WithInvalidBirthDate_IsInvalid(string date)
+        {
+            wrapper.SmartHealthCard.VerifiableCredential.CredentialSubject.Patients[0].DateOfBirth = date;
 
             TokenValidateResult result = wrapper.Validate();
 
