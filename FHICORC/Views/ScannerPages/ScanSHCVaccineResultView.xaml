@@ -99,7 +99,6 @@
                     <Grid Margin="0"
                           Padding="20,25,20,27"
                           RowSpacing="0"
-                          IsVisible="{Binding IsBorderControlOn}"
                           BackgroundColor="{StaticResource FHIPrimaryBlue}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -124,8 +123,7 @@
                     </Grid>
 
                     <Grid
-                        Margin="20,0,20,0"
-                        IsVisible="{Binding IsBorderControlOn}">
+                        Margin="20,0,20,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />

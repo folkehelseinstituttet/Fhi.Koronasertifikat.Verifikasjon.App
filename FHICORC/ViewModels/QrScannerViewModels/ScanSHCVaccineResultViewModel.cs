@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using FHICORC.Core.Data;
-using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Model;
 using FHICORC.Core.Services.Model.SmartHealthCardModel.Shc;
 using FHICORC.Data;
