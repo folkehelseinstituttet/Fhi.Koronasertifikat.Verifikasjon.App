@@ -245,7 +245,12 @@ namespace FHICORC.Core.Services.DecoderServices
                 // Step 6. (Optional, not in scope) Revocation
 
                 // Step 7. Create Models
-                SmartHealthCardModel decodedModel = JsonConvert.DeserializeObject<SmartHealthCardModel>(SmartHealthCard);
+                SmartHealthCardModel decodedModel = JsonConvert.DeserializeObject<SmartHealthCardModel>(
+                    SmartHealthCard,
+                    new JsonSerializerSettings()
+                    {
+                        DateParseHandling = DateParseHandling.None // So custom date handling recieves strings.
+                    });
                 List<SmartHealthCardVaccineInfo> vaccineInfo = await _codingService.GetShcVaccineInfo(
                     decodedModel.VerifiableCredential.CredentialSubject.Immunizations);
                 Debug.Print("Smart health card decoded with " +

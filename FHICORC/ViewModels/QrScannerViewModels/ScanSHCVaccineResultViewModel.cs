@@ -193,7 +193,7 @@ namespace FHICORC.ViewModels.QrScannerViewModels
 
                         FullName = patient.PersonName.FullName;
                         DateOfBirth = patient.DateOfBirth;
-                        VaccinationDate = immunization.OccurrenceDateTime?.ToLocaleDateFormat();
+                        VaccinationDate = immunization.OccurrenceDateTime.ToLocaleDateFormat();
                         VaccineName = vaccineInfo.Name;
                         VaccineType = vaccineInfo.Type;
                         VaccineManufacturer = vaccineInfo.Manufacturer;
