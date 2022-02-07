@@ -1,6 +1,4 @@
-﻿using System;
-using FHICORC.Core.Services.Model.Converter;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace FHICORC.Core.Services.Model.SmartHealthCardModel.Shc
 {
@@ -19,7 +17,6 @@ namespace FHICORC.Core.Services.Model.SmartHealthCardModel.Shc
         }
 
         [JsonProperty("birthDate")]
-        [JsonConverter(typeof(ISO8601DateTimeConverter))]
-        public DateTime? DateOfBirth { get; set; }
+        public string DateOfBirth { get; set; }
     }
 }

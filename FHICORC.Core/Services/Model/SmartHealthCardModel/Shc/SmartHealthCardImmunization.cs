@@ -15,9 +15,9 @@ namespace FHICORC.Core.Services.Model.SmartHealthCardModel.Shc
         [JsonProperty("patient")]
         public Patient Patient { get; set; }
 
-        [JsonProperty("occurrenceDateTime")]
-        [JsonConverter(typeof(ISO8601DateTimeConverter))]
-        public DateTime? OccurrenceDateTime { get; set; }
+        [JsonProperty("occurrenceDateTime", Required = Required.Always)]
+        [JsonConverter(typeof(StrictISO8601DateTimeConverter))]
+        public DateTime OccurrenceDateTime { get; set; }
     }
 
     public class Patient

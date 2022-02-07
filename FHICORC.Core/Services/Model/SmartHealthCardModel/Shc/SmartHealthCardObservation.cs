@@ -16,8 +16,8 @@ namespace FHICORC.Core.Services.Model.SmartHealthCardModel.Shc
         public Subject Subject { get; set; }
 
         [JsonProperty("effectiveDateTime")]
-        [JsonConverter(typeof(ISO8601DateTimeConverter))]
-        public DateTime? EffectiveDateTime { get; set; }
+        [JsonConverter(typeof(StrictISO8601DateTimeConverter))]
+        public DateTime EffectiveDateTime { get; set; }
 
         [JsonProperty("valueQuantity")]
         public ValueQuantity ValueQuantity { get; set; }
