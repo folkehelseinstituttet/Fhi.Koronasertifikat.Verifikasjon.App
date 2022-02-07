@@ -13,4 +13,4 @@ extends:
   parameters:
     azureSubscription: FHI-Koronasertifikat.Verifisering-ARM-Test
     accountName: $(stvksAccountname)
-    textVersion: '3.3'
+    textVersion: '3.4'
