@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace FHICORC.Core.Services.Model.SmartHealthCardModel.Shc
 {
@@ -12,6 +10,7 @@ namespace FHICORC.Core.Services.Model.SmartHealthCardModel.Shc
         [JsonProperty("given")]
         public string[] GivenName { get; set; }
 
-        public string FullName => $"{FamilyName}, {string.Join(" ", GivenName)}";
+        public string FullName => FamilyName
+            + (GivenName != null && GivenName.Length != 0 ? $", {string.Join(" ", GivenName)}" : "");
     }
 }
