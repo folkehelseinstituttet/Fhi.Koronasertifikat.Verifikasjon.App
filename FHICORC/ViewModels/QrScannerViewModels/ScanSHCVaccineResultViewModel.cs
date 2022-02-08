@@ -63,17 +63,6 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             }
         }
 
-        private string _vaccineType;
-        public string VaccineType
-        {
-            get => _vaccineType;
-            set
-            {
-                _vaccineType = value;
-                OnPropertyChanged(nameof(VaccineType));
-            }
-        }
-
         private string _vaccineManufacturer;
         public string VaccineManufacturer
         {
@@ -160,7 +149,6 @@ namespace FHICORC.ViewModels.QrScannerViewModels
         public string VaccineStatusText => "SHC_VACCINE_STATUS_TEXT".Translate();
         public string VaccineDateOfVaccinationText => "INTERNATIONAL_INFO_VACCINE_DATE_OF_VACCINATION_TEXT".Translate();
         public string VaccineNameText => "INTERNATIONAL_INFO_VACCINE_VACCINE_NAME_TEXT".Translate();
-        public string VaccineTypeText => "INTERNATIONAL_INFO_VACCINE_TYPE_TEXT".Translate();
         public string VaccineManufacturerText =>  "INTERNATIONAL_INFO_VACCINE_MARKETING_AUTHORISATION_HOLDER_TEXT".Translate();
         public string VaccineNumberOfDosesText => "INTERNATIONAL_INFO_VACCINE_DOSE_TITLE_TEXT".Translate();
         public string VaccineTargetedDiseaseText => "INTERNATIONAL_INFO_VACCINE_DISEASE_TEXT".Translate();
@@ -195,7 +183,6 @@ namespace FHICORC.ViewModels.QrScannerViewModels
                         DateOfBirth = patient.DateOfBirth;
                         VaccinationDate = immunization.OccurrenceDateTime.ToLocaleDateFormat();
                         VaccineName = vaccineInfo.Name;
-                        VaccineType = vaccineInfo.Type;
                         VaccineManufacturer = vaccineInfo.Manufacturer;
                         VaccineNumberOfDoses = shc.SmartHealthCard.VerifiableCredential.CredentialSubject.Immunizations.Count().ToString();
                         VaccineTargetDisease = vaccineInfo.Target;
