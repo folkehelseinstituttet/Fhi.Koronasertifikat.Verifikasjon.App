@@ -94,7 +94,8 @@
                        VerticalOptions="Center"
                        VerticalTextAlignment="Start"
                        effects:FontSizeLabelEffectParams.MaxFontSize="24.00"
-                       effects:FontSizeLabelEffectParams.MinFontSize="12.00">
+                       effects:FontSizeLabelEffectParams.MinFontSize="12.00"
+                       LineHeight="1.2">
                     <Label.Effects>
                         <effects:FontSizeLabelEffect/>
                     </Label.Effects>
