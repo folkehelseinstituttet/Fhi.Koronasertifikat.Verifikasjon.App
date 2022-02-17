@@ -84,7 +84,7 @@
                                 </Label.Effects>
                             </Label>
                             <Label x:Name="DateOfBirthLabel"
-                                   AutomationId="{Binding DateOfBirthAccessibilityText}"
+                                   AutomationProperties.Name="{Binding DateOfBirthAccessibilityText}"
                                    Text="{Binding DateOfBirth}"
                                    Style="{StaticResource ContentStyle}"
                                    HorizontalTextAlignment="Center"
