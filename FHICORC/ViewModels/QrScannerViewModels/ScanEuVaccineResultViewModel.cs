@@ -190,8 +190,6 @@ namespace FHICORC.ViewModels.QrScannerViewModels
                         FullName = cwt.DCCPayloadData.DCC.PersonName.FullName;
                         FullNameAccessibilityText = cwt.DCCPayloadData.DCC.PersonName.FullName.ToLower();
                         DateOfBirth = cwt.DCCPayloadData.DCC.DateOfBirth;
-                        var dateOfBirthAccessibility = DateTime.ParseExact(DateOfBirth, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-                        DateOfBirthAccessibilityText = String.Format("{0:dd. MMMM yyyy}", dateOfBirthAccessibility);
                         PassportViewModel.PassportData = new PassportData(string.Empty, cwt);
                         RulesFeedbackViewModel = new RulesFeedbackViewModel(tokenValidateResultModel.RulesFeedBacks);
                         RulesEnginePassed = RulesFeedbackViewModel.RulesEngineResult.Where(x => x.Result == RulesFeedbackResult.TRUE).Count();
@@ -201,6 +199,7 @@ namespace FHICORC.ViewModels.QrScannerViewModels
                         UpdateRuleColorAndText();
                         UpdateView();
                         SetAccessibilityTextDate();
+                        SetAccessibilityTextDateOfBirth();
                     }
                 }
             }
@@ -210,6 +209,19 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             }
 
             return base.InitializeAsync(navigationData);
+        }
+
+        public void SetAccessibilityTextDateOfBirth()
+        {
+            try
+            {
+                var dateOfBirth = DateTime.ParseExact(DateOfBirth, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                DateOfBirthAccessibilityText = string.Format("{0:dd. MMMM yyyy}", dateOfBirth);
+            }
+            catch (FormatException)
+            {
+                DateOfBirthAccessibilityText = DateOfBirth;
+            }
         }
 
         private async Task ShowRulesInfo()

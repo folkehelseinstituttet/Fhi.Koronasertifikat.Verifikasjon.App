@@ -84,6 +84,7 @@
                             </Label>
                             <Label x:Name="DateOfBirthLabel"
                                    Text="{Binding DateOfBirth}"
+                                    AutomationProperties.Name="{Binding DateOfBirthAccessibilityText}"
                                    Style="{StaticResource ContentStyle}"
                                    HorizontalTextAlignment="Center"
                                    HorizontalOptions="Center"
@@ -160,6 +161,7 @@
                         </Label>
                         <Label Grid.Row="1"
                                x:Name="VaccineVaccinationDate"
+                               AutomationProperties.Name="{Binding VaccinationDateAccessibilityText}"
                                Text="{Binding VaccinationDate}" 
                                Style="{StaticResource InfoPaneItemValue}" 
                                HorizontalOptions="Start"

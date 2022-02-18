@@ -14,6 +14,7 @@ using Xamarin.Forms;
 using FHICORC.Utils;
 using FHICORC.Core.Services.Model.SmartHealthCardModel.Coding;
 using FHICORC.Core.Services.Model.SmartHealthCardModel.Issuer;
+using System.Globalization;
 
 namespace FHICORC.ViewModels.QrScannerViewModels
 {
@@ -140,6 +141,28 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             }
         }
 
+        private string _vaccinationDateAccessibilityText;
+        public string VaccinationDateAccessibilityText
+        {
+            get => _vaccinationDateAccessibilityText;
+            set
+            {
+                _vaccinationDateAccessibilityText = value;
+                OnPropertyChanged(nameof(VaccinationDateAccessibilityText));
+            }
+        }
+
+        private string _dateOfBirthAccessibilityText;
+        public string DateOfBirthAccessibilityText
+        {
+            get => _dateOfBirthAccessibilityText;
+            set
+            {
+                _dateOfBirthAccessibilityText = value;
+                OnPropertyChanged(nameof(DateOfBirthAccessibilityText));
+            }
+        }
+
         private readonly IPreferencesService _preferencesService;
         public bool IsBorderControlOn => _preferencesService.GetUserPreferenceAsBoolean(PreferencesKeys.BORDER_CONTROL_ON);
 
@@ -187,6 +210,7 @@ namespace FHICORC.ViewModels.QrScannerViewModels
                         VaccineNumberOfDoses = shc.SmartHealthCard.VerifiableCredential.CredentialSubject.Immunizations.Count().ToString();
                         VaccineTargetDisease = vaccineInfo.Target;
                         IssuerName = issuer.Name;
+                        SetAccessibilityTextDate();
                     }
                 }
             }
@@ -211,6 +235,29 @@ namespace FHICORC.ViewModels.QrScannerViewModels
                 BannerColor = Color.FromHex("F3F9FB");
                 BannerTextColor = Color.FromHex("#32345C");
                 BannerText = "SCANNER_NO_BANNER_TEXT".Translate();
+            }
+        }
+
+        public void SetAccessibilityTextDate()
+        {
+            try
+            {
+                var vaccinationDate = DateTime.ParseExact(VaccinationDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                VaccinationDateAccessibilityText = string.Format("{0:dd. MMMM yyyy}", vaccinationDate);
+
+            }
+            catch (FormatException)
+            {
+                VaccinationDateAccessibilityText = VaccinationDate;
+            }
+            try
+            {
+                var dateOfBirth = DateTime.ParseExact(DateOfBirth, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                DateOfBirthAccessibilityText = string.Format("{0:dd. MMMM yyyy}", dateOfBirth);
+            }
+            catch (FormatException)
+            {
+                DateOfBirthAccessibilityText = DateOfBirth;
             }
         }
     }
