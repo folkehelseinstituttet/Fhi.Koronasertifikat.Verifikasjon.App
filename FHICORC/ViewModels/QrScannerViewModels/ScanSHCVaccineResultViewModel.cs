@@ -243,14 +243,20 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             try
             {
                 var vaccinationDate = DateTime.ParseExact(VaccinationDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-                var dateOfBirth = DateTime.ParseExact(DateOfBirth, "yyyy-MM-dd", CultureInfo.InvariantCulture);
                 VaccinationDateAccessibilityText = string.Format("{0:dd. MMMM yyyy}", vaccinationDate);
-                DateOfBirthAccessibilityText = string.Format("{0:dd. MMMM yyyy}", dateOfBirth);
 
             }
             catch (FormatException)
             {
                 VaccinationDateAccessibilityText = VaccinationDate;
+            }
+            try
+            {
+                var dateOfBirth = DateTime.ParseExact(DateOfBirth, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                DateOfBirthAccessibilityText = string.Format("{0:dd. MMMM yyyy}", dateOfBirth);
+            }
+            catch (FormatException)
+            {
                 DateOfBirthAccessibilityText = DateOfBirth;
             }
         }
