@@ -13,12 +13,10 @@ namespace FHICORC.Views.Elements
         {
             InitializeComponent();
             HeaderBackgroundColour = FHICORCColor.NavigationHeaderBackgroundColor.Color();
-            LeftButtonHeightRequest = 30;
-            CenterLabelHeightRequest = 40;
-            RightButtonHeightRequest = 30;
+            LeftButtonHeightRequest = 40;
+            RightButtonHeightRequest = 40;
 
             CenterLabel.Text = "LANDING_PAGE_TITLE".Translate();
-
 
             AutomationProperties.SetIsInAccessibleTree(CenterLabel, true);
             AutomationProperties.SetIsInAccessibleTree(LeftButton, false);
@@ -59,10 +57,6 @@ namespace FHICORC.Views.Elements
             {
                 CenterLabel.Text = CenterLabelText;
                 UpdateIconsSizesAccessibility();
-            }
-            else if (propertyName == CenterLabelHeightRequestProperty.PropertyName)
-            {
-                CenterLabel.HeightRequest = CenterLabelHeightRequest;
             }
             else if (propertyName == RightButtonImageSourceProperty.PropertyName)
             {
@@ -146,17 +140,6 @@ namespace FHICORC.Views.Elements
             set { SetValue(CenterLabelTextProperty, value); }
         }
 
-        public static readonly BindableProperty CenterLabelHeightRequestProperty =
-            BindableProperty.Create(nameof(CenterLabelHeightRequest), typeof(int), typeof(Image), null,
-                BindingMode.OneWay);
-
-        public int CenterLabelHeightRequest
-        {
-            get { return (int)GetValue(CenterLabelHeightRequestProperty); }
-            set { SetValue(CenterLabelHeightRequestProperty, value); }
-        }
-
-
         public static readonly BindableProperty RightButtonImageSourceProperty =
             BindableProperty.Create(nameof(RightButtonImageSource), typeof(ImageSource), typeof(ImageButton),
                 null, BindingMode.OneWay);
@@ -166,7 +149,6 @@ namespace FHICORC.Views.Elements
             get { return (ImageSource)GetValue(RightButtonImageSourceProperty); }
             set { SetValue(RightButtonImageSourceProperty, value); }
         }
-
 
         public static readonly BindableProperty RightButtonCommandProperty =
             BindableProperty.Create(nameof(RightButtonCommand), typeof(Command), typeof(ImageButton), null,

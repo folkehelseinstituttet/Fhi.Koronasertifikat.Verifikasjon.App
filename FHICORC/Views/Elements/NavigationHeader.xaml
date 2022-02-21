@@ -8,26 +8,29 @@
     x:Name="HeaderGrid"
     BackgroundColor="{StaticResource NavigationHeaderBackgroundColor}">
 
-    <Grid Margin="10,10"
-          ColumnSpacing="10"
-          ColumnDefinitions="Auto, *, Auto">
+    <StackLayout Margin="10"
+                 Spacing="6"
+                 Orientation="Horizontal"
+                 HorizontalOptions="FillAndExpand">
         <ImageButton
             x:Name="LeftButton"
-            Grid.Column="0"
-            Padding="6,6,6,6"
+            Padding="6"
+            WidthRequest="40"
+            MinimumWidthRequest="40"
             AutomationId="LeftButton"
             BackgroundColor="Transparent"
             HorizontalOptions="Start"
             VerticalOptions="Center" />
+
         <Label
             x:Name="CenterLabel"
-            Grid.Column="1"
             local:FontSizeLabelEffectParams.MaxFontSize="32"
             local:FontSizeLabelEffectParams.MinFontSize="12"
             AutomationId="{Binding CenterLabelText}"
             HorizontalOptions="CenterAndExpand"
             HorizontalTextAlignment="Center"
-            LineBreakMode="TailTruncation"
+            LineBreakMode="WordWrap"
+            MaxLines="2"
             Style="{StaticResource NavigationTitleTextStyle}"
             Text="{Binding CenterLabelText}"
             VerticalOptions="Center"
@@ -36,13 +39,15 @@
                 <local:FontSizeLabelEffect />
             </Label.Effects>
         </Label>
+
         <ImageButton
             x:Name="RightButton"
-            Grid.Column="2"
-            Padding="10,0,10,0"
+            Padding="6"
+            WidthRequest="40"
+            MinimumWidthRequest="40"
             AutomationId="RightButton"
             BackgroundColor="Transparent"
             HorizontalOptions="End"
             VerticalOptions="Center"/>
-    </Grid>
+    </StackLayout>
 </Grid>
