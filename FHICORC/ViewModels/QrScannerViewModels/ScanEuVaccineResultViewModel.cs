@@ -8,7 +8,6 @@ using FHICORC.Core.Data;
 using FHICORC.Core.Services.Enum;
 using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Model;
-using FHICORC.Core.Services.Model.BusinessRules;
 using FHICORC.Data;
 using FHICORC.Enums;
 using FHICORC.Models;

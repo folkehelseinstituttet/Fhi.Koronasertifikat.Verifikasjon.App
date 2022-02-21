@@ -29,7 +29,6 @@
                 CenterLabelText="{Binding Strings[HELP_TITLE]}"
                 LeftButtonCommand="{Binding BackCommand}"
                 LeftButtonAccessibilityText="{Binding Strings[BACK_BUTTON]}"
-                LeftButtonHeightRequest="50"
                 LeftButtonImageSource="{StaticResource ArrowBack}"/>
 
             <ScrollView Grid.Row="1" BackgroundColor="{StaticResource DefaultBackgroundColor}">

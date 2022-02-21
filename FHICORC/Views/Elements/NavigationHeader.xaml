@@ -8,10 +8,15 @@
     x:Name="HeaderGrid"
     BackgroundColor="{StaticResource NavigationHeaderBackgroundColor}">
 
-    <Grid Margin="10,10">
+    <StackLayout Margin="10"
+                 Spacing="6"
+                 Orientation="Horizontal"
+                 HorizontalOptions="FillAndExpand">
         <ImageButton
             x:Name="LeftButton"
-            Padding="6,6,6,6"
+            Padding="6"
+            WidthRequest="40"
+            MinimumWidthRequest="40"
             AutomationId="LeftButton"
             BackgroundColor="Transparent"
             HorizontalOptions="Start"
@@ -24,7 +29,8 @@
             AutomationId="{Binding CenterLabelText}"
             HorizontalOptions="CenterAndExpand"
             HorizontalTextAlignment="Center"
-            LineBreakMode="NoWrap"
+            LineBreakMode="WordWrap"
+            MaxLines="2"
             Style="{StaticResource NavigationTitleTextStyle}"
             Text="{Binding CenterLabelText}"
             VerticalOptions="Center"
@@ -36,10 +42,12 @@
 
         <ImageButton
             x:Name="RightButton"
-            Padding="10,0,10,0"
+            Padding="6"
+            WidthRequest="40"
+            MinimumWidthRequest="40"
             AutomationId="RightButton"
             BackgroundColor="Transparent"
             HorizontalOptions="End"
             VerticalOptions="Center"/>
-    </Grid>
+    </StackLayout>
 </Grid>

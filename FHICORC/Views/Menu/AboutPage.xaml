@@ -26,7 +26,6 @@
             <elements:NavigationHeader
                 CenterLabelText="{Binding Strings[ABOUT_PAGE_TITLE]}"
                 LeftButtonCommand="{Binding BackCommand}"
-                LeftButtonHeightRequest="40"
                 LeftButtonImageSource="{StaticResource ArrowBack}"/>
             <ScrollView Grid.Row="1" BackgroundColor="{StaticResource DefaultBackgroundColor}">
                 <ScrollView.Content>
