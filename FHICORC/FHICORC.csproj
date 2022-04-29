@@ -126,6 +126,7 @@
     <EmbeddedResource Include="Certs\prod.crt" />
     <None Remove="Certs\test.crt" />
     <EmbeddedResource Include="Certs\test.crt" />
+    <None Remove="sqlite-net-pcl" />
   </ItemGroup>
 
   <ItemGroup>
@@ -152,6 +153,7 @@
     <PackageReference Include="IntelliAbb.Xamarin.Controls" Version="1.0.148" />
     <PackageReference Include="Xamarin.Forms.RootCheck" Version="1.0.1" />
     <PackageReference Include="Xamarin.Forms.InputKit" Version="3.7.2" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Locales\" />

@@ -68,6 +68,7 @@
     <PackageReference Include="PeterO.URIUtility" Version="1.0.0" />
     <PackageReference Include="PeterO.Numbers" Version="1.7.4" />
     <PackageReference Include="Zlib.Portable.Signed" Version="1.11.0" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Services\Model\EuDCCModel\ValueSet\test_manf.json" />
@@ -79,6 +80,7 @@
     <None Remove="Services\Model\EuDCCModel\ValueSet\vaccines-covid-19-auth-holders.json" />
     <None Remove="Services\Model\EuDCCModel\ValueSet\vaccines-covid-19-names.json" />
     <None Remove="Services\Model\EuDCCModel\ValueSet\sct-vaccines-covid-19.json" />
+    <None Remove="sqlite-net-pcl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\covid-19-lab-test-type.json" />

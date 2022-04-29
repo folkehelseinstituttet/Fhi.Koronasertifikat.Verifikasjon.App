@@ -49,6 +49,7 @@ namespace FHICORC.iOS
             IoCContainer.RegisterSingleton<IPlatformBrowserService, PlatformBrowserService>(); 
             IoCContainer.RegisterInterface<IScannerFactory, IosScannerFactory>();
             IoCContainer.RegisterInterface<IDeepLinkingService, IosDeepLinkingService>();
+            IoCContainer.RegisterInterface<ISqlConnection, SqlConnection>();
         }
         
         public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)

@@ -85,6 +85,7 @@ namespace FHICORC.Configuration
             _container.Register<IValueSetService, ValueSetService>();
             _container.Register<IDigitalGreenValueSetTranslatorFactory, DigitalGreenValueSetTranslatorFactory>();
             _container.Register<IValueSetRepository, ValueSetRepository>();
+            _container.Register<IRevocationsRepository, MockRevocationsRepository>();
         }
 
         //The services that need to be reset after the user logs out.
@@ -94,6 +95,7 @@ namespace FHICORC.Configuration
             _container.Register<IRestClient, RestClient>();
             _container.Register<IPublicKeyService, PublicKeyDataManager>().AsSingleton();
             _container.Register<IBusinessRulesService, BusinessRulesDataManager>().AsSingleton();
+            _container.Register<IRevocationsService, RevocationsDataManager>().AsSingleton();
         }
 
         public static void ResetIoCContainer()

@@ -76,6 +76,7 @@
     <PackageReference Include="PeterO.Cbor" Version="4.3.0" />
     <PackageReference Include="PeterO.URIUtility" Version="1.0.0" />
     <PackageReference Include="PeterO.Numbers" Version="1.7.4" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
   </ItemGroup>
 
   <ItemGroup>
@@ -89,5 +90,8 @@
     <Folder Include="ModelTests\" />
     <Folder Include="ViewModelTests\" />
     <Folder Include="BusinessRules\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="sqlite-net-pcl" />
   </ItemGroup>
 </Project>

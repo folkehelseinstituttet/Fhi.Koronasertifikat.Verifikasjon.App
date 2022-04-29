@@ -26,6 +26,7 @@ namespace FHICORC
         private IPublicKeyService _publicKeyDataManager;
         private IBusinessRulesService _businessRulesDataManager;
         private IValueSetService _valueSetService;
+        private IRevocationsService _revocationsService;
 
         public App()
         {
@@ -41,6 +42,7 @@ namespace FHICORC
             _publicKeyDataManager = IoCContainer.Resolve<IPublicKeyService>();
             _businessRulesDataManager = IoCContainer.Resolve<IBusinessRulesService>();
             _valueSetService = IoCContainer.Resolve<IValueSetService>();
+            _revocationsService = IoCContainer.Resolve<IRevocationsService>();
             ConfigureApp();
         }
 
@@ -104,6 +106,7 @@ namespace FHICORC
             await _valueSetService.FetchAndSaveLatestVersionOfValueSets(lastTimeFetchedValuesets);
             await _businessRulesDataManager.CheckAndFetchBusinessRulesFromBackend();
             await _publicKeyDataManager.CheckAndFetchPublicKeyFromBackend();
+            await _revocationsService.CheckAndFetchRevocationsFromBackend();
         }
 
         private void ClearAppData()

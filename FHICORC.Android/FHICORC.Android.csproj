@@ -153,6 +153,9 @@
     <PackageReference Include="PeterO.Numbers">
       <Version>1.7.4</Version>
     </PackageReference>
+    <PackageReference Include="sqlite-net-pcl">
+      <Version>1.8.116</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomRenderers\CustomProgressBarRenderer.cs" />
@@ -171,6 +174,7 @@
     <Compile Include="Services\ImagerService\DataWedgeReceiver.cs" />
     <Compile Include="CustomRenderers\CustomSwitchRenderer.cs" />
     <Compile Include="Services\AndroidDeepLinkingService.cs" />
+    <Compile Include="Services\SqlConnection.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="..\FHICORC\Configuration\appsettings.local.json">

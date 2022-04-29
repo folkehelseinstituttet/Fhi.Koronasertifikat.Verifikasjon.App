@@ -14,5 +14,6 @@
         public static readonly string BORDER_CONTROL_ON = nameof(BORDER_CONTROL_ON);
         public static readonly string DOMESTIC_CONTROL_ON = nameof(DOMESTIC_CONTROL_ON);
         public static readonly string LAST_TIME_FETCHED_VALUESETS = nameof(LAST_TIME_FETCHED_VALUESETS);
+        public static readonly string LAST_TIME_FETCHED_REVOCATIONS = nameof(LAST_TIME_FETCHED_REVOCATIONS);
     }
 }

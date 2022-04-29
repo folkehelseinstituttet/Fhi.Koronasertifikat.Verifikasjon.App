@@ -69,6 +69,7 @@ namespace FHICORC.Droid
             IoCContainer.RegisterInstance<ICloseButtonService>(this);
             IoCContainer.RegisterInterface<IScannerFactory, AndroidScannerFactory>();
             IoCContainer.RegisterInterface<IDeepLinkingService, AndroidDeepLinkingService>();
+            IoCContainer.RegisterInterface<ISqlConnection, SqlConnection>();
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)

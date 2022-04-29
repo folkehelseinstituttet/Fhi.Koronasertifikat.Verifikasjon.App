@@ -29,6 +29,9 @@
         string ForceUpdateLink { get; }
 
         string EmbeddedTextVersion { get; }
+
         int PublicKeyPeriodicFetchingIntervalInHours { get; }
+
+        int RevocationsFetchingIntervalInHours { get; }
     }
 }
