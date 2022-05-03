@@ -134,6 +134,7 @@
 
   <ItemGroup>
     <PackageReference Include="CsvHelper" Version="27.0.2" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
     <PackageReference Include="TinyIoC" Version="1.3.0" />
     <PackageReference Include="TinyMvvm.TinyIoC" Version="2.4.14" />
     <PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.4.0" />

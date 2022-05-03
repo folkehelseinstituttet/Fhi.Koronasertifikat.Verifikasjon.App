@@ -1,21 +1,21 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using FHICORC.Core.Data;
+using FHICORC.Core.Data.Models;
+using FHICORC.Core.Interfaces;
 using FHICORC.Core.Services.Enum;
 using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Model;
-using FHICORC.Core.Services.Model.Converter;
+using FHICORC.Core.Services.Model.BusinessRules;
 using FHICORC.Core.Services.Model.CoseModel;
 using FHICORC.Core.Services.Model.EuDCCModel;
-using FHICORC.Core.Services.Utils;
-using FHICORC.Core.Services.Model.NO;
-using System.Linq;
-using FHICORC.Core.Interfaces;
 using FHICORC.Core.Services.Model.EuDCCModel._1._3._0;
-using FHICORC.Core.Services.Model.BusinessRules;
+using FHICORC.Core.Services.Model.NO;
+using FHICORC.Core.Services.Utils;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using FHICORC.Core.Data;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace FHICORC.Core.Services.DecoderServices
 {
@@ -27,6 +27,7 @@ namespace FHICORC.Core.Services.DecoderServices
         private readonly IRuleSelectorService _ruleSelectorService;
         private readonly IPreferencesService _preferencesService;
         private readonly IDigitalGreenValueSetTranslatorFactory _digitalGreenValueSetTranslatorFactory;
+        private readonly IRevocationBatchService _revocationBatchService;
 
         private IDgcValueSetTranslator _translator;
 
@@ -36,7 +37,8 @@ namespace FHICORC.Core.Services.DecoderServices
             IRuleSelectorService ruleSelectorService,
             IRuleVerifierService ruleVerifierService,
             IPreferencesService preferencesService,
-            IDigitalGreenValueSetTranslatorFactory digitalGreenValueSetTranslatorFactory)
+            IDigitalGreenValueSetTranslatorFactory digitalGreenValueSetTranslatorFactory,
+            IRevocationBatchService revocationBatchService)
         {
             _certificationService = certificationService;
             _dateTimeService = dateTimeService;
@@ -45,6 +47,7 @@ namespace FHICORC.Core.Services.DecoderServices
             _preferencesService = preferencesService;
             _digitalGreenValueSetTranslatorFactory = digitalGreenValueSetTranslatorFactory;
             _translator = _digitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
+            _revocationBatchService = revocationBatchService;
             _digitalGreenValueSetTranslatorFactory.Init();
         }
 
@@ -82,6 +85,13 @@ namespace FHICORC.Core.Services.DecoderServices
                 if (decodedModel == null)
                 {
                     resultModel.ValidationResult = TokenValidateResult.UnsupportedType;
+                    return resultModel;
+                }
+
+                // Check certificate against DGC revocation list
+                if (await IsCertificateRevoked(decodedModel))
+                {
+                    resultModel.ValidationResult = TokenValidateResult.Invalid;
                     return resultModel;
                 }
 
@@ -211,6 +221,20 @@ namespace FHICORC.Core.Services.DecoderServices
                 if (!validDoseNumber)
                     throw new InvalidDataException("invalid dose number");
             }
+        }
+
+        private async Task<bool> IsCertificateRevoked(ITokenPayload cwt)
+        {
+            // Check certificate against DGC revocation list
+            var certificateId = ((DCCPayload)cwt).DCCPayloadData.DCC.Vaccinations.First().CertificateId;
+            var isoCode = certificateId.Split(':')[3]; // "URN:UVCI:01:Country:Payload:Checksum"
+            var revocationBatches = await _revocationBatchService.GetRevocationBatchesFromCountry(isoCode);
+            return CheckHashInRevocationBatches(revocationBatches, certificateId);
+        }
+
+        private bool CheckHashInRevocationBatches(IEnumerable<RevocationBatch> revocationBatches, string certificateId)
+        {
+            return true;
         }
     }
 }

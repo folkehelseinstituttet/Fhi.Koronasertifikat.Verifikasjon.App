@@ -1,11 +1,11 @@
 ﻿using FHICORC.Configuration;
 using FHICORC.Core.Data;
+using FHICORC.Core.Data.Models;
 using FHICORC.Core.Interfaces;
 using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Utils;
 using FHICORC.Core.WebServices;
 using FHICORC.Data;
-using FHICORC.Models.DataModels;
 using FHICORC.Utils;
 using System;
 using System.Collections.Concurrent;
@@ -36,8 +36,7 @@ namespace FHICORC.Services.DataManagers
             IDateTimeService dateTimeService,
             IRepository<RevocationBatch> revocationBatchRepository,
             IRepository<AppLastFetchingDates> appLastFetchingDatesRepository,
-            IRestClient restClient
-            )
+            IRestClient restClient)
         {
             _dateTimeService = dateTimeService;
             _navigationTaskManager = navigationTaskManager;

@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SQLite;
 
-namespace FHICORC.Models.DataModels
+namespace FHICORC.Core.Data.Models
 {
     public class RevocationBatch : DatabaseEntityBase
     {

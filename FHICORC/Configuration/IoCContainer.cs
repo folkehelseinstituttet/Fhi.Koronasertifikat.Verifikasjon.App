@@ -1,4 +1,5 @@
 ﻿using FHICORC.Core.Data;
+using FHICORC.Core.Data.Models;
 using FHICORC.Core.Interfaces;
 using FHICORC.Core.Services;
 using FHICORC.Core.Services.BusinessRules;
@@ -9,7 +10,6 @@ using FHICORC.Core.Services.Model.EuDCCModel.ValueSet;
 using FHICORC.Core.WebServices;
 using FHICORC.Data;
 using FHICORC.Models;
-using FHICORC.Models.DataModels;
 using FHICORC.Services;
 using FHICORC.Services.DataManagers;
 using FHICORC.Services.Interfaces;

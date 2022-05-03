@@ -1,7 +1,6 @@
-﻿using FHICORC.Core.Data;
-using SQLite;
+﻿using SQLite;
 
-namespace FHICORC.Models.DataModels
+namespace FHICORC.Core.Data.Models
 {
     public class DatabaseEntityBase : IDatabaseEntity
     {

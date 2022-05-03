@@ -1,7 +1,7 @@
 ﻿using SQLite;
 using System;
 
-namespace FHICORC.Models.DataModels
+namespace FHICORC.Core.Data.Models
 {
     public class AppLastFetchingDates : DatabaseEntityBase
     {

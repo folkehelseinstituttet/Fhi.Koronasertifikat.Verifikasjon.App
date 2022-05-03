@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FHICORC.Core.Data
+﻿namespace FHICORC.Core.Data
 {
     public interface IDatabaseEntity
     {
