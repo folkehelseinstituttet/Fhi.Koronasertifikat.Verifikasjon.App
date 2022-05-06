@@ -8,7 +8,7 @@ namespace FHICORC.Core.Services.Model.EuDCCModel._1._3._0
     public class DCCPayload: ITokenPayload
     {
         [JsonProperty("1")]
-        public String Issuer { get; set; }
+        public string Issuer { get; set; }
 
         [JsonProperty("6")]
         [JsonConverter(typeof(EpochDatetimeConverter))]
@@ -29,6 +29,5 @@ namespace FHICORC.Core.Services.Model.EuDCCModel._1._3._0
     {
         [JsonProperty("1")]
         public DCCSchemaV1 DCC;
-
     }
 }

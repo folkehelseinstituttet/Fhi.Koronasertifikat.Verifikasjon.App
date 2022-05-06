@@ -1,5 +1,4 @@
 ﻿using FHICORC.Core.Data;
-using FHICORC.Core.Data.Models;
 using FHICORC.Core.Interfaces;
 using FHICORC.Core.Services.Enum;
 using FHICORC.Core.Services.Interface;
@@ -27,7 +26,7 @@ namespace FHICORC.Core.Services.DecoderServices
         private readonly IRuleSelectorService _ruleSelectorService;
         private readonly IPreferencesService _preferencesService;
         private readonly IDigitalGreenValueSetTranslatorFactory _digitalGreenValueSetTranslatorFactory;
-        private readonly IRevocationBatchService _revocationBatchService;
+        private readonly ICertificateRevocationService _certificateRevocationService;
 
         private IDgcValueSetTranslator _translator;
 
@@ -38,7 +37,7 @@ namespace FHICORC.Core.Services.DecoderServices
             IRuleVerifierService ruleVerifierService,
             IPreferencesService preferencesService,
             IDigitalGreenValueSetTranslatorFactory digitalGreenValueSetTranslatorFactory,
-            IRevocationBatchService revocationBatchService)
+            ICertificateRevocationService certificateRevocationService)
         {
             _certificationService = certificationService;
             _dateTimeService = dateTimeService;
@@ -47,7 +46,7 @@ namespace FHICORC.Core.Services.DecoderServices
             _preferencesService = preferencesService;
             _digitalGreenValueSetTranslatorFactory = digitalGreenValueSetTranslatorFactory;
             _translator = _digitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
-            _revocationBatchService = revocationBatchService;
+            _certificateRevocationService = certificateRevocationService;
             _digitalGreenValueSetTranslatorFactory.Init();
         }
 
@@ -87,11 +86,9 @@ namespace FHICORC.Core.Services.DecoderServices
                     resultModel.ValidationResult = TokenValidateResult.UnsupportedType;
                     return resultModel;
                 }
-
-                // Check certificate against DGC revocation list
-                if (await IsCertificateRevoked(decodedModel))
+                else if (await _certificateRevocationService.IsCertificateRevoked(decodedModel)) // Check certificate against EU DGC revocation list
                 {
-                    resultModel.ValidationResult = TokenValidateResult.Invalid;
+                    resultModel.ValidationResult = TokenValidateResult.Revoked;
                     return resultModel;
                 }
 
@@ -128,8 +125,7 @@ namespace FHICORC.Core.Services.DecoderServices
             {
                 // If any exceptions are throw, assume it invalid
                 return resultModel;
-            }
-            
+            }        
         }
 
         private List<RulesFeedbackData> VerifyRules(DCCPayload dccPayload, bool international)
@@ -221,20 +217,6 @@ namespace FHICORC.Core.Services.DecoderServices
                 if (!validDoseNumber)
                     throw new InvalidDataException("invalid dose number");
             }
-        }
-
-        private async Task<bool> IsCertificateRevoked(ITokenPayload cwt)
-        {
-            // Check certificate against DGC revocation list
-            var certificateId = ((DCCPayload)cwt).DCCPayloadData.DCC.Vaccinations.First().CertificateId;
-            var isoCode = certificateId.Split(':')[3]; // "URN:UVCI:01:Country:Payload:Checksum"
-            var revocationBatches = await _revocationBatchService.GetRevocationBatchesFromCountry(isoCode);
-            return CheckHashInRevocationBatches(revocationBatches, certificateId);
-        }
-
-        private bool CheckHashInRevocationBatches(IEnumerable<RevocationBatch> revocationBatches, string certificateId)
-        {
-            return true;
         }
     }
 }

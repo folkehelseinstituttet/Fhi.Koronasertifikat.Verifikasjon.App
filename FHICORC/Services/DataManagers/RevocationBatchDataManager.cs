@@ -11,7 +11,6 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace FHICORC.Services.DataManagers
@@ -20,7 +19,6 @@ namespace FHICORC.Services.DataManagers
 
     public class RevocationBatchDataManager : IRevocationBatchService
     {
-        private static readonly AutoResetEvent _revocationBatchFetchingCompleteEvent = new AutoResetEvent(false);
         private static int _fecthingGuard;
         private readonly IDateTimeService _dateTimeService;
         private readonly INavigationTaskManager _navigationTaskManager;
@@ -47,52 +45,27 @@ namespace FHICORC.Services.DataManagers
             _cachedRevocationBatches = InitializeRevocationBatchCache();
         }
 
-        public async Task<IEnumerable<RevocationBatch>> GetRevocationBatchesFromCountry(string isoCode)
+
+        public Task<IEnumerable<RevocationBatch>> GetRevocationBatchesFromCountry(string isoCode) => GetRevocationBatchesMatchingCountryFromRevocationBatchesCache(isoCode);
+
+        public Task FetchRevocationBatchesFromBackend(bool forced) => ParallelizationUtils.CreateInterlockedTask(async () =>
         {
-            var revocationBatches = await GetRevocationBatchesMatchingCountryFromRevocationBatchesCache(isoCode).ConfigureAwait(false);
+            var entity = (await _appLastFetchingDatesRepository.GetEntitiesAsync(x => x.Name.Equals(LastFetchNames.RevocationBatch)).ConfigureAwait(false)).FirstOrDefault() ?? new AppLastFetchingDates() { Name = LastFetchNames.RevocationBatch };
+            var lastFetch = entity.LastFetch.GetValueOrDefault();
 
-            if (!revocationBatches.Any())
+            if (forced || lastFetch.Add(_periodicFetchingInterval) <= _dateTimeService.Now)
             {
-                _ = Task.Run(() => FetchRevocationBatchesFromBackend(true)).ConfigureAwait(false);
-                _revocationBatchFetchingCompleteEvent.WaitOne(TimeSpan.FromSeconds(5));
-                return await GetRevocationBatchesMatchingCountryFromRevocationBatchesCache(isoCode).ConfigureAwait(false);
-            }
-            else
-                _ = Task.Run(() => FetchRevocationBatchesFromBackend(false)).ConfigureAwait(false);
+                var response = await _restClient.Get<List<RevocationBatch>>(Urls.URL_GET_REVOCATION_BATCH).ConfigureAwait(false);
 
-            return revocationBatches;
-        }
-
-        private Task FetchRevocationBatchesFromBackend(bool forced) => ParallelizationUtils.CreateInterlockedTask(async () =>
-        {
-            try
-            {
-                var entity = (await _appLastFetchingDatesRepository.GetEntitiesAsync(x => x.Name.Equals(LastFetchNames.RevocationBatch)).ConfigureAwait(false)).FirstOrDefault() ?? new AppLastFetchingDates() { Name = LastFetchNames.RevocationBatch };
-                var lastFetch = entity.LastFetch.GetValueOrDefault();
-
-                if (forced && lastFetch.AddSeconds(30) > _dateTimeService.Now)
-                    return;
-
-                if (forced || lastFetch.Add(_periodicFetchingInterval) <= _dateTimeService.Now)
+                if (response.IsSuccessfull && response.Data != null)
                 {
-                    var response = await _restClient.Get<List<RevocationBatch>>(Urls.URL_GET_REVOCATION_BATCH).ConfigureAwait(false);
-
-                    if (response.IsSuccessfull && response.Data != null)
-                    {
-                        entity.LastFetch = _dateTimeService.Now;
-                        _ = await _appLastFetchingDatesRepository.AddOrUpdateEntityAsync(entity).ConfigureAwait(false);
-                        _ = await _revocationBatchRepository.DropEntityTableAsync().ConfigureAwait(false); // Drop table to cleanup old entries not part of the newest fetch
-                        _ = await _revocationBatchRepository.CreateEntityTableAsync().ConfigureAwait(false); // Due to the table drop a table recreation is needed
-                        _ = await _revocationBatchRepository.AddOrUpdateEntitiesAsync(response.Data).ConfigureAwait(false);
-                        _cachedRevocationBatches = new RevocationBatchCache(() => new ConcurrentBag<RevocationBatch>(response.Data));
-                    }
-                    else
-                        await _navigationTaskManager.HandlerErrors(response, true).ConfigureAwait(false);
+                    entity.LastFetch = _dateTimeService.Now;
+                    _ = await _revocationBatchRepository.AddOrUpdateEntitiesAsync(response.Data).ConfigureAwait(false);
+                    _ = await _appLastFetchingDatesRepository.AddOrUpdateEntityAsync(entity).ConfigureAwait(false);
+                    _cachedRevocationBatches = InitializeRevocationBatchCache();
                 }
-            }
-            finally
-            {
-                _revocationBatchFetchingCompleteEvent.Set();
+                else
+                    await _navigationTaskManager.HandlerErrors(response, true).ConfigureAwait(false);
             }
         }, ref _fecthingGuard);
 

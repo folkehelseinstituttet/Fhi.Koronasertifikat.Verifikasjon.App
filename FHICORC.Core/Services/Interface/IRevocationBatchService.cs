@@ -7,5 +7,6 @@ namespace FHICORC.Core.Services.Interface
     public interface IRevocationBatchService
     {
         Task<IEnumerable<RevocationBatch>> GetRevocationBatchesFromCountry(string isoCode);
+        Task FetchRevocationBatchesFromBackend(bool forced);
     }
 }
