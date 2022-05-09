@@ -12,6 +12,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.RootCheck;
 using Xamarin.Forms.Xaml;
 using System.Threading.Tasks;
+using System.Threading;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace FHICORC
@@ -23,6 +24,7 @@ namespace FHICORC
         private readonly IPreferencesService _preferencesService;
         private readonly ITextService _textService;
         private readonly INavigationService _navigationService;
+        private readonly IRevocationBatchService _revocationBatchDataManager;
         private IPublicKeyService _publicKeyDataManager;
         private IBusinessRulesService _businessRulesDataManager;
         private IValueSetService _valueSetService;
@@ -41,6 +43,7 @@ namespace FHICORC
             _publicKeyDataManager = IoCContainer.Resolve<IPublicKeyService>();
             _businessRulesDataManager = IoCContainer.Resolve<IBusinessRulesService>();
             _valueSetService = IoCContainer.Resolve<IValueSetService>();
+            _revocationBatchDataManager = IoCContainer.Resolve<IRevocationBatchService>();
             ConfigureApp();
         }
 
@@ -104,7 +107,15 @@ namespace FHICORC
             await _valueSetService.FetchAndSaveLatestVersionOfValueSets(lastTimeFetchedValuesets);
             await _businessRulesDataManager.CheckAndFetchBusinessRulesFromBackend();
             await _publicKeyDataManager.CheckAndFetchPublicKeyFromBackend();
+
+            task = Task.Run(async () =>
+            {
+                await _revocationBatchDataManager.FetchRevocationBatchesFromBackend(false);
+                Thread.Sleep(10000);
+            });
         }
+
+        public static Task task;
 
         private void ClearAppData()
         {

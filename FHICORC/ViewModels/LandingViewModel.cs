@@ -122,6 +122,13 @@ namespace FHICORC.ViewModels
         {
             if (_preferencesService.GetUserPreferenceAsBoolean(PreferencesKeys.TERMS_ACCEPTED))
             {
+                if (!App.task.IsCompleted)
+                {
+                    await _navigationService.PushPage(new NativeLoadingPage());
+                    await App.task;
+                    await _navigationService.PopPage();
+                }
+
                 if (_scannerFactoryService.GetAvailableScanner() == null)
                 {
                     await _navigationService.PushPage(new QRScannerPage());

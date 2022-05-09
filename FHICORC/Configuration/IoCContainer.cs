@@ -85,8 +85,9 @@ namespace FHICORC.Configuration
             _container.Register<IValueSetService, ValueSetService>();
             _container.Register<IDigitalGreenValueSetTranslatorFactory, DigitalGreenValueSetTranslatorFactory>();
             _container.Register<IValueSetRepository, ValueSetRepository>();
-            _container.Register<ICertificateRevocationService, CertificateRevocationService>().AsSingleton();           
-
+            _container.Register<ICertificateRevocationService, CertificateRevocationService>().AsSingleton();
+            _container.Register<IRevocationBatchService, RevocationBatchDataManager>().AsSingleton();
+            
             // All IRepository<> type instances need to be registered manually, due to a bug in TinyIoC relating to open types and generics, see: https://github.com/grumpydev/TinyIoC/issues/8
             _container.Register<IRepository<RevocationBatch>, GenericRepositoryProxy<RevocationBatch>>().AsSingleton();
             _container.Register<IRepository<AppLastFetchingDates>, GenericRepositoryProxy<AppLastFetchingDates>>().AsSingleton();    
