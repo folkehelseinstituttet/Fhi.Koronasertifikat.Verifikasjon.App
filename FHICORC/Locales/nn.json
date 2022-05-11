@@ -194,5 +194,6 @@
   "RULES_ENGINE_VERIFY_PASSED_ACCESSIBILITY_TEXT": "{0} av {1}  Innfridd",
   "RULES_ENGINE_VERIFY_OPEN_ACCESSIBILITY_TEXT": "{0} av {1} Ikkje evaluert",
   "RULES_ENGINE_DOMESTIC_FULFILLED": "Reglar innfridd",
-  "RULES_ENGINE_DOMESTIC_NOT_FULFILLED": "Reglar ikkje innfridd"
+  "RULES_ENGINE_DOMESTIC_NOT_FULFILLED": "Reglar ikkje innfridd",
+  "SPINNER_LOADING_TEXT": "Ver venleg og vent medan sida lastar"
 }
