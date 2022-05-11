@@ -4,6 +4,8 @@
              x:Class="FHICORC.Views.NativeLoadingPage"
              BackgroundColor="{StaticResource NavigationHeaderBackgroundColor}"
              NavigationPage.HasNavigationBar="False"
+             xmlns:viewModel="clr-namespace:FHICORC.ViewModels"
+             x:DataType="viewModel:NativeLoadingViewModel"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="False">
     <ContentPage.Content>
