@@ -132,7 +132,6 @@
                     Text="{Binding SecondsRemainingText}"
                     TextColor="{StaticResource BaseTextColor}"
                     AutomationProperties.IsInAccessibleTree="True"
-                    AutomationId="{Binding SecondsRemainingText_Accessibility}"
                     effects:FontSizeLabelEffectParams.MaxFontSize="24.00"
                     effects:FontSizeLabelEffectParams.MinFontSize="12.00">
                     <Label.Effects>
