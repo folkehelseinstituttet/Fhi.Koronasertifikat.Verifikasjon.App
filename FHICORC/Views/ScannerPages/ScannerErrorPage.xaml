@@ -48,24 +48,22 @@
                         <Style TargetType="{x:Type StackLayout}">
                             <Setter Property="BackgroundColor" Value="{StaticResource DefaultErrorBackgroundColor}"></Setter>
                             <Style.Triggers>
-                                <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding Path=TokenValidateResultModel}" Value="{x:Static enums:TokenValidateResult.Expired}">
+                                <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding Path=TokenValidateResultModel.ValidationResult}" Value="{x:Static enums:TokenValidateResult.Expired}">
                                     <Setter Property="BackgroundColor" Value="{StaticResource ExpiredBackgroundColor}" />
                                 </DataTrigger>
-                                <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding Path=TokenValidateResultModel}" Value="{x:Static enums:TokenValidateResult.Invalid}">
+                                <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding Path=TokenValidateResultModel.ValidationResult}" Value="{x:Static enums:TokenValidateResult.Invalid}">
                                     <Setter Property="BackgroundColor" Value="{StaticResource InvalidBackgroundColor}" />
                                 </DataTrigger>
-                                <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding Path=TokenValidateResultModel}" Value="{x:Static enums:TokenValidateResult.UnsupportedType}">
+                                <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding Path=TokenValidateResultModel.ValidationResult}" Value="{x:Static enums:TokenValidateResult.UnsupportedType}">
                                     <Setter Property="BackgroundColor" Value="{StaticResource UnsupportedTypeBackgroundColor}" />
                                 </DataTrigger>
-                                <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding Path=TokenValidateResultModel}" Value="{x:Static enums:TokenValidateResult.Revoked}">
+                                <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding Path=TokenValidateResultModel.ValidationResult}" Value="{x:Static enums:TokenValidateResult.Revoked}">
                                     <Setter Property="BackgroundColor" Value="{StaticResource RevokedBackgroundColor}" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
                     </StackLayout.Style>
                 </StackLayout>
-
-
             </StackLayout>
 
             <!--  Title and Content Text for the error page -->
@@ -84,7 +82,7 @@
                                 <Style TargetType="{x:Type Image}">
                                     <Setter Property="Source" Value="{StaticResource ErrorCheckLayout}"></Setter>
                                     <Style.Triggers>
-                                        <DataTrigger TargetType="{x:Type Image}" Binding="{Binding Path=TokenValidateResultModel}" Value="{x:Static enums:TokenValidateResult.Expired}">
+                                        <DataTrigger TargetType="{x:Type Image}" Binding="{Binding Path=TokenValidateResultModel.ValidationResult}" Value="{x:Static enums:TokenValidateResult.Expired}">
                                             <Setter Property="Source" Value="{StaticResource HourGlass}" />
                                         </DataTrigger>
                                     </Style.Triggers>
