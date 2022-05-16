@@ -23,43 +23,47 @@
             </Grid.RowDefinitions>
 
             <!--  Repeating text for Expired, Invalid and Revoked page  -->
-            <StackLayout Margin="0,20,0,0" Padding="0" Spacing="0" Grid.Row="0" Orientation="Vertical">
-                <StackLayout.Style>
-                    <Style TargetType="{x:Type StackLayout}">
-                        <Setter Property="BackgroundColor" Value="{StaticResource DefaultErrorBackgroundColor}"></Setter>
-                        <Style.Triggers>
-                            <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding Path=TokenValidateResultModel}" Value="{x:Static enums:TokenValidateResult.Expired}">
-                                <Setter Property="BackgroundColor" Value="{StaticResource ExpiredBackgroundColor}" />
-                            </DataTrigger>
-                            <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding Path=TokenValidateResultModel}" Value="{x:Static enums:TokenValidateResult.Invalid}">
-                                <Setter Property="BackgroundColor" Value="{StaticResource InvalidBackgroundColor}" />
-                            </DataTrigger>
-                            <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding Path=TokenValidateResultModel}" Value="{x:Static enums:TokenValidateResult.UnsupportedType}">
-                                <Setter Property="BackgroundColor" Value="{StaticResource UnsupportedTypeBackgroundColor}" />
-                            </DataTrigger>
-                            <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding Path=TokenValidateResultModel}" Value="{x:Static enums:TokenValidateResult.Revoked}">
-                                <Setter Property="BackgroundColor" Value="{StaticResource RevokedBackgroundColor}" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </StackLayout.Style>
+            <StackLayout Padding="0" Spacing="0" Grid.Row="0" Orientation="Vertical">
                 <elements:NavigationHeader
-                CenterLabelText="{Binding PageTitle}"
-                RightButtonAccessibilityText="{Binding Strings[CLOSE_BUTTON]}"
-                RightButtonCommand="{Binding ScanAgainCommand}"
-                RightButtonImageSource="{StaticResource XMark}" />
-                <Label
-                    Margin="-50,0"
-                    Padding="0,2"
-                    VerticalTextAlignment="Center"
-                    MaxLines="1"
-                    LineBreakMode="NoWrap"
-                    Style="{StaticResource SecondaryContentBoldStyle}"
-                    TextColor="{StaticResource BaseTextColor}"
-                    Text="{Binding RepeatedText}"
-                    FontSize="20"
-                    AutomationProperties.IsInAccessibleTree="False">
-                </Label>
+                    CenterLabelText="{Binding PageTitle}"
+                    RightButtonAccessibilityText="{Binding Strings[CLOSE_BUTTON]}"
+                    RightButtonCommand="{Binding ScanAgainCommand}"
+                    RightButtonImageSource="{StaticResource XMark}" />
+
+                <StackLayout Margin="0,20,0,0" Padding="0,9,0,9" Spacing="0">
+                    <Label
+                        Margin="-50,0"
+                        Padding="0,2"
+                        VerticalTextAlignment="Center"
+                        MaxLines="1"
+                        LineBreakMode="NoWrap"
+                        Style="{StaticResource SecondaryContentBoldStyle}"
+                        TextColor="{StaticResource BaseTextColor}"
+                        Text="{Binding RepeatedText}"
+                        FontSize="20"
+                        AutomationProperties.IsInAccessibleTree="False">
+                    </Label>
+
+                    <StackLayout.Style>
+                        <Style TargetType="{x:Type StackLayout}">
+                            <Setter Property="BackgroundColor" Value="{StaticResource DefaultErrorBackgroundColor}"></Setter>
+                            <Style.Triggers>
+                                <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding Path=TokenValidateResultModel.ValidationResult}" Value="{x:Static enums:TokenValidateResult.Expired}">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource ExpiredBackgroundColor}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding Path=TokenValidateResultModel.ValidationResult}" Value="{x:Static enums:TokenValidateResult.Invalid}">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource InvalidBackgroundColor}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding Path=TokenValidateResultModel.ValidationResult}" Value="{x:Static enums:TokenValidateResult.UnsupportedType}">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource UnsupportedTypeBackgroundColor}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding Path=TokenValidateResultModel.ValidationResult}" Value="{x:Static enums:TokenValidateResult.Revoked}">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource RevokedBackgroundColor}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackLayout.Style>
+                </StackLayout>
             </StackLayout>
 
             <!--  Title and Content Text for the error page -->
@@ -70,36 +74,40 @@
                     VerticalOptions="CenterAndExpand"
                     Padding="0"
                     Margin="43,0">
-                    <Image Source="{StaticResource HourGlass}">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Source" Value="{StaticResource ErrorCheckLayout}"></Setter>
-                                <Style.Triggers>
-                                    <DataTrigger TargetType="{x:Type Image}" Binding="{Binding Path=TokenValidateResultModel}" Value="{x:Static enums:TokenValidateResult.Expired}">
-                                        <Setter Property="Source" Value="{StaticResource HourGlass}" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Label
+                    <StackLayout
+                        Orientation="Vertical"
+                        Spacing="20">
+                        <Image>
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Setter Property="Source" Value="{StaticResource ErrorCheckLayout}"></Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger TargetType="{x:Type Image}" Binding="{Binding Path=TokenValidateResultModel.ValidationResult}" Value="{x:Static enums:TokenValidateResult.Expired}">
+                                            <Setter Property="Source" Value="{StaticResource HourGlass}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Label
                         Style="{StaticResource BigTitleStyle}"
                         Text="{Binding PageTitle}"
                         HorizontalTextAlignment="Center"
                         effects:FontSizeLabelEffectParams.MaxFontSize="32.00">
-                        <Label.Effects>
-                            <effects:FontSizeLabelEffect/>
-                        </Label.Effects>
-                    </Label>
-                    <Label
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                        <Label
                         Style="{StaticResource ContentStyle}"
                         Text="{Binding ContentText}"
                         HorizontalTextAlignment="Center"
                         effects:FontSizeLabelEffectParams.MaxFontSize="26.00">
-                        <Label.Effects>
-                            <effects:FontSizeLabelEffect/>
-                        </Label.Effects>
-                    </Label>
+                            <Label.Effects>
+                                <effects:FontSizeLabelEffect/>
+                            </Label.Effects>
+                        </Label>
+                    </StackLayout>
                 </StackLayout>
             </ScrollView>
 
