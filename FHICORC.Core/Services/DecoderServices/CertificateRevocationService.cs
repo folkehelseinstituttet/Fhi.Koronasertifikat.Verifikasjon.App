@@ -13,15 +13,15 @@ namespace FHICORC.Core.Services.DecoderServices
     {
         private static readonly Dictionary<string, Func<string, string>> _customGetCertificateIdentifierHashFunctionDirectory = new Dictionary<string, Func<string, string>>()
         {
-            { "BE", (x) => x.Split('#')[0] },                   // "01CountryOpaqueUniqueString#Checksum"                                   Example: "01BEVLMP7BEIN6GQWZTAKP6OBBAN#J"
-            { "CY", (x) => x.Split('#')[0].Split(':')[2] },     // "dgci:V1:Country:OpaqueUniqueString#Checksum"                            Example: "dgci:V1:CY:GRHC8O6ECPWMUM16D3WAXOPN4:89"
-            { "DE", (x) => x.Split('#')[0].Split(':')[2] },     // "URN:UVCI:01Country/IssuingEntity/OpaqueUniqueString#Checksum"           Example: "URN:UVCI:01DE/IZ12345A/5CWLU12RNOB9RXSEOP6FG8#W",
-            { "ES", (x) => x.Split('#')[0].Split(':')[2] },     // "URN:UVCI:01:Country:OpaqueUniqueString#Checksum"                        Example: "01ES07T895AA7BF69D99C77DB96B#E"
-            { "FR", (x) => x.Split('#')[0].Split(':')[2] },     // "URN:UVCI:01:Country:OpaqueUniqueString#Checksum"                        Example: "dgci:V1:FR:C51AOQW7CQMFW7WLIWVGADQY6:70"
-            { "IT", (x) => x.Split('#')[0].Split(':')[2] },     // "URN:UVCI:01:Country:OpaqueUniqueString#Checksum"                        Example: "01ITE7300E1AB2A84C719004F103DCB1F70A#6"
-            { "LU", (x) => x.Split('#')[0].Split(':')[2] },     // "URN:UVCI:01:Country:OpaqueUniqueString#Checksum"                        Example: "01/LU/1GJBHZ9HOOZ8W#3K",
-            { "PT", (x) => x.Split('#')[0].Split(':')[2] },     // "URN:UVCI:01:Country:OpaqueUniqueString#Checksum"                        Example: "urn:uvci:01/PT/SPMS/TRC01234567890123456#1",
-            { "EE", (x) => x.Split('#')[0].Split(':')[2] }      // "URN:UVCI:01:Country:OpaqueUniqueString#Checksum"                        Example: "01/EE/TIS/9C0KAVIIYH7CZAB02O#O"
+            { "BE", (x) => x.Split('#')[0] },                       // "01CountryOpaqueUniqueString#Checksum"
+            { "CY", (x) => x.Split('#')[0].Split(':')[3] },         // "dgci:V1:Country:OpaqueUniqueString#Checksum"
+            { "DE", (x) => x.Split('#')[0].Split(':', '/')[4] },    // "URN:UVCI:01Country/IssuingEntity/OpaqueUniqueString#Checksum"
+            { "ES", (x) => x.Split('#')[0] },                       // "01CountryOpaqueUniqueString#Checksum"
+            { "FR", (x) => x.Split('#')[0].Split(':')[3] },         // "dgci:V1:Country:OpaqueUniqueString#Checksum"
+            { "IT", (x) => x.Split('#')[0] },                       // "01CountryOpaqueUniqueString#Checksum"
+            { "LU", (x) => x.Split('#')[0].Split('/')[2] },         // "01/Country/OpaqueUniqueString#Checksum"
+            { "PT", (x) => x.Split('#')[0].Split(':', '/')[5] },    // "urn:uvci:01/Country/SPMS/OpaqueUniqueString#Checksum"
+            { "EE", (x) => x.Split('#')[0].Split('/')[3] }          // "01/Country/TIS/OpaqueUniqueString#Checksum"
         };
 
         private readonly IRevocationBatchService _revocationBatchService;
