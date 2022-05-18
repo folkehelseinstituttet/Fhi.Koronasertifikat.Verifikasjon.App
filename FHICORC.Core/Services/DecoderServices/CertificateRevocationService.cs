@@ -1,5 +1,6 @@
 ﻿using FHICORC.Core.Data.Models;
 using FHICORC.Core.Services.Interface;
+using FHICORC.Core.Services.Model;
 using FHICORC.Core.Services.Model.EuDCCModel._1._3._0;
 using FHICORC.Core.Services.Utils;
 using System;
@@ -25,8 +26,34 @@ namespace FHICORC.Core.Services.DecoderServices
         };
 
         private readonly IRevocationBatchService _revocationBatchService;
+        private readonly BloomFilterBuckets _bloomFilterBuckets;
 
-        public CertificateRevocationService(IRevocationBatchService revocationBatchService) => _revocationBatchService = revocationBatchService;
+        public CertificateRevocationService(IRevocationBatchService revocationBatchService)
+        {
+            _revocationBatchService = revocationBatchService;
+            _bloomFilterBuckets = FillBloomBuckets();
+        }
+
+        public static BloomFilterBuckets FillBloomBuckets()
+        {
+            var buckets = new List<BucketItem>()
+            {
+                new BucketItem(){ BucketId = 0, BitVectorLength_m = 240, MaxValue = 5, NumberOfHashFunctions_k = 34},
+                new BucketItem(){ BucketId = 1, BitVectorLength_m = 480, MaxValue = 10, NumberOfHashFunctions_k = 34},
+                new BucketItem(){ BucketId = 2, BitVectorLength_m = 1390, MaxValue = 29, NumberOfHashFunctions_k = 34},
+                new BucketItem(){ BucketId = 3, BitVectorLength_m = 3307, MaxValue = 69, NumberOfHashFunctions_k = 34},
+                new BucketItem(){ BucketId = 4, BitVectorLength_m = 6566, MaxValue = 137, NumberOfHashFunctions_k = 34},
+                new BucketItem(){ BucketId = 5, BitVectorLength_m = 11215, MaxValue = 234, NumberOfHashFunctions_k = 34},
+                new BucketItem(){ BucketId = 6, BitVectorLength_m = 17589, MaxValue = 367, NumberOfHashFunctions_k = 34},
+                new BucketItem(){ BucketId = 7, BitVectorLength_m = 25688, MaxValue = 536, NumberOfHashFunctions_k = 34},
+                new BucketItem(){ BucketId = 8, BitVectorLength_m = 35801, MaxValue = 747, NumberOfHashFunctions_k = 34},
+                new BucketItem(){ BucketId = 9, BitVectorLength_m = 47926, MaxValue = 1000, NumberOfHashFunctions_k = 34},
+
+            };
+
+            return new BloomFilterBuckets() { Buckets = buckets };
+        }
+
 
         public async Task<bool> IsCertificateRevoked(ITokenPayload token)
         {
@@ -75,17 +102,21 @@ namespace FHICORC.Core.Services.DecoderServices
 
         private bool CheckHashInRevocationBatches(IEnumerable<RevocationBatch> revocationBatches, string certificateIdentifierHash)
         {
-            int m = 0;
-            int k = 0;
 
-            foreach (var batch in revocationBatches)
-            {
-                // If any hash functions hits a bit with a zero, go to next batch (contiune)
+            //var result = MobileUtils.ContainsCertificateFilterMobile(certificateIdentifierHash, revocationBatches, _bloomFilterBuckets);
+            //return result;
+
+            //int m = 0;
+            //int k = 0;
+
+            //foreach (var batch in revocationBatches)
+            //{
+            //    // If any hash functions hits a bit with a zero, go to next batch (contiune)
 
 
-                if (batch.Bits.Contains(certificateIdentifierHash, m, k))
-                    return true;
-            }
+            //    if (batch.Bits.Contains(certificateIdentifierHash, m, k))
+            //        return true;
+            //}
 
             return false;
         }

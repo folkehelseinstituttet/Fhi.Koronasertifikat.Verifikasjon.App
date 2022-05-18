@@ -13,6 +13,9 @@ namespace FHICORC.Core.Data.Models
         public string Country { get; set; }
 
         [NotNull]
-        public BitArray Bits { get; set; }     
+        public BitArray Bits { get; set; }
+
+        [NotNull, JsonProperty("bucketId")]
+        public int BucketId { get; set; }
     }
 }

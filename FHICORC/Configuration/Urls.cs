@@ -12,6 +12,6 @@ namespace FHICORC.Configuration
         public static string URL_GET_TEXTS => $"{_baseUrl}{_apiVersion}/text";
         public static string URL_GET_BUSINESS_RULES => $"{_baseUrl}{_apiVersion}/rule";
         public static string URL_GET_VALUESETS => $"{_baseUrl}{_apiVersion}/valueset";
-        public static string URL_GET_REVOCATION_BATCH => $"{_baseUrl}{_apiVersion}/RevocationBatch";
+        public static string URL_GET_REVOCATION_BATCH => $"{_baseUrl}{_apiVersion}/Revocation/download";
     }
 }
