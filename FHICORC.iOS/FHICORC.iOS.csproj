@@ -543,52 +543,144 @@
     <ImageAsset Include="AppAssets.xcassets\certificate_title_blue.imageset\certificate_title_blue%403x.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="AppAssets.xcassets\menu_help_icon.imageset\Contents.json" />
-    <ImageAsset Include="AppAssets.xcassets\menu_help_icon.imageset\menu_helpsupport.png" />
-    <ImageAsset Include="AppAssets.xcassets\menu_help_icon.imageset\menu_helpsupport%402x.png" />
-    <ImageAsset Include="AppAssets.xcassets\menu_help_icon.imageset\menu_helpsupport%403x.png" />
-    <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\Contents.json" />
-    <ImageAsset Include="AppAssets.xcassets\close_icon_blue.imageset\Contents.json" />
-    <ImageAsset Include="AppAssets.xcassets\close_icon_blue.imageset\close_blue.png" />
-    <ImageAsset Include="AppAssets.xcassets\close_icon_blue.imageset\close_blue%402x.png" />
-    <ImageAsset Include="AppAssets.xcassets\close_icon_blue.imageset\close_blue%403x.png" />
-    <ImageAsset Include="AppAssets.xcassets\error_maintenance.imageset\V2-3.png" />
-    <ImageAsset Include="AppAssets.xcassets\error_maintenance.imageset\V2.png" />
-    <ImageAsset Include="AppAssets.xcassets\error_maintenance.imageset\V2-1.png" />
-    <ImageAsset Include="AppAssets.xcassets\error_layout.imageset\White.png" />
-    <ImageAsset Include="AppAssets.xcassets\error_layout.imageset\White-1.png" />
-    <ImageAsset Include="AppAssets.xcassets\error_layout.imageset\White-2.png" />
-    <ImageAsset Include="AppAssets.xcassets\hourGlass.imageset\V2.pdf" />
-    <ImageAsset Include="AppAssets.xcassets\flashlight_off.imageset\Contents.json" />
-    <ImageAsset Include="AppAssets.xcassets\flashlight_on.imageset\Contents.json" />
-    <ImageAsset Include="AppAssets.xcassets\flashlight_off.imageset\flashlight_off%403x.png" />
-    <ImageAsset Include="AppAssets.xcassets\flashlight_off.imageset\flashlight_off%402x.png" />
-    <ImageAsset Include="AppAssets.xcassets\flashlight_off.imageset\flashlight_off.png" />
-    <ImageAsset Include="AppAssets.xcassets\flashlight_on.imageset\flashlight_on%403x.png" />
-    <ImageAsset Include="AppAssets.xcassets\flashlight_on.imageset\flashlight_on%402x.png" />
-    <ImageAsset Include="AppAssets.xcassets\flashlight_on.imageset\flashlight_on.png" />
-    <ImageAsset Include="AppAssets.xcassets\error_lock.imageset\error_lock.png" />
-    <ImageAsset Include="AppAssets.xcassets\error_lock.imageset\error_lock%402x.png" />
-    <ImageAsset Include="AppAssets.xcassets\error_lock.imageset\error_lock%403x.png" />
-    <ImageAsset Include="AppAssets.xcassets\splash_logo.imageset\Contents.json" />
-    <ImageAsset Include="AppAssets.xcassets\splash_logo.imageset\splash_logo.png" />
-    <ImageAsset Include="AppAssets.xcassets\splash_logo.imageset\splash_logo%402x.png" />
-    <ImageAsset Include="AppAssets.xcassets\splash_logo.imageset\splash_logo%403x.png" />
-    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\splash_image.png" />
-    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\splash_image%402x.png" />
-    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\splash_image%403x.png" />
-    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery.png" />
-    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery%402x.png" />
-    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery%403x.png" />
-    <ImageAsset Include="AppAssets.xcassets\test.imageset\test.png" />
-    <ImageAsset Include="AppAssets.xcassets\test.imageset\test%402x.png" />
-    <ImageAsset Include="AppAssets.xcassets\test.imageset\test%403x.png" />
-    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine.png" />
-    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine%402x.png" />
-    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine%403x.png" />
-    <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\landingpage_help_icon.png" />
-    <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\landingpage_help_icon_2.png" />
-    <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\landingpage_help_icon_3.png" />
+    <ImageAsset Include="AppAssets.xcassets\menu_help_icon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\menu_help_icon.imageset\menu_helpsupport.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\menu_help_icon.imageset\menu_helpsupport%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\menu_help_icon.imageset\menu_helpsupport%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\close_icon_blue.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\close_icon_blue.imageset\close_blue.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\close_icon_blue.imageset\close_blue%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\close_icon_blue.imageset\close_blue%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_maintenance.imageset\V2-3.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_maintenance.imageset\V2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_maintenance.imageset\V2-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_layout.imageset\White.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_layout.imageset\White-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_layout.imageset\White-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\hourGlass.imageset\V2.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\flashlight_off.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\flashlight_on.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\flashlight_off.imageset\flashlight_off%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\flashlight_off.imageset\flashlight_off%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\flashlight_off.imageset\flashlight_off.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\flashlight_on.imageset\flashlight_on%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\flashlight_on.imageset\flashlight_on%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\flashlight_on.imageset\flashlight_on.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_lock.imageset\error_lock.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_lock.imageset\error_lock%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\error_lock.imageset\error_lock%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\splash_logo.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\splash_logo.imageset\splash_logo.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\splash_logo.imageset\splash_logo%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\splash_logo.imageset\splash_logo%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\splash_image.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\splash_image%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\splash_image.imageset\splash_image%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\recovery.imageset\recovery%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\test.imageset\test.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\test.imageset\test%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\test.imageset\test%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\vaccine.imageset\vaccine%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\landingpage_help_icon.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\landingpage_help_icon_2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="AppAssets.xcassets\landingpage_help_icon.imageset\landingpage_help_icon_3.png">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
