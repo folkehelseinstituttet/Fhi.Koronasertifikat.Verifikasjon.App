@@ -110,7 +110,7 @@ namespace FHICORC
 
             task = Task.Run(async () =>
             {
-                await _revocationBatchDataManager.FetchRevocationBatchesFromBackend(false);
+                await _revocationBatchDataManager.FetchRevocationBatchesFromBackend(true);
                 Thread.Sleep(10000);
             });
         }

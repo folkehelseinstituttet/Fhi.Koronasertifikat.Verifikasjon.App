@@ -376,5 +376,21 @@ namespace FHICORC.Core.WebServices
                 HttpClient.DefaultRequestHeaders.Remove("LastFetched");
             }
         }
+
+        public void RegisterCustomRequestHeaders(params (string Key, string Value)[] headers)
+        {
+
+            foreach (var header in headers)
+
+            {
+                if (HttpClient.DefaultRequestHeaders.Contains(header.Key))
+                {
+                    HttpClient.DefaultRequestHeaders.Remove(header.Key);
+                }
+
+                HttpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
+
+            }
+        }
     }
 }

@@ -86,11 +86,11 @@ namespace FHICORC.Core.Services.DecoderServices
                     resultModel.ValidationResult = TokenValidateResult.UnsupportedType;
                     return resultModel;
                 }
-                else if (await _certificateRevocationService.IsCertificateRevoked(decodedModel)) // Check certificate against EU DGC revocation list
-                {
-                    resultModel.ValidationResult = TokenValidateResult.Revoked;
-                    return resultModel;
-                }
+                //else if (await _certificateRevocationService.IsCertificateRevoked(decodedModel)) // Check certificate against EU DGC revocation list
+                //{
+                //    resultModel.ValidationResult = TokenValidateResult.Revoked;
+                //    return resultModel;
+                //}
 
                 DateTime? expiration = decodedModel.ExpiredDateTime();
                 DateTime? issueAt = decodedModel.IssueDateTime();
