@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using SQLite;
-using System.Collections;
 
 namespace FHICORC.Core.Data.Models
 {
@@ -12,10 +11,10 @@ namespace FHICORC.Core.Data.Models
         [NotNull, MaxLength(512), JsonProperty("country")]
         public string Country { get; set; }
 
-        [NotNull]
-        public BitArray Bits { get; set; }
+        [NotNull, JsonProperty("superFilter")]
+        public byte[] Bits { get; set; }
 
-        [NotNull, JsonProperty("bucketId")]
+        [NotNull, JsonProperty("bucket")]
         public int BucketId { get; set; }
     }
 }

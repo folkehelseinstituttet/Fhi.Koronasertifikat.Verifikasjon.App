@@ -27,7 +27,8 @@ namespace FHICORC.Core.Services.Utils
             foreach (var r in revocationBatches)
             {
                 //var bucketId = BucketIdBasedOnBitLength(r.Bits.Length, bloomFilterBuckets);
-                var bitVector = r.Bits; //new BitArray(r.SuperFilter);
+                //var bitVector = r.Bits;
+                var bitVector = new BitArray(r.Bits);
                 var contains = bitVector.Contains(allHashFunctionIndicies_k[r.BucketId]);
 
                 if (contains)
