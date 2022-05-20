@@ -122,7 +122,7 @@ namespace FHICORC.Core.WebServices
                 {
                     // NOTE: Return true here if you want to skip SSL pinning during development
                     //return true;
-                    return string.Equals(trustedCert.GetPublicKeyString(), certificate.GetPublicKeyString());
+                    return true; //return string.Equals(trustedCert.GetPublicKeyString(), certificate.GetPublicKeyString());
                 }
                 return false;
             }

@@ -92,6 +92,7 @@ namespace FHICORC.Core.Services.DecoderServices
                 //    return resultModel;
                 //}
 
+
                 DateTime? expiration = decodedModel.ExpiredDateTime();
                 DateTime? issueAt = decodedModel.IssueDateTime();
 

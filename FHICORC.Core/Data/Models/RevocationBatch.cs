@@ -14,7 +14,7 @@ namespace FHICORC.Core.Data.Models
         [NotNull, JsonProperty("superFilter")]
         public byte[] Bits { get; set; }
 
-        [NotNull, JsonProperty("bucket")]
+        [NotNull, JsonProperty("bucketId")]
         public int BucketId { get; set; }
     }
 }
