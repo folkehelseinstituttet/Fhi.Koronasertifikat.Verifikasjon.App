@@ -71,7 +71,7 @@ namespace FHICORC.Services.DataManagers
 
         private RevocationBatchCache InitializeRevocationBatchCache() => new RevocationBatchCache(async () => new ConcurrentBag<RevocationBatch>(await _revocationBatchRepository.GetEntitiesAsync(_ => true).ConfigureAwait(false)));
 
-        private async Task<IEnumerable<RevocationBatch>> GetRevocationBatchesMatchingCountryFromRevocationBatchesCache(string isoCode) => (await _cachedRevocationBatches.Value.ConfigureAwait(false)).Where(x => x.Country.Equals(isoCode));
+        private async Task<IEnumerable<RevocationBatch>> GetRevocationBatchesMatchingCountryFromRevocationBatchesCache(string isoCode) => (await _cachedRevocationBatches.Value.ConfigureAwait(false)).Where(x => x.CountryISO3166.Equals(isoCode));
 
     }
 }

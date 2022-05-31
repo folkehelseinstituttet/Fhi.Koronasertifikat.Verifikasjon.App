@@ -4,6 +4,6 @@ namespace FHICORC.Core.Services.Interface
 {
     public interface ICertificateRevocationService
     {
-        Task<bool> IsCertificateRevoked(ITokenPayload token);
+        Task<bool> IsCertificateRevoked(ITokenPayload token, string signatureBase64EncodedHash);
     }
 }

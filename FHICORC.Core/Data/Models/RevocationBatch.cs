@@ -1,20 +1,24 @@
-﻿using Newtonsoft.Json;
+﻿using FHICORC.Core.Services.Enum;
+using Newtonsoft.Json;
 using SQLite;
 
 namespace FHICORC.Core.Data.Models
 {
     public class RevocationBatch : DatabaseEntityBase
     {
-        [Indexed, NotNull, MaxLength(16), JsonProperty("batchId")]
+        [Indexed, NotNull, MaxLength(16), JsonProperty("Id")]
         public string BatchId { get; set; }
 
-        [NotNull, MaxLength(512), JsonProperty("country")]
-        public string Country { get; set; }
+        [NotNull, MaxLength(512), JsonProperty("countryISO3166")]
+        public string CountryISO3166 { get; set; }
 
-        [NotNull, JsonProperty("superFilter")]
-        public byte[] Bits { get; set; }
+        [NotNull, JsonProperty("bloomFilter")]
+        public byte[] BloomFilter { get; set; }
 
-        [NotNull, JsonProperty("bucketId")]
-        public int BucketId { get; set; }
+        [NotNull, JsonProperty("bucketType")]
+        public int BucketType { get; set; }
+
+        [NotNull]
+        public HashType HashMethod { get; set; }
     }
 }

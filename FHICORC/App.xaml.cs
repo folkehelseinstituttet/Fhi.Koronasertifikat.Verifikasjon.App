@@ -106,13 +106,15 @@ namespace FHICORC
             long lastTimeFetchedValuesets = _preferencesService.GetUserPreferenceAsLong(PreferencesKeys.LAST_TIME_FETCHED_VALUESETS);
             await _valueSetService.FetchAndSaveLatestVersionOfValueSets(lastTimeFetchedValuesets);
             await _businessRulesDataManager.CheckAndFetchBusinessRulesFromBackend();
-            await _publicKeyDataManager.CheckAndFetchPublicKeyFromBackend();
+            //await _publicKeyDataManager.CheckAndFetchPublicKeyFromBackend();
 
-            task = Task.Run(async () =>
-            {
-                await _revocationBatchDataManager.FetchRevocationBatchesFromBackend(true);
-                Thread.Sleep(10000);
-            });
+            await _revocationBatchDataManager.FetchRevocationBatchesFromBackend(true);
+
+            //task = Task.Run(async () =>
+            //{
+            //    await _revocationBatchDataManager.FetchRevocationBatchesFromBackend(true);
+            //    //Thread.Sleep(10000);
+            //});
         }
 
         public static Task task;
@@ -137,6 +139,14 @@ namespace FHICORC
             base.OnResume();
             await FetchRemoteData();
             PerformRootCheck();
+
+
+            //Singelton service, check if task completed send message, remove from schedular
+
+            //MessagingCenter.Send<object>(this, MessagingCenterKeys.APP_STARTED);
+
+            //Force create LandingViewModel, add this task subscribe into the constructor
+            //MessagingCenter.Subscribe<object>(this, MessagingCenterKeys.SCREENSHOT_TAKEN, async (sender) => await _screenshotDetectionService.ShowDialog(_settingsService.ScreenshotProtectionLockDurationInSeconds));
         }
 
         private void ConfigureApp()

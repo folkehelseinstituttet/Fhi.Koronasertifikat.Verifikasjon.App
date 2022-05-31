@@ -9,36 +9,28 @@ namespace FHICORC.Core.Services.Utils
 {
     public static class MobileUtils
     {
-        public static bool ContainsCertificateFilterMobile(string certificateIdentifierHash, IEnumerable<RevocationBatch> revocationBatches, BloomFilterBuckets bloomFilterBuckets)
+        public static bool ContainsCertificateFilterMobile(string certificateIdentifierHash, string signatureHash, IEnumerable<RevocationBatch> revocationBatches, BloomFilterBuckets bloomFilterBuckets)
         {
-            //BloomFilterBuckets bloomFilterBuckets = FillBloomBuckets();
-
-            var allHashFunctionIndicies_k = CalculateAllIndicies(certificateIdentifierHash, bloomFilterBuckets);
-            return CheckFilterByCountry(allHashFunctionIndicies_k, revocationBatches, bloomFilterBuckets);
+            var allHashFunctionCertificateIdentifierIndicies_k = CalculateAllIndicies(certificateIdentifierHash, bloomFilterBuckets);
+            var allHashFunctionSignatureIndicies_k = CalculateAllIndicies(signatureHash, bloomFilterBuckets);
+            return CheckFilterByCountry(allHashFunctionCertificateIdentifierIndicies_k, allHashFunctionSignatureIndicies_k, revocationBatches, bloomFilterBuckets);
         }
 
 
-        public static bool CheckFilterByCountry(List<int[]> allHashFunctionIndicies_k, IEnumerable<RevocationBatch> revocationBatches, BloomFilterBuckets bloomFilterBuckets)
+        public static bool CheckFilterByCountry(List<int[]> allHashFunctionCertificateIdentifierIndicies_k, List<int[]> allHashFunctionSignatureIndicies_k, IEnumerable<RevocationBatch> revocationBatches, BloomFilterBuckets bloomFilterBuckets)
         {
-
-            //var superFilter = _coronapassContext.RevocationSuperFilter
-            //    .Where(s => s.SuperCountry.Equals(country));
-
             foreach (var r in revocationBatches)
             {
-                //var bucketId = BucketIdBasedOnBitLength(r.Bits.Length, bloomFilterBuckets);
-                //var bitVector = r.Bits;
-                var bitVector = new BitArray(r.Bits);
-                var contains = bitVector.Contains(allHashFunctionIndicies_k[r.BucketId]);
+                var bitVector = new BitArray(r.BloomFilter);
+                var containsCertificateIdentfier = bitVector.Contains(allHashFunctionCertificateIdentifierIndicies_k[r.BucketType]);
+                var containsSignature = bitVector.Contains(allHashFunctionSignatureIndicies_k[r.BucketType]);
 
-                if (contains)
+                if (containsCertificateIdentfier || containsSignature)
                     return true;
             }
 
             return false;
         }
-
-
 
 
         public static bool Contains(this BitArray filter, int[] indicies)
@@ -70,7 +62,6 @@ namespace FHICORC.Core.Services.Utils
 
             return allHashFunctionIndicies_k;
         }
-
 
     }
 }

@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace FHICORC.Core.Services.DecoderServices
 {
@@ -55,14 +57,14 @@ namespace FHICORC.Core.Services.DecoderServices
         }
 
 
-        public async Task<bool> IsCertificateRevoked(ITokenPayload token)
+        public async Task<bool> IsCertificateRevoked(ITokenPayload token, string signatureBase64EncodedHash)
         {
             if(token is DCCPayload payload)
             {
-                (var certificateIdentifier, var isoCode) = GetCertificateIdentifierAndISOCodeFromTokenPayload(payload);
+                (var isoCode, var certificateIdentifier) = GetCertificateIdentifierAndISOCodeFromTokenPayload(payload);
                 var certificateIdentifierHash = GetCertificateIdentifierHashFromCertificateIdentifier(certificateIdentifier, isoCode);
                 var revocationBatches = await _revocationBatchService.GetRevocationBatchesFromCountry(isoCode);
-                return CheckHashInRevocationBatches(revocationBatches, certificateIdentifierHash);
+                return CheckHashInRevocationBatches(revocationBatches, certificateIdentifierHash, signatureBase64EncodedHash);
             }
             return false;
         }
@@ -71,11 +73,11 @@ namespace FHICORC.Core.Services.DecoderServices
         {
             var obj = payload.DCCPayloadData.DCC;
 
-            if (obj?.Vaccinations.Any() ?? false)
+            if (obj?.Vaccinations?.Any() ?? false)
                 return (obj.Vaccinations.First().CountryOfVaccination, obj.Vaccinations.First().CertificateId);
-            else if (obj?.Tests.Any() ?? false)
+            else if (obj?.Tests?.Any() ?? false)
                 return (obj.Tests.First().CountryOfTest, obj.Tests.First().CertificateId);
-            else if (obj?.Recovery.Any() ?? false)
+            else if (obj?.Recovery?.Any() ?? false)
                 return (obj.Recovery.First().CountryOfTest, obj.Recovery.First().CertificateId);
             else
                 throw new ArgumentException($"DCCPayload did not contain any DCC result data.");
@@ -100,25 +102,24 @@ namespace FHICORC.Core.Services.DecoderServices
             };
         }
 
-        private bool CheckHashInRevocationBatches(IEnumerable<RevocationBatch> revocationBatches, string certificateIdentifierHash)
+        private bool CheckHashInRevocationBatches(IEnumerable<RevocationBatch> revocationBatches, string certificateIdentifierHash, string signatureBase64EncodedHash)
         {
 
-            //var result = MobileUtils.ContainsCertificateFilterMobile(certificateIdentifierHash, revocationBatches, _bloomFilterBuckets);
-            //return result;
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // Computing Hash - returns here byte array
+                var sha256Bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(certificateIdentifierHash));
+                var sha256B64 = Convert.ToBase64String(sha256Bytes);
 
-            //int m = 0;
-            //int k = 0;
+                var sha256Bytes2 = new byte[16];
+                Array.Copy(sha256Bytes, sha256Bytes2, sha256Bytes2.Length);
 
-            //foreach (var batch in revocationBatches)
-            //{
-            //    // If any hash functions hits a bit with a zero, go to next batch (contiune)
+                var certificateIdentifierBase64EndodedHash = Convert.ToBase64String(sha256Bytes2);
 
+                var result = MobileUtils.ContainsCertificateFilterMobile(certificateIdentifierBase64EndodedHash, signatureBase64EncodedHash, revocationBatches, _bloomFilterBuckets);
+                return result;
 
-            //    if (batch.Bits.Contains(certificateIdentifierHash, m, k))
-            //        return true;
-            //}
-
-            return false;
+            }
         }
     }
 }

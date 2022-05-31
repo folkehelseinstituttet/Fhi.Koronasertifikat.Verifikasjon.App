@@ -14,6 +14,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace FHICORC.Core.Services.DecoderServices
@@ -68,9 +70,38 @@ namespace FHICORC.Core.Services.DecoderServices
                 }
                 //Decode token to a cose sign 1 object
                 CoseSign1Object coseSign1Object = DecodeToCOSEFlow(base45String);
+
+
+
+                string signatureSha256Base64;
+                using (SHA256 sha256Hash = SHA256.Create())
+                {
+                    var signature = coseSign1Object.GetSignature();
+                    byte[] sha256Bytes;
+
+                    //SHA256withECDSA signature only opperates on half of the signature
+                    if (coseSign1Object.GetSignatureAlgorithm() == "SHA256withECDSA")
+                    {
+                        var splitSignature = new byte[signature.Length / 2];
+                        Array.Copy(signature, splitSignature, signature.Length / 2);
+                        sha256Bytes = sha256Hash.ComputeHash(splitSignature);
+
+                    }
+                    else {
+                        sha256Bytes = sha256Hash.ComputeHash(signature);
+                    }
+
+                    var sha256B64 = Convert.ToBase64String(sha256Bytes);
+
+                    var sha256Bytes2 = new byte[16];
+                    Array.Copy(sha256Bytes, sha256Bytes2, sha256Bytes2.Length);
+                    signatureSha256Base64 = Convert.ToBase64String(sha256Bytes2);
+
+                }
 #if !UNITTESTS
-                await _certificationService.VerifyCoseSign1Object(coseSign1Object);
+                    //await _certificationService.VerifyCoseSign1Object(coseSign1Object);
 #endif
+
                 string jsonStringFromBytes = coseSign1Object.GetJson();
 
                 bool international = _preferencesService.GetUserPreferenceAsBoolean("BORDER_CONTROL_ON");
@@ -86,12 +117,11 @@ namespace FHICORC.Core.Services.DecoderServices
                     resultModel.ValidationResult = TokenValidateResult.UnsupportedType;
                     return resultModel;
                 }
-                //else if (await _certificateRevocationService.IsCertificateRevoked(decodedModel)) // Check certificate against EU DGC revocation list
-                //{
-                //    resultModel.ValidationResult = TokenValidateResult.Revoked;
-                //    return resultModel;
-                //}
-
+                else if (await _certificateRevocationService.IsCertificateRevoked(decodedModel, signatureSha256Base64)) // Check certificate against EU DGC revocation list
+                {
+                    resultModel.ValidationResult = TokenValidateResult.Revoked;
+                    return resultModel;
+                }
 
                 DateTime? expiration = decodedModel.ExpiredDateTime();
                 DateTime? issueAt = decodedModel.IssueDateTime();
@@ -122,7 +152,7 @@ namespace FHICORC.Core.Services.DecoderServices
                 resultModel.DecodedModel = decodedModel;
                 return resultModel;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 // If any exceptions are throw, assume it invalid
                 return resultModel;

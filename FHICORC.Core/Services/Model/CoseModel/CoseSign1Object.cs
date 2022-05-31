@@ -253,7 +253,7 @@ namespace FHICORC.Core.Services.Model.CoseModel
          *          the ECDSA signature
          * @return DER-encoded signature
          */
-        private static byte[] ConvertToDer(byte[] rsConcat)
+        public static byte[] ConvertToDer(byte[] rsConcat)
         {
             int len = rsConcat.Length / 2;
             byte[] r = new byte[len];
@@ -266,6 +266,19 @@ namespace FHICORC.Core.Services.Model.CoseModel
             seq.Add(Asn1Utils.ToUnsignedInteger(s));
 
             return Asn1Utils.ToSequence(seq);
+        }
+
+        public byte[] GetSignature() {
+            return signature;
+        }
+
+        public string GetSignatureAlgorithm() {
+            CBORObject registeredAlgorithm = this.protectedAttributes[HeaderParameterKey.ALG];
+            return SignatureAlgorithm.GetAlgorithmName(registeredAlgorithm);
+        }
+
+        public byte[] GetContent() {
+            return content;
         }
 
     }
