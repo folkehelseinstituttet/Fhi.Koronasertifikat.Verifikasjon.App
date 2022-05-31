@@ -20,7 +20,7 @@ namespace FHICORC.Core.Data.Models
         public int BucketType { get; set; }
 
         [NotNull]
-        public HashType HashMethod { get; set; }
+        public HashTypeEnum HashType { get; set; }
 
         [NotNull]
         public DateTime ExpirationDate { get; set; }

@@ -22,10 +22,17 @@ namespace FHICORC.Core.Services.Utils
             foreach (var r in revocationBatches)
             {
                 var bitVector = new BitArray(r.BloomFilter);
-                var containsCertificateIdentfier = bitVector.Contains(allHashFunctionCertificateIdentifierIndicies_k[r.BucketType]);
-                var containsSignature = bitVector.Contains(allHashFunctionSignatureIndicies_k[r.BucketType]);
 
-                if (containsCertificateIdentfier || containsSignature)
+                var contains = false;
+                if (r.HashType == Enum.HashTypeEnum.Signature)
+                {
+                    contains = bitVector.Contains(allHashFunctionSignatureIndicies_k[r.BucketType]);
+                }
+                else {
+                    contains = bitVector.Contains(allHashFunctionCertificateIdentifierIndicies_k[r.BucketType]);
+                }
+
+                if (contains)
                     return true;
             }
 

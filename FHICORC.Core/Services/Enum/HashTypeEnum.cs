@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FHICORC.Core.Services.Enum
 {
-    public enum HashType
+    public enum HashTypeEnum
     {
         None = 0,
         Signature = 1,
