@@ -25,6 +25,7 @@ namespace FHICORC
         private readonly ITextService _textService;
         private readonly INavigationService _navigationService;
         private readonly IRevocationBatchService _revocationBatchDataManager;
+        private readonly IRevocationDeleteExpiredBatchService _revocationDeleteExpiredBatchService;
         private IPublicKeyService _publicKeyDataManager;
         private IBusinessRulesService _businessRulesDataManager;
         private IValueSetService _valueSetService;
@@ -44,6 +45,7 @@ namespace FHICORC
             _businessRulesDataManager = IoCContainer.Resolve<IBusinessRulesService>();
             _valueSetService = IoCContainer.Resolve<IValueSetService>();
             _revocationBatchDataManager = IoCContainer.Resolve<IRevocationBatchService>();
+            _revocationDeleteExpiredBatchService = IoCContainer.Resolve<IRevocationDeleteExpiredBatchService>();
             ConfigureApp();
         }
 
@@ -109,6 +111,8 @@ namespace FHICORC
             //await _publicKeyDataManager.CheckAndFetchPublicKeyFromBackend();
 
             await _revocationBatchDataManager.FetchRevocationBatchesFromBackend(true);
+            await _revocationDeleteExpiredBatchService.DeleteExpiredBatches();
+
 
             //task = Task.Run(async () =>
             //{

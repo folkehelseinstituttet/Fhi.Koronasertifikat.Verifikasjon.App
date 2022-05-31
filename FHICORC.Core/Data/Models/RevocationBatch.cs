@@ -1,6 +1,7 @@
 ﻿using FHICORC.Core.Services.Enum;
 using Newtonsoft.Json;
 using SQLite;
+using System;
 
 namespace FHICORC.Core.Data.Models
 {
@@ -20,5 +21,8 @@ namespace FHICORC.Core.Data.Models
 
         [NotNull]
         public HashType HashMethod { get; set; }
+
+        [NotNull]
+        public DateTime ExpirationDate { get; set; }
     }
 }
