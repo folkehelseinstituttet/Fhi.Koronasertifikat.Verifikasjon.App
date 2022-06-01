@@ -102,7 +102,7 @@ namespace FHICORC.Core.Services.DecoderServices
             };
         }
 
-        private bool CheckHashInRevocationBatches(IEnumerable<RevocationBatch> revocationBatches, string certificateIdentifierHash, string signatureBase64EncodedHash)
+        public bool CheckHashInRevocationBatches(IEnumerable<RevocationBatch> revocationBatches, string certificateIdentifierHash, string signatureBase64EncodedHash)
         {
 
             using (SHA256 sha256Hash = SHA256.Create())

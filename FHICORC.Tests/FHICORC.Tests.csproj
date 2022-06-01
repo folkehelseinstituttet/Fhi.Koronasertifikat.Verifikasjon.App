@@ -84,10 +84,15 @@
 
   <ItemGroup>
     <Folder Include="NavigationTests\" />
-    <Folder Include="TestMocks\" />
     <Folder Include="ServiceTests\" />
     <Folder Include="ModelTests\" />
     <Folder Include="ViewModelTests\" />
     <Folder Include="BusinessRules\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="RevocationTests\RevocationDownloadReponse.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
