@@ -64,7 +64,7 @@ namespace FHICORC.Core.Services.DecoderServices
                 (var isoCode, var certificateIdentifier) = GetCertificateIdentifierAndISOCodeFromTokenPayload(payload);
                 var certificateIdentifierHash = GetCertificateIdentifierHashFromCertificateIdentifier(certificateIdentifier, isoCode);
                 var revocationBatches = await _revocationBatchService.GetRevocationBatchesFromCountry(isoCode);
-                return CheckHashInRevocationBatches(revocationBatches, certificateIdentifierHash, signatureBase64EncodedHash);
+                return CheckHashInRevocationBatchesAsync(revocationBatches, certificateIdentifierHash, signatureBase64EncodedHash);
             }
             return false;
         }
@@ -102,7 +102,7 @@ namespace FHICORC.Core.Services.DecoderServices
             };
         }
 
-        public bool CheckHashInRevocationBatches(IEnumerable<RevocationBatch> revocationBatches, string certificateIdentifierHash, string signatureBase64EncodedHash)
+        public bool CheckHashInRevocationBatchesAsync(IEnumerable<RevocationBatch> revocationBatches, string certificateIdentifierHash, string signatureBase64EncodedHash)
         {
 
             using (SHA256 sha256Hash = SHA256.Create())

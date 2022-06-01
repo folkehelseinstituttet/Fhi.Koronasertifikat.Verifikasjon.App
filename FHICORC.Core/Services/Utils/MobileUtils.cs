@@ -1,6 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using BloomFilter;
 using FHICORC.Core.Data.Models;
 using FHICORC.Core.Services.Model;
@@ -23,7 +28,7 @@ namespace FHICORC.Core.Services.Utils
             {
                 var bitVector = new BitArray(r.BloomFilter);
 
-                var contains = false;
+                bool contains;
                 if (r.HashType == Enum.HashTypeEnum.Signature)
                 {
                     contains = bitVector.Contains(allHashFunctionSignatureIndicies_k[r.BucketType]);
@@ -37,6 +42,58 @@ namespace FHICORC.Core.Services.Utils
             }
 
             return false;
+        }
+
+
+        static async IAsyncEnumerable<bool> LoopThroughBatchesAsync(List<int[]> allHashFunctionCertificateIdentifierIndicies_k, List<int[]> allHashFunctionSignatureIndicies_k, List<RevocationBatch> revocationBatches, int revocationBatchCount, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+        {
+
+            
+            for (int i = 0; i < revocationBatchCount; i++)
+            {
+                
+                var bitVector = new BitArray(revocationBatches[i].BloomFilter);
+
+                bool contains;
+                if (revocationBatches[i].HashType == Enum.HashTypeEnum.Signature)
+                {
+                    contains = bitVector.Contains(allHashFunctionSignatureIndicies_k[revocationBatches[i].BucketType]);
+                }
+                else
+                {
+                    contains = bitVector.Contains(allHashFunctionCertificateIdentifierIndicies_k[revocationBatches[i].BucketType]);
+                }
+
+
+                await Task.Delay(i, cancellationToken);
+
+                if (contains)
+                    yield return true;
+
+
+                yield return false;
+
+            }
+        }
+
+
+        public async static Task<bool> CheckFilterByCountryAsync(List<int[]> allHashFunctionCertificateIdentifierIndicies_k, List<int[]> allHashFunctionSignatureIndicies_k, IEnumerable<RevocationBatch> revocationBatches, BloomFilterBuckets bloomFilterBuckets)
+        {
+
+            var cts = new CancellationTokenSource();
+            var revocationBatchCount = revocationBatches.ToList().Count();
+
+
+            await foreach (bool contains in LoopThroughBatchesAsync(allHashFunctionCertificateIdentifierIndicies_k, allHashFunctionSignatureIndicies_k, revocationBatches.ToList(), revocationBatchCount).WithCancellation(cts.Token)) {
+                if (contains) {
+                    cts.Cancel();
+                    return true;
+                }
+                    
+            }
+
+            return false;
+               
         }
 
 

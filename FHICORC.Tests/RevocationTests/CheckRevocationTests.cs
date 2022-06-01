@@ -33,7 +33,7 @@ namespace FHICORC.Tests.RevocationTests
 
             var sut = new CertificateRevocationService(new MockRevocationBatchService());
 
-            var result = sut.CheckHashInRevocationBatches(revocationBatchesCountry, uciHash, signatureHash);
+            var result = sut.CheckHashInRevocationBatchesAsync(revocationBatchesCountry, uciHash, signatureHash);
 
             Assert.True(result);
 
