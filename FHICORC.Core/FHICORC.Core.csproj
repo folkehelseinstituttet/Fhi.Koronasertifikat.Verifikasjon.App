@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
@@ -91,5 +91,13 @@
 		<EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\vaccines-covid-19-auth-holders.json" />
 		<EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\vaccines-covid-19-names.json" />
 		<EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\sct-vaccines-covid-19.json" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Update="RevocationDownloadReponse.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="RevocationHash.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 </Project>

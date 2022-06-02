@@ -89,10 +89,4 @@
     <Folder Include="ViewModelTests\" />
     <Folder Include="BusinessRules\" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Update="RevocationTests\RevocationDownloadReponse.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 </Project>

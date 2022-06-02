@@ -64,7 +64,8 @@ namespace FHICORC.Core.Services.DecoderServices
                 (var isoCode, var certificateIdentifier) = GetCertificateIdentifierAndISOCodeFromTokenPayload(payload);
                 var certificateIdentifierHash = GetCertificateIdentifierHashFromCertificateIdentifier(certificateIdentifier, isoCode);
                 var revocationBatches = await _revocationBatchService.GetRevocationBatchesFromCountry(isoCode);
-                return CheckHashInRevocationBatchesAsync(revocationBatches, certificateIdentifierHash, signatureBase64EncodedHash);
+                var certificateIdentifierBase64EndodedHash = Base64EncodeCertificateIdentifierHash(certificateIdentifierHash);
+                return CheckHashInRevocationBatchesAsync(revocationBatches, certificateIdentifierBase64EndodedHash, signatureBase64EncodedHash);
             }
             return false;
         }
@@ -102,9 +103,7 @@ namespace FHICORC.Core.Services.DecoderServices
             };
         }
 
-        public bool CheckHashInRevocationBatchesAsync(IEnumerable<RevocationBatch> revocationBatches, string certificateIdentifierHash, string signatureBase64EncodedHash)
-        {
-
+        private string Base64EncodeCertificateIdentifierHash(string certificateIdentifierHash) {
             using (SHA256 sha256Hash = SHA256.Create())
             {
                 // Computing Hash - returns here byte array
@@ -115,11 +114,17 @@ namespace FHICORC.Core.Services.DecoderServices
                 Array.Copy(sha256Bytes, sha256Bytes2, sha256Bytes2.Length);
 
                 var certificateIdentifierBase64EndodedHash = Convert.ToBase64String(sha256Bytes2);
+                return certificateIdentifierBase64EndodedHash;
+            }
 
+        }
+
+        public bool CheckHashInRevocationBatchesAsync(IEnumerable<RevocationBatch> revocationBatches, string certificateIdentifierBase64EndodedHash, string signatureBase64EncodedHash)
+        {
                 var result = MobileUtils.ContainsCertificateFilterMobile(certificateIdentifierBase64EndodedHash, signatureBase64EncodedHash, revocationBatches, _bloomFilterBuckets);
                 return result;
 
-            }
         }
+   
     }
 }

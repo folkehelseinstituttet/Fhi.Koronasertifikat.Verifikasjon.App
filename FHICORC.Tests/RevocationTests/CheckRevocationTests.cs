@@ -22,6 +22,7 @@ namespace FHICORC.Tests.RevocationTests
         [OneTimeSetUp]
         public void SetUp()
         {
+
             revocationBatchtes = JsonConvert.DeserializeObject<List<RevocationBatch>>(File.ReadAllText("RevocationDownloadReponse.json"));
 
         }
@@ -38,6 +39,35 @@ namespace FHICORC.Tests.RevocationTests
             Assert.True(result);
 
         }
+
+
+        [Test]
+        public void CheckAllRevocationExists() {
+
+            var revocationHashes = new List<string>(File.ReadAllLines("RevocationHash.txt"));
+            var isoCodes = new List<string>() { "CZ", "DE", "DX", "ES", "FR", "HR", "IT", "RO", "XX", "YA" };
+            var sut = new CertificateRevocationService(new MockRevocationBatchService());
+
+            foreach (var revocationHash in revocationHashes) {
+
+                var uciOrSingatureHash = revocationHash.Replace("\t", "");
+                var doesHashExistInRevocationBloomFilters = false;
+
+                foreach (var isoCode in isoCodes) {
+
+                    var revocationBatchesCountry = GetRevocationBatchesFromCountry(isoCode);
+                    var result = sut.CheckHashInRevocationBatchesAsync(revocationBatchesCountry, uciOrSingatureHash, uciOrSingatureHash);
+
+                    if (result) {
+                        doesHashExistInRevocationBloomFilters = true;
+                        break;
+                    }
+                }
+
+                Assert.True(doesHashExistInRevocationBloomFilters); 
+            }
+        }
+        
 
         private List<RevocationBatch> GetRevocationBatchesFromCountry(string isoCode) {
             return revocationBatchtes.Where(rb => rb.CountryISO3166 == isoCode).ToList();
