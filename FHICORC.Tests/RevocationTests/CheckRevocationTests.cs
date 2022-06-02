@@ -19,7 +19,7 @@ namespace FHICORC.Tests.RevocationTests
         private List<RevocationBatch> revocationBatchtes;
 
 
-        [OneTimeSetUp]
+        //[OneTimeSetUp]
         public void SetUp()
         {
 
@@ -27,7 +27,7 @@ namespace FHICORC.Tests.RevocationTests
 
         }
 
-        [TestCase("RO", "", "J4PCK4sFs63kH/EeP7+C3A==")]
+        //[TestCase("RO", "", "J4PCK4sFs63kH/EeP7+C3A==")]
         public void CheckIfSingleRevocationExists(string isoCode, string uciHash, string signatureHash) {
 
             var revocationBatchesCountry = GetRevocationBatchesFromCountry(isoCode);
@@ -41,7 +41,7 @@ namespace FHICORC.Tests.RevocationTests
         }
 
 
-        [Test]
+        //[Test]
         public void CheckAllRevocationExists() {
 
             var revocationHashes = new List<string>(File.ReadAllLines("RevocationHash.txt"));
