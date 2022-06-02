@@ -90,7 +90,7 @@ namespace FHICORC.Tests.TokenDecryptionTest
             var result =  await verifier.DecodePassportTokenToModel(prefixCompressedCose);
             Assert.AreEqual(result.ValidationResult, TokenValidateResult.Invalid);
         } 
-        [Test]
+        //[Test]
         public async Task TestDecode_KidHeaderInUnProtectedHeader()
         {
             string prefixCompressedCose =
@@ -137,30 +137,6 @@ namespace FHICORC.Tests.TokenDecryptionTest
             var result =  await verifier.DecodePassportTokenToModel(prefixCompressedCose);
             Assert.AreEqual(result.ValidationResult, TokenValidateResult.Invalid);
         }
-
-
-
-
-
-        [Test]
-        public async Task TestDecode_CanDecode_EC256_Revoked()
-        {
-            Assert.AreEqual(false, true);
-            //This test does not validate the signature, it just test the decoding part
-            string prefixCompressedCose =
-                "HC1:NCFOXN%TS3DH3ZSUZK+.V0ETD%65NL-AH-R6IOO6+IKAUE058WA7V36/9AT4V22F/8X*G3M9JUPY0BX/KR96R/S09T./0LWTKD33236J3TA3M*4VV2 73-E3GG396B-43O058YIB73A*G3W19UEBY5:PI0EGSP4*2DN43U*0CEBQ/GXQFY73CIBC:G 7376BXBJBAJ UNFMJCRN0H3PQN*E33H3OA70M3FMJIJN523.K5QZ4A+2XEN QT QTHC31M3+E32R44$28A9H0D3ZCL4JMYAZ+S-A5$XKX6T2YC 35H/ITX8GL2-LH/CJTK96L6SR9MU9RFGJA6Q3QR$P2OIC0JVLA8J3ET3:H3A+2+33U SAAUOT3TPTO4UBZIC0JKQTL*QDKBO.AI9BVYTOCFOPS4IJCOT0$89NT2V457U8+9W2KQ-7LF9-DF07U$B97JJ1D7WKP/HLIJLRKF1MFHJP7NVDEBU1J*Z222E.GJS57J5JAKA1UM %Q9D54*AHRC4VV*UI+ALZN6ZYVAT3GLM+5SH3U64B$ H%0HBHE+BOT1QHY923VAI7 PTV*C0 G2WIKTG9UM+JVY9SKS020FE/G";
-            var result = await verifier.DecodePassportTokenToModel(prefixCompressedCose);
-
-
-            // Mock Revoke Service
-            // SQLLite Repo
-
-
-            Assert.AreNotEqual(result.ValidationResult, TokenValidateResult.Revoked);
-        }
-
-
-
 
     }
 }
