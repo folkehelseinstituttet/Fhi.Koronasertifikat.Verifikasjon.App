@@ -91,6 +91,7 @@
       <SubType>Code</SubType>
     </Compile>
     <None Remove="Resources\Sounds\valid_scan_sound.mp3" />
+    <EmbeddedResource Include="Certs\dev.crt" />
     <EmbeddedResource Include="Resources\Sounds\valid_scan_sound.mp3" />
     <None Remove="Resources\Sounds\invalid_scan_sound.mp3" />
     <EmbeddedResource Include="Resources\Sounds\invalid_scan_sound.mp3" />
@@ -117,7 +118,6 @@
     <None Remove="Resources\Fonts\TitilliumWeb-SemiBold.ttf" />
     <EmbeddedResource Include="Resources\Fonts\TitilliumWeb-SemiBold.ttf" />
     <None Remove="Certs\dev.crt" />
-    <EmbeddedResource Include="Certs\dev.crt" />
     <None Remove="Certs\local.crt" />
     <EmbeddedResource Include="Certs\local.crt" />
     <None Remove="Certs\preprod.crt" />
