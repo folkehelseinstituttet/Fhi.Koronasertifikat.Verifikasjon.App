@@ -54,7 +54,13 @@ namespace FHICORC.Services.DataManagers
             var lastFetch = entity.LastFetch.GetValueOrDefault();
             if (forced || lastFetch.Add(_periodicFetchingInterval) <= _dateTimeService.Now)
             {
-                _restClient.RegisterCustomRequestHeaders(("LastDownloaded", "2000-05-28T10:03:47Z")); //lastFetch.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
+                string lastFetchDateString;
+                if (lastFetch == new DateTime())
+                    lastFetchDateString = "2021-06-01T00:00:00Z";
+                else
+                    lastFetchDateString = lastFetch.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ");
+
+                _restClient.RegisterCustomRequestHeaders(("LastDownloaded", lastFetchDateString));
                 var response = await _restClient.Get<List<RevocationBatch>>(Urls.URL_GET_REVOCATION_BATCH).ConfigureAwait(false);
 
                 if (response.IsSuccessfull && response.Data != null)
