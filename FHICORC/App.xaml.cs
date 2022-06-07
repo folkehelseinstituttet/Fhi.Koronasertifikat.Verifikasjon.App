@@ -121,7 +121,7 @@ namespace FHICORC
             //});
         }
 
-        public static Task task;
+        //public static Task task;
 
         private void ClearAppData()
         {
