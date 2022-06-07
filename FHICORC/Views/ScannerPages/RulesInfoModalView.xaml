@@ -40,7 +40,7 @@
                             Grid.RowSpan="2"
                             VerticalOptions="Fill"
                             WidthRequest="20"
-                            BackgroundColor="{StaticResource InvalidBorderColor}"/>
+                            BackgroundColor="{StaticResource InvalidBackgroundColor}"/>
                         <Label
                             Grid.Column="1"
                             Grid.Row="1"
@@ -80,7 +80,7 @@
                             Grid.RowSpan="2"
                             VerticalOptions="Fill"
                             WidthRequest="20"
-                            BackgroundColor="{StaticResource InvalidBorderColor}"/>
+                            BackgroundColor="{StaticResource InvalidBackgroundColor}"/>
                         <Label
                             Grid.Column="1"
                             Grid.Row="0"
@@ -130,7 +130,7 @@
                             Grid.RowSpan="2"
                             VerticalOptions="Fill"
                             WidthRequest="20"
-                            BackgroundColor="{StaticResource SuccessBorderColor}"/>
+                            BackgroundColor="{StaticResource SuccessBackgroundColor}"/>
                         <Label
                             Grid.Column="1"
                             Grid.Row="1"
@@ -170,7 +170,7 @@
                             Grid.RowSpan="2"
                             VerticalOptions="Fill"
                             WidthRequest="20"
-                            BackgroundColor="{StaticResource SuccessBorderColor}"/>
+                            BackgroundColor="{StaticResource SuccessBackgroundColor}"/>
                         <Label
                             Grid.Column="1"
                             Grid.Row="0"
@@ -220,7 +220,7 @@
                             Grid.RowSpan="2"
                             VerticalOptions="Fill"
                             WidthRequest="20"
-                            BackgroundColor="{StaticResource ExpiredBorderColor}"/>
+                            BackgroundColor="{StaticResource ExpiredBackgroundColor}"/>
                         <Label
                             Grid.Column="1"
                             Grid.Row="1"
@@ -260,7 +260,7 @@
                             Grid.RowSpan="2"
                             VerticalOptions="Fill"
                             WidthRequest="20"
-                            BackgroundColor="{StaticResource ExpiredBorderColor}"/>
+                            BackgroundColor="{StaticResource ExpiredBackgroundColor}"/>
                         <Label
                             Grid.Column="1"
                             Grid.Row="0"

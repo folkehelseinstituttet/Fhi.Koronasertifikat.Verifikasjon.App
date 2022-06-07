@@ -21,9 +21,9 @@ namespace FHICORC.Utils
         ButtonDisable,
 
         LandingPageColorStart,
-        SuccessBorderColor,
-        InvalidBorderColor,
-        ExpiredBorderColor
+        SuccessBackgroundColor,
+        InvalidBackgroundColor,
+        ExpiredBackgroundColor
     }
 
     public static class FHICORCColorExtensions

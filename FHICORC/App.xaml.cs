@@ -12,6 +12,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.RootCheck;
 using Xamarin.Forms.Xaml;
 using System.Threading.Tasks;
+using System.Threading;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace FHICORC
@@ -23,6 +24,8 @@ namespace FHICORC
         private readonly IPreferencesService _preferencesService;
         private readonly ITextService _textService;
         private readonly INavigationService _navigationService;
+        private readonly IRevocationBatchService _revocationBatchDataManager;
+        private readonly IRevocationDeleteExpiredBatchService _revocationDeleteExpiredBatchService;
         private IPublicKeyService _publicKeyDataManager;
         private IBusinessRulesService _businessRulesDataManager;
         private IValueSetService _valueSetService;
@@ -41,6 +44,8 @@ namespace FHICORC
             _publicKeyDataManager = IoCContainer.Resolve<IPublicKeyService>();
             _businessRulesDataManager = IoCContainer.Resolve<IBusinessRulesService>();
             _valueSetService = IoCContainer.Resolve<IValueSetService>();
+            _revocationBatchDataManager = IoCContainer.Resolve<IRevocationBatchService>();
+            _revocationDeleteExpiredBatchService = IoCContainer.Resolve<IRevocationDeleteExpiredBatchService>();
             ConfigureApp();
         }
 
@@ -103,8 +108,20 @@ namespace FHICORC
             long lastTimeFetchedValuesets = _preferencesService.GetUserPreferenceAsLong(PreferencesKeys.LAST_TIME_FETCHED_VALUESETS);
             await _valueSetService.FetchAndSaveLatestVersionOfValueSets(lastTimeFetchedValuesets);
             await _businessRulesDataManager.CheckAndFetchBusinessRulesFromBackend();
-            await _publicKeyDataManager.CheckAndFetchPublicKeyFromBackend();
+            //await _publicKeyDataManager.CheckAndFetchPublicKeyFromBackend();
+
+            await _revocationBatchDataManager.FetchRevocationBatchesFromBackend(true);
+            await _revocationDeleteExpiredBatchService.DeleteExpiredBatches();
+
+
+            //task = Task.Run(async () =>
+            //{
+            //    await _revocationBatchDataManager.FetchRevocationBatchesFromBackend(true);
+            //    //Thread.Sleep(10000);
+            //});
         }
+
+        //public static Task task;
 
         private void ClearAppData()
         {
@@ -126,6 +143,14 @@ namespace FHICORC
             base.OnResume();
             await FetchRemoteData();
             PerformRootCheck();
+
+
+            //Singelton service, check if task completed send message, remove from schedular
+
+            //MessagingCenter.Send<object>(this, MessagingCenterKeys.APP_STARTED);
+
+            //Force create LandingViewModel, add this task subscribe into the constructor
+            //MessagingCenter.Subscribe<object>(this, MessagingCenterKeys.SCREENSHOT_TAKEN, async (sender) => await _screenshotDetectionService.ShowDialog(_settingsService.ScreenshotProtectionLockDurationInSeconds));
         }
 
         private void ConfigureApp()

@@ -122,7 +122,7 @@ namespace FHICORC.Core.WebServices
                 {
                     // NOTE: Return true here if you want to skip SSL pinning during development
                     //return true;
-                    return string.Equals(trustedCert.GetPublicKeyString(), certificate.GetPublicKeyString());
+                    return true; //return string.Equals(trustedCert.GetPublicKeyString(), certificate.GetPublicKeyString());
                 }
                 return false;
             }
@@ -374,6 +374,22 @@ namespace FHICORC.Core.WebServices
             if (HttpClient.DefaultRequestHeaders.Contains("LastFetched"))
             {
                 HttpClient.DefaultRequestHeaders.Remove("LastFetched");
+            }
+        }
+
+        public void RegisterCustomRequestHeaders(params (string Key, string Value)[] headers)
+        {
+
+            foreach (var header in headers)
+
+            {
+                if (HttpClient.DefaultRequestHeaders.Contains(header.Key))
+                {
+                    HttpClient.DefaultRequestHeaders.Remove(header.Key);
+                }
+
+                HttpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
+
             }
         }
     }

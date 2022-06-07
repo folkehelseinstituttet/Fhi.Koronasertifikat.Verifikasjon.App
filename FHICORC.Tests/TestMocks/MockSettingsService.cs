@@ -56,5 +56,7 @@ namespace FHICORC.Tests.TestMocks
         public int PublicKeyPeriodicFetchingIntervalInHours => 24;
 
         public string Environment => "mock";
+
+        public int RevocationBatchPeriodicFetchingIntervalInHours => 24;
     }
 }

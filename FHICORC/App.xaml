@@ -23,15 +23,17 @@
 
             <!--  Background Colour  -->
             <Color x:Key="DefaultBackgroundColor">#E1EAED</Color>
+            <Color x:Key="DefaultErrorBackgroundColor">#F5858c</Color>
             <Color x:Key="ErrorBackgroundColor">#32345C</Color>
             <Color x:Key="NavigationHeaderBackgroundColor">#E1EAED</Color>
             <Color x:Key="LandingPageColorStart">#425070</Color>
             <Color x:Key="MainPageBackgroundColor">#E7F2F2</Color>
-            <Color x:Key="SuccessBorderColor">#D9F0D4</Color>
-            <Color x:Key="InvalidBorderColor">#F5858c</Color>
-            <Color x:Key="ExpiredBorderColor">#F5E360</Color>
-
-
+            <Color x:Key="SuccessBackgroundColor">#D9F0D4</Color>
+            <Color x:Key="InvalidBackgroundColor">#F5858c</Color>
+            <Color x:Key="ExpiredBackgroundColor">#F5E360</Color>
+            <Color x:Key="UnsupportedTypeBackgroundColor">#F5858c</Color>
+            <Color x:Key="RevokedBackgroundColor">#F5858c</Color>
+   
             <!--  Image  -->
             <x:String x:Key="LandingPageFhiLogo">landing_page_fhi_logo.png</x:String>
             <x:String x:Key="LandingPageLogo">landing_page_logo</x:String>

@@ -194,3 +194,5 @@ FakesAssemblies/
 
 .vscode/settings.json
 .idea
+/FHICORC/Certs/dev.crt
+/FHICORC/Configuration/appsettings.Development.json

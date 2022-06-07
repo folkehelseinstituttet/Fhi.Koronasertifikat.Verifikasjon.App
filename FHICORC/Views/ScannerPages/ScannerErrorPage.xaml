@@ -8,6 +8,7 @@
     xmlns:controls="clr-namespace:FHICORC.Controls"
     xmlns:elements="clr-namespace:FHICORC.Views.Elements"
     xmlns:effects="clr-namespace:FHICORC.Controls"
+    xmlns:enums="clr-namespace:FHICORC.Core.Services.Enum;assembly=FHICORC.Core" xmlns:qrscannerviewmodels="clr-namespace:FHICORC.ViewModels.QrScannerViewModels" x:DataType="qrscannerviewmodels:ScannerErrorViewModel"
     NavigationPage.HasNavigationBar="False"
     BackgroundColor="{StaticResource NavigationHeaderBackgroundColor}"
     ios:Application.EnableAccessibilityScalingForNamedFontSizes="true"
@@ -21,27 +22,18 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <StackLayout Grid.Row="0"
-                         Orientation="Vertical"
-                         Padding="0"
-                         Spacing="0">
+            <!--  Repeating text for Expired, Invalid and Revoked page  -->
+            <StackLayout Padding="0" Spacing="0" Grid.Row="0" Orientation="Vertical">
                 <elements:NavigationHeader
                     CenterLabelText="{Binding PageTitle}"
                     RightButtonAccessibilityText="{Binding Strings[CLOSE_BUTTON]}"
                     RightButtonCommand="{Binding ScanAgainCommand}"
                     RightButtonImageSource="{StaticResource XMark}" />
 
-
-                <!--  Repeating text for Expired and Invalid page  -->
-                <StackLayout
-                    BackgroundColor="{StaticResource ExpiredBorderColor}"
-                    IsVisible="{Binding ShowInvalidPage, Converter={StaticResource BoolToInverseBoolConverter}}"
-                    Margin="0,20,0,0"
-                    Padding="0,9,0,9"
-                    Spacing="0">
+                <StackLayout Margin="0,20,0,0" Padding="0,9,0,9" Spacing="0">
                     <Label
-                        Margin="-50, 0"
-                        Padding="0, 2"
+                        Margin="-50,0"
+                        Padding="0,2"
                         VerticalTextAlignment="Center"
                         MaxLines="1"
                         LineBreakMode="NoWrap"
@@ -51,82 +43,66 @@
                         FontSize="20"
                         AutomationProperties.IsInAccessibleTree="False">
                     </Label>
-                </StackLayout>
 
-                <StackLayout
-                    BackgroundColor="{StaticResource InvalidBorderColor}"
-                    IsVisible="{Binding ShowInvalidPage}"
-                    Margin="0,20,0,0"
-                    Padding="0,9,0,9"
-                    Spacing="0">
-                    <Label
-                        Margin="-50, 0"
-                        Padding="0, 2"
-                        VerticalTextAlignment="Center"
-                        MaxLines="1"
-                        LineBreakMode="NoWrap"
-                        Style="{StaticResource SecondaryContentBoldStyle}"
-                        TextColor="{StaticResource BaseTextColor}"
-                        Text="{Binding RepeatedText}"
-                        FontSize="20"
-                        AutomationProperties.IsInAccessibleTree="False">
-                    </Label>
+                    <StackLayout.Style>
+                        <Style TargetType="{x:Type StackLayout}">
+                            <Setter Property="BackgroundColor" Value="{StaticResource DefaultErrorBackgroundColor}"></Setter>
+                            <Style.Triggers>
+                                <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding Path=TokenValidateResultModel.ValidationResult}" Value="{x:Static enums:TokenValidateResult.Expired}">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource ExpiredBackgroundColor}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding Path=TokenValidateResultModel.ValidationResult}" Value="{x:Static enums:TokenValidateResult.Invalid}">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource InvalidBackgroundColor}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding Path=TokenValidateResultModel.ValidationResult}" Value="{x:Static enums:TokenValidateResult.UnsupportedType}">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource UnsupportedTypeBackgroundColor}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding Path=TokenValidateResultModel.ValidationResult}" Value="{x:Static enums:TokenValidateResult.Revoked}">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource RevokedBackgroundColor}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackLayout.Style>
                 </StackLayout>
             </StackLayout>
 
-
+            <!--  Title and Content Text for the error page -->
             <ScrollView Grid.Row="1" VerticalOptions="FillAndExpand">
-                <StackLayout 
+                <StackLayout
                     Orientation="Vertical"
+                    Spacing="0"
                     VerticalOptions="CenterAndExpand"
                     Padding="0"
-                    Spacing="0"
-                    Margin="43,0,43,0">
-                    <!--  Title for Expired and Invalid page  -->
+                    Margin="43,0">
                     <StackLayout
-                        IsVisible="{Binding ShowInvalidPage, Converter={StaticResource BoolToInverseBoolConverter}}"
                         Orientation="Vertical"
                         Spacing="20">
-                        <Image Source="{StaticResource HourGlass}" />
+                        <Image>
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Setter Property="Source" Value="{StaticResource ErrorCheckLayout}"></Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger TargetType="{x:Type Image}" Binding="{Binding Path=TokenValidateResultModel.ValidationResult}" Value="{x:Static enums:TokenValidateResult.Expired}">
+                                            <Setter Property="Source" Value="{StaticResource HourGlass}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
                         <Label
-                            Style="{StaticResource BigTitleStyle}"
-                            Text="{Binding Strings[SCANNER_ERROR_EXPIRED_CONTENT]}"
-                            HorizontalTextAlignment="Center"
-                            effects:FontSizeLabelEffectParams.MaxFontSize="32.00">
+                        Style="{StaticResource BigTitleStyle}"
+                        Text="{Binding PageTitle}"
+                        HorizontalTextAlignment="Center"
+                        effects:FontSizeLabelEffectParams.MaxFontSize="32.00">
                             <Label.Effects>
                                 <effects:FontSizeLabelEffect/>
                             </Label.Effects>
                         </Label>
                         <Label
-                            Style="{StaticResource ContentStyle}"
-                            Text="{Binding Strings [SCANNER_ERROR_EXPIRED_CONTENT_2]}"
-                            HorizontalTextAlignment="Center"
-                            effects:FontSizeLabelEffectParams.MaxFontSize="26.00">
-                            <Label.Effects>
-                                <effects:FontSizeLabelEffect/>
-                            </Label.Effects>
-                        </Label>
-                    </StackLayout>
-
-                    <StackLayout
-                        IsVisible="{Binding ShowInvalidPage}"
-                        Orientation="Vertical"
-                        Spacing="20">
-                        <Image Source="{StaticResource ErrorCheckLayout}" />
-                        <Label
-                            HorizontalTextAlignment="Center"
-                            Style="{StaticResource BigTitleStyle}"
-                            Text="{Binding Strings[SCANNER_ERROR_INVALID_TITLE]}"
-                            effects:FontSizeLabelEffectParams.MaxFontSize="32.00">
-                            <Label.Effects>
-                                <effects:FontSizeLabelEffect/>
-                            </Label.Effects>
-                        </Label>
-                        <Label
-                            HorizontalTextAlignment="Center"
-                            Style="{StaticResource ContentStyle}"
-                            Text="{Binding InvalidContentText}"
-                            effects:FontSizeLabelEffectParams.MaxFontSize="26.00">
+                        Style="{StaticResource ContentStyle}"
+                        Text="{Binding ContentText}"
+                        HorizontalTextAlignment="Center"
+                        effects:FontSizeLabelEffectParams.MaxFontSize="26.00">
                             <Label.Effects>
                                 <effects:FontSizeLabelEffect/>
                             </Label.Effects>
@@ -140,7 +116,7 @@
                          VerticalOptions="End"
                          Padding="0"
                          Spacing="0"
-                         Margin="50,20,50,20">
+                         Margin="50,20">
                 <controls:SingleLineButton
                     Padding="20, 0"
                     Command="{Binding ScanAgainCommand}"
@@ -156,7 +132,6 @@
                     </controls:SingleLineButton.Effects>
                 </controls:SingleLineButton>
 
-
                 <!--  Seconds left before the page closes  -->
                 <Label
                     Margin="0,20"
@@ -165,7 +140,6 @@
                     Text="{Binding SecondsRemainingText}"
                     TextColor="{StaticResource BaseTextColor}"
                     AutomationProperties.IsInAccessibleTree="True"
-                    AutomationId="{Binding SecondsRemainingText_Accessibility}"
                     effects:FontSizeLabelEffectParams.MaxFontSize="24.00"
                     effects:FontSizeLabelEffectParams.MinFontSize="12.00">
                     <Label.Effects>

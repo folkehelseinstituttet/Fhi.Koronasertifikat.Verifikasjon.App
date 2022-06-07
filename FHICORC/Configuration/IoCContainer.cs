@@ -1,25 +1,26 @@
 ﻿using FHICORC.Core.Data;
+using FHICORC.Core.Data.Models;
 using FHICORC.Core.Interfaces;
+using FHICORC.Core.Services;
+using FHICORC.Core.Services.BusinessRules;
 using FHICORC.Core.Services.DecoderServices;
 using FHICORC.Core.Services.Interface;
+using FHICORC.Core.Services.Model.Converter;
+using FHICORC.Core.Services.Model.EuDCCModel.ValueSet;
 using FHICORC.Core.WebServices;
+using FHICORC.Data;
 using FHICORC.Models;
 using FHICORC.Services;
+using FHICORC.Services.DataManagers;
 using FHICORC.Services.Interfaces;
 using FHICORC.Services.Mocks;
 using FHICORC.Services.Repositories;
-using FHICORC.Services.Translator;
 using FHICORC.Services.WebServices;
 using FHICORC.ViewModels;
 using FHICORC.ViewModels.Error;
 using FHICORC.ViewModels.Menu;
 using FHICORC.ViewModels.QrScannerViewModels;
 using TinyIoC;
-using FHICORC.Core.Services;
-using FHICORC.Services.DataManagers;
-using FHICORC.Core.Services.BusinessRules;
-using FHICORC.Core.Services.Model.Converter;
-using FHICORC.Core.Services.Model.EuDCCModel.ValueSet;
 
 namespace FHICORC.Configuration
 {
@@ -57,8 +58,7 @@ namespace FHICORC.Configuration
         }
 
         private static void RegisterServices()
-        {
-            
+        {        
             _container.Register<IPreferencesService, PreferencesService>();
             _container.Register<IDialogService, DialogService>();
             _container.Register<ISecureStorageService<PublicKeyStorageModel>, SecureStorageService <PublicKeyStorageModel>>();
@@ -85,6 +85,13 @@ namespace FHICORC.Configuration
             _container.Register<IValueSetService, ValueSetService>();
             _container.Register<IDigitalGreenValueSetTranslatorFactory, DigitalGreenValueSetTranslatorFactory>();
             _container.Register<IValueSetRepository, ValueSetRepository>();
+            _container.Register<ICertificateRevocationService, CertificateRevocationService>().AsSingleton();
+            _container.Register<IRevocationBatchService, RevocationBatchDataManager>().AsSingleton();
+            _container.Register<IRevocationDeleteExpiredBatchService, RevocationDeleteExpiredBatchService>().AsSingleton();
+
+            // All IRepository<> type instances need to be registered manually, due to a bug in TinyIoC relating to open types and generics, see: https://github.com/grumpydev/TinyIoC/issues/8
+            _container.Register<IRepository<RevocationBatch>, GenericRepositoryProxy<RevocationBatch>>().AsSingleton();
+            _container.Register<IRepository<AppLastFetchingDates>, GenericRepositoryProxy<AppLastFetchingDates>>().AsSingleton();    
         }
 
         //The services that need to be reset after the user logs out.
