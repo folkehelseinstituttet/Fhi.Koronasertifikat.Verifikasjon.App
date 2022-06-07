@@ -73,7 +73,7 @@
   "SCANNER_ERROR_INVALID_TITLE": "Ugyldig",
   "SCANNER_ERROR_INVALID_CONTENT": "Koronasertifikatet er ikkje gyldig.",
   "SCANNER_ERROR_REVOKED_TITLE": "Ugyldig",
-  "SCANNER_ERROR_REVOKED_CONTENT": "Koronasertifikatet er ikkje gyldig.",
+  "SCANNER_ERROR_REVOKED_CONTENT": "Koronasertifikatet er ikkje gyldig. (Revokert)",
   "SCANNER_ERROR_UNKNOWN_TYPE_CONTENT": "Sertifikatet er ikkje gyldig for grensekontroll. I grensekontroll vil appen kun validera EU/EØS-kodar.",
   "SCANNER_ERROR_BUTTON_TEXT": "Skann ny",
   "SCANNER_FLASHLIGHT": "Lommelykt",
