@@ -9,6 +9,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Text;
 using System.Security.Cryptography;
+using System.IO;
+using Newtonsoft.Json;
+using System.Reflection;
 
 namespace FHICORC.Core.Services.DecoderServices
 {
@@ -38,22 +41,45 @@ namespace FHICORC.Core.Services.DecoderServices
 
         public static BloomFilterBuckets FillBloomBuckets()
         {
-            var buckets = new List<BucketItem>()
+            var numberOfBuckets = 200;
+            var minValue = 5;
+            var maxValue = 1000;
+            var stepness = 1;
+            var falsePositiveProbability = 1e-10;
+
+
+            var bloomFilterBucketsList = new List<BucketItem>();
+
+            //for (var i = 0; i < numberOfBuckets; i++)
+            //{
+            //    var bucketValue = (int)Math.Ceiling((maxValue - minValue) /
+            //        (Math.Pow(numberOfBuckets - 1, stepness))
+            //        * Math.Pow(i, stepness) + minValue);
+
+            //    var bloomStats = BloomFilterUtils.CalcOptimalMK(bucketValue, falsePositiveProbability);
+            //    var bucketItem = new BucketItem() {
+            //        BucketId = i,
+            //        MaxValue = bucketValue,
+            //        BitVectorLength_m = bloomStats.m,
+            //        NumberOfHashFunctions_k = bloomStats.k
+            //    };
+            //    bloomFilterBucketsList.Add(bucketItem);
+
+            //}
+
+            var assembly = IntrospectionExtensions.GetTypeInfo(typeof(CertificateRevocationService)).Assembly;
+            string resourceName = assembly.GetManifestResourceNames()
+                .Single(str => str.EndsWith("RevocationBuckets.json"));
+
+            Stream stream = assembly.GetManifestResourceStream(resourceName);
+
+            using (var reader = new System.IO.StreamReader(stream))
             {
-                new BucketItem(){ BucketId = 0, BitVectorLength_m = 240, MaxValue = 5, NumberOfHashFunctions_k = 34},
-                new BucketItem(){ BucketId = 1, BitVectorLength_m = 480, MaxValue = 10, NumberOfHashFunctions_k = 34},
-                new BucketItem(){ BucketId = 2, BitVectorLength_m = 1390, MaxValue = 29, NumberOfHashFunctions_k = 34},
-                new BucketItem(){ BucketId = 3, BitVectorLength_m = 3307, MaxValue = 69, NumberOfHashFunctions_k = 34},
-                new BucketItem(){ BucketId = 4, BitVectorLength_m = 6566, MaxValue = 137, NumberOfHashFunctions_k = 34},
-                new BucketItem(){ BucketId = 5, BitVectorLength_m = 11215, MaxValue = 234, NumberOfHashFunctions_k = 34},
-                new BucketItem(){ BucketId = 6, BitVectorLength_m = 17589, MaxValue = 367, NumberOfHashFunctions_k = 34},
-                new BucketItem(){ BucketId = 7, BitVectorLength_m = 25688, MaxValue = 536, NumberOfHashFunctions_k = 34},
-                new BucketItem(){ BucketId = 8, BitVectorLength_m = 35801, MaxValue = 747, NumberOfHashFunctions_k = 34},
-                new BucketItem(){ BucketId = 9, BitVectorLength_m = 47926, MaxValue = 1000, NumberOfHashFunctions_k = 34},
+                var jsonData = reader.ReadToEnd();
+                bloomFilterBucketsList = JsonConvert.DeserializeObject<List<BucketItem>>(jsonData);
+            }
 
-            };
-
-            return new BloomFilterBuckets() { Buckets = buckets };
+            return new BloomFilterBuckets() { Buckets = bloomFilterBucketsList };
         }
 
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -120,5 +121,43 @@ namespace FHICORC.Core.Services.Utils
             bitArray.CopyTo(byteArray, 0);
             return byteArray;
         }
+
+
+        public static BloomStats CalcOptimalMK(int expectedElements, double errorRate)
+        {
+            if (expectedElements < 1)
+            {
+                throw new ArgumentOutOfRangeException("expectedElements", expectedElements, "expectedElements must be > 0");
+            }
+
+            if (errorRate >= 1.0 || errorRate <= 0.0)
+            {
+                throw new ArgumentOutOfRangeException("errorRate", errorRate, $"errorRate must be between 0 and 1, exclusive. Was {errorRate}");
+            }
+
+            var capacity = BloomFilter.Filter.BestM(expectedElements, errorRate);
+            var hashes = BloomFilter.Filter.BestK(expectedElements, capacity);
+
+
+            return new BloomStats()
+            {
+                ExpectedElements = expectedElements,
+                ErrorRate = errorRate,
+                m = capacity,
+                k = hashes
+            };
+        }
+
+    }
+
+
+    public class BloomStats
+    {
+        public int ExpectedElements { get; set; }
+        public double ErrorRate { get; set; }
+        public int m { get; set; }
+        public int k { get; set; }
+
+
     }
 }

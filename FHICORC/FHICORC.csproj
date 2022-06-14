@@ -160,9 +160,7 @@
     <Folder Include="Data\" />
     <Folder Include="Services\WebServices\" />
     <Folder Include="Views\ScannerPages\" />
-    <Folder Include="Resources\" />
     <Folder Include="Resources\Fonts\" />
-    <Folder Include="Resources\" />
     <Folder Include="Resources\Fonts\" />
     <Folder Include="ViewModels\QrScannerViewModels\" />
     <Folder Include="ViewModels\Error\" />
