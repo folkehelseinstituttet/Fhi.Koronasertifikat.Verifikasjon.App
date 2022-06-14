@@ -31,7 +31,7 @@ namespace FHICORC.Core.Services.DecoderServices
         };
 
         private readonly IRevocationBatchService _revocationBatchService;
-        private readonly BloomFilterBuckets _bloomFilterBuckets;
+        private readonly List<BucketItem> _bloomFilterBuckets;
 
         public CertificateRevocationService(IRevocationBatchService revocationBatchService)
         {
@@ -39,7 +39,7 @@ namespace FHICORC.Core.Services.DecoderServices
             _bloomFilterBuckets = FillBloomBuckets();
         }
 
-        public static BloomFilterBuckets FillBloomBuckets()
+        public static List<BucketItem> FillBloomBuckets()
         {
             var numberOfBuckets = 200;
             var minValue = 5;
@@ -47,39 +47,41 @@ namespace FHICORC.Core.Services.DecoderServices
             var stepness = 1;
             var falsePositiveProbability = 1e-10;
 
+            //var numberOfBuckets = 10;
+            //var minValue = 5;
+            //var maxValue = 1000;
+            //var stepness = 2.5;
+            //var falsePositiveProbability = 1e-10;
 
             var bloomFilterBucketsList = new List<BucketItem>();
 
-            //for (var i = 0; i < numberOfBuckets; i++)
-            //{
-            //    var bucketValue = (int)Math.Ceiling((maxValue - minValue) /
-            //        (Math.Pow(numberOfBuckets - 1, stepness))
-            //        * Math.Pow(i, stepness) + minValue);
-
-            //    var bloomStats = BloomFilterUtils.CalcOptimalMK(bucketValue, falsePositiveProbability);
-            //    var bucketItem = new BucketItem() {
-            //        BucketId = i,
-            //        MaxValue = bucketValue,
-            //        BitVectorLength_m = bloomStats.m,
-            //        NumberOfHashFunctions_k = bloomStats.k
-            //    };
-            //    bloomFilterBucketsList.Add(bucketItem);
-
-            //}
-
-            var assembly = IntrospectionExtensions.GetTypeInfo(typeof(CertificateRevocationService)).Assembly;
-            string resourceName = assembly.GetManifestResourceNames()
-                .Single(str => str.EndsWith("RevocationBuckets.json"));
-
-            Stream stream = assembly.GetManifestResourceStream(resourceName);
-
-            using (var reader = new System.IO.StreamReader(stream))
+            for (var i = 0; i < numberOfBuckets; i++)
             {
-                var jsonData = reader.ReadToEnd();
-                bloomFilterBucketsList = JsonConvert.DeserializeObject<List<BucketItem>>(jsonData);
+                var bucketValue = (int)Math.Ceiling((maxValue - minValue) /
+                    (Math.Pow(numberOfBuckets - 1, stepness))
+                    * Math.Pow(i, stepness) + minValue);
+
+                var bloomStats = BloomFilterUtils.CalcOptimalMK(bucketValue, falsePositiveProbability);
+                var bucketItem = new BucketItem(i, bucketValue, bloomStats.m, bloomStats.k);
+                bloomFilterBucketsList.Add(bucketItem);
+
             }
 
-            return new BloomFilterBuckets() { Buckets = bloomFilterBucketsList };
+
+
+            //var assembly = IntrospectionExtensions.GetTypeInfo(typeof(CertificateRevocationService)).Assembly;
+            //string resourceName = assembly.GetManifestResourceNames()
+            //    .Single(str => str.EndsWith("RevocationBuckets.json"));
+
+            //Stream stream = assembly.GetManifestResourceStream(resourceName);
+
+            //using (var reader = new System.IO.StreamReader(stream))
+            //{
+            //    var jsonData = reader.ReadToEnd();
+            //    bloomFilterBucketsList = JsonConvert.DeserializeObject<List<BucketItem>>(jsonData);
+            //}
+
+            return bloomFilterBucketsList;
         }
 
 

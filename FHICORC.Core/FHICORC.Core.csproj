@@ -97,7 +97,13 @@
 		<EmbeddedResource Include="Services\Model\EuDCCModel\ValueSet\sct-vaccines-covid-19.json" />
 	</ItemGroup>
 	<ItemGroup>
+	  <None Update="RevocationDownloadReponse200.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	  <None Update="RevocationDownloadReponse.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="RevocationHash200.txt">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	  <None Update="RevocationHash.txt">

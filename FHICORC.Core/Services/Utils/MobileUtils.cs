@@ -10,7 +10,7 @@ namespace FHICORC.Core.Services.Utils
 {
     public static class MobileUtils
     {
-        public static bool ContainsCertificateFilterMobile(string certificateIdentifierHash, string signatureHash, IEnumerable<RevocationBatch> revocationBatches, BloomFilterBuckets bloomFilterBuckets)
+        public static bool ContainsCertificateFilterMobile(string certificateIdentifierHash, string signatureHash, IEnumerable<RevocationBatch> revocationBatches, List<BucketItem> bloomFilterBuckets)
         {
             var allHashFunctionCertificateIdentifierIndicies_k = CalculateAllIndicies(certificateIdentifierHash, bloomFilterBuckets);
             var allHashFunctionSignatureIndicies_k = CalculateAllIndicies(signatureHash, bloomFilterBuckets);
@@ -88,10 +88,10 @@ namespace FHICORC.Core.Services.Utils
         }
 
 
-        public static List<int[]> CalculateAllIndicies(string hashString, BloomFilterBuckets bloomFilterBuckets)
+        public static List<int[]> CalculateAllIndicies(string hashString, List<BucketItem> bloomFilterBuckets)
         {
             var allHashFunctionIndicies_k = new List<int[]>();
-            foreach (var bucketItem in bloomFilterBuckets.Buckets)
+            foreach (var bucketItem in bloomFilterBuckets)
             {
                 var hashedIndicies = HashData(Encoding.UTF8.GetBytes(hashString), bucketItem.BitVectorLength_m, bucketItem.NumberOfHashFunctions_k);
                 allHashFunctionIndicies_k.Add(hashedIndicies);

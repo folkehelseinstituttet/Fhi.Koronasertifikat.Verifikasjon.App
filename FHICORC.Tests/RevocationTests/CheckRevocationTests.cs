@@ -19,15 +19,16 @@ namespace FHICORC.Tests.RevocationTests
         private List<RevocationBatch> revocationBatchtes;
 
 
-        //[OneTimeSetUp]
+        [OneTimeSetUp]
         public void SetUp()
         {
 
-            revocationBatchtes = JsonConvert.DeserializeObject<List<RevocationBatch>>(File.ReadAllText("RevocationDownloadReponse.json"));
+            revocationBatchtes = JsonConvert.DeserializeObject<List<RevocationBatch>>(File.ReadAllText("RevocationDownloadReponse200.json"));
 
         }
 
         //[TestCase("RO", "", "J4PCK4sFs63kH/EeP7+C3A==")]
+        [TestCase("CZ", "+hkApE6qvfhfb95y/Jjx/w==", "+hkApE6qvfhfb95y/Jjx/w==")]
         public void CheckIfSingleRevocationExists(string isoCode, string uciHash, string signatureHash) {
 
             var revocationBatchesCountry = GetRevocationBatchesFromCountry(isoCode);
@@ -41,12 +42,13 @@ namespace FHICORC.Tests.RevocationTests
         }
 
 
-        //[Test]
+        [Test]
         public void CheckAllRevocationExists() {
 
-            var revocationHashes = new List<string>(File.ReadAllLines("RevocationHash.txt"));
+            var revocationHashes = new List<string>(File.ReadAllLines("RevocationHash200.txt"));
             var isoCodes = new List<string>() { "CZ", "DE", "DX", "ES", "FR", "HR", "IT", "RO", "XX", "YA" };
             var sut = new CertificateRevocationService(new MockRevocationBatchService());
+            var iso = "";
 
             foreach (var revocationHash in revocationHashes) {
 
@@ -54,6 +56,8 @@ namespace FHICORC.Tests.RevocationTests
                 var doesHashExistInRevocationBloomFilters = false;
 
                 foreach (var isoCode in isoCodes) {
+
+                    iso = isoCode;                        
 
                     var revocationBatchesCountry = GetRevocationBatchesFromCountry(isoCode);
                     var result = sut.CheckHashInRevocationBatchesAsync(revocationBatchesCountry, uciOrSingatureHash, uciOrSingatureHash);
@@ -64,7 +68,8 @@ namespace FHICORC.Tests.RevocationTests
                     }
                 }
 
-                Assert.True(doesHashExistInRevocationBloomFilters); 
+                Assert.True(doesHashExistInRevocationBloomFilters);
+
             }
         }
         
