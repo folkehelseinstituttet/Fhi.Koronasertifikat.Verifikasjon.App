@@ -46,6 +46,7 @@ namespace FHICORC.Tests.RevocationTests
         }
 
 
+
         [Test]
         public void CheckAllRevocationExists() {
 
@@ -86,10 +87,11 @@ namespace FHICORC.Tests.RevocationTests
             watch.Stop();
             TestContext.WriteLine($"Non-parallel Execution Time: {watch.ElapsedMilliseconds} ms");
 
-            watch.Start();
+            var watch2 = new System.Diagnostics.Stopwatch();
+            watch2.Start();
             CheckIfSingleRevocationExists(isoCode, uciHash, signatureHash, true);
-            watch.Stop();
-            TestContext.WriteLine($"Parallel Execution Time: {watch.ElapsedMilliseconds} ms");
+            watch2.Stop();
+            TestContext.WriteLine($"Parallel Execution Time: {watch2.ElapsedMilliseconds} ms");
 
         }
 
@@ -119,7 +121,6 @@ namespace FHICORC.Tests.RevocationTests
                     BloomFilter = GetByteArray(bucketItem.BitVectorLength_m / 8),
                     BucketType = bucketItem.BucketId,
                     HashType = HashTypeEnum.Signature,
-                    ExpirationDate = DateTime.UtcNow
                 };
 
                 revocationBatchtes.Insert(0, mockedBatch);
