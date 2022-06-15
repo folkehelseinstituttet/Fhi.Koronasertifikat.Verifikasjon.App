@@ -11,6 +11,9 @@ using System.Collections.Generic;
 using System.Linq;
 using FHICORC.Core.Services.DecoderServices;
 using FHICORC.Tests.TestMocks;
+using FHICORC.Core.Services.Utils;
+using FHICORC.Core.Services.Model;
+using FHICORC.Core.Services.Enum;
 
 namespace FHICORC.Tests.RevocationTests
 {
@@ -28,14 +31,15 @@ namespace FHICORC.Tests.RevocationTests
         }
 
         //[TestCase("RO", "", "J4PCK4sFs63kH/EeP7+C3A==")]
-        [TestCase("CZ", "+hkApE6qvfhfb95y/Jjx/w==", "+hkApE6qvfhfb95y/Jjx/w==")]
-        public void CheckIfSingleRevocationExists(string isoCode, string uciHash, string signatureHash) {
+        [TestCase("CZ", "+hkApE6qvfhfb95y/Jjx/w==", "+hkApE6qvfhfb95y/Jjx/w==", true)]
+        [TestCase("CZ", "+hkApE6qvfhfb95y/Jjx/w==", "+hkApE6qvfhfb95y/Jjx/w==", false)]
+        public void CheckIfSingleRevocationExists(string isoCode, string uciHash, string signatureHash, bool isParallel=false) {
 
             var revocationBatchesCountry = GetRevocationBatchesFromCountry(isoCode);
 
             var sut = new CertificateRevocationService(new MockRevocationBatchService());
 
-            var result = sut.CheckHashInRevocationBatchesAsync(revocationBatchesCountry, uciHash, signatureHash);
+            var result = sut.CheckHashInRevocationBatchesAsync(revocationBatchesCountry, uciHash, signatureHash, isParallel);
 
             Assert.True(result);
 
@@ -48,7 +52,6 @@ namespace FHICORC.Tests.RevocationTests
             var revocationHashes = new List<string>(File.ReadAllLines("RevocationHash200.txt"));
             var isoCodes = new List<string>() { "CZ", "DE", "DX", "ES", "FR", "HR", "IT", "RO", "XX", "YA" };
             var sut = new CertificateRevocationService(new MockRevocationBatchService());
-            var iso = "";
 
             foreach (var revocationHash in revocationHashes) {
 
@@ -56,9 +59,6 @@ namespace FHICORC.Tests.RevocationTests
                 var doesHashExistInRevocationBloomFilters = false;
 
                 foreach (var isoCode in isoCodes) {
-
-                    iso = isoCode;                        
-
                     var revocationBatchesCountry = GetRevocationBatchesFromCountry(isoCode);
                     var result = sut.CheckHashInRevocationBatchesAsync(revocationBatchesCountry, uciOrSingatureHash, uciOrSingatureHash);
 
@@ -72,7 +72,73 @@ namespace FHICORC.Tests.RevocationTests
 
             }
         }
-        
+
+
+        [TestCase("CZ", "+hkApE6qvfhfb95y/Jjx/w==", "+hkApE6qvfhfb95y/Jjx/w==")]
+        public void CheckPerformanceIfLocalDatabaseIsBigAFandRevocedPassIsLast(string isoCode, string uciHash, string signatureHash) {
+
+            var watch = new System.Diagnostics.Stopwatch();
+
+            AddJunkBatches(isoCode);
+
+            watch.Start();
+            CheckIfSingleRevocationExists(isoCode, uciHash, signatureHash, false);
+            watch.Stop();
+            TestContext.WriteLine($"Non-parallel Execution Time: {watch.ElapsedMilliseconds} ms");
+
+            watch.Start();
+            CheckIfSingleRevocationExists(isoCode, uciHash, signatureHash, true);
+            watch.Stop();
+            TestContext.WriteLine($"Parallel Execution Time: {watch.ElapsedMilliseconds} ms");
+
+        }
+
+        private List<RevocationBatch> AddJunkBatches(string isoCode, int amountOfJunkBatches=80000){
+
+            var buckets = MobileUtils.FillBloomBuckets();
+            Random random = new Random();
+
+
+            for (var i = 0; i < amountOfJunkBatches; i++)
+            {
+                //int numberOfHashesInBatch = random.Next(1, 999);
+                int numberOfHashesInBatch = 1000;
+
+                BucketItem bucketItem = new BucketItem();
+                foreach (var b in buckets)
+                {
+                    bucketItem = b;
+                    if (b.MaxValue >= numberOfHashesInBatch)
+                        break;
+                }
+
+                var mockedBatch = new RevocationBatch()
+                {
+                    BatchId = "",
+                    CountryISO3166 = isoCode,
+                    BloomFilter = GetByteArray(bucketItem.BitVectorLength_m / 8),
+                    BucketType = bucketItem.BucketId,
+                    HashType = HashTypeEnum.Signature,
+                    ExpirationDate = DateTime.UtcNow
+                };
+
+                revocationBatchtes.Insert(0, mockedBatch);
+            }
+
+            return revocationBatchtes;
+
+        }
+
+        private byte[] GetByteArray(int byteSize)
+        {
+            Random rnd = new Random();
+            byte[] b = new byte[byteSize];
+            rnd.NextBytes(b);
+            return b;
+        }
+
+
+
 
         private List<RevocationBatch> GetRevocationBatchesFromCountry(string isoCode) {
             return revocationBatchtes.Where(rb => rb.CountryISO3166 == isoCode).ToList();

@@ -36,52 +36,7 @@ namespace FHICORC.Core.Services.DecoderServices
         public CertificateRevocationService(IRevocationBatchService revocationBatchService)
         {
             _revocationBatchService = revocationBatchService;
-            _bloomFilterBuckets = FillBloomBuckets();
-        }
-
-        public static List<BucketItem> FillBloomBuckets()
-        {
-            var numberOfBuckets = 200;
-            var minValue = 5;
-            var maxValue = 1000;
-            var stepness = 1;
-            var falsePositiveProbability = 1e-10;
-
-            //var numberOfBuckets = 10;
-            //var minValue = 5;
-            //var maxValue = 1000;
-            //var stepness = 2.5;
-            //var falsePositiveProbability = 1e-10;
-
-            var bloomFilterBucketsList = new List<BucketItem>();
-
-            for (var i = 0; i < numberOfBuckets; i++)
-            {
-                var bucketValue = (int)Math.Ceiling((maxValue - minValue) /
-                    (Math.Pow(numberOfBuckets - 1, stepness))
-                    * Math.Pow(i, stepness) + minValue);
-
-                var bloomStats = BloomFilterUtils.CalcOptimalMK(bucketValue, falsePositiveProbability);
-                var bucketItem = new BucketItem(i, bucketValue, bloomStats.m, bloomStats.k);
-                bloomFilterBucketsList.Add(bucketItem);
-
-            }
-
-
-
-            //var assembly = IntrospectionExtensions.GetTypeInfo(typeof(CertificateRevocationService)).Assembly;
-            //string resourceName = assembly.GetManifestResourceNames()
-            //    .Single(str => str.EndsWith("RevocationBuckets.json"));
-
-            //Stream stream = assembly.GetManifestResourceStream(resourceName);
-
-            //using (var reader = new System.IO.StreamReader(stream))
-            //{
-            //    var jsonData = reader.ReadToEnd();
-            //    bloomFilterBucketsList = JsonConvert.DeserializeObject<List<BucketItem>>(jsonData);
-            //}
-
-            return bloomFilterBucketsList;
+            _bloomFilterBuckets = MobileUtils.FillBloomBuckets();
         }
 
 
@@ -147,9 +102,9 @@ namespace FHICORC.Core.Services.DecoderServices
 
         }
 
-        public bool CheckHashInRevocationBatchesAsync(IEnumerable<RevocationBatch> revocationBatches, string certificateIdentifierBase64EndodedHash, string signatureBase64EncodedHash)
+        public bool CheckHashInRevocationBatchesAsync(IEnumerable<RevocationBatch> revocationBatches, string certificateIdentifierBase64EndodedHash, string signatureBase64EncodedHash, bool isParallel=false)
         {
-                var result = MobileUtils.ContainsCertificateFilterMobile(certificateIdentifierBase64EndodedHash, signatureBase64EncodedHash, revocationBatches, _bloomFilterBuckets);
+                var result = MobileUtils.ContainsCertificateFilterMobile(certificateIdentifierBase64EndodedHash, signatureBase64EncodedHash, revocationBatches, _bloomFilterBuckets, isParallel);
                 return result;
 
         }

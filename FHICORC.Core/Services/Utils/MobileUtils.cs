@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,15 @@ namespace FHICORC.Core.Services.Utils
 {
     public static class MobileUtils
     {
-        public static bool ContainsCertificateFilterMobile(string certificateIdentifierHash, string signatureHash, IEnumerable<RevocationBatch> revocationBatches, List<BucketItem> bloomFilterBuckets)
+        public static bool ContainsCertificateFilterMobile(string certificateIdentifierHash, string signatureHash, IEnumerable<RevocationBatch> revocationBatches, List<BucketItem> bloomFilterBuckets, bool isParallel=false)
         {
             var allHashFunctionCertificateIdentifierIndicies_k = CalculateAllIndicies(certificateIdentifierHash, bloomFilterBuckets);
             var allHashFunctionSignatureIndicies_k = CalculateAllIndicies(signatureHash, bloomFilterBuckets);
-            return CheckFilterByCountryParallel(allHashFunctionCertificateIdentifierIndicies_k, allHashFunctionSignatureIndicies_k, revocationBatches);
+
+            if(isParallel)
+                return CheckFilterByCountryParallel(allHashFunctionCertificateIdentifierIndicies_k, allHashFunctionSignatureIndicies_k, revocationBatches);
+
+            return CheckFilterByCountry(allHashFunctionCertificateIdentifierIndicies_k, allHashFunctionSignatureIndicies_k, revocationBatches);
         }
 
 
@@ -98,6 +103,37 @@ namespace FHICORC.Core.Services.Utils
             };
 
             return allHashFunctionIndicies_k;
+        }
+
+        public static List<BucketItem> FillBloomBuckets()
+        {
+            var numberOfBuckets = 200;
+            var minValue = 5;
+            var maxValue = 1000;
+            var stepness = 1;
+            var falsePositiveProbability = 1e-10;
+
+            //var numberOfBuckets = 10;
+            //var minValue = 5;
+            //var maxValue = 1000;
+            //var stepness = 2.5;
+            //var falsePositiveProbability = 1e-10;
+
+            var bloomFilterBucketsList = new List<BucketItem>();
+
+            for (var i = 0; i < numberOfBuckets; i++)
+            {
+                var bucketValue = (int)Math.Ceiling((maxValue - minValue) /
+                    (Math.Pow(numberOfBuckets - 1, stepness))
+                    * Math.Pow(i, stepness) + minValue);
+
+                var bloomStats = BloomFilterUtils.CalcOptimalMK(bucketValue, falsePositiveProbability);
+                var bucketItem = new BucketItem(i, bucketValue, bloomStats.m, bloomStats.k);
+                bloomFilterBucketsList.Add(bucketItem);
+
+            }
+
+            return bloomFilterBucketsList;
         }
 
     }
