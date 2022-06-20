@@ -31,15 +31,15 @@ namespace FHICORC.Tests.RevocationTests
         }
 
         //[TestCase("RO", "", "J4PCK4sFs63kH/EeP7+C3A==")]
-        [TestCase("CZ", "+hkApE6qvfhfb95y/Jjx/w==", "+hkApE6qvfhfb95y/Jjx/w==", true)]
-        [TestCase("CZ", "+hkApE6qvfhfb95y/Jjx/w==", "+hkApE6qvfhfb95y/Jjx/w==", false)]
-        public void CheckIfSingleRevocationExists(string isoCode, string uciHash, string signatureHash, bool isParallel=false) {
+        [TestCase("CZ", "+hkApE6qvfhfb95y/Jjx/w==", "+hkApE6qvfhfb95y/Jjx/w==", "+hkApE6qvfhfb95y/Jjx/w==", true)]
+        [TestCase("CZ", "+hkApE6qvfhfb95y/Jjx/w==", "+hkApE6qvfhfb95y/Jjx/w==", "+hkApE6qvfhfb95y/Jjx/w==",  false)]
+        public void CheckIfSingleRevocationExists(string isoCode, string uciHash, string countrycodeuciHash, string signatureHash, bool isParallel=false) {
 
             var revocationBatchesCountry = GetRevocationBatchesFromCountry(isoCode);
 
             var sut = new CertificateRevocationService(new MockRevocationBatchService());
 
-            var result = sut.CheckHashInRevocationBatchesAsync(revocationBatchesCountry, uciHash, signatureHash, isParallel);
+            var result = sut.CheckHashInRevocationBatchesAsync(revocationBatchesCountry, uciHash, countrycodeuciHash, signatureHash, isParallel);
 
             Assert.True(result);
 
@@ -61,7 +61,7 @@ namespace FHICORC.Tests.RevocationTests
 
                 foreach (var isoCode in isoCodes) {
                     var revocationBatchesCountry = GetRevocationBatchesFromCountry(isoCode);
-                    var result = sut.CheckHashInRevocationBatchesAsync(revocationBatchesCountry, uciOrSingatureHash, uciOrSingatureHash);
+                    var result = sut.CheckHashInRevocationBatchesAsync(revocationBatchesCountry, uciOrSingatureHash, uciOrSingatureHash, uciOrSingatureHash);
 
                     if (result) {
                         doesHashExistInRevocationBloomFilters = true;
@@ -75,21 +75,21 @@ namespace FHICORC.Tests.RevocationTests
         }
 
 
-        [TestCase("CZ", "+hkApE6qvfhfb95y/Jjx/w==", "+hkApE6qvfhfb95y/Jjx/w==")]
-        public void CheckPerformanceIfLocalDatabaseIsBigAFandRevocedPassIsLast(string isoCode, string uciHash, string signatureHash) {
+        [TestCase("CZ", "+hkApE6qvfhfb95y/Jjx/w==", "+hkApE6qvfhfb95y/Jjx/w==", "+hkApE6qvfhfb95y/Jjx/w==")]
+        public void CheckPerformanceIfLocalDatabaseIsBigAFandRevocedPassIsLast(string isoCode, string uciHash, string countrycodeuciHash, string signatureHash) {
 
             var watch = new System.Diagnostics.Stopwatch();
 
             AddJunkBatches(isoCode);
 
             watch.Start();
-            CheckIfSingleRevocationExists(isoCode, uciHash, signatureHash, false);
+            CheckIfSingleRevocationExists(isoCode, uciHash, countrycodeuciHash, signatureHash, false);
             watch.Stop();
             TestContext.WriteLine($"Non-parallel Execution Time: {watch.ElapsedMilliseconds} ms");
 
             var watch2 = new System.Diagnostics.Stopwatch();
             watch2.Start();
-            CheckIfSingleRevocationExists(isoCode, uciHash, signatureHash, true);
+            CheckIfSingleRevocationExists(isoCode, uciHash, countrycodeuciHash, signatureHash, true);
             watch2.Stop();
             TestContext.WriteLine($"Parallel Execution Time: {watch2.ElapsedMilliseconds} ms");
 

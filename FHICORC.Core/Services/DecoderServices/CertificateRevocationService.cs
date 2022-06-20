@@ -47,8 +47,10 @@ namespace FHICORC.Core.Services.DecoderServices
                 (var isoCode, var certificateIdentifier) = GetCertificateIdentifierAndISOCodeFromTokenPayload(payload);
                 var certificateIdentifierHash = GetCertificateIdentifierHashFromCertificateIdentifier(certificateIdentifier, isoCode);
                 var revocationBatches = await _revocationBatchService.GetRevocationBatchesFromCountry(isoCode);
-                var certificateIdentifierBase64EndodedHash = Base64EncodeCertificateIdentifierHash(certificateIdentifierHash);
-                return CheckHashInRevocationBatchesAsync(revocationBatches, certificateIdentifierBase64EndodedHash, signatureBase64EncodedHash);
+                var uciBase64EndodedHash = Base64EncodeCertificateIdentifierHash(certificateIdentifierHash);
+                var countrycodeuciBase64EndodedHash = Base64EncodeCertificateIdentifierHash(isoCode.ToUpper() + certificateIdentifierHash);
+
+                return CheckHashInRevocationBatchesAsync(revocationBatches, uciBase64EndodedHash, countrycodeuciBase64EndodedHash, signatureBase64EncodedHash);
             }
             return false;
         }
@@ -102,9 +104,9 @@ namespace FHICORC.Core.Services.DecoderServices
 
         }
 
-        public bool CheckHashInRevocationBatchesAsync(IEnumerable<RevocationBatch> revocationBatches, string certificateIdentifierBase64EndodedHash, string signatureBase64EncodedHash, bool isParallel=false)
+        public bool CheckHashInRevocationBatchesAsync(IEnumerable<RevocationBatch> revocationBatches, string uciBase64EndodedHash, string countrycodeuciBase64EndodedHash, string signatureBase64EncodedHash, bool isParallel=false)
         {
-                var result = MobileUtils.ContainsCertificateFilterMobile(certificateIdentifierBase64EndodedHash, signatureBase64EncodedHash, revocationBatches, _bloomFilterBuckets, isParallel);
+                var result = MobileUtils.ContainsCertificateFilterMobile(uciBase64EndodedHash, signatureBase64EncodedHash, countrycodeuciBase64EndodedHash, revocationBatches, _bloomFilterBuckets, isParallel);
                 return result;
 
         }
