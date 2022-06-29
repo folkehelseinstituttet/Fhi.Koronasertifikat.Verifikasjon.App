@@ -27,6 +27,7 @@ namespace FHICORC.Core.Services.DecoderServices
             { "IT", (x) => x.Split('#')[0] },                       // "01CountryOpaqueUniqueString#Checksum"
             { "LU", (x) => x.Split('#')[0].Split('/')[2] },         // "01/Country/OpaqueUniqueString#Checksum"
             { "PT", (x) => x.Split('#')[0].Split(':', '/')[5] },    // "urn:uvci:01/Country/SPMS/OpaqueUniqueString#Checksum"
+            { "NO", (x) => x.Split('#')[0].Split(':', '/')[5] },    // "urn:uvci:01:Country/SPMS/OpaqueUniqueString#Checksum"
             { "EE", (x) => x.Split('#')[0].Split('/')[3] }          // "01/Country/TIS/OpaqueUniqueString#Checksum"
         };
 
@@ -48,7 +49,8 @@ namespace FHICORC.Core.Services.DecoderServices
                 var certificateIdentifierHash = GetCertificateIdentifierHashFromCertificateIdentifier(certificateIdentifier, isoCode);
                 var revocationBatches = await _revocationBatchService.GetRevocationBatchesFromCountry(isoCode);
                 var certificateIdentifierBase64EndodedHash = Base64EncodeCertificateIdentifierHash(certificateIdentifierHash);
-                return CheckHashInRevocationBatchesAsync(revocationBatches, certificateIdentifierBase64EndodedHash, signatureBase64EncodedHash);
+                var ccUci = Base64EncodeCertificateIdentifierHash(isoCode + certificateIdentifierHash);
+                return CheckHashInRevocationBatchesAsync(revocationBatches, certificateIdentifierBase64EndodedHash, ccUci, signatureBase64EncodedHash);
             }
             return false;
         }
@@ -70,20 +72,8 @@ namespace FHICORC.Core.Services.DecoderServices
         private string GetCertificateIdentifierHashFromCertificateIdentifier(string certificateIdentifier, string isoCode)
         {
             var certificateIdentifierWithoutCheckSum = certificateIdentifier.Split('#').First();
-            var colons = certificateIdentifierWithoutCheckSum.Count(x => x.Equals(':'));
-            var slash = certificateIdentifierWithoutCheckSum.Count(x => x.Equals('/'));
 
-            return (slash, colons) switch 
-            {
-                (0, 4) => certificateIdentifierWithoutCheckSum.Split(':')[4], // Unique Vaccination Certificate Identifier(UVCI) Option 2 - opaque identifier - no structure
-                (1, 4) => certificateIdentifierWithoutCheckSum.Split(':')[4], // Unique Vaccination Certificate Identifier(UVCI) Option 3 - some semantics
-                (2, 4) => certificateIdentifierWithoutCheckSum.Split(':')[4], // Unique Vaccination Certificate Identifier(UVCI) Option 1 - identifier with semantics
-                _ => _customGetCertificateIdentifierHashFunctionDirectory.TryGetValue(isoCode, out var countryGetCertficateIdentifierHashFunction) switch
-                {
-                    true => countryGetCertficateIdentifierHashFunction.Invoke(certificateIdentifier),
-                    _ => throw new ArgumentException($"No GetCertficateIdentifierHashFunction found for specified country: {isoCode}. The certificate identifier is not in a valid format.")
-                }  
-            };
+            return certificateIdentifierWithoutCheckSum;
         }
 
         private string Base64EncodeCertificateIdentifierHash(string certificateIdentifierHash) {
@@ -91,6 +81,8 @@ namespace FHICORC.Core.Services.DecoderServices
             {
                 // Computing Hash - returns here byte array
                 var sha256Bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(certificateIdentifierHash));
+
+                var s = System.Text.Encoding.Default.GetString(sha256Bytes);
                 var sha256B64 = Convert.ToBase64String(sha256Bytes);
 
                 var sha256Bytes2 = new byte[16];
@@ -102,9 +94,9 @@ namespace FHICORC.Core.Services.DecoderServices
 
         }
 
-        public bool CheckHashInRevocationBatchesAsync(IEnumerable<RevocationBatch> revocationBatches, string certificateIdentifierBase64EndodedHash, string signatureBase64EncodedHash, bool isParallel=false)
+        public bool CheckHashInRevocationBatchesAsync(IEnumerable<RevocationBatch> revocationBatches, string uciBase64EndodedHash, string countryCodeUciBase64EndodedHash, string signatureBase64EncodedHash, bool isParallel=false)
         {
-                var result = MobileUtils.ContainsCertificateFilterMobile(certificateIdentifierBase64EndodedHash, signatureBase64EncodedHash, revocationBatches, _bloomFilterBuckets, isParallel);
+                var result = MobileUtils.ContainsCertificateFilterMobile(uciBase64EndodedHash, countryCodeUciBase64EndodedHash, signatureBase64EncodedHash, revocationBatches, _bloomFilterBuckets, isParallel);
                 return result;
 
         }

@@ -30,6 +30,8 @@ namespace FHICORC
         private IBusinessRulesService _businessRulesDataManager;
         private IValueSetService _valueSetService;
 
+        private readonly IFetchRevocationBatchesFromBackednService _fetchRevocationBatchesFromBackednService; 
+
         public App()
         {
             System.Diagnostics.Debug.Print("Initializing app.");
@@ -46,6 +48,7 @@ namespace FHICORC
             _valueSetService = IoCContainer.Resolve<IValueSetService>();
             _revocationBatchDataManager = IoCContainer.Resolve<IRevocationBatchService>();
             _revocationDeleteExpiredBatchService = IoCContainer.Resolve<IRevocationDeleteExpiredBatchService>();
+            _fetchRevocationBatchesFromBackednService = IoCContainer.Resolve<IFetchRevocationBatchesFromBackednService>();
             ConfigureApp();
         }
 
@@ -97,7 +100,10 @@ namespace FHICORC
             }
             await _textService.LoadSavedLocales();
             _navigationService.OpenLandingPage();
+
             await FetchRemoteData();
+            var _ = _fetchRevocationBatchesFromBackednService.FetchFromBackend();
+            
             base.OnStart();
             PerformRootCheck();
         }
@@ -110,7 +116,7 @@ namespace FHICORC
             await _businessRulesDataManager.CheckAndFetchBusinessRulesFromBackend();
             //await _publicKeyDataManager.CheckAndFetchPublicKeyFromBackend();
 
-            await _revocationBatchDataManager.FetchRevocationBatchesFromBackend(true);
+            //await _revocationBatchDataManager.FetchRevocationBatchesFromBackend(true);
             await _revocationDeleteExpiredBatchService.DeleteExpiredBatches();
 
 

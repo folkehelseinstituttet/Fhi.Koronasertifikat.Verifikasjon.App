@@ -25,8 +25,8 @@ namespace FHICORC.ViewModels.QrScannerViewModels
             TokenValidateResult.Invalid => "SCANNER_ERROR_INVALID_CONTENT".Translate(),
             TokenValidateResult.Expired => "SCANNER_ERROR_EXPIRED_CONTENT".Translate(),
             TokenValidateResult.UnsupportedType => "SCANNER_ERROR_UNKNOWN_TYPE_CONTENT".Translate(),
-            TokenValidateResult.Revoked => "SCANNER_ERROR_REVOKED_CONTENT".Translate(),
-            _ => "SCANNER_ERROR_DEFAULT_CONTENT".Translate(),
+            TokenValidateResult.Revoked => "SCANNER_ERROR_REVOKED_CONTENT_REV".Translate(),
+            _ => "SCANNER_ERROR_DEFAULT_CONTENT_REV".Translate(),
         };
 
         public TokenValidateResultModel TokenValidateResultModel { get; set; } = new TokenValidateResultModel();

@@ -29,6 +29,7 @@ namespace FHICORC.Core.Services.DecoderServices
         private readonly IPreferencesService _preferencesService;
         private readonly IDigitalGreenValueSetTranslatorFactory _digitalGreenValueSetTranslatorFactory;
         private readonly ICertificateRevocationService _certificateRevocationService;
+        private readonly IFetchRevocationBatchesFromBackednService _fetchRevocationBatchesFromBackednService;
 
         private IDgcValueSetTranslator _translator;
 
@@ -39,7 +40,8 @@ namespace FHICORC.Core.Services.DecoderServices
             IRuleVerifierService ruleVerifierService,
             IPreferencesService preferencesService,
             IDigitalGreenValueSetTranslatorFactory digitalGreenValueSetTranslatorFactory,
-            ICertificateRevocationService certificateRevocationService)
+            ICertificateRevocationService certificateRevocationService,
+            IFetchRevocationBatchesFromBackednService fetchRevocationBatchesFromBackednService)
         {
             _certificationService = certificationService;
             _dateTimeService = dateTimeService;
@@ -50,6 +52,7 @@ namespace FHICORC.Core.Services.DecoderServices
             _translator = _digitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
             _certificateRevocationService = certificateRevocationService;
             _digitalGreenValueSetTranslatorFactory.Init();
+            _fetchRevocationBatchesFromBackednService = fetchRevocationBatchesFromBackednService;
         }
 
         public void SetDgcValueSetTranslator(IDgcValueSetTranslator translator)
@@ -60,7 +63,9 @@ namespace FHICORC.Core.Services.DecoderServices
         }
 
         public async Task<TokenValidateResultModel> DecodePassportTokenToModel(string base45String)
-        {
+        {            
+            await _fetchRevocationBatchesFromBackednService.HasChangedTask();
+
             TokenValidateResultModel resultModel = new TokenValidateResultModel();
             try
             {

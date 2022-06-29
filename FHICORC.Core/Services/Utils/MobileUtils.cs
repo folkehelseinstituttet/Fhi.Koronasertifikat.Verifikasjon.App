@@ -11,19 +11,20 @@ namespace FHICORC.Core.Services.Utils
 {
     public static class MobileUtils
     {
-        public static bool ContainsCertificateFilterMobile(string certificateIdentifierHash, string signatureHash, IEnumerable<RevocationBatch> revocationBatches, List<BucketItem> bloomFilterBuckets, bool isParallel=true)
+        public static bool ContainsCertificateFilterMobile(string uciHash, string countryCodeUciHash, string signatureHash, IEnumerable<RevocationBatch> revocationBatches, List<BucketItem> bloomFilterBuckets, bool isParallel=true)
         {
-            var allHashFunctionCertificateIdentifierIndicies_k = CalculateAllIndicies(certificateIdentifierHash, bloomFilterBuckets);
+            var allHashFunctionCertificateIdentifierIndicies_k = CalculateAllIndicies(uciHash, bloomFilterBuckets);
+            var allHashFunctionCountryCodeUci_k = CalculateAllIndicies(countryCodeUciHash, bloomFilterBuckets);
             var allHashFunctionSignatureIndicies_k = CalculateAllIndicies(signatureHash, bloomFilterBuckets);
 
             if(isParallel)
-                return CheckFilterByCountryParallel(allHashFunctionCertificateIdentifierIndicies_k, allHashFunctionSignatureIndicies_k, revocationBatches);
+                return CheckFilterByCountryParallel(allHashFunctionCertificateIdentifierIndicies_k, allHashFunctionCountryCodeUci_k, allHashFunctionSignatureIndicies_k, revocationBatches);
 
-            return CheckFilterByCountry(allHashFunctionCertificateIdentifierIndicies_k, allHashFunctionSignatureIndicies_k, revocationBatches);
+            return CheckFilterByCountry(allHashFunctionCertificateIdentifierIndicies_k, allHashFunctionCountryCodeUci_k, allHashFunctionSignatureIndicies_k, revocationBatches);
         }
 
 
-        public static bool CheckFilterByCountry(List<int[]> allHashFunctionCertificateIdentifierIndicies_k, List<int[]> allHashFunctionSignatureIndicies_k, IEnumerable<RevocationBatch> revocationBatches)
+        public static bool CheckFilterByCountry(List<int[]> uci_k, List<int[]> countryCodeUci_k, List<int[]> signature_k, IEnumerable<RevocationBatch> revocationBatches)
         {
             foreach (var r in revocationBatches)
             {
@@ -32,11 +33,15 @@ namespace FHICORC.Core.Services.Utils
                 bool contains;
                 if (r.HashType == Enum.HashTypeEnum.Signature)
                 {
-                    contains = bitVector.Contains(allHashFunctionSignatureIndicies_k[r.BucketType]);
+                    contains = bitVector.Contains(signature_k[r.BucketType]);
+                }
+                else if (r.HashType == Enum.HashTypeEnum.UCI)
+                {
+                    contains = bitVector.Contains(uci_k[r.BucketType]);
                 }
                 else
                 {
-                    contains = bitVector.Contains(allHashFunctionCertificateIdentifierIndicies_k[r.BucketType]);
+                    contains = bitVector.Contains(countryCodeUci_k[r.BucketType]);
                 }
 
                 if (contains)
@@ -47,15 +52,14 @@ namespace FHICORC.Core.Services.Utils
         }
 
 
-        public static bool CheckFilterByCountryParallel(List<int[]> allHashFunctionCertificateIdentifierIndicies_k, List<int[]> allHashFunctionSignatureIndicies_k, IEnumerable<RevocationBatch> revocationBatches)
+        public static bool CheckFilterByCountryParallel(List<int[]> uci_k, List<int[]> countryCodeUci_k, List<int[]> signature_k, IEnumerable<RevocationBatch> revocationBatches)
         {
-
             bool contains = revocationBatches.AsParallel()
-                .Any(r => BatchContains(r, allHashFunctionCertificateIdentifierIndicies_k, allHashFunctionSignatureIndicies_k));
+                .Any(r => BatchContains(r, uci_k, countryCodeUci_k, signature_k));
             return contains;
         }
 
-        public static bool BatchContains(RevocationBatch revocationBatch, List<int[]> allHashFunctionCertificateIdentifierIndicies_k, List<int[]> allHashFunctionSignatureIndicies_k)
+        public static bool BatchContains(RevocationBatch revocationBatch, List<int[]> uci_k, List<int[]> countryCodeUci_k, List<int[]> signature_k)
         {
 
             var bitVector = new BitArray(revocationBatch.BloomFilter);
@@ -63,11 +67,14 @@ namespace FHICORC.Core.Services.Utils
             bool contains;
             if (revocationBatch.HashType == Enum.HashTypeEnum.Signature)
             {
-                contains = bitVector.Contains(allHashFunctionSignatureIndicies_k[revocationBatch.BucketType]);
+                contains = bitVector.Contains(signature_k[revocationBatch.BucketType]);
             }
-            else
+            else if (revocationBatch.HashType == Enum.HashTypeEnum.UCI)
             {
-                contains = bitVector.Contains(allHashFunctionCertificateIdentifierIndicies_k[revocationBatch.BucketType]);
+                contains = bitVector.Contains(uci_k[revocationBatch.BucketType]);
+            }
+            else {
+                contains = bitVector.Contains(countryCodeUci_k[revocationBatch.BucketType]);
             }
 
             return contains;

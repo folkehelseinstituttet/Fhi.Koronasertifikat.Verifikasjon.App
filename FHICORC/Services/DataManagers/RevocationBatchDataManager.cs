@@ -56,7 +56,7 @@ namespace FHICORC.Services.DataManagers
             {
                 string lastFetchDateString;
                 if (lastFetch == new DateTime())
-                    lastFetchDateString = "2021-06-01T00:00:00Z";
+                    lastFetchDateString = "2022-06-27T00:00:00Z";
                 else
                     lastFetchDateString = lastFetch.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ");
 

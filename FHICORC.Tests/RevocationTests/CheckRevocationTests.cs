@@ -39,7 +39,7 @@ namespace FHICORC.Tests.RevocationTests
 
             var sut = new CertificateRevocationService(new MockRevocationBatchService());
 
-            var result = sut.CheckHashInRevocationBatchesAsync(revocationBatchesCountry, uciHash, signatureHash, isParallel);
+            var result = sut.CheckHashInRevocationBatchesAsync(revocationBatchesCountry, uciHash, uciHash, signatureHash, isParallel);
 
             Assert.True(result);
 
@@ -61,7 +61,7 @@ namespace FHICORC.Tests.RevocationTests
 
                 foreach (var isoCode in isoCodes) {
                     var revocationBatchesCountry = GetRevocationBatchesFromCountry(isoCode);
-                    var result = sut.CheckHashInRevocationBatchesAsync(revocationBatchesCountry, uciOrSingatureHash, uciOrSingatureHash);
+                    var result = sut.CheckHashInRevocationBatchesAsync(revocationBatchesCountry, uciOrSingatureHash, uciOrSingatureHash, uciOrSingatureHash);
 
                     if (result) {
                         doesHashExistInRevocationBloomFilters = true;
