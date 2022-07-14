@@ -44,7 +44,6 @@
 	<ItemGroup>
 		<Folder Include="WebServices\" />
 		<Folder Include="Interfaces\" />
-		<Folder Include="Data\" />
 		<Folder Include="Services\Model\Converter\" />
 		<Folder Include="Services\Model\NoDGCModel\" />
 		<Folder Include="Services\Model\EuDCCModel\1.3.0\" />
