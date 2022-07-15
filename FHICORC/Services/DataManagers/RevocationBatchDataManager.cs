@@ -62,22 +62,39 @@ namespace FHICORC.Services.DataManagers
                 else
                     lastFetchDateString = lastFetch.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ");
 
-                do
+                try
                 {
-                    _restClient.RegisterCustomRequestHeaders(("LastDownloaded", lastFetchDateString));
-                    response = await _restClient.Get<SuperBatchChunk>(Urls.URL_GET_REVOCATION_LIST_LIMIT).ConfigureAwait(false);
-                    
-                    if (response.IsSuccessfull && response.Data != null)
+                    do
                     {
-                        _ = await _revocationBatchRepository.AddOrUpdateEntitiesAsync(response.Data.S).ConfigureAwait(false);
-                        _ = await _appLastFetchingDatesRepository.AddOrUpdateEntityAsync(entity).ConfigureAwait(false);
-                        entity.LastFetch = response.Data.N;
-                        lastFetchDateString = response.Data.N.ToString("yyyy-MM-ddTHH:mm:ssZ");
-                        _cachedRevocationBatches = InitializeRevocationBatchCache();
-                    }
-                    else
-                        await _navigationTaskManager.HandlerErrors(response, true).ConfigureAwait(false);
-                } while (response.Data.M);
+                        _restClient.RegisterCustomRequestHeaders(("LastDownloaded", lastFetchDateString));
+                        response = await _restClient.Get<SuperBatchChunk>(Urls.URL_GET_REVOCATION_LIST_LIMIT).ConfigureAwait(false);
+
+                        if (response.StatusCode.Equals(200) && response.Data != null)
+                        {
+
+                            if (response.Data.M)
+                                entity.LastFetch = response.Data.N;
+                            else
+                                entity.LastFetch = DateTime.UtcNow;
+
+                            _ = await _revocationBatchRepository.AddOrUpdateEntitiesAsync(response.Data.S).ConfigureAwait(false);                
+                            _ = await _appLastFetchingDatesRepository.AddOrUpdateEntityAsync(entity).ConfigureAwait(false);
+                            _cachedRevocationBatches = InitializeRevocationBatchCache();
+                            
+                            lastFetchDateString = response.Data.N.ToString("yyyy-MM-ddTHH:mm:ssZ");
+               
+                                
+
+                        }
+                        else
+                            await _navigationTaskManager.HandlerErrors(response, true).ConfigureAwait(false);
+                    } while (response.Data.M);
+
+
+                }
+                catch (Exception ex) {
+                    System.Diagnostics.Debug.WriteLine("BigEx " + ex);
+                }
             }
         }, ref _fecthingGuard);
 

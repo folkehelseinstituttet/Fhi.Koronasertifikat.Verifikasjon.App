@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,16 +16,19 @@ namespace FHICORC.Core.Data.Models
         }
 
         // More revocationbatches available
-        public bool M { get; private set; }
+        [JsonProperty("m")]
+        public bool M { get; set; }
 
         /// <summary>
         /// NextLastModified
         /// The modified dateTime of the first Superbatch in the next chunk
         /// If ther there are noe more chunks to download this is set to null.
         /// </summary>
-        public DateTime N { get; private set; }
+        [JsonProperty("n")]
+        public DateTime N { get; set; }
 
         // SuperBatches
-        public IEnumerable<RevocationBatch> S { get; private set; }
+        [JsonProperty("s")]
+        public IEnumerable<RevocationBatch> S { get; set; }
     }
 }

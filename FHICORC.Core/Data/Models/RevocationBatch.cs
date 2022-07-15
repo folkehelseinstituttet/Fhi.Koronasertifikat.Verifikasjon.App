@@ -7,22 +7,22 @@ namespace FHICORC.Core.Data.Models
 {
     public class RevocationBatch : DatabaseEntityBase
     {
-        [Indexed, NotNull, MaxLength(16), JsonProperty("I")]
+        [MaxLength(16), JsonProperty("i")]
         public string BatchId { get; set; }
 
-        [NotNull, MaxLength(512), JsonProperty("C")]
+        [MaxLength(512), JsonProperty("c")]
         public string CountryISO3166 { get; set; }
 
-        [NotNull, JsonProperty("B")]
-        public byte[] BloomFilter { get; set; }
-
-        [NotNull, JsonProperty("F")]
+        [JsonProperty("b")]
         public int BucketType { get; set; }
 
-        [NotNull, JsonProperty("H")]
+        [JsonProperty("f")]
+        public byte[] BloomFilter { get; set; }
+
+        [JsonProperty("h")]
         public HashTypeEnum HashType { get; set; }
 
-        [NotNull, JsonProperty("E")]
+        [JsonProperty("e")]
         public DateTime ExpirationDate { get; set; }
     }
 }
