@@ -9,28 +9,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Text;
 using System.Security.Cryptography;
-using System.IO;
-using Newtonsoft.Json;
-using System.Reflection;
 
 namespace FHICORC.Core.Services.DecoderServices
 {
     public class CertificateRevocationService : ICertificateRevocationService
     {
-        private static readonly Dictionary<string, Func<string, string>> _customGetCertificateIdentifierHashFunctionDirectory = new Dictionary<string, Func<string, string>>()
-        {
-            { "BE", (x) => x.Split('#')[0] },                       // "01CountryOpaqueUniqueString#Checksum"
-            { "CY", (x) => x.Split('#')[0].Split(':')[3] },         // "dgci:V1:Country:OpaqueUniqueString#Checksum"
-            { "DE", (x) => x.Split('#')[0].Split(':', '/')[4] },    // "URN:UVCI:01Country/IssuingEntity/OpaqueUniqueString#Checksum"
-            { "ES", (x) => x.Split('#')[0] },                       // "01CountryOpaqueUniqueString#Checksum"
-            { "FR", (x) => x.Split('#')[0].Split(':')[3] },         // "dgci:V1:Country:OpaqueUniqueString#Checksum"
-            { "IT", (x) => x.Split('#')[0] },                       // "01CountryOpaqueUniqueString#Checksum"
-            { "LU", (x) => x.Split('#')[0].Split('/')[2] },         // "01/Country/OpaqueUniqueString#Checksum"
-            { "PT", (x) => x.Split('#')[0].Split(':', '/')[5] },    // "urn:uvci:01/Country/SPMS/OpaqueUniqueString#Checksum"
-            { "NO", (x) => x.Split('#')[0].Split(':', '/')[5] },    // "urn:uvci:01:Country/SPMS/OpaqueUniqueString#Checksum"
-            { "EE", (x) => x.Split('#')[0].Split('/')[3] }          // "01/Country/TIS/OpaqueUniqueString#Checksum"
-        };
-
         private readonly IRevocationBatchService _revocationBatchService;
         private readonly List<BucketItem> _bloomFilterBuckets;
 
@@ -45,12 +28,14 @@ namespace FHICORC.Core.Services.DecoderServices
         {
             if(token is DCCPayload payload)
             {
-                (var isoCode, var certificateIdentifier) = GetCertificateIdentifierAndISOCodeFromTokenPayload(payload);
-                var certificateIdentifierHash = GetCertificateIdentifierHashFromCertificateIdentifier(certificateIdentifier, isoCode);
+                (var isoCode, var certificateIdentifierWithChecksum) = GetCertificateIdentifierAndISOCodeFromTokenPayload(payload);
+                var certificateIdentifier = RemoveCheckSum(certificateIdentifierWithChecksum);
                 var revocationBatches = await _revocationBatchService.GetRevocationBatchesFromCountry(isoCode);
-                var certificateIdentifierBase64EndodedHash = Base64EncodeCertificateIdentifierHash(certificateIdentifierHash);
-                var ccUci = Base64EncodeCertificateIdentifierHash(isoCode + certificateIdentifierHash);
-                return CheckHashInRevocationBatchesAsync(revocationBatches, certificateIdentifierBase64EndodedHash, ccUci, signatureBase64EncodedHash);
+
+                var uci = Base64EncodeIdentifier(certificateIdentifier);
+                var ccUci = Base64EncodeIdentifier(isoCode + certificateIdentifier);
+
+                return CheckHashInRevocationBatchesAsync(revocationBatches, uci, ccUci, signatureBase64EncodedHash);
             }
             return false;
         }
@@ -69,30 +54,40 @@ namespace FHICORC.Core.Services.DecoderServices
                 throw new ArgumentException($"DCCPayload did not contain any DCC result data.");
         }
 
-        private string GetCertificateIdentifierHashFromCertificateIdentifier(string certificateIdentifier, string isoCode)
+        private string RemoveCheckSum(string certificateIdentifier)
         {
             var certificateIdentifierWithoutCheckSum = certificateIdentifier.Split('#').First();
-
             return certificateIdentifierWithoutCheckSum;
         }
 
-        private string Base64EncodeCertificateIdentifierHash(string certificateIdentifierHash) {
+        private string Base64EncodeIdentifier(string certificateIdentifierHash) {
             using (SHA256 sha256Hash = SHA256.Create())
             {
                 // Computing Hash - returns here byte array
-                var sha256Bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(certificateIdentifierHash));
+                var shaBytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(certificateIdentifierHash));
 
-                var s = System.Text.Encoding.Default.GetString(sha256Bytes);
-                var sha256B64 = Convert.ToBase64String(sha256Bytes);
+                var shaBytes16 = new byte[16];
+                Array.Copy(shaBytes, shaBytes16, shaBytes16.Length);
 
-                var sha256Bytes2 = new byte[16];
-                Array.Copy(sha256Bytes, sha256Bytes2, sha256Bytes2.Length);
 
-                var certificateIdentifierBase64EndodedHash = Convert.ToBase64String(sha256Bytes2);
+#if DEBUG
+                //Show the sha256 hashed string
+                var str = BytesToString(shaBytes16);
+# endif
+                var certificateIdentifierBase64EndodedHash = Convert.ToBase64String(shaBytes16);
                 return certificateIdentifierBase64EndodedHash;
             }
-
         }
+
+        public static string BytesToString(byte[] bytes) {
+            StringBuilder Sb = new StringBuilder();
+
+            foreach (Byte b in bytes)
+                Sb.Append(b.ToString("x2"));
+
+            return Sb.ToString();
+        }
+
 
         public bool CheckHashInRevocationBatchesAsync(IEnumerable<RevocationBatch> revocationBatches, string uciBase64EndodedHash, string countryCodeUciBase64EndodedHash, string signatureBase64EncodedHash, bool isParallel=false)
         {
