@@ -196,5 +196,6 @@
   "RULES_ENGINE_VERIFY_OPEN_ACCESSIBILITY_TEXT": "{0} of {1} Not evaluated",
   "RULES_ENGINE_DOMESTIC_FULFILLED": "Rules fulfilled",
   "RULES_ENGINE_DOMESTIC_NOT_FULFILLED": "Rules not fulfilled",
-  "SPINNER_LOADING_TEXT": "Please wait while page is loading"
+  "SPINNER_LOADING_TEXT": "Please wait while page is loading",
+  "PROGRESSBAR_LOADING_TEXT": "Please wait while data is loading"
 }

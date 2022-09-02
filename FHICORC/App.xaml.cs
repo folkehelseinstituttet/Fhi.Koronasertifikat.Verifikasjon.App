@@ -101,10 +101,11 @@ namespace FHICORC
             }
             await _textService.LoadSavedLocales();
             _navigationService.OpenLandingPage();
-            //Progressbar
             _navigationService.InitialDataLoadPage();
+
             await FetchRemoteData();
             var _ = _fetchRevocationBatchesFromBackednService.FetchFromBackend();
+
             await _navigationService.PopPage();
 
             base.OnStart();

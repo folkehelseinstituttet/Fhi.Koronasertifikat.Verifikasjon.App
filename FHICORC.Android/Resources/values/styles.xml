@@ -13,8 +13,9 @@
         <!-- colorAccent is used as the default value for colorControlActivated
          which is used to tint widgets -->
         <item name="colorAccent">#32345C</item>
-        
-    </style>
+		<item name="android:windowIsTranslucent">true</item>
+
+	</style>
 
 	<style name="FHICORC.Splash" parent ="Theme.AppCompat.Light.NoActionBar">
 		<item name="android:windowBackground">@drawable/splash_screen_layout</item>
