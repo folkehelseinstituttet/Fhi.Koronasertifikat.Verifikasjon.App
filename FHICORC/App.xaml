@@ -22,12 +22,12 @@
             <Color x:Key="ErrorTitleColor">#FBB5AD</Color>
 
             <!--  Background Colour  -->
-            <Color x:Key="DefaultBackgroundColor">#E1EAED</Color>
+            <Color x:Key="DefaultBackgroundColor">#425070</Color>
             <Color x:Key="DefaultErrorBackgroundColor">#F5858c</Color>
             <Color x:Key="ErrorBackgroundColor">#32345C</Color>
             <Color x:Key="NavigationHeaderBackgroundColor">#E1EAED</Color>
             <Color x:Key="LandingPageColorStart">#425070</Color>
-            <Color x:Key="MainPageBackgroundColor">#E7F2F2</Color>
+            <Color x:Key="MainPageBackgroundColor">#425070</Color>
             <Color x:Key="SuccessBackgroundColor">#D9F0D4</Color>
             <Color x:Key="InvalidBackgroundColor">#F5858c</Color>
             <Color x:Key="ExpiredBackgroundColor">#F5E360</Color>
@@ -84,6 +84,7 @@
             <Color x:Key="MenuButtonPressed">#80F3F9FB</Color>
             <Color x:Key="White">#FFFFFF</Color>
             <Color x:Key="Dark60">#99000000</Color>
+            <Color x:Key="ProgressBarColor">#3985F7</Color>
 
             <Color x:Key="FHIPrimaryBlue">#32345C</Color>
             <Color x:Key="FHIPrimaryBlueTransparent">#CC32345C</Color>
@@ -148,6 +149,13 @@
                 <Setter Property="FontFamily" Value="PTSansRegular" />
                 <Setter Property="FontSize" Value="Medium" />
                 <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+                <Setter Property="LineHeight" Value="1.2" />
+            </Style>
+
+            <Style x:Key="LoadPageStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansRegular" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="TextColor" Value="{StaticResource FHIWhite}" />
                 <Setter Property="LineHeight" Value="1.2" />
             </Style>
 

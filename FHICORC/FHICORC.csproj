@@ -66,6 +66,7 @@
     <None Remove="Locales\en.json" />
     <EmbeddedResource Remove="Views\CertificateViews\ProblemPage.xaml" />
     <EmbeddedResource Remove="Views\HelpPage.xaml" />
+    <Compile Remove="ViewModels\Class1.cs" />
     <Compile Remove="ViewModels\HelpPageViewModel.cs" />
     <Compile Remove="Views\CertificateViews\ProblemPage.xaml.cs" />
     <Compile Remove="Views\Deprecated\IntroductionPage.xaml.cs" />
@@ -198,6 +199,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Views\ErrorPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\InitialDataLoad.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Menu\HelpPage.xaml">

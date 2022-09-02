@@ -28,5 +28,7 @@ namespace FHICORC.Services.Interfaces
         Task GoToErrorPage(ErrorPageModel data);
         void SetStatusBar(Color backgroundColor, Color textColor);
         Task OpenAcceptTermsPage();
+        //Set the load screen when app opens
+        void InitialDataLoadPage();
     }
 }

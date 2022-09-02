@@ -35,6 +35,12 @@ namespace FHICORC.Services
             Application.Current.MainPage = newPage;
         }
 
+        public async void InitialDataLoadPage()
+        {
+            InitialDataLoad newPage = new InitialDataLoad();
+            await PushPage(newPage, true, PageNavigationStyle.PushModallyFullscreen, null);
+        }
+
         public async Task OpenAcceptTermsPage()
         {
             AcceptTermsPage newPage = new AcceptTermsPage();
