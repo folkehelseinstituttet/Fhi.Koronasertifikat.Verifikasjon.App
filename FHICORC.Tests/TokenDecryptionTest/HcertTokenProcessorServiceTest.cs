@@ -19,6 +19,7 @@ namespace FHICORC.Tests.TokenDecryptionTest
     {
         private HcertTokenProcessorService verifier;
         private Mock<ICertificationService> MockCertificationService { get; set; }
+        private readonly IRevocationBatchService _revocationBatchDataManager;
 
         public HcertTokenProcessorServiceTest()
         {
@@ -37,7 +38,8 @@ namespace FHICORC.Tests.TokenDecryptionTest
                 new RuleVerifierService(new MockPreferencesService()),
                 new MockPreferencesService(),
                 IoCContainer.Resolve<IDigitalGreenValueSetTranslatorFactory>(),
-                IoCContainer.Resolve<ICertificateRevocationService>());
+                IoCContainer.Resolve<ICertificateRevocationService>(),
+                new FetchRevocationBatchesFromBackednService(_revocationBatchDataManager));
         }
 
         [Test]
