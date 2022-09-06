@@ -79,5 +79,9 @@ namespace FHICORC.Tests.TestMocks
         public void SetStatusBar(Color backgroundColor, Color textColor)
         {
         }
+
+        public void InitialDataLoadPage()
+        {
+        }
     }
 }

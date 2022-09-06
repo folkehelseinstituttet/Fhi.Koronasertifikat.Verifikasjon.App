@@ -22,7 +22,7 @@
             <Color x:Key="ErrorTitleColor">#FBB5AD</Color>
 
             <!--  Background Colour  -->
-            <Color x:Key="DefaultBackgroundColor">#425070</Color>
+            <Color x:Key="DefaultBackgroundColor">#E1EAED</Color>
             <Color x:Key="DefaultErrorBackgroundColor">#F5858c</Color>
             <Color x:Key="ErrorBackgroundColor">#32345C</Color>
             <Color x:Key="NavigationHeaderBackgroundColor">#E1EAED</Color>
