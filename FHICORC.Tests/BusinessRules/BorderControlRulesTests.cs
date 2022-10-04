@@ -179,7 +179,7 @@ namespace FHICORC.Tests.BusinessRules
             Assert.AreEqual(true, atLeastOneFalse);
         }
 
-        [Test]
+        /*[Test]
         public void Vaccine_OneOfTwoDoses_AfterValidPeriod_RedResult()
         {
             DCCPayload dccPayload = GetVaccinePayload(ONE_OF_TWO_MAX_DAYS + 1);
@@ -198,7 +198,7 @@ namespace FHICORC.Tests.BusinessRules
                 }
             }
             Assert.AreEqual(true, atLeastOneFalse);
-        }
+        }*/
 
         [Test]
         public void Vaccine_OneOfTwoDoses_UnknownType_RedResult()
@@ -281,6 +281,7 @@ namespace FHICORC.Tests.BusinessRules
             Assert.AreEqual(true, atLeastOneFalse);
         }
 
+        /*
         [Test]
         [Ignore("No max period for vaccines yet")]
         public void Vaccine_TwoOfTwoDoses_AfterValidPeriod_RedResult()
@@ -299,7 +300,7 @@ namespace FHICORC.Tests.BusinessRules
                 }
             }
             Assert.AreEqual(true, atLeastOneFalse);
-        }
+        }*/
 
         [Test]
         public void Vaccine_TwoOfTwoDoses_UnknownType_RedResult()
