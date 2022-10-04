@@ -408,7 +408,7 @@ namespace FHICORC.Tests.BusinessRules
             }
         }
 
-        [Test]
+        /*[Test]
         [Ignore("No max period for vaccines yet")]
         public void Vaccine_OneOfOneDoses_AfterValidPeriod_RedResult()
         {
@@ -429,7 +429,7 @@ namespace FHICORC.Tests.BusinessRules
                 }
             }
             Assert.AreEqual(true, atLeastOneFalse);
-        }
+        }*/
 
         [Test]
         public void Vaccine_OneOfOneDoses_UnknownType_RedResult()
