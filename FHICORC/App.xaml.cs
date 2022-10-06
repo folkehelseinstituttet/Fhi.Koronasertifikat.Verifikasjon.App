@@ -103,6 +103,7 @@ namespace FHICORC
 
             await FetchRemoteData();
             var _ = _fetchRevocationBatchesFromBackednService.FetchFromBackend();
+            //Loading screen
             
             base.OnStart();
             PerformRootCheck();
