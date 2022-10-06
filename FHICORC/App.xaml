@@ -27,7 +27,7 @@
             <Color x:Key="ErrorBackgroundColor">#32345C</Color>
             <Color x:Key="NavigationHeaderBackgroundColor">#E1EAED</Color>
             <Color x:Key="LandingPageColorStart">#425070</Color>
-            <Color x:Key="MainPageBackgroundColor">#425070</Color>
+            <Color x:Key="MainPageBackgroundColor">#E7F2F2</Color>
             <Color x:Key="SuccessBackgroundColor">#D9F0D4</Color>
             <Color x:Key="InvalidBackgroundColor">#F5858c</Color>
             <Color x:Key="ExpiredBackgroundColor">#F5E360</Color>
