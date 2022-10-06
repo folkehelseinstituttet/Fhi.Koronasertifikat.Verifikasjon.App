@@ -198,7 +198,7 @@ namespace FHICORC.Tests.BusinessRules
                 }
             }
             Assert.AreEqual(true, atLeastOneFalse);
-        }*/
+        }
 
         [Test]
         public void Vaccine_OneOfTwoDoses_UnknownType_RedResult()
