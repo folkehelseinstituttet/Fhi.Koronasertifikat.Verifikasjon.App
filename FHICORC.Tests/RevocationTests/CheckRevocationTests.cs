@@ -1,4 +1,4 @@
-﻿using FHICORC.Configuration;
+﻿/*using FHICORC.Configuration;
 using NUnit.Framework;
 using System;
 using FHICORC.Core.Data;
@@ -146,3 +146,4 @@ namespace FHICORC.Tests.RevocationTests
         }
     }
 }
+*/
