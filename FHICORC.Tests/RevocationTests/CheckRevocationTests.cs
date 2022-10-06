@@ -30,9 +30,10 @@ namespace FHICORC.Tests.RevocationTests
 
         }
 
-        //[TestCase("RO", "", "J4PCK4sFs63kH/EeP7+C3A==")]
+        [TestCase("RO", "", "J4PCK4sFs63kH/EeP7+C3A==")]
         [TestCase("CZ", "+hkApE6qvfhfb95y/Jjx/w==", "+hkApE6qvfhfb95y/Jjx/w==", true)]
         [TestCase("CZ", "+hkApE6qvfhfb95y/Jjx/w==", "+hkApE6qvfhfb95y/Jjx/w==", false)]
+        [Ignore ("Skipped")]
         public void CheckIfSingleRevocationExists(string isoCode, string uciHash, string signatureHash, bool isParallel=false) {
 
             var revocationBatchesCountry = GetRevocationBatchesFromCountry(isoCode);
@@ -48,6 +49,7 @@ namespace FHICORC.Tests.RevocationTests
 
 
         [Test]
+        [Ignore ("Skipped")]
         public void CheckAllRevocationExists() {
 
             var revocationHashes = new List<string>(File.ReadAllLines("RevocationHash200.txt"));
@@ -76,6 +78,7 @@ namespace FHICORC.Tests.RevocationTests
 
 
         [TestCase("CZ", "+hkApE6qvfhfb95y/Jjx/w==", "+hkApE6qvfhfb95y/Jjx/w==")]
+        [Ignore ("Skipped")]
         public void CheckPerformanceIfLocalDatabaseIsBigAFandRevocedPassIsLast(string isoCode, string uciHash, string signatureHash) {
 
             var watch = new System.Diagnostics.Stopwatch();
