@@ -11,7 +11,7 @@ namespace FHICORC.Core.Services.Utils
 {
     public static class MobileUtils
     {
-        public static bool ContainsCertificateFilterMobile(string uciHash, string countryCodeUciHash, string signatureHash, IEnumerable<RevocationBatch> revocationBatches, List<BucketItem> bloomFilterBuckets, bool isParallel=true)
+        public static bool ContainsCertificateFilterMobile(string uciHash, string countryCodeUciHash, string signatureHash, IEnumerable<RevocationBatch> revocationBatches, List<BucketItem> bloomFilterBuckets, bool isParallel = true)
         {
             var allHashFunctionCertificateIdentifierIndicies_k = CalculateAllIndicies(uciHash, bloomFilterBuckets);
             var allHashFunctionCountryCodeUci_k = CalculateAllIndicies(countryCodeUciHash, bloomFilterBuckets);
@@ -119,12 +119,6 @@ namespace FHICORC.Core.Services.Utils
             var maxValue = 1000;
             var stepness = 1;
             var falsePositiveProbability = 1e-10;
-
-            //var numberOfBuckets = 10;
-            //var minValue = 5;
-            //var maxValue = 1000;
-            //var stepness = 2.5;
-            //var falsePositiveProbability = 1e-10;
 
             var bloomFilterBucketsList = new List<BucketItem>();
 

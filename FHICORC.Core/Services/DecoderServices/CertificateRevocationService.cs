@@ -26,7 +26,7 @@ namespace FHICORC.Core.Services.DecoderServices
 
         public async Task<bool> IsCertificateRevoked(ITokenPayload token, string signatureBase64EncodedHash)
         {
-            if(token is DCCPayload payload)
+            if (token is DCCPayload payload)
             {
                 (var isoCode, var certificateIdentifierWithChecksum) = GetCertificateIdentifierAndISOCodeFromTokenPayload(payload);
                 var certificateIdentifier = RemoveCheckSum(certificateIdentifierWithChecksum);
@@ -89,7 +89,7 @@ namespace FHICORC.Core.Services.DecoderServices
         }
 
 
-        public bool CheckHashInRevocationBatchesAsync(IEnumerable<RevocationBatch> revocationBatches, string uciBase64EndodedHash, string countryCodeUciBase64EndodedHash, string signatureBase64EncodedHash, bool isParallel=false)
+        public bool CheckHashInRevocationBatchesAsync(IEnumerable<RevocationBatch> revocationBatches, string uciBase64EndodedHash, string countryCodeUciBase64EndodedHash, string signatureBase64EncodedHash, bool isParallel = false)
         {
                 var result = MobileUtils.ContainsCertificateFilterMobile(uciBase64EndodedHash, countryCodeUciBase64EndodedHash, signatureBase64EncodedHash, revocationBatches, _bloomFilterBuckets, isParallel);
                 return result;

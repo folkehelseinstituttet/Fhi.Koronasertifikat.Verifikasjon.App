@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace FHICORC.Core.Services.DecoderServices
 {
-    public class FetchRevocationBatchesFromBackednService : IFetchRevocationBatchesFromBackednService
+    public class FetchRevocationBatchesFromBackednService : IFetchRevocationBatchesFromBackendService
     {
 
         private readonly IRevocationBatchService _revocationBatchDataManager;
@@ -27,35 +27,5 @@ namespace FHICORC.Core.Services.DecoderServices
         {
             return tcs.Task; 
         }
-
-
-        //static async void Run()
-        //{
-        //    var tcs = new TaskCompletionSource<bool>();
-
-        //    var fireAndForgetTask = Task.Delay(5000)
-        //                                .ContinueWith(task => tcs.SetResult(true));
-
-        //    
-        //}
-
-
-
-
     }
-
-
-    //    public class Monitor
-    //    {
-    //        private TaskCompletionSource<bool> _changedTaskSource = new TaskCompletionSource<bool>();
-    //        public Task HasChangedTask => _changedTaskSource.Task;
-
-    //        public bool HasChanged
-    //        ...
-    //        set
-    //        {
-    //        ...
-    //        _changedTaskSource.TrySetResult(true);
-    //    }
-    //}
 }

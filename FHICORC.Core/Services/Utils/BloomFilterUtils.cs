@@ -7,29 +7,6 @@ namespace FHICORC.Core.Services.Utils
 {
     public static class BloomFilterUtils
     {
-        //public static bool Contains(this BitArray filter, string str, int m, int k)
-        //{
-        //    var hash = HashData(Encoding.UTF8.GetBytes(str), m, k);
-
-        //    foreach (int i in hash)
-        //    {
-        //        if (!filter[i])
-        //            return false;
-        //    }
-        //    return true;
-        //}
-
-        //public static bool Contains(this BitArray filter, int[] hashData)
-        //{
-        //    foreach (int i in hashData)
-        //    {
-        //        var value = filter[i];
-        //        if (!value)
-        //            return false;
-        //    }
-        //    return true;
-        //}
-
         public static int[] HashData(byte[] data, int m, int k)
         {
             var hashAlgorithm = SHA256.Create();
@@ -157,7 +134,5 @@ namespace FHICORC.Core.Services.Utils
         public double ErrorRate { get; set; }
         public int m { get; set; }
         public int k { get; set; }
-
-
     }
 }

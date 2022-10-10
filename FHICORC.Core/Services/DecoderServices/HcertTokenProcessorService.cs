@@ -29,7 +29,7 @@ namespace FHICORC.Core.Services.DecoderServices
         private readonly IPreferencesService _preferencesService;
         private readonly IDigitalGreenValueSetTranslatorFactory _digitalGreenValueSetTranslatorFactory;
         private readonly ICertificateRevocationService _certificateRevocationService;
-        private readonly IFetchRevocationBatchesFromBackednService _fetchRevocationBatchesFromBackednService;
+        private readonly IFetchRevocationBatchesFromBackendService _fetchRevocationBatchesFromBackednService;
 
         private IDgcValueSetTranslator _translator;
 
@@ -41,7 +41,7 @@ namespace FHICORC.Core.Services.DecoderServices
             IPreferencesService preferencesService,
             IDigitalGreenValueSetTranslatorFactory digitalGreenValueSetTranslatorFactory,
             ICertificateRevocationService certificateRevocationService,
-            IFetchRevocationBatchesFromBackednService fetchRevocationBatchesFromBackednService)
+            IFetchRevocationBatchesFromBackendService fetchRevocationBatchesFromBackednService)
         {
             _certificationService = certificationService;
             _dateTimeService = dateTimeService;
@@ -159,7 +159,7 @@ namespace FHICORC.Core.Services.DecoderServices
             }
             catch (Exception e)
             {
-                // If any exceptions are throw, assume it invalid
+                // If any exceptions are thrown, assume it invalid
                 return resultModel;
             }        
         }

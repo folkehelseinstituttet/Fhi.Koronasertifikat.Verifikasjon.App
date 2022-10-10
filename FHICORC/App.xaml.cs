@@ -31,7 +31,7 @@ namespace FHICORC
         private IBusinessRulesService _businessRulesDataManager;
         private IValueSetService _valueSetService;
 
-        private readonly IFetchRevocationBatchesFromBackednService _fetchRevocationBatchesFromBackednService; 
+        private readonly IFetchRevocationBatchesFromBackendService _fetchRevocationBatchesFromBackednService; 
 
         public App()
         {
@@ -49,7 +49,7 @@ namespace FHICORC
             _valueSetService = IoCContainer.Resolve<IValueSetService>();
             _revocationBatchDataManager = IoCContainer.Resolve<IRevocationBatchService>();
             _revocationDeleteExpiredBatchService = IoCContainer.Resolve<IRevocationDeleteExpiredBatchService>();
-            _fetchRevocationBatchesFromBackednService = IoCContainer.Resolve<IFetchRevocationBatchesFromBackednService>();
+            _fetchRevocationBatchesFromBackednService = IoCContainer.Resolve<IFetchRevocationBatchesFromBackendService>();
             ConfigureApp();
         }
 

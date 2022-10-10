@@ -2,7 +2,7 @@
 
 namespace FHICORC.Core.Services.Interface
 {
-    public interface IFetchRevocationBatchesFromBackednService
+    public interface IFetchRevocationBatchesFromBackendService
     {
 
         Task HasChangedTask();
