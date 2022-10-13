@@ -1,0 +1,1202 @@
+﻿[
+  {
+    "BucketId": 0,
+    "BitVectorLength_m": 240,
+    "MaxValue": 5,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 1,
+    "BitVectorLength_m": 480,
+    "MaxValue": 10,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 2,
+    "BitVectorLength_m": 719,
+    "MaxValue": 15,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 3,
+    "BitVectorLength_m": 959,
+    "MaxValue": 20,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 4,
+    "BitVectorLength_m": 1199,
+    "MaxValue": 25,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 5,
+    "BitVectorLength_m": 1438,
+    "MaxValue": 30,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 6,
+    "BitVectorLength_m": 1678,
+    "MaxValue": 35,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 7,
+    "BitVectorLength_m": 1918,
+    "MaxValue": 40,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 8,
+    "BitVectorLength_m": 2157,
+    "MaxValue": 45,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 9,
+    "BitVectorLength_m": 2397,
+    "MaxValue": 50,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 10,
+    "BitVectorLength_m": 2636,
+    "MaxValue": 55,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 11,
+    "BitVectorLength_m": 2876,
+    "MaxValue": 60,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 12,
+    "BitVectorLength_m": 3116,
+    "MaxValue": 65,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 13,
+    "BitVectorLength_m": 3355,
+    "MaxValue": 70,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 14,
+    "BitVectorLength_m": 3595,
+    "MaxValue": 75,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 15,
+    "BitVectorLength_m": 3835,
+    "MaxValue": 80,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 16,
+    "BitVectorLength_m": 4074,
+    "MaxValue": 85,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 17,
+    "BitVectorLength_m": 4314,
+    "MaxValue": 90,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 18,
+    "BitVectorLength_m": 4553,
+    "MaxValue": 95,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 19,
+    "BitVectorLength_m": 4793,
+    "MaxValue": 100,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 20,
+    "BitVectorLength_m": 5033,
+    "MaxValue": 105,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 21,
+    "BitVectorLength_m": 5272,
+    "MaxValue": 110,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 22,
+    "BitVectorLength_m": 5512,
+    "MaxValue": 115,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 23,
+    "BitVectorLength_m": 5752,
+    "MaxValue": 120,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 24,
+    "BitVectorLength_m": 5991,
+    "MaxValue": 125,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 25,
+    "BitVectorLength_m": 6231,
+    "MaxValue": 130,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 26,
+    "BitVectorLength_m": 6470,
+    "MaxValue": 135,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 27,
+    "BitVectorLength_m": 6710,
+    "MaxValue": 140,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 28,
+    "BitVectorLength_m": 6950,
+    "MaxValue": 145,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 29,
+    "BitVectorLength_m": 7189,
+    "MaxValue": 150,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 30,
+    "BitVectorLength_m": 7429,
+    "MaxValue": 155,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 31,
+    "BitVectorLength_m": 7669,
+    "MaxValue": 160,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 32,
+    "BitVectorLength_m": 7908,
+    "MaxValue": 165,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 33,
+    "BitVectorLength_m": 8148,
+    "MaxValue": 170,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 34,
+    "BitVectorLength_m": 8387,
+    "MaxValue": 175,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 35,
+    "BitVectorLength_m": 8627,
+    "MaxValue": 180,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 36,
+    "BitVectorLength_m": 8867,
+    "MaxValue": 185,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 37,
+    "BitVectorLength_m": 9106,
+    "MaxValue": 190,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 38,
+    "BitVectorLength_m": 9346,
+    "MaxValue": 195,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 39,
+    "BitVectorLength_m": 9586,
+    "MaxValue": 200,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 40,
+    "BitVectorLength_m": 9825,
+    "MaxValue": 205,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 41,
+    "BitVectorLength_m": 10065,
+    "MaxValue": 210,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 42,
+    "BitVectorLength_m": 10304,
+    "MaxValue": 215,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 43,
+    "BitVectorLength_m": 10544,
+    "MaxValue": 220,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 44,
+    "BitVectorLength_m": 10784,
+    "MaxValue": 225,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 45,
+    "BitVectorLength_m": 11023,
+    "MaxValue": 230,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 46,
+    "BitVectorLength_m": 11263,
+    "MaxValue": 235,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 47,
+    "BitVectorLength_m": 11503,
+    "MaxValue": 240,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 48,
+    "BitVectorLength_m": 11742,
+    "MaxValue": 245,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 49,
+    "BitVectorLength_m": 11982,
+    "MaxValue": 250,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 50,
+    "BitVectorLength_m": 12221,
+    "MaxValue": 255,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 51,
+    "BitVectorLength_m": 12461,
+    "MaxValue": 260,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 52,
+    "BitVectorLength_m": 12701,
+    "MaxValue": 265,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 53,
+    "BitVectorLength_m": 12940,
+    "MaxValue": 270,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 54,
+    "BitVectorLength_m": 13180,
+    "MaxValue": 275,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 55,
+    "BitVectorLength_m": 13420,
+    "MaxValue": 280,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 56,
+    "BitVectorLength_m": 13659,
+    "MaxValue": 285,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 57,
+    "BitVectorLength_m": 13899,
+    "MaxValue": 290,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 58,
+    "BitVectorLength_m": 14138,
+    "MaxValue": 295,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 59,
+    "BitVectorLength_m": 14378,
+    "MaxValue": 300,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 60,
+    "BitVectorLength_m": 14618,
+    "MaxValue": 305,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 61,
+    "BitVectorLength_m": 14857,
+    "MaxValue": 310,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 62,
+    "BitVectorLength_m": 15097,
+    "MaxValue": 315,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 63,
+    "BitVectorLength_m": 15337,
+    "MaxValue": 320,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 64,
+    "BitVectorLength_m": 15576,
+    "MaxValue": 325,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 65,
+    "BitVectorLength_m": 15816,
+    "MaxValue": 330,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 66,
+    "BitVectorLength_m": 16055,
+    "MaxValue": 335,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 67,
+    "BitVectorLength_m": 16295,
+    "MaxValue": 340,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 68,
+    "BitVectorLength_m": 16535,
+    "MaxValue": 345,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 69,
+    "BitVectorLength_m": 16774,
+    "MaxValue": 350,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 70,
+    "BitVectorLength_m": 17014,
+    "MaxValue": 355,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 71,
+    "BitVectorLength_m": 17254,
+    "MaxValue": 360,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 72,
+    "BitVectorLength_m": 17493,
+    "MaxValue": 365,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 73,
+    "BitVectorLength_m": 17733,
+    "MaxValue": 370,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 74,
+    "BitVectorLength_m": 17972,
+    "MaxValue": 375,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 75,
+    "BitVectorLength_m": 18212,
+    "MaxValue": 380,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 76,
+    "BitVectorLength_m": 18452,
+    "MaxValue": 385,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 77,
+    "BitVectorLength_m": 18691,
+    "MaxValue": 390,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 78,
+    "BitVectorLength_m": 18931,
+    "MaxValue": 395,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 79,
+    "BitVectorLength_m": 19171,
+    "MaxValue": 400,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 80,
+    "BitVectorLength_m": 19410,
+    "MaxValue": 405,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 81,
+    "BitVectorLength_m": 19650,
+    "MaxValue": 410,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 82,
+    "BitVectorLength_m": 19889,
+    "MaxValue": 415,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 83,
+    "BitVectorLength_m": 20129,
+    "MaxValue": 420,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 84,
+    "BitVectorLength_m": 20369,
+    "MaxValue": 425,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 85,
+    "BitVectorLength_m": 20608,
+    "MaxValue": 430,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 86,
+    "BitVectorLength_m": 20848,
+    "MaxValue": 435,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 87,
+    "BitVectorLength_m": 21088,
+    "MaxValue": 440,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 88,
+    "BitVectorLength_m": 21327,
+    "MaxValue": 445,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 89,
+    "BitVectorLength_m": 21567,
+    "MaxValue": 450,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 90,
+    "BitVectorLength_m": 21807,
+    "MaxValue": 455,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 91,
+    "BitVectorLength_m": 22046,
+    "MaxValue": 460,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 92,
+    "BitVectorLength_m": 22286,
+    "MaxValue": 465,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 93,
+    "BitVectorLength_m": 22525,
+    "MaxValue": 470,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 94,
+    "BitVectorLength_m": 22765,
+    "MaxValue": 475,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 95,
+    "BitVectorLength_m": 23005,
+    "MaxValue": 480,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 96,
+    "BitVectorLength_m": 23244,
+    "MaxValue": 485,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 97,
+    "BitVectorLength_m": 23484,
+    "MaxValue": 490,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 98,
+    "BitVectorLength_m": 23724,
+    "MaxValue": 495,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 99,
+    "BitVectorLength_m": 23963,
+    "MaxValue": 500,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 100,
+    "BitVectorLength_m": 24203,
+    "MaxValue": 505,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 101,
+    "BitVectorLength_m": 24442,
+    "MaxValue": 510,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 102,
+    "BitVectorLength_m": 24682,
+    "MaxValue": 515,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 103,
+    "BitVectorLength_m": 24922,
+    "MaxValue": 520,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 104,
+    "BitVectorLength_m": 25161,
+    "MaxValue": 525,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 105,
+    "BitVectorLength_m": 25401,
+    "MaxValue": 530,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 106,
+    "BitVectorLength_m": 25641,
+    "MaxValue": 535,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 107,
+    "BitVectorLength_m": 25880,
+    "MaxValue": 540,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 108,
+    "BitVectorLength_m": 26120,
+    "MaxValue": 545,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 109,
+    "BitVectorLength_m": 26359,
+    "MaxValue": 550,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 110,
+    "BitVectorLength_m": 26599,
+    "MaxValue": 555,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 111,
+    "BitVectorLength_m": 26839,
+    "MaxValue": 560,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 112,
+    "BitVectorLength_m": 27078,
+    "MaxValue": 565,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 113,
+    "BitVectorLength_m": 27318,
+    "MaxValue": 570,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 114,
+    "BitVectorLength_m": 27558,
+    "MaxValue": 575,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 115,
+    "BitVectorLength_m": 27797,
+    "MaxValue": 580,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 116,
+    "BitVectorLength_m": 28037,
+    "MaxValue": 585,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 117,
+    "BitVectorLength_m": 28276,
+    "MaxValue": 590,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 118,
+    "BitVectorLength_m": 28516,
+    "MaxValue": 595,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 119,
+    "BitVectorLength_m": 28756,
+    "MaxValue": 600,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 120,
+    "BitVectorLength_m": 28995,
+    "MaxValue": 605,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 121,
+    "BitVectorLength_m": 29235,
+    "MaxValue": 610,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 122,
+    "BitVectorLength_m": 29475,
+    "MaxValue": 615,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 123,
+    "BitVectorLength_m": 29714,
+    "MaxValue": 620,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 124,
+    "BitVectorLength_m": 29954,
+    "MaxValue": 625,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 125,
+    "BitVectorLength_m": 30193,
+    "MaxValue": 630,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 126,
+    "BitVectorLength_m": 30433,
+    "MaxValue": 635,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 127,
+    "BitVectorLength_m": 30673,
+    "MaxValue": 640,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 128,
+    "BitVectorLength_m": 30912,
+    "MaxValue": 645,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 129,
+    "BitVectorLength_m": 31152,
+    "MaxValue": 650,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 130,
+    "BitVectorLength_m": 31392,
+    "MaxValue": 655,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 131,
+    "BitVectorLength_m": 31631,
+    "MaxValue": 660,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 132,
+    "BitVectorLength_m": 31871,
+    "MaxValue": 665,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 133,
+    "BitVectorLength_m": 32110,
+    "MaxValue": 670,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 134,
+    "BitVectorLength_m": 32350,
+    "MaxValue": 675,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 135,
+    "BitVectorLength_m": 32590,
+    "MaxValue": 680,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 136,
+    "BitVectorLength_m": 32829,
+    "MaxValue": 685,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 137,
+    "BitVectorLength_m": 33069,
+    "MaxValue": 690,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 138,
+    "BitVectorLength_m": 33309,
+    "MaxValue": 695,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 139,
+    "BitVectorLength_m": 33548,
+    "MaxValue": 700,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 140,
+    "BitVectorLength_m": 33788,
+    "MaxValue": 705,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 141,
+    "BitVectorLength_m": 34027,
+    "MaxValue": 710,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 142,
+    "BitVectorLength_m": 34267,
+    "MaxValue": 715,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 143,
+    "BitVectorLength_m": 34507,
+    "MaxValue": 720,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 144,
+    "BitVectorLength_m": 34746,
+    "MaxValue": 725,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 145,
+    "BitVectorLength_m": 34986,
+    "MaxValue": 730,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 146,
+    "BitVectorLength_m": 35226,
+    "MaxValue": 735,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 147,
+    "BitVectorLength_m": 35465,
+    "MaxValue": 740,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 148,
+    "BitVectorLength_m": 35705,
+    "MaxValue": 745,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 149,
+    "BitVectorLength_m": 35944,
+    "MaxValue": 750,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 150,
+    "BitVectorLength_m": 36184,
+    "MaxValue": 755,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 151,
+    "BitVectorLength_m": 36424,
+    "MaxValue": 760,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 152,
+    "BitVectorLength_m": 36663,
+    "MaxValue": 765,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 153,
+    "BitVectorLength_m": 36903,
+    "MaxValue": 770,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 154,
+    "BitVectorLength_m": 37143,
+    "MaxValue": 775,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 155,
+    "BitVectorLength_m": 37382,
+    "MaxValue": 780,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 156,
+    "BitVectorLength_m": 37622,
+    "MaxValue": 785,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 157,
+    "BitVectorLength_m": 37861,
+    "MaxValue": 790,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 158,
+    "BitVectorLength_m": 38101,
+    "MaxValue": 795,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 159,
+    "BitVectorLength_m": 38341,
+    "MaxValue": 800,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 160,
+    "BitVectorLength_m": 38580,
+    "MaxValue": 805,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 161,
+    "BitVectorLength_m": 38820,
+    "MaxValue": 810,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 162,
+    "BitVectorLength_m": 39060,
+    "MaxValue": 815,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 163,
+    "BitVectorLength_m": 39299,
+    "MaxValue": 820,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 164,
+    "BitVectorLength_m": 39539,
+    "MaxValue": 825,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 165,
+    "BitVectorLength_m": 39778,
+    "MaxValue": 830,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 166,
+    "BitVectorLength_m": 40018,
+    "MaxValue": 835,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 167,
+    "BitVectorLength_m": 40258,
+    "MaxValue": 840,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 168,
+    "BitVectorLength_m": 40497,
+    "MaxValue": 845,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 169,
+    "BitVectorLength_m": 40737,
+    "MaxValue": 850,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 170,
+    "BitVectorLength_m": 40977,
+    "MaxValue": 855,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 171,
+    "BitVectorLength_m": 41216,
+    "MaxValue": 860,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 172,
+    "BitVectorLength_m": 41456,
+    "MaxValue": 865,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 173,
+    "BitVectorLength_m": 41696,
+    "MaxValue": 870,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 174,
+    "BitVectorLength_m": 41935,
+    "MaxValue": 875,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 175,
+    "BitVectorLength_m": 42175,
+    "MaxValue": 880,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 176,
+    "BitVectorLength_m": 42414,
+    "MaxValue": 885,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 177,
+    "BitVectorLength_m": 42654,
+    "MaxValue": 890,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 178,
+    "BitVectorLength_m": 42894,
+    "MaxValue": 895,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 179,
+    "BitVectorLength_m": 43133,
+    "MaxValue": 900,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 180,
+    "BitVectorLength_m": 43373,
+    "MaxValue": 905,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 181,
+    "BitVectorLength_m": 43613,
+    "MaxValue": 910,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 182,
+    "BitVectorLength_m": 43852,
+    "MaxValue": 915,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 183,
+    "BitVectorLength_m": 44092,
+    "MaxValue": 920,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 184,
+    "BitVectorLength_m": 44331,
+    "MaxValue": 925,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 185,
+    "BitVectorLength_m": 44571,
+    "MaxValue": 930,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 186,
+    "BitVectorLength_m": 44811,
+    "MaxValue": 935,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 187,
+    "BitVectorLength_m": 45050,
+    "MaxValue": 940,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 188,
+    "BitVectorLength_m": 45290,
+    "MaxValue": 945,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 189,
+    "BitVectorLength_m": 45530,
+    "MaxValue": 950,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 190,
+    "BitVectorLength_m": 45769,
+    "MaxValue": 955,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 191,
+    "BitVectorLength_m": 46009,
+    "MaxValue": 960,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 192,
+    "BitVectorLength_m": 46248,
+    "MaxValue": 965,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 193,
+    "BitVectorLength_m": 46488,
+    "MaxValue": 970,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 194,
+    "BitVectorLength_m": 46728,
+    "MaxValue": 975,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 195,
+    "BitVectorLength_m": 46967,
+    "MaxValue": 980,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 196,
+    "BitVectorLength_m": 47207,
+    "MaxValue": 985,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 197,
+    "BitVectorLength_m": 47447,
+    "MaxValue": 990,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 198,
+    "BitVectorLength_m": 47686,
+    "MaxValue": 995,
+    "NumberOfHashFunctions_k": 34
+  },
+  {
+    "BucketId": 199,
+    "BitVectorLength_m": 47926,
+    "MaxValue": 1000,
+    "NumberOfHashFunctions_k": 34
+  }
+]

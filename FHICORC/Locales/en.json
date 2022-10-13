@@ -65,12 +65,17 @@
   "SCANNER_EU_TITLE_TEXT": "Corona Passport",
   "SCANNER_EU_BANNER_TEXT": "Border control",
   "SCANNER_NO_BANNER_TEXT": "Domestic control",
+  "SCANNER_ERROR_DEFAULT_TITLE": "Invalid",
+  "SCANNER_ERROR_DEFAULT_CONTENT": "The COVID-19 certificate is invalid.",
+  "SCANNER_ERROR_DEFAULT_CONTENT_REV": "REVOKERT",
   "SCANNER_ERROR_EXPIRED_TITLE": "Expired",
   "SCANNER_ERROR_EXPIRED_CONTENT": "The COVID-19 certificate has expired",
   "SCANNER_ERROR_EXPIRED_CONTENT_2": "Ask the person to open the COVID-19 certificate on helsenorge.no",
   "SCANNER_ERROR_INVALID_TITLE": "Invalid",
   "SCANNER_ERROR_INVALID_CONTENT": "The COVID-19 certificate is invalid.",
   "SCANNER_ERROR_UNKNOWN_TYPE_CONTENT": "The certificate is not valid for border control. In border control the app will only validate EU/EEC codes.",
+  "SCANNER_ERROR_REVOKED_TITLE": "Invalid",
+  "SCANNER_ERROR_REVOKED_CONTENT": "The COVID-19 certificate is invalid.",
   "SCANNER_ERROR_BUTTON_TEXT": "Scan again",
   "SCANNER_FLASHLIGHT": "Flashlight",
   "MENU_TITLE": "Menu",
@@ -190,5 +195,7 @@
   "RULES_ENGINE_VERIFY_PASSED_ACCESSIBILITY_TEXT": "{0} of {1} Fulfilled",
   "RULES_ENGINE_VERIFY_OPEN_ACCESSIBILITY_TEXT": "{0} of {1} Not evaluated",
   "RULES_ENGINE_DOMESTIC_FULFILLED": "Rules fulfilled",
-  "RULES_ENGINE_DOMESTIC_NOT_FULFILLED": "Rules not fulfilled"
+  "RULES_ENGINE_DOMESTIC_NOT_FULFILLED": "Rules not fulfilled",
+  "SPINNER_LOADING_TEXT": "Please wait while page is loading",
+  "PROGRESSBAR_LOADING_TEXT": "Please wait while data is loading"
 }

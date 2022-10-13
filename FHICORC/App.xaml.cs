@@ -12,6 +12,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.RootCheck;
 using Xamarin.Forms.Xaml;
 using System.Threading.Tasks;
+using System.Threading;
+using FHICORC.Views;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace FHICORC
@@ -23,9 +25,13 @@ namespace FHICORC
         private readonly IPreferencesService _preferencesService;
         private readonly ITextService _textService;
         private readonly INavigationService _navigationService;
+        private readonly IRevocationBatchService _revocationBatchDataManager;
+        private readonly IRevocationDeleteExpiredBatchService _revocationDeleteExpiredBatchService;
         private IPublicKeyService _publicKeyDataManager;
         private IBusinessRulesService _businessRulesDataManager;
         private IValueSetService _valueSetService;
+
+        private readonly IFetchRevocationBatchesFromBackendService _fetchRevocationBatchesFromBackednService; 
 
         public App()
         {
@@ -41,6 +47,9 @@ namespace FHICORC
             _publicKeyDataManager = IoCContainer.Resolve<IPublicKeyService>();
             _businessRulesDataManager = IoCContainer.Resolve<IBusinessRulesService>();
             _valueSetService = IoCContainer.Resolve<IValueSetService>();
+            _revocationBatchDataManager = IoCContainer.Resolve<IRevocationBatchService>();
+            _revocationDeleteExpiredBatchService = IoCContainer.Resolve<IRevocationDeleteExpiredBatchService>();
+            _fetchRevocationBatchesFromBackednService = IoCContainer.Resolve<IFetchRevocationBatchesFromBackendService>();
             ConfigureApp();
         }
 
@@ -92,7 +101,13 @@ namespace FHICORC
             }
             await _textService.LoadSavedLocales();
             _navigationService.OpenLandingPage();
+            _navigationService.InitialDataLoadPage();
+
             await FetchRemoteData();
+            var _ = _fetchRevocationBatchesFromBackednService.FetchFromBackend();
+
+            await _navigationService.PopPage();
+
             base.OnStart();
             PerformRootCheck();
         }
@@ -103,7 +118,7 @@ namespace FHICORC
             long lastTimeFetchedValuesets = _preferencesService.GetUserPreferenceAsLong(PreferencesKeys.LAST_TIME_FETCHED_VALUESETS);
             await _valueSetService.FetchAndSaveLatestVersionOfValueSets(lastTimeFetchedValuesets);
             await _businessRulesDataManager.CheckAndFetchBusinessRulesFromBackend();
-            await _publicKeyDataManager.CheckAndFetchPublicKeyFromBackend();
+            await _revocationDeleteExpiredBatchService.DeleteExpiredBatches();
         }
 
         private void ClearAppData()
@@ -126,6 +141,7 @@ namespace FHICORC
             base.OnResume();
             await FetchRemoteData();
             PerformRootCheck();
+
         }
 
         private void ConfigureApp()

@@ -51,7 +51,10 @@ namespace FHICORC.Services
         public int MinimumHoursBetweenTextFetches => GetSetting<int>(nameof(MinimumHoursBetweenTextFetches));
 
         public string EmbeddedTextVersion => GetSetting<string>(nameof(EmbeddedTextVersion));
+
         public int PublicKeyPeriodicFetchingIntervalInHours => GetSetting<int>(nameof(PublicKeyPeriodicFetchingIntervalInHours));
+
+        public int RevocationBatchPeriodicFetchingIntervalInHours => GetSetting<int>(nameof(RevocationBatchPeriodicFetchingIntervalInHours));
 
         public string ForceUpdateLink
         {

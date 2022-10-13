@@ -23,15 +23,17 @@
 
             <!--  Background Colour  -->
             <Color x:Key="DefaultBackgroundColor">#E1EAED</Color>
+            <Color x:Key="DefaultErrorBackgroundColor">#F5858c</Color>
             <Color x:Key="ErrorBackgroundColor">#32345C</Color>
             <Color x:Key="NavigationHeaderBackgroundColor">#E1EAED</Color>
             <Color x:Key="LandingPageColorStart">#425070</Color>
             <Color x:Key="MainPageBackgroundColor">#E7F2F2</Color>
-            <Color x:Key="SuccessBorderColor">#D9F0D4</Color>
-            <Color x:Key="InvalidBorderColor">#F5858c</Color>
-            <Color x:Key="ExpiredBorderColor">#F5E360</Color>
-
-
+            <Color x:Key="SuccessBackgroundColor">#D9F0D4</Color>
+            <Color x:Key="InvalidBackgroundColor">#F5858c</Color>
+            <Color x:Key="ExpiredBackgroundColor">#F5E360</Color>
+            <Color x:Key="UnsupportedTypeBackgroundColor">#F5858c</Color>
+            <Color x:Key="RevokedBackgroundColor">#F5858c</Color>
+   
             <!--  Image  -->
             <x:String x:Key="LandingPageFhiLogo">landing_page_fhi_logo.png</x:String>
             <x:String x:Key="LandingPageLogo">landing_page_logo</x:String>
@@ -82,6 +84,7 @@
             <Color x:Key="MenuButtonPressed">#80F3F9FB</Color>
             <Color x:Key="White">#FFFFFF</Color>
             <Color x:Key="Dark60">#99000000</Color>
+            <Color x:Key="ProgressBarColor">#3985F7</Color>
 
             <Color x:Key="FHIPrimaryBlue">#32345C</Color>
             <Color x:Key="FHIPrimaryBlueTransparent">#CC32345C</Color>
@@ -146,6 +149,13 @@
                 <Setter Property="FontFamily" Value="PTSansRegular" />
                 <Setter Property="FontSize" Value="Medium" />
                 <Setter Property="TextColor" Value="{StaticResource FHIPrimaryBlue}" />
+                <Setter Property="LineHeight" Value="1.2" />
+            </Style>
+
+            <Style x:Key="LoadPageStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="PTSansRegular" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="TextColor" Value="{StaticResource FHIWhite}" />
                 <Setter Property="LineHeight" Value="1.2" />
             </Style>
 

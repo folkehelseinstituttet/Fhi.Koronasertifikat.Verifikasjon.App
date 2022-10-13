@@ -281,6 +281,7 @@ namespace FHICORC.Tests.BusinessRules
             Assert.AreEqual(true, atLeastOneFalse);
         }
 
+        
         [Test]
         [Ignore("No max period for vaccines yet")]
         public void Vaccine_TwoOfTwoDoses_AfterValidPeriod_RedResult()

@@ -84,7 +84,6 @@
 
   <ItemGroup>
     <Folder Include="NavigationTests\" />
-    <Folder Include="TestMocks\" />
     <Folder Include="ServiceTests\" />
     <Folder Include="ModelTests\" />
     <Folder Include="ViewModelTests\" />

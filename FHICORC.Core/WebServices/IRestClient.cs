@@ -19,5 +19,8 @@ namespace FHICORC.Core.WebServices
         void ClearLocalesRequestHeaders();
         void RegisterValuesetsRequestHeaders(string lastTimestamp);
         void ClearValuesetsRequestHeaders();
+
+        void RegisterCustomRequestHeaders(params (string Key, string Value)[] headers);
+
     }
 }

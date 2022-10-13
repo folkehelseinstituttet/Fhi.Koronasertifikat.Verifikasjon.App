@@ -116,7 +116,7 @@
 
             <StackLayout
                 Grid.Row="3"
-                BackgroundColor="{StaticResource SuccessBorderColor}"
+                BackgroundColor="{StaticResource SuccessBackgroundColor}"
                 Margin="0, 30, 0, 0"
                 Padding="0, 2"
                 Spacing="0">

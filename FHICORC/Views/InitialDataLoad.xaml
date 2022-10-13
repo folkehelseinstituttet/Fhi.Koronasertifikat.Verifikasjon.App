@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:viewModel="clr-namespace:FHICORC.ViewModels"
+             NavigationPage.HasNavigationBar="False"
+             x:DataType="viewModel:ProgressbarViewModel"
+             ios:Page.UseSafeArea="True"
+             x:Class="FHICORC.Views.InitialDataLoad"
+             AutomationId="Progressbar"
+             BackgroundImageSource="{StaticResource SplashImage}">
+    <ContentPage.Content>
+        <StackLayout>
+            <Image
+                Source="{StaticResource SplashLogo}"
+                Margin="0,300,0,0"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+            <ProgressBar
+                x:Name="loadInitialDataProgressBar"
+                Margin="100,150,100,0"
+                ProgressColor="{StaticResource ProgressBarColor}"
+                VerticalOptions="Center"
+                HorizontalOptions="FillAndExpand"
+                Progress="0.0"/>
+            <Label
+                AutomationProperties.IsInAccessibleTree="True"
+                AutomationProperties.Name="{Binding ProgressbarText}"
+                HorizontalOptions="Center"
+                Text="{Binding Strings[PROGRESSBAR_LOADING_TEXT]}"
+                Style="{StaticResource LoadPageStyle}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

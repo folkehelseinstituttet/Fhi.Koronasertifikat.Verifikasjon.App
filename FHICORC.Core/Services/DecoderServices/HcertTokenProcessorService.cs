@@ -1,21 +1,22 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using FHICORC.Core.Data;
+using FHICORC.Core.Interfaces;
 using FHICORC.Core.Services.Enum;
 using FHICORC.Core.Services.Interface;
 using FHICORC.Core.Services.Model;
-using FHICORC.Core.Services.Model.Converter;
+using FHICORC.Core.Services.Model.BusinessRules;
 using FHICORC.Core.Services.Model.CoseModel;
 using FHICORC.Core.Services.Model.EuDCCModel;
-using FHICORC.Core.Services.Utils;
-using FHICORC.Core.Services.Model.NO;
-using System.Linq;
-using FHICORC.Core.Interfaces;
 using FHICORC.Core.Services.Model.EuDCCModel._1._3._0;
-using FHICORC.Core.Services.Model.BusinessRules;
+using FHICORC.Core.Services.Model.NO;
+using FHICORC.Core.Services.Utils;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using FHICORC.Core.Data;
+using System.IO;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace FHICORC.Core.Services.DecoderServices
 {
@@ -27,6 +28,8 @@ namespace FHICORC.Core.Services.DecoderServices
         private readonly IRuleSelectorService _ruleSelectorService;
         private readonly IPreferencesService _preferencesService;
         private readonly IDigitalGreenValueSetTranslatorFactory _digitalGreenValueSetTranslatorFactory;
+        private readonly ICertificateRevocationService _certificateRevocationService;
+        private readonly IFetchRevocationBatchesFromBackendService _fetchRevocationBatchesFromBackednService;
 
         private IDgcValueSetTranslator _translator;
 
@@ -36,7 +39,9 @@ namespace FHICORC.Core.Services.DecoderServices
             IRuleSelectorService ruleSelectorService,
             IRuleVerifierService ruleVerifierService,
             IPreferencesService preferencesService,
-            IDigitalGreenValueSetTranslatorFactory digitalGreenValueSetTranslatorFactory)
+            IDigitalGreenValueSetTranslatorFactory digitalGreenValueSetTranslatorFactory,
+            ICertificateRevocationService certificateRevocationService,
+            IFetchRevocationBatchesFromBackendService fetchRevocationBatchesFromBackednService)
         {
             _certificationService = certificationService;
             _dateTimeService = dateTimeService;
@@ -45,7 +50,9 @@ namespace FHICORC.Core.Services.DecoderServices
             _preferencesService = preferencesService;
             _digitalGreenValueSetTranslatorFactory = digitalGreenValueSetTranslatorFactory;
             _translator = _digitalGreenValueSetTranslatorFactory.DgcValueSetTranslator;
+            _certificateRevocationService = certificateRevocationService;
             _digitalGreenValueSetTranslatorFactory.Init();
+            _fetchRevocationBatchesFromBackednService = fetchRevocationBatchesFromBackednService;
         }
 
         public void SetDgcValueSetTranslator(IDgcValueSetTranslator translator)
@@ -56,7 +63,9 @@ namespace FHICORC.Core.Services.DecoderServices
         }
 
         public async Task<TokenValidateResultModel> DecodePassportTokenToModel(string base45String)
-        {
+        {            
+            await _fetchRevocationBatchesFromBackednService.HasChangedTask();
+
             TokenValidateResultModel resultModel = new TokenValidateResultModel();
             try
             {
@@ -66,9 +75,38 @@ namespace FHICORC.Core.Services.DecoderServices
                 }
                 //Decode token to a cose sign 1 object
                 CoseSign1Object coseSign1Object = DecodeToCOSEFlow(base45String);
+
+
+
+                string signatureSha256Base64;
+                using (SHA256 sha256Hash = SHA256.Create())
+                {
+                    var signature = coseSign1Object.GetSignature();
+                    byte[] sha256Bytes;
+
+                    //SHA256withECDSA signature only opperates on half of the signature
+                    if (coseSign1Object.GetSignatureAlgorithm() == "SHA256withECDSA")
+                    {
+                        var splitSignature = new byte[signature.Length / 2];
+                        Array.Copy(signature, splitSignature, signature.Length / 2);
+                        sha256Bytes = sha256Hash.ComputeHash(splitSignature);
+
+                    }
+                    else {
+                        sha256Bytes = sha256Hash.ComputeHash(signature);
+                    }
+
+                    var sha256B64 = Convert.ToBase64String(sha256Bytes);
+
+                    var sha256Bytes2 = new byte[16];
+                    Array.Copy(sha256Bytes, sha256Bytes2, sha256Bytes2.Length);
+                    signatureSha256Base64 = Convert.ToBase64String(sha256Bytes2);
+
+                }
 #if !UNITTESTS
-                await _certificationService.VerifyCoseSign1Object(coseSign1Object);
+                    //await _certificationService.VerifyCoseSign1Object(coseSign1Object);
 #endif
+
                 string jsonStringFromBytes = coseSign1Object.GetJson();
 
                 bool international = _preferencesService.GetUserPreferenceAsBoolean("BORDER_CONTROL_ON");
@@ -82,6 +120,11 @@ namespace FHICORC.Core.Services.DecoderServices
                 if (decodedModel == null)
                 {
                     resultModel.ValidationResult = TokenValidateResult.UnsupportedType;
+                    return resultModel;
+                }
+                else if (await _certificateRevocationService.IsCertificateRevoked(decodedModel, signatureSha256Base64)) // Check certificate against EU DGC revocation list
+                {
+                    resultModel.ValidationResult = TokenValidateResult.Revoked;
                     return resultModel;
                 }
 
@@ -114,12 +157,11 @@ namespace FHICORC.Core.Services.DecoderServices
                 resultModel.DecodedModel = decodedModel;
                 return resultModel;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // If any exceptions are throw, assume it invalid
+                // If any exceptions are thrown, assume it invalid
                 return resultModel;
-            }
-            
+            }        
         }
 
         private List<RulesFeedbackData> VerifyRules(DCCPayload dccPayload, bool international)

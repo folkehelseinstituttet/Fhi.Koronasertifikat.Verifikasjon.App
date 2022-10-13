@@ -69,5 +69,10 @@ namespace FHICORC.Tests.TestMocks
         public void ClearValuesetsRequestHeaders()
         {
         }
+
+        public void RegisterCustomRequestHeaders(params (string Key, string Value)[] headers)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
