@@ -104,7 +104,8 @@ namespace FHICORC.Services
                 Page pageToPop = FindCurrentPage();
                 if (pageToPop.IsModal())
                 {
-                    if (pageToPop.Navigation.NavigationStack.Any()) {//The modal has a navigation page
+                    //The modal has a navigation page
+                    if (pageToPop.Navigation.NavigationStack.Any()) {
                         _navPagesWithStatusBar.Pop();
                     }
                     await pageToPop.Navigation.PopModalAsync(animated);
