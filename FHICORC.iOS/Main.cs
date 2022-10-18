@@ -13,7 +13,7 @@ namespace FHICORC.iOS
             // you can specify it here.
             try
             {
-                UIApplication.Main(args, null, "AppDelegate");
+                UIApplication.Main(args, null, typeof(AppDelegate));
             }
             catch (Exception e)
             {

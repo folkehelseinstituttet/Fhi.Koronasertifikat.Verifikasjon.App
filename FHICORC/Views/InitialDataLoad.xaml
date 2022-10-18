@@ -5,30 +5,45 @@
              xmlns:viewModel="clr-namespace:FHICORC.ViewModels"
              NavigationPage.HasNavigationBar="False"
              x:DataType="viewModel:ProgressbarViewModel"
-             ios:Page.UseSafeArea="True"
+             ios:Page.UseSafeArea="False"
              x:Class="FHICORC.Views.InitialDataLoad"
              AutomationId="Progressbar"
              BackgroundImageSource="{StaticResource SplashImage}">
     <ContentPage.Content>
-        <StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
             <Image
-                Source="{StaticResource SplashLogo}"
-                Margin="0,300,0,0"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"/>
-            <ProgressBar
-                x:Name="loadInitialDataProgressBar"
-                Margin="100,150,100,0"
-                ProgressColor="{StaticResource ProgressBarColor}"
-                VerticalOptions="Center"
-                HorizontalOptions="FillAndExpand"
-                Progress="0.0"/>
-            <Label
-                AutomationProperties.IsInAccessibleTree="True"
-                AutomationProperties.Name="{Binding ProgressbarText}"
-                HorizontalOptions="Center"
-                Text="{Binding Strings[PROGRESSBAR_LOADING_TEXT]}"
-                Style="{StaticResource LoadPageStyle}"/>
-        </StackLayout>
+                Grid.Row="0"
+                Grid.RowSpan="4"
+                Aspect="Fill"
+                Source="{StaticResource SplashImage}"
+                VerticalOptions="Fill"/>
+            <StackLayout Grid.Row="1">
+                <Image
+                    Source="{StaticResource CertificateLogo}"
+                    Margin="0,300,0,0"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+                <ProgressBar
+                    x:Name="loadInitialDataProgressBar"
+                    Margin="100,200,100,0"
+                    ProgressColor="{StaticResource ProgressBarColor}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="FillAndExpand"
+                    Progress="0.0"/>
+                <Label
+                    AutomationProperties.IsInAccessibleTree="True"
+                    AutomationProperties.Name="{Binding ProgressbarText}"
+                    HorizontalOptions="Center"
+                    Text="{Binding Strings[PROGRESSBAR_LOADING_TEXT]}"
+                    Style="{StaticResource LoadPageStyle}"/>
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
+
