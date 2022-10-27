@@ -19,19 +19,6 @@ namespace FHICORC.Views
             InitializeComponent();
             BindingContext = IoCContainer.Resolve<ProgressbarViewModel>();
         }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            ProgressBarAnimationBehavior(0.95, 6000);
-        }
-
-        async Task ProgressBarAnimationBehavior(double Progress, uint time)
-        {
-            loadInitialDataProgressBar.ProgressTo(Progress, time, Easing.Linear);
-        }
-
-
     }
 }
 
