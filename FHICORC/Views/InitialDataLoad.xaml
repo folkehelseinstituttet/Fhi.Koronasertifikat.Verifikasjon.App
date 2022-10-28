@@ -24,22 +24,35 @@
                 Source="{StaticResource SplashImage}"
                 VerticalOptions="Fill"/>
             <StackLayout Grid.Row="1">
+                <StackLayout.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="0,300,0,0"/>
+                        <On Platform="Android" Value="0,200,0,0"/>
+                    </OnPlatform>
+                </StackLayout.Margin>
                 <Image
                     Source="{StaticResource CertificateLogo}"
-                    Margin="0,300,0,0"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"/>
-                <ProgressBar
-                    x:Name="loadInitialDataProgressBar"
-                    Margin="100,200,100,0"
-                    ProgressColor="{StaticResource ProgressBarColor}"
+            </StackLayout>
+            <StackLayout Grid.Row="2">
+                <StackLayout.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="0,200,0,0"/>
+                        <On Platform="Android" Value="0,100,0,0"/>
+                    </OnPlatform>
+                </StackLayout.Margin>
+                <ActivityIndicator
+                    IsRunning="True"
+                    Scale="1.2"
+                    Color="{StaticResource FHIPrimaryWhite}"
                     VerticalOptions="Center"
-                    HorizontalOptions="FillAndExpand"
-                    Progress="0.0"/>
+                    HorizontalOptions="FillAndExpand"/>
                 <Label
                     AutomationProperties.IsInAccessibleTree="True"
                     AutomationProperties.Name="{Binding ProgressbarText}"
                     HorizontalOptions="Center"
+                    Margin="0,20,0,0"
                     Text="{Binding Strings[PROGRESSBAR_LOADING_TEXT]}"
                     Style="{StaticResource LoadPageStyle}"/>
             </StackLayout>
