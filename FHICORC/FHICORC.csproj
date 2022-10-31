@@ -92,7 +92,7 @@
       <SubType>Code</SubType>
     </Compile>
     <None Remove="Resources\Sounds\valid_scan_sound.mp3" />
-    <EmbeddedResource Include="Certs\dev.crt"/>
+    <EmbeddedResource Include="Certs\dev.crt" />
     <EmbeddedResource Include="Resources\Sounds\valid_scan_sound.mp3" />
     <None Remove="Resources\Sounds\invalid_scan_sound.mp3" />
     <EmbeddedResource Include="Resources\Sounds\invalid_scan_sound.mp3" />

@@ -17,7 +17,7 @@ namespace FHICORC.Views
         public InitialDataLoad()
         {
             InitializeComponent();
-            BindingContext = IoCContainer.Resolve<ProgressbarViewModel>();
+            BindingContext = IoCContainer.Resolve<InitialDataLoadViewModel>();
         }
     }
 }
