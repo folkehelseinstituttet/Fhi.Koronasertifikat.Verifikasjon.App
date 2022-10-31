@@ -4,7 +4,7 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:viewModel="clr-namespace:FHICORC.ViewModels"
              NavigationPage.HasNavigationBar="False"
-             x:DataType="viewModel:ProgressbarViewModel"
+             x:DataType="viewModel:InitialDataLoadViewModel"
              ios:Page.UseSafeArea="False"
              x:Class="FHICORC.Views.InitialDataLoad"
              AutomationId="Progressbar"
